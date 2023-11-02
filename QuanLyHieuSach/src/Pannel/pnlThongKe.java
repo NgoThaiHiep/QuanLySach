@@ -11,7 +11,7 @@ public class pnlThongKe extends javax.swing.JPanel {
     private TaiKhoan tk;
     private NhanVien nv;
     
-    public pnlThongKe(TaiKhoan tk) {
+    public pnlThongKe(TaiKhoan tk, NhanVien nv) {
         this.tk = tk;
         this.nv = nv;
         initComponents();

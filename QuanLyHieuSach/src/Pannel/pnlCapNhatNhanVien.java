@@ -75,7 +75,7 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
         init();
         lblCaLam.setVisible(false);
         cboCaLamViec.setVisible(false);
-          
+        
     }
         
     public void init() throws IOException, SQLException{
@@ -244,6 +244,7 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
 
         lblTimKiem.setText("Tìm kiếm");
 
+        lblChucVuTimKiem.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         lblChucVuTimKiem.setText("Chức vụ");
 
         cboChucVuTimKiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản lý", "Nhân viên" }));
@@ -295,7 +296,7 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin nhân viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 12))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin nhân viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 1, 12))); // NOI18N
 
         cboTinhThanhPho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

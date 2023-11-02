@@ -67,9 +67,7 @@ public class NhanVien {
         return maNV;
     }
 
-    public String getHoVaTenNV() {
-        return hoTenNhanVien;
-    }
+
 
     public LocalDate getNgaySinh() {
         return ngaySinh;
@@ -144,9 +142,6 @@ public class NhanVien {
         this.maNV = maNV;
     }
 
-    public void setHoVaTenNV(String hoTenNhanVien) {
-        this.hoTenNhanVien = hoTenNhanVien;
-    }
 
     public void setNgaySinh(LocalDate ngaySinh) {
         this.ngaySinh = ngaySinh;

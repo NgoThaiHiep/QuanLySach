@@ -10,14 +10,19 @@ import Entity.TaiKhoan;
 import Entity.ThoiGianHoatDong;
 import Menu.MenuItem;
 import Pannel.pnlCapNhatNhanVien;
+import Pannel.pnlCapNhatSach;
 import Pannel.pnlDanhSachHoaDon;
 import Pannel.pnlLapHoaDon;
 import Pannel.pnlThemKhachHang;
 import Pannel.pnlThemNhanVien;
+import Pannel.pnlThemSach;
 import Pannel.pnlThemSanPham;
+import Pannel.pnlThongKe;
+import Pannel.pnlThongKeTheoNam;
 import Pannel.pnlTraCuuKhachHang;
 import Pannel.pnlTraCuuNhanVien;
 import Pannel.pnlTraCuuSanPham;
+import Pannel.pnlTrangChu;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -38,6 +43,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 
@@ -59,7 +65,8 @@ public class TrangChu extends javax.swing.JFrame {
     private JLabel lblThoiGianDaLam;
     private LocalTime thoiGianDangNhap;
     private TaiKhoan_DAO taiKhoan_DAO;
-
+    private MenuItem menuThemKhachHang;
+    private javax.swing.ImageIcon iconThemKhachHang;
     public TrangChu(TaiKhoan tk,NhanVien nv) {       
         super("Trang chủ");
         this.tk = tk;
@@ -131,9 +138,17 @@ public class TrangChu extends javax.swing.JFrame {
                 LocalDate localDateNam = LocalDate.now();
                 String formattedTime = loCalTime.format(formatter);
                 String nam = localDate.getYear()+"";
-                String maLamViec = localDate.getDayOfMonth()+"" + localDate.getMonthValue() + nam.substring(2, 4) + formattedTime.substring(0,2) +formattedTime.substring(3,5) + nv.getMaNV();
+               
+                Date currentDate = new Date();
+                SimpleDateFormat formatterDay = new SimpleDateFormat("ddMMyy");
+                String formattedDate = formatterDay.format(currentDate);
+        
+                String maLamViec = formattedDate+ formattedTime.substring(0,2) +formattedTime.substring(3,5) + nv.getMaNV();
+                
                 tghd = new ThoiGianHoatDong(maLamViec, nv, localDateNam, thoiGianDangNhap);
+                
                 thoiGianHoatDong_DAO.insertThoiGianLam(tghd);
+                
                 lblThoiGianDaLam.setText("00:00:00");
         }
     }
@@ -142,8 +157,8 @@ public class TrangChu extends javax.swing.JFrame {
     }
     private void thoiGianHeader(){
         lblChucVu.setText(nv.getChucVu().getMaChucVu()+" :");
-        lblTenNhanVien.setText(nv.getHoVaTenNV());
-        System.out.println("Họ tên nhân viên : "+nv.getHoVaTenNV());
+        lblTenNhanVien.setText(nv.getHoTenNhanVien());
+        System.out.println("Họ tên nhân viên : "+nv.getHoTenNhanVien());
         System.out.println("Chức vụ "+nv.getChucVu().getMaChucVu());
         
         pnlBody.add(new Pannel.pnlTrangChu(tk,lblThoiGianDaLam));
@@ -192,7 +207,7 @@ public class TrangChu extends javax.swing.JFrame {
         
     }
     private void menuChucVu(){
-                javax.swing.ImageIcon iconTrangChu = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
+        javax.swing.ImageIcon iconTrangChu = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
         javax.swing.ImageIcon iconSanPham = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
         javax.swing.ImageIcon iconHoaDon = new javax.swing.ImageIcon(getClass().getResource("/IMG/hoaDon.png"));
         javax.swing.ImageIcon iconKhachHang = new javax.swing.ImageIcon(getClass().getResource("/IMG/khachHang.png"));
@@ -206,7 +221,7 @@ public class TrangChu extends javax.swing.JFrame {
         javax.swing.ImageIcon iconThemSanPham = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
         javax.swing.ImageIcon iconCapNhatSanPham = new javax.swing.ImageIcon(getClass().getResource("/IMG/hoaDon.png"));
         //tạo submenu cho sản phẩm
-        
+       
         
  
         MenuItem menuTraCuuSanPham = new MenuItem(iconTraCuuSanPham, "Tra cứu sản phẩm",new ActionListener() {
@@ -217,6 +232,7 @@ public class TrangChu extends javax.swing.JFrame {
                 System.out.println(tk.getTenTK());
                 pnlBody.repaint();
                 pnlBody.revalidate();
+                
             }
         });
         MenuItem menuThemSanPham= new MenuItem(iconThemSanPham, "Thêm sản phẩm", new ActionListener() {
@@ -238,14 +254,16 @@ public class TrangChu extends javax.swing.JFrame {
         javax.swing.ImageIcon iconTaoHoaDon = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
         javax.swing.ImageIcon iconDanhSachHoaDon = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
         //tạo submenu cho hóa đơn
-        MenuItem menuTaoHoaDon = new MenuItem(iconTaoHoaDon, "Tạo hóa đơn",new ActionListener() {
+        MenuItem menuTaoHoaDon = new MenuItem(iconTaoHoaDon, "Lập hóa đơn",new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 pnlBody.removeAll();
                 pnlBody.add(new pnlLapHoaDon(tk,nv));
-               // System.out.println(tk.getTenTK());
+             
                 pnlBody.repaint();
                 pnlBody.revalidate(); 
+                
+                
             }
         });
         MenuItem menuDanhSachHoaDon =  new MenuItem(iconDanhSachHoaDon, "Danh sách hóa đơn",new ActionListener() {
@@ -261,7 +279,7 @@ public class TrangChu extends javax.swing.JFrame {
         
         //Tạo icon cho khachHang
         javax.swing.ImageIcon iconTraCuuKhachHang = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
-        javax.swing.ImageIcon iconThemKhachHang= new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
+        
         //tạo submenu cho khachHang
         MenuItem menuTraCuuKhachHang = new MenuItem(iconTraCuuKhachHang, "Tra cứu khách hàng", new ActionListener() {
             @Override
@@ -277,7 +295,8 @@ public class TrangChu extends javax.swing.JFrame {
                 pnlBody.revalidate(); 
             }
         });
-        MenuItem menuThemKhachHang= new MenuItem(iconThemKhachHang, "Thêm khách hàng", new ActionListener() {
+        iconThemKhachHang = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
+        menuThemKhachHang= new MenuItem(iconThemKhachHang, "Thêm khách hàng", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 pnlBody.removeAll();
@@ -590,6 +609,20 @@ public class TrangChu extends javax.swing.JFrame {
                     doiMatKhau.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public void showThemKhachHang(){
+        
+    
+     
+       
+   
+                pnlBody.removeAll();
+                pnlBody.add(new pnlThemKhachHang(tk));
+               // System.out.println(tk.getTenTK());
+                
+                
+       
+       
+    }
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
        

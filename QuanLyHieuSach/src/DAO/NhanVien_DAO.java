@@ -148,7 +148,7 @@ public class NhanVien_DAO {
                         
 			state = con.prepareStatement("INSERT INTO [dbo].[NhanVien]([NhanVienID],[HoTenNhanVien],[CCCD],[GioiTinh],[NgaySinh],[SoDienThoai],[Email],[TrangThai],[HinhAnh],[ChucVu],[CaLamViec],[TaiKhoan])VALUES(?,?, ?, ?,?,?,?,?,?,?,?,?)");
 			state.setString(1, nv.getMaNV());
-			state.setString(2, nv.getHoVaTenNV());
+			state.setString(2, nv.getHoTenNhanVien());
 			state.setString(3, nv.getCCCD());
 			state.setBoolean(4, nv.getGioiTinh());
 			state.setString(5, formatter.format(nv.getNgaySinh()));

@@ -92,7 +92,7 @@ public class TaiKhoan_DAO {
 		pst.setString(1, tk.getTenTK());
 		pst.setString(2, tk.getMatKhau());
 		pst.setString(3, "");
-		pst.setString(4, "Đã xác nhận");
+		pst.setString(4, "Đã đăng xuất");
 		n = pst.executeUpdate();
              } catch (SQLException e) {
                  
