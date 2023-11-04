@@ -1,9 +1,17 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ */
 package Pannel;
+
+/**
+ *
+ * @author Admin
+ */
 public class pnlVanPhongPham extends javax.swing.JPanel {
 
     /**
-     * Creates new form VanPhongPham
+     * Creates new form pnlVanPhongPham
      */
     public pnlVanPhongPham() {
         initComponents();
@@ -18,32 +26,19 @@ public class pnlVanPhongPham extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        VanPhongPham = new javax.swing.JLabel();
-
-        setBackground(new java.awt.Color(255, 153, 153));
-
-        VanPhongPham.setText("Van phong pham");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addComponent(VanPhongPham)
-                .addContainerGap(165, Short.MAX_VALUE))
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(VanPhongPham)
-                .addContainerGap(218, Short.MAX_VALUE))
+            .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel VanPhongPham;
     // End of variables declaration//GEN-END:variables
 }

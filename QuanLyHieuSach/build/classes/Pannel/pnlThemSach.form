@@ -142,7 +142,7 @@
                           <Group type="103" alignment="1" groupAlignment="1" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="lblDonGia" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="44" max="32767" attributes="0"/>
+                                  <EmptySpace pref="45" max="32767" attributes="0"/>
                                   <Component id="txtDonGia" min="-2" pref="381" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
