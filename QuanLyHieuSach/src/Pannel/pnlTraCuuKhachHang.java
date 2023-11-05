@@ -363,7 +363,7 @@ public class pnlTraCuuKhachHang extends javax.swing.JPanel {
 public static ArrayList<String> readExcel_City() throws IOException {
 		//Đọc dữ liệu từ file Diachi.xlsx
                 ArrayList<String> cities = new ArrayList<>();
-		FileInputStream file = new FileInputStream("D:\\MON\\PTUD\\JavaDiaChi\\Book1.xlsx");
+		FileInputStream file = new FileInputStream("src\\Li\\Book1.xlsx");
 		//Nạp file input stream đưa về dạng excel
 		XSSFWorkbook wb = new XSSFWorkbook(file);
 		//Đọc file từ Sheet 1 (bắt đầu từ số 0)
@@ -387,7 +387,7 @@ public static ArrayList<String> readExcel_City() throws IOException {
     public static ArrayList<String> readExcel_districts(JComboBox<String> cbo,JComboBox<String> cbo1,JComboBox<String> cbo2,String tb) throws IOException {
 	//Đọc dữ liệu từ file Diachi.xlsx
             ArrayList<String> districts = new ArrayList<>();
-		FileInputStream file = new FileInputStream("D:\\MON\\PTUD\\JavaDiaChi\\Book1.xlsx");
+		FileInputStream file = new FileInputStream("src\\Li\\Book1.xlsx");
 		//Nạp file input stream đưa về dạng excel
 		XSSFWorkbook wb = new XSSFWorkbook(file);
 		//Đọc file từ Sheet 1 (bắt đầu từ số 0)
@@ -422,7 +422,7 @@ public static ArrayList<String> readExcel_City() throws IOException {
      public static ArrayList<String> readExcel_wardsDistrict(JComboBox<String> cbo,JComboBox<String> cbo1) throws IOException {
 		//Đọc dữ liệu từ file Diachi.xlsx
     	 ArrayList<String> wardsDistrict = new ArrayList<>();
-		FileInputStream file = new FileInputStream("D:\\MON\\PTUD\\JavaDiaChi\\Book1.xlsx");
+		FileInputStream file = new FileInputStream("src\\Li\\Book1.xlsx");
 		//Nạp file input stream đưa về dạng excel
 		XSSFWorkbook wb = new XSSFWorkbook(file); 
 		//Đọc file từ Sheet 1 (bắt đầu từ số 0)
