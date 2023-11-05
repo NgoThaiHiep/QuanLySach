@@ -4,12 +4,25 @@
  */
 package Pannel;
 
+import DAO.CaLam_DAO;
+import DAO.ChucVu_DAO;
+import DAO.NhanVien_DAO;
 import DAO.TaiKhoan_DAO;
+import Entity.CaLamViec;
+import Entity.ChucVu;
 import Entity.NhanVien;
 import Entity.TaiKhoan;
 import static Pannel.pnlTraCuuKhachHang.readExcel_City;
+import ServiceUser.SelectedDate;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +33,9 @@ public class pnlTaiKhoan extends javax.swing.JPanel {
     private TaiKhoan tk;
     private NhanVien nv;
     private final TaiKhoan_DAO TaiKhoan_DAO;
+    private NhanVien_DAO nhanVien_DAO;
+    private TaiKhoan_DAO taiKhoan_DAO;
+    private ChucVu_DAO chucVu_DAO;
       public pnlTaiKhoan(TaiKhoan tk, NhanVien nv){
         this.tk = tk;
         this.nv = nv;
@@ -29,6 +45,7 @@ public class pnlTaiKhoan extends javax.swing.JPanel {
         maNVKyTu.setFont(new java.awt.Font("Times New Roman", Font.BOLD, 15));
         maTenNVKyTu.setText(nv.getHoTenNhanVien());
         maTenNVKyTu.setFont(new java.awt.Font("Times New Roman", Font.BOLD, 15));
+        capNhatDanhSachNhanVien();
     }
 
 
@@ -52,7 +69,7 @@ public class pnlTaiKhoan extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblNhanVien = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -100,12 +117,11 @@ public class pnlTaiKhoan extends javax.swing.JPanel {
                 .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(maTenNVKyTu, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(maNVKyTu, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
+                    .addComponent(maNVKyTu, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -113,7 +129,7 @@ public class pnlTaiKhoan extends javax.swing.JPanel {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sách tài khoản nhân viên"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -132,7 +148,12 @@ public class pnlTaiKhoan extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        tblNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblNhanVienMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblNhanVien);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -189,6 +210,38 @@ public class pnlTaiKhoan extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
+            
+    }//GEN-LAST:event_tblNhanVienMouseClicked
+    private void capNhatDanhSachNhanVien(){
+        nhanVien_DAO = new NhanVien_DAO();
+        chucVu_DAO = new ChucVu_DAO();
+        ArrayList<ChucVu> dsChucVu = chucVu_DAO.layDanhSachChucVu();
+        taiKhoan_DAO = new TaiKhoan_DAO();
+        ArrayList<TaiKhoan> dsTaiKhoan = taiKhoan_DAO.layDanhSachTaiKhoan();
+        ArrayList<NhanVien> dsNhanVien = nhanVien_DAO.layDanhSachNhanVien();
+      
+        String colTieuDe1[] = new String[]{"Mã nhân viên", "Tên nhân viên", "Mật khẩu", "Chức vụ"};
+        DefaultTableModel model = new DefaultTableModel(colTieuDe1, 0);
+           Object[] row;
+        for (NhanVien nhanVien : dsNhanVien) {
+              row = new Object[12];
+            // GÁN GIÁ TRỊ
+            row[0] = nhanVien.getMaNV();
+            row[1] = nhanVien.getHoTenNhanVien();
+            for (TaiKhoan taiKhoan : dsTaiKhoan){
+                if(taiKhoan.getTenTK().equals(nhanVien.getMaNV()))
+                row[2] = taiKhoan.getMatKhau();
+            }
+            for (ChucVu chucVu : dsChucVu) {
+               if(nhanVien.getChucVu().getMaChucVu().equals(chucVu.getMaChucVu()))
+                   
+                row[3]  = chucVu.getTenChucVu();
+        }
+           model.addRow(row);
+        }
+        tblNhanVien.setModel(model);
+    }   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -200,8 +253,8 @@ public class pnlTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel maNVKyTu;
     private javax.swing.JLabel maTenNVKyTu;
+    private javax.swing.JTable tblNhanVien;
     // End of variables declaration//GEN-END:variables
 }

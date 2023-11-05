@@ -7,10 +7,12 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 
 import java.util.Random;
-
+import java.sql.Statement;
 import ConnectDB.ConnectDB;
 import Entity.NhanVien;
 import Entity.TaiKhoan;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 
 public class TaiKhoan_DAO {
@@ -19,6 +21,63 @@ public class TaiKhoan_DAO {
 	public TaiKhoan_DAO() {
 		
 	}
+        public TaiKhoan layThongTinTaiKhoan(TaiKhoan  tk){
+        ConnectDB.getInstance();
+	Connection con = ConnectDB.getConnection();
+        PreparedStatement pst = null;
+        TaiKhoan p;
+        try{
+            String sql = "select * from TaiKhoan where TaiKhoan = ?";
+            pst = con.prepareStatement(sql);
+            pst.setString(1,tk.getTenTK());    
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                String tenDangNhap = rs.getString(1);
+                String matKhau = rs.getString(2);
+                String maXacNhan = rs.getString(3);
+                String trangThai = rs.getString(4);
+                p = new TaiKhoan(tenDangNhap, matKhau, maXacNhan, trangThai);
+                return p;
+            }    
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+	try {
+		pst.close();
+		} catch (SQLException e2) {
+		// TODO: handle exceptione2 
+		e2.printStackTrace();
+            }
+	}
+        return null;
+    }
+    public ArrayList<TaiKhoan> layDanhSachTaiKhoan(){
+        ArrayList<TaiKhoan> dstk = new ArrayList<TaiKhoan>();
+	ConnectDB.getInstance();
+	Connection con = ConnectDB.getConnection();
+        
+        try {
+        String sql = "select * from TaiKhoan";
+            Statement state = con.createStatement();
+	ResultSet rs = state.executeQuery(sql);
+        while(rs.next()){
+                String tenDangNhap = rs.getString(1);
+                String matKhau = rs.getString(2);
+                String maXacNhan = rs.getString(3);
+                String trangThai = rs.getString(3);
+         
+                TaiKhoan tk = new TaiKhoan(tenDangNhap, matKhau, maXacNhan, trangThai);
+                dstk.add(tk);
+                
+            }    
+        } catch (SQLException e) {
+           e.printStackTrace();
+        }
+        
+        return dstk; 
+    }
+    
 	public boolean login(TaiKhoan tk){
         ConnectDB.getInstance();
 	Connection con = ConnectDB.getConnection();
