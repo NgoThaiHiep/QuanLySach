@@ -1,11 +1,11 @@
 
 package Pannel;
-public class pnlVanPhongPham extends javax.swing.JPanel {
+public class pnlThemVanPhongPham extends javax.swing.JPanel {
 
     /**
      * Creates new form VanPhongPham
      */
-    public pnlVanPhongPham() {
+    public pnlThemVanPhongPham() {
         initComponents();
     }
 
@@ -19,31 +19,42 @@ public class pnlVanPhongPham extends javax.swing.JPanel {
     private void initComponents() {
 
         VanPhongPham = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 153, 153));
 
         VanPhongPham.setText("Van phong pham");
+
+        jButton1.setText("jButton1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addComponent(VanPhongPham)
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(VanPhongPham))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addComponent(jButton1)))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(66, 66, 66)
                 .addComponent(VanPhongPham)
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addComponent(jButton1)
+                .addContainerGap(149, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel VanPhongPham;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

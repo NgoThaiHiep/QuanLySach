@@ -21,8 +21,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="lblTieuDeLapHoaDon" alignment="0" max="32767" attributes="0"/>
-          <Component id="pnlHoaDon" alignment="0" pref="1308" max="32767" attributes="0"/>
+          <Component id="lblTieuDeLapHoaDon" alignment="0" pref="1300" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+              <Component id="pnlHoaDon" pref="0" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -32,7 +35,7 @@
               <Component id="lblTieuDeLapHoaDon" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnlHoaDon" min="-2" pref="671" max="-2" attributes="0"/>
-              <EmptySpace pref="19" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

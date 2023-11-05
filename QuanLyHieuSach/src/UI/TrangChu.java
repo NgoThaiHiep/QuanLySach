@@ -44,7 +44,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.LookAndFeel;
 import javax.swing.Timer;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 
 /**
@@ -67,14 +70,28 @@ public class TrangChu extends javax.swing.JFrame {
     private TaiKhoan_DAO taiKhoan_DAO;
     private MenuItem menuThemKhachHang;
     private javax.swing.ImageIcon iconThemKhachHang;
-    public TrangChu(TaiKhoan tk,NhanVien nv) {       
+    private MenuItem menuTaoHoaDon;
+    private MenuItem menuDanhSachHoaDon;
+    private MenuItem menuTraCuuKhachHang;
+    private MenuItem menuTraCuuNhanVien;
+    private MenuItem menuThemNhanVien;
+    private MenuItem menuCapNhatNhanVien;
+    private MenuItem menuTrangChu;
+    private LookAndFeel originalLookAndFeel;
+    public TrangChu(TaiKhoan tk,NhanVien nv,LookAndFeel originalLookAndFeel) {     
         super("Trang chủ");
         this.tk = tk;
         this.nv = nv;
+        this.originalLookAndFeel = originalLookAndFeel;
+        
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         lblThoiGianDaLam = new JLabel();
         setTitle("");
-        
+        try {
+            UIManager.setLookAndFeel(originalLookAndFeel);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
         thoiGianLamViec();
         thoiGianHeader();
@@ -207,6 +224,7 @@ public class TrangChu extends javax.swing.JFrame {
         
     }
     private void menuChucVu(){
+        
         javax.swing.ImageIcon iconTrangChu = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
         javax.swing.ImageIcon iconSanPham = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
         javax.swing.ImageIcon iconHoaDon = new javax.swing.ImageIcon(getClass().getResource("/IMG/hoaDon.png"));
@@ -226,7 +244,12 @@ public class TrangChu extends javax.swing.JFrame {
  
         MenuItem menuTraCuuSanPham = new MenuItem(iconTraCuuSanPham, "Tra cứu sản phẩm",new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
+                 try {
+            UIManager.setLookAndFeel(originalLookAndFeel);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
                 pnlBody.removeAll();
                 pnlBody.add(new pnlTraCuuSanPham(tk));
                 System.out.println(tk.getTenTK());
@@ -238,6 +261,12 @@ public class TrangChu extends javax.swing.JFrame {
         MenuItem menuThemSanPham= new MenuItem(iconThemSanPham, "Thêm sản phẩm", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+             
+                 try {
+            UIManager.setLookAndFeel(originalLookAndFeel);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
                 pnlBody.removeAll();
                 pnlBody.add(new pnlThemSanPham(tk));
                 pnlBody.repaint();
@@ -247,6 +276,12 @@ public class TrangChu extends javax.swing.JFrame {
         MenuItem menuCapNhatSanPham = new MenuItem(iconCapNhatSanPham, "Cập nhật sản phẩm", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+               
+                 try {
+            UIManager.setLookAndFeel(originalLookAndFeel);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
             }
         });
         
@@ -254,21 +289,20 @@ public class TrangChu extends javax.swing.JFrame {
         javax.swing.ImageIcon iconTaoHoaDon = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
         javax.swing.ImageIcon iconDanhSachHoaDon = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
         //tạo submenu cho hóa đơn
-        MenuItem menuTaoHoaDon = new MenuItem(iconTaoHoaDon, "Lập hóa đơn",new ActionListener() {
+        menuTaoHoaDon = new MenuItem(iconTaoHoaDon, "Lập hóa đơn",new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
                 pnlBody.removeAll();
                 pnlBody.add(new pnlLapHoaDon(tk,nv));
-             
                 pnlBody.repaint();
                 pnlBody.revalidate(); 
-                
+               
                 
             }
         });
-        MenuItem menuDanhSachHoaDon =  new MenuItem(iconDanhSachHoaDon, "Danh sách hóa đơn",new ActionListener() {
+       menuDanhSachHoaDon =  new MenuItem(iconDanhSachHoaDon, "Danh sách hóa đơn",new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
                 pnlBody.removeAll();
                 pnlBody.add(new pnlDanhSachHoaDon(tk,nv));
                // System.out.println(tk.getTenTK());
@@ -281,9 +315,9 @@ public class TrangChu extends javax.swing.JFrame {
         javax.swing.ImageIcon iconTraCuuKhachHang = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
         
         //tạo submenu cho khachHang
-        MenuItem menuTraCuuKhachHang = new MenuItem(iconTraCuuKhachHang, "Tra cứu khách hàng", new ActionListener() {
+        menuTraCuuKhachHang = new MenuItem(iconTraCuuKhachHang, "Tra cứu khách hàng", new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
                 pnlBody.removeAll();
                 try {
                     pnlBody.add(new pnlTraCuuKhachHang(tk));
@@ -298,7 +332,7 @@ public class TrangChu extends javax.swing.JFrame {
         iconThemKhachHang = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
         menuThemKhachHang= new MenuItem(iconThemKhachHang, "Thêm khách hàng", new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
                 pnlBody.removeAll();
                 pnlBody.add(new pnlThemKhachHang(tk));
                // System.out.println(tk.getTenTK());
@@ -314,19 +348,20 @@ public class TrangChu extends javax.swing.JFrame {
         javax.swing.ImageIcon iconCapNhatNhanVien = new javax.swing.ImageIcon(getClass().getResource("/IMG/hoaDon.png"));
         
         //tạo submenu cho nhân viên
-        MenuItem menuTraCuuNhanVien = new MenuItem(iconTraCuuNhanVien, "Tra cứu nhân viên", new ActionListener() {
+        menuTraCuuNhanVien = new MenuItem(iconTraCuuNhanVien, "Tra cứu nhân viên", new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
                 pnlBody.removeAll();
-                pnlBody.add(new pnlTraCuuNhanVien(tk));
+               // pnlBody.add(new pnlTraCuuNhanVien(tk));
+               pnlBody.add(new pnlThongKeTheoNam());
                 System.out.println(tk.getTenTK());
                 pnlBody.repaint();
                 pnlBody.revalidate(); 
             }
         });
-        MenuItem menuThemNhanVien =  new MenuItem(iconThemNhanVien, "Thêm nhân viên", new ActionListener() {
+        menuThemNhanVien =  new MenuItem(iconThemNhanVien, "Thêm nhân viên", new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
                 pnlBody.removeAll();
                 try {
                     try {
@@ -342,9 +377,9 @@ public class TrangChu extends javax.swing.JFrame {
                 pnlBody.revalidate();
             }
         });
-        MenuItem menuCapNhatNhanVien = new MenuItem(iconCapNhatNhanVien, "Cập nhật nhân viên", new ActionListener() {
+        menuCapNhatNhanVien = new MenuItem(iconCapNhatNhanVien, "Cập nhật nhân viên", new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
                 pnlBody.removeAll();
                 try {
                     pnlBody.add(new pnlCapNhatNhanVien(tk));
@@ -362,9 +397,13 @@ public class TrangChu extends javax.swing.JFrame {
         
         
         //menu chính
-        MenuItem menuTrangChu = new MenuItem(iconTrangChu, "Trang chủ",new ActionListener() {
+        menuTrangChu = new MenuItem(iconTrangChu, "Trang chủ",new ActionListener() {
              @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {                 
+                try {            UIManager.setLookAndFeel(originalLookAndFeel);        
+                } catch (UnsupportedLookAndFeelException ex) {            
+                    Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        
+                }
             pnlBody.removeAll();
             pnlBody.add(new Pannel.pnlTrangChu(tk,lblThoiGianDaLam ));
             System.out.println(tk.getTenTK());
@@ -432,6 +471,8 @@ public class TrangChu extends javax.swing.JFrame {
         }
         pnlMenus.revalidate();
     }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -581,7 +622,11 @@ public class TrangChu extends javax.swing.JFrame {
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
         // TODO add your handling code here:
-        
+        try {
+            UIManager.setLookAndFeel(originalLookAndFeel);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
        int hoiDeDangXuat =   JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng xuất không?","Thông báo",JOptionPane.YES_NO_OPTION);
        if(hoiDeDangXuat == JOptionPane.YES_OPTION){
            thoiGianHoatDong_DAO = new ThoiGianHoatDong_DAO();
@@ -605,22 +650,23 @@ public class TrangChu extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-                    DoiMatKhau doiMatKhau = new DoiMatKhau (tk);
-                    doiMatKhau.setVisible(true);
+        try {
+            UIManager.setLookAndFeel(originalLookAndFeel);
+        } catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DoiMatKhau doiMatKhau = new DoiMatKhau (tk);
+        doiMatKhau.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public void showThemKhachHang(){
         
-    
+        
      
        
    
-                pnlBody.removeAll();
-                pnlBody.add(new pnlThemKhachHang(tk));
-               // System.out.println(tk.getTenTK());
-                
-                
-       
+             
+ 
        
     }
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

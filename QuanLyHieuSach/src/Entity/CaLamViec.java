@@ -1,6 +1,7 @@
 
 package Entity;
 
+import java.time.LocalTime;
 import java.util.Objects;
 
 /**
@@ -10,15 +11,33 @@ import java.util.Objects;
 public class CaLamViec {
     private String maCa ;
     private String tenCa;
-    private String thoiGianBatDau;
-    private String thoiGianKetThuc;
+    private LocalTime thoiGianBatDau;
+    private LocalTime thoiGianKetThuc;
 
-    public CaLamViec(String maCa, String tenCa, String thoiGianBatDau, String thoiGianKetThuc) {
+    public CaLamViec(String maCa, String tenCa, LocalTime thoiGianBatDau, LocalTime thoiGianKetThuc) {
         this.maCa = maCa;
         this.tenCa = tenCa;
         this.thoiGianBatDau = thoiGianBatDau;
         this.thoiGianKetThuc = thoiGianKetThuc;
     }
+
+    public LocalTime getThoiGianBatDau() {
+        return thoiGianBatDau;
+    }
+
+    public void setThoiGianBatDau(LocalTime thoiGianBatDau) {
+        this.thoiGianBatDau = thoiGianBatDau;
+    }
+
+    public LocalTime getThoiGianKetThuc() {
+        return thoiGianKetThuc;
+    }
+
+    public void setThoiGianKetThuc(LocalTime thoiGianKetThuc) {
+        this.thoiGianKetThuc = thoiGianKetThuc;
+    }
+
+    
 
     
     public CaLamViec(String maCa) {
@@ -36,13 +55,7 @@ public class CaLamViec {
         this.tenCa = tenCa;
     }
 
-    public void setThoiGianBatDau(String thoiGianBatDau) {
-        this.thoiGianBatDau = thoiGianBatDau;
-    }
-
-    public void setThoiGianKetThuc(String thoiGianKetThuc) {
-        this.thoiGianKetThuc = thoiGianKetThuc;
-    }
+   
     public String getMaCa() {
         return maCa;
     }
@@ -51,13 +64,7 @@ public class CaLamViec {
         return tenCa;
     }
 
-    public String getThoiGianBatDau() {
-        return thoiGianBatDau;
-    }
-
-    public String getThoiGianKetThuc() {
-        return thoiGianKetThuc;
-    }
+  
 
     @Override
     public int hashCode() {

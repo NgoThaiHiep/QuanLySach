@@ -16,6 +16,8 @@ import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.LookAndFeel;
+import javax.swing.UIManager;
 
 /**
  *
@@ -27,6 +29,8 @@ public class DangNhap extends javax.swing.JFrame {
     private NhanVien_DAO nhanVien_DAO;
     private NhanVien nv;
     private TaiKhoan tk;
+    private final LookAndFeel originalLookAndFeel;
+
     
     /**
      * Creates new form Login
@@ -34,6 +38,7 @@ public class DangNhap extends javax.swing.JFrame {
     public DangNhap() {
         
         initComponents();
+        originalLookAndFeel = UIManager.getLookAndFeel();
         init();
         btnDangNhap.setEnabled(false);
     }
@@ -178,7 +183,7 @@ public class DangNhap extends javax.swing.JFrame {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                 String ngaySinhFormatted =nv.getNgaySinh().format(formatter);
                 System.out.println("Ngày Sinh : "+ngaySinhFormatted);
-                (new TrangChu(tk,nv)).setVisible(true);
+                (new TrangChu(tk,nv,originalLookAndFeel)).setVisible(true);
                 this.dispose();
            }
         }else if(taiKhoan_DAO.login_DaDangNhap(tk)){

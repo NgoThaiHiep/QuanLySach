@@ -4,6 +4,7 @@ package Pannel;
 import DAO.HoaDon_DAO;
 import Entity.NhanVien;
 import Entity.TaiKhoan;
+import Menu.MenuItem;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Panel;
@@ -16,6 +17,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import Pannel.pnlTrangChu;
 import UI.TrangChu;
+import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import javax.swing.UIManager;
+import static javax.swing.UIManager.setLookAndFeel;
 /**
  *
  * @author FPTSHOP
@@ -34,6 +40,7 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
         this.nv = nv;
         this.tk = tk;
         
+       
         initComponents();
        
 	hoaDon_DAO = new HoaDon_DAO();
@@ -388,8 +395,10 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblTieuDeLapHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 1308, Short.MAX_VALUE)
+            .addComponent(lblTieuDeLapHoaDon, javax.swing.GroupLayout.DEFAULT_SIZE, 1300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(pnlHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,7 +407,7 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
                 .addComponent(lblTieuDeLapHoaDon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -454,11 +463,13 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
         // TODO add your handling code here:
           
          
-        trangChu = new TrangChu(tk, nv);
-        trangChu.showThemKhachHang();
+       
+        
+      
+        
             
     }//GEN-LAST:event_btnAnhThemKhachHangActionPerformed
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnhThemKhachHang;

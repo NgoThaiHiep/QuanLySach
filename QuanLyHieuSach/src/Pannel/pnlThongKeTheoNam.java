@@ -15,6 +15,7 @@ public class pnlThongKeTheoNam extends javax.swing.JPanel {
      */
     public pnlThongKeTheoNam() {
         initComponents();
+        tblGioHang1.setTableHeader(null);
     }
 
     /**
@@ -288,7 +289,7 @@ public class pnlThongKeTheoNam extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Đơn giá", "Thành tiền"
+                "", "", "", "", "", ""
             }
         ) {
             Class[] types = new Class [] {

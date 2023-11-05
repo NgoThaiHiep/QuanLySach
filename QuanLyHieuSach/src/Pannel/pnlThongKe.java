@@ -91,7 +91,7 @@ public class pnlThongKe extends javax.swing.JPanel {
         pnlSouth.removeAll();
         btnVanPhongPham.setBackground(Color.red);
         btnSach.setBackground(Color.white);
-        pnlSouth.add(new Pannel.pnlVanPhongPham());
+        pnlSouth.add(new Pannel.pnlThemVanPhongPham());
         System.out.println(tk.getTenTK());
         pnlSouth.repaint();
         pnlSouth.revalidate();

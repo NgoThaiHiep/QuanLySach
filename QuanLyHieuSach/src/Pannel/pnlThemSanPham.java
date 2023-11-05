@@ -66,18 +66,18 @@ public class pnlThemSanPham extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(btnSach)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnVanPhongPham)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSach)
                     .addComponent(btnVanPhongPham))
-                .addGap(18, 18, 18)
+                .addGap(0, 0, 0)
                 .addComponent(pnlSouth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -102,7 +102,7 @@ public class pnlThemSanPham extends javax.swing.JPanel {
         pnlSouth.removeAll();
         btnVanPhongPham.setBackground(Color.red);
         btnSach.setBackground(Color.white);
-        pnlSouth.add(new Pannel.pnlVanPhongPham());
+        pnlSouth.add(new Pannel.pnlThemVanPhongPham());
         System.out.println(tk.getTenTK());
         pnlSouth.repaint();
         pnlSouth.revalidate();
