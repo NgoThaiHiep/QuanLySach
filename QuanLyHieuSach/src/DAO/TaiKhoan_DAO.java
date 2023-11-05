@@ -344,6 +344,7 @@ public class TaiKhoan_DAO {
 		}
 		return n>0;	
 	}
+        
         public boolean updataTinhTrangDangNhap(String id,String trangThai)throws SQLException {
 		ConnectDB.getInstance();
 		Connection con = ConnectDB.getConnection();

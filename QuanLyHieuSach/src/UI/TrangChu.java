@@ -412,7 +412,12 @@ public class TrangChu extends javax.swing.JFrame {
         });
         MenuItem menuDSTaiKhoan = new MenuItem(iconTaiKhoan, "Tài khoản", new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+                public void actionPerformed(ActionEvent e) {
+                      try {
+                UIManager.setLookAndFeel(originalLookAndFeel);
+            } catch (UnsupportedLookAndFeelException ex) {
+                Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 pnlBody.removeAll();
                 pnlBody.add(new pnlTaiKhoan(tk,nv));
                 System.out.println(tk.getTenTK());
@@ -423,6 +428,11 @@ public class TrangChu extends javax.swing.JFrame {
         MenuItem menuDSThongKe = new MenuItem(iconThongKe, "Thống kê", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                  try {
+                    UIManager.setLookAndFeel(originalLookAndFeel);
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 pnlBody.removeAll();
                 pnlBody.add(new pnlThongKe(tk));
                 System.out.println(tk.getTenTK());

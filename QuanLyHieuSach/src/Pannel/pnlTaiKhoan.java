@@ -19,7 +19,10 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
@@ -41,10 +44,10 @@ public class pnlTaiKhoan extends javax.swing.JPanel {
         this.nv = nv;
         initComponents();
         TaiKhoan_DAO = new TaiKhoan_DAO();
-        maNVKyTu.setText(nv.getMaNV());
-        maNVKyTu.setFont(new java.awt.Font("Times New Roman", Font.BOLD, 15));
-        maTenNVKyTu.setText(nv.getHoTenNhanVien());
-        maTenNVKyTu.setFont(new java.awt.Font("Times New Roman", Font.BOLD, 15));
+       
+        lblmaNVKyTu.setFont(new java.awt.Font("Times New Roman", Font.BOLD, 15));
+      
+        lblTenNVKyTu.setFont(new java.awt.Font("Times New Roman", Font.BOLD, 15));
         capNhatDanhSachNhanVien();
     }
 
@@ -62,9 +65,9 @@ public class pnlTaiKhoan extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        maNVKyTu = new javax.swing.JLabel();
+        lblmaNVKyTu = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        maTenNVKyTu = new javax.swing.JLabel();
+        lblTenNVKyTu = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -82,6 +85,11 @@ public class pnlTaiKhoan extends javax.swing.JPanel {
         jLabel3.setText("Tên nhân viên");
 
         jButton1.setText("Cấp lại mật khẩu");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Làm mới");
 
@@ -92,11 +100,11 @@ public class pnlTaiKhoan extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(maNVKyTu, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
+                        .addContainerGap(21, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblmaNVKyTu, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(92, 92, 92))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(177, 177, 177)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -106,19 +114,19 @@ public class pnlTaiKhoan extends javax.swing.JPanel {
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                         .addGap(182, 182, 182))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(maTenNVKyTu, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33))))
+                        .addComponent(lblTenNVKyTu, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(maTenNVKyTu, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTenNVKyTu, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(maNVKyTu, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblmaNVKyTu, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,8 +219,21 @@ public class pnlTaiKhoan extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
-            
+        int row  = tblNhanVien.getSelectedRow();
+        lblmaNVKyTu.setText(tblNhanVien.getValueAt(row, 0).toString());
+        lblTenNVKyTu.setText(tblNhanVien.getValueAt(row, 1).toString());
     }//GEN-LAST:event_tblNhanVienMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        taiKhoan_DAO = new TaiKhoan_DAO();
+        try {
+            taiKhoan_DAO.updataPasswordLost(lblmaNVKyTu.getText(), "123456");
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlTaiKhoan.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        capNhatDanhSachNhanVien();
+    }//GEN-LAST:event_jButton1ActionPerformed
     private void capNhatDanhSachNhanVien(){
         nhanVien_DAO = new NhanVien_DAO();
         chucVu_DAO = new ChucVu_DAO();
@@ -253,8 +274,8 @@ public class pnlTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel maNVKyTu;
-    private javax.swing.JLabel maTenNVKyTu;
+    private javax.swing.JLabel lblTenNVKyTu;
+    private javax.swing.JLabel lblmaNVKyTu;
     private javax.swing.JTable tblNhanVien;
     // End of variables declaration//GEN-END:variables
 }
