@@ -14,13 +14,13 @@ public class pnlThongKe extends javax.swing.JPanel {
     private TaiKhoan tk;
     private NhanVien nv;
     
-    public pnlThongKe(TaiKhoan tk, NhanVien nv) {
+    public pnlThongKe(TaiKhoan tk) {
         this.tk = tk;
         this.nv = nv;
         initComponents();
         
-        btnSach.setBackground(Color.red);
-        pnlSouth.add(new Pannel.pnlTraCuuSach());
+        btnNgay.setBackground(Color.red);
+        pnlSouth.add(new Pannel.pnlThongKeTheoNgay());
         pnlSouth.repaint();
         pnlSouth.revalidate();
     }
@@ -34,25 +34,33 @@ public class pnlThongKe extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnSach = new javax.swing.JButton();
-        btnVanPhongPham = new javax.swing.JButton();
+        btnNgay = new javax.swing.JButton();
+        btnThang = new javax.swing.JButton();
         pnlSouth = new javax.swing.JPanel();
+        btnNam = new javax.swing.JButton();
 
-        btnSach.setText("Sách");
-        btnSach.addActionListener(new java.awt.event.ActionListener() {
+        btnNgay.setText("Ngày");
+        btnNgay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSachActionPerformed(evt);
+                btnNgayActionPerformed(evt);
             }
         });
 
-        btnVanPhongPham.setText("Văn Phòng Phẩm");
-        btnVanPhongPham.addActionListener(new java.awt.event.ActionListener() {
+        btnThang.setText("Tháng");
+        btnThang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVanPhongPhamActionPerformed(evt);
+                btnThangActionPerformed(evt);
             }
         });
 
         pnlSouth.setLayout(new java.awt.BorderLayout());
+
+        btnNam.setText("Năm");
+        btnNam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNamActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -61,57 +69,64 @@ public class pnlThongKe extends javax.swing.JPanel {
             .addComponent(pnlSouth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(btnSach)
+                .addComponent(btnNgay)
                 .addGap(18, 18, 18)
-                .addComponent(btnVanPhongPham)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addComponent(btnThang)
+                .addGap(18, 18, 18)
+                .addComponent(btnNam)
+                .addContainerGap(131, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSach)
-                    .addComponent(btnVanPhongPham))
+                    .addComponent(btnNgay)
+                    .addComponent(btnThang)
+                    .addComponent(btnNam))
                 .addGap(18, 18, 18)
                 .addComponent(pnlSouth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSachActionPerformed
+    private void btnNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNgayActionPerformed
         // TODO add your handling code here:
         pnlSouth.removeAll();
-        btnSach.setBackground(Color.red);
-        btnVanPhongPham.setBackground(Color.white);
-        pnlSouth.add(new Pannel.pnlTraCuuSach());
+        btnNgay.setBackground(Color.red);
+        btnThang.setBackground(Color.white);
+        pnlSouth.add(new Pannel.pnlThongKeTheoNgay());
         System.out.println(tk.getTenTK());
         pnlSouth.repaint();
         pnlSouth.revalidate();
-    }//GEN-LAST:event_btnSachActionPerformed
+    }//GEN-LAST:event_btnNgayActionPerformed
 
-    private void btnVanPhongPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVanPhongPhamActionPerformed
-        try {
-            // TODO add your handling code here:
-            pnlSouth.removeAll();
-            btnVanPhongPham.setBackground(Color.red);
-            btnSach.setBackground(Color.white);
-            
-            pnlSouth.add(new Pannel.pnlThemVanPhongPham());
-            
-            pnlSouth.add(new Pannel.pnlTraCuuVanPhongPham());
-            
-            System.out.println(tk.getTenTK());
-            pnlSouth.repaint();
-            pnlSouth.revalidate();
-        } catch (SQLException ex) {
-            Logger.getLogger(pnlThongKe.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnVanPhongPhamActionPerformed
+    private void btnThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThangActionPerformed
+        // TODO add your handling code here:
+        pnlSouth.removeAll();
+        btnNgay.setBackground(Color.red);
+        btnThang.setBackground(Color.white);
+        pnlSouth.add(new Pannel.pnlThongKeTheoThang());
+        System.out.println(tk.getTenTK());
+        pnlSouth.repaint();
+        pnlSouth.revalidate();
+    }//GEN-LAST:event_btnThangActionPerformed
+
+    private void btnNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNamActionPerformed
+        // TODO add your handling code here:
+        pnlSouth.removeAll();
+        btnNgay.setBackground(Color.red);
+        btnThang.setBackground(Color.white);
+        pnlSouth.add(new Pannel.pnlThongKeTheoNam());
+        System.out.println(tk.getTenTK());
+        pnlSouth.repaint();
+        pnlSouth.revalidate();
+    }//GEN-LAST:event_btnNamActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSach;
-    private javax.swing.JButton btnVanPhongPham;
+    private javax.swing.JButton btnNam;
+    private javax.swing.JButton btnNgay;
+    private javax.swing.JButton btnThang;
     private javax.swing.JPanel pnlSouth;
     // End of variables declaration//GEN-END:variables
 }

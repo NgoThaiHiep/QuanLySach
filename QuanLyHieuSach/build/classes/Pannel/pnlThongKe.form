@@ -19,10 +19,12 @@
           <Component id="pnlSouth" alignment="0" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-              <Component id="btnSach" min="-2" max="-2" attributes="0"/>
+              <Component id="btnNgay" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnVanPhongPham" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="171" max="32767" attributes="0"/>
+              <Component id="btnThang" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnNam" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="131" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -31,8 +33,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnSach" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnVanPhongPham" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnNgay" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnThang" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnNam" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="pnlSouth" max="32767" attributes="0"/>
@@ -41,25 +44,33 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="btnSach">
+    <Component class="javax.swing.JButton" name="btnNgay">
       <Properties>
-        <Property name="text" type="java.lang.String" value="S&#xe1;ch"/>
+        <Property name="text" type="java.lang.String" value="Ng&#xe0;y"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSachActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNgayActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnVanPhongPham">
+    <Component class="javax.swing.JButton" name="btnThang">
       <Properties>
-        <Property name="text" type="java.lang.String" value="V&#x103;n Ph&#xf2;ng Ph&#x1ea9;m"/>
+        <Property name="text" type="java.lang.String" value="Th&#xe1;ng"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVanPhongPhamActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThangActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="pnlSouth">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
     </Container>
+    <Component class="javax.swing.JButton" name="btnNam">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="N&#x103;m"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNamActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

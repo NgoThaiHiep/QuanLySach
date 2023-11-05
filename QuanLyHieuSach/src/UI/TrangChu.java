@@ -13,6 +13,7 @@ import Pannel.pnlCapNhatNhanVien;
 import Pannel.pnlCapNhatSach;
 import Pannel.pnlDanhSachHoaDon;
 import Pannel.pnlLapHoaDon;
+import Pannel.pnlTaiKhoan;
 import Pannel.pnlThemKhachHang;
 import Pannel.pnlThemNhanVien;
 import Pannel.pnlThemSach;
@@ -393,9 +394,6 @@ public class TrangChu extends javax.swing.JFrame {
                 pnlBody.revalidate();
             }
         }); 
-        
-        
-        
         //menu chính
         menuTrangChu = new MenuItem(iconTrangChu, "Trang chủ",new ActionListener() {
              @Override
@@ -412,12 +410,32 @@ public class TrangChu extends javax.swing.JFrame {
                  System.out.println();
              }
         });
+        MenuItem menuDSTaiKhoan = new MenuItem(iconTaiKhoan, "Tài khoản", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pnlBody.removeAll();
+                pnlBody.add(new pnlTaiKhoan(tk,nv));
+                System.out.println(tk.getTenTK());
+                pnlBody.repaint();
+                pnlBody.revalidate(); 
+            }
+        });
+        MenuItem menuDSThongKe = new MenuItem(iconThongKe, "Thống kê", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pnlBody.removeAll();
+                pnlBody.add(new pnlThongKe(tk));
+                System.out.println(tk.getTenTK());
+                pnlBody.repaint();
+                pnlBody.revalidate(); 
+            }
+        });
         MenuItem menuSanPham = new MenuItem(iconSanPham, "Sản phẩm",null,menuTraCuuSanPham,menuThemSanPham,menuCapNhatSanPham);
         MenuItem menuHoaDon = new MenuItem(iconHoaDon, "Hóa đơn",null,menuTaoHoaDon,menuDanhSachHoaDon);
         MenuItem menuKhachHang = new MenuItem(iconKhachHang, "Khách hàng",null,menuTraCuuKhachHang,menuThemKhachHang);
         MenuItem menuNhanVien = new MenuItem(iconNhanVien, "Nhân viên",null,menuTraCuuNhanVien,menuThemNhanVien,menuCapNhatNhanVien);
-        MenuItem menuThongKe = new MenuItem(iconThongKe, "Thống kê",null);
-        MenuItem menuTaiKhoan = new MenuItem(iconTaiKhoan, "Tài khoản",null);
+        MenuItem menuThongKe = new MenuItem(iconThongKe, "Thống kê",null,menuDSThongKe);
+        MenuItem menuTaiKhoan = new MenuItem(iconTaiKhoan, "Tài khoản",null,menuDSTaiKhoan);
         MenuItem menuTroGiup = new MenuItem(iconTroGiup, "Trợ Giúp",null);
         
         if(nv.getChucVu().getMaChucVu().equals("QL")){
