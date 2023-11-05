@@ -73,6 +73,7 @@ public class pnlThemSach extends javax.swing.JPanel {
         kiemTraSo(txtSoLuongTon);
         kiemTraSo(txtNamXuatBan);
         kiemTraDuLieuFloat(txtDonGia);
+        duLieuTenSach();
 }
     public void kiemTraDuLieuFloat(JTextField textField){
         DecimalFormat df = new DecimalFormat("#,###");
@@ -427,6 +428,11 @@ public class pnlThemSach extends javax.swing.JPanel {
         );
 
         jButton2.setText("Làm mới");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Thêm sản phẩm");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -616,6 +622,88 @@ public class pnlThemSach extends javax.swing.JPanel {
         jframThemTheLoai(true);
         modalDialog.setVisible(true);
     }//GEN-LAST:event_btnThemTheLoaiActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        AbstractDocument document = (AbstractDocument) txtTenSach.getDocument();
+
+        DocumentFilter oldFilter;
+         oldFilter = document.getDocumentFilter();
+    document.setDocumentFilter(null);
+
+    // Đặt lại giá trị
+        txtTenSach.setText("");
+
+        // Đặt lại DocumentFilter
+        document.setDocumentFilter(oldFilter);
+        txtDonGia.setText("");
+        txtNamXuatBan.setText("");
+        txtSoLuongTon.setText("");
+        txtSoTrang.setText("");
+        cboNhaCungCap.setSelectedIndex(-1);
+        cboNhaXuatBan.setSelectedIndex(-1);
+        cboTheLoai.setSelectedIndex(-1);
+        cboTacGia.removeSelectedItems();
+    }//GEN-LAST:event_jButton2ActionPerformed
+     private void duLieuTenSach(){
+            txtTenSach.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    String text = txtTenSach.getText();
+                    String formattedText = vietHoaChuCaiDauTienTrongJtextField(text);
+                    txtTenSach.setText(formattedText);
+                }
+            });
+
+                    // Tạo một DocumentFilter để kiểm tra và lọc ký tự
+            AbstractDocument document = (AbstractDocument) txtTenSach.getDocument();
+            document.setDocumentFilter(new DocumentFilter() {
+                @Override
+                public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                    // Chỉ cho phép chữ cái, mã UTF-8, và có đúng một dấu cách giữa các từ
+                    if (string == null)
+                        return;
+
+                    String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+                    String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+                    if (isValidText(newText)) {
+                        super.insertString(fb, offset, string, attr);
+                    }
+                }
+
+                @Override
+                public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                    // Chỉ cho phép chữ cái, mã UTF-8, và có đúng một dấu cách giữa các từ
+                    if (text == null)
+                        return;
+
+                    String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+                    String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+                    if (isValidText(newText)) {
+                        super.replace(fb, offset, length, text, attrs);
+                    }
+                }
+
+                private boolean isValidText(String text) {
+                    if (text.isEmpty() || text.startsWith(" ")) {
+                        return false; // Ký tự đầu tiên không được là dấu cách
+                    }
+
+                    String[] words = text.split(" ");
+                    if (words.length < 1) {
+                        return false; // Phải có ít nhất một từ
+                    }
+
+                    for (String word : words) {
+                        if (!Pattern.matches("^[\\p{L} ]*$", word)) {
+                            return false; // Chỉ mã UTF-8 và dấu cách được chấp nhận
+                        }
+                    }
+
+                    return true;
+                }
+            });
+        }
     public void jframThemTheLoai(boolean a){
          JFrame frmTheTheLoai = new JFrame("Large Image");
        

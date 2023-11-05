@@ -1,16 +1,13 @@
 
 package ServiceUser;
 
-
-
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.icons.FlatCheckBoxIcon;
 import com.formdev.flatlaf.ui.FlatUIUtils;
 import com.formdev.flatlaf.util.UIScale;
+
 import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,38 +22,14 @@ import javax.swing.plaf.basic.BasicComboBoxEditor;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import net.miginfocom.swing.MigLayout;
 
-/**
- *
- * @author RAVEN
- * @param <E>
- */
 public class ComboBoxMultiSelection<E> extends JComboBox<E> {
-
-    public List<Object> getSelectedItems() {
-        return selectedItems;
-    }
-
-    public void setSelectedItems(List<Object> selectedItems) {
-        List<Object> comboItem = new ArrayList<>();
-        int count = getItemCount();
-        for (int i = 0; i < count; i++) {
-            comboItem.add(getItemAt(i));
-        }
-        for (Object obj : selectedItems) {
-            if (comboItem.contains(obj)) {
-                addItemObject(obj);
-            }
-        }
-        comboItem.clear();
-    }
-
-    public void clearSelectedItems() {
-        selectedItems.clear();
-    }
 
     private final List<Object> selectedItems = new ArrayList<>();
     private final ComboBoxMultiCellEditor comboBoxMultiCellEditor;
     private Component comboList;
+    public List<Object> getSelectedItems() {
+        return selectedItems;
+    }
 
     private void removeItemObject(Object obj) {
         selectedItems.remove(obj);
@@ -97,6 +70,25 @@ public class ComboBoxMultiSelection<E> extends JComboBox<E> {
 
     }
 
+    public void removeSelectedItems() {
+        List<Object> selectedItemsCopy = new ArrayList<>(selectedItems);
+        for (Object item : selectedItemsCopy) {
+            removeItemObject(item);
+        }
+    }
+    public void setSelectedItems(List<Object> selectedItems) {
+        List<Object> comboItem = new ArrayList<>();
+        int count = getItemCount();
+        for (int i = 0; i < count; i++) {
+            comboItem.add(getItemAt(i));
+        }
+        for (Object obj : selectedItems) {
+            if (comboItem.contains(obj)) {
+                addItemObject(obj);
+            }
+        }
+        comboItem.clear();
+    }
     private class ComboBoxMultiCellRenderer extends BasicComboBoxRenderer {
         @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
@@ -104,7 +96,6 @@ public class ComboBoxMultiSelection<E> extends JComboBox<E> {
             if (comboList != list) {
                 comboList = list;
             }
-           // setIcon(new CheckBoxIcon(selectedItems.contains(value)));
             return this;
         }
     }
@@ -159,20 +150,6 @@ public class ComboBoxMultiSelection<E> extends JComboBox<E> {
 
     }
 
-    private class CheckBoxIcon extends FlatCheckBoxIcon {
-
-        private final boolean selected;
-
-        public CheckBoxIcon(boolean selected) {
-            this.selected = selected;
-        }
-
-        @Override
-        protected boolean isSelected(Component c) {
-            return selected;
-        }
-    }
-
     private class Item extends JLabel {
 
         public Object getItem() {
@@ -188,29 +165,22 @@ public class ComboBoxMultiSelection<E> extends JComboBox<E> {
         }
 
         private void init() {
-            putClientProperty(FlatClientProperties.STYLE, ""
-                    + "border:0,5,0,20;"
-                    + "background:darken($ComboBox.background,10%)");
-            JButton cmd = new JButton(new FlatSVGIcon("IMG/close.svg", 0.6f));
-            
-            cmd.addActionListener((e) -> {
-                removeItemObject(item);
-            });
-            cmd.setFocusable(false);
-            setLayout(new MigLayout("fill"));
-            add(cmd, "pos 1al 0.5al 10 10");
-            
+        	 putClientProperty(FlatClientProperties.STYLE, ""
+                     + "border:0,5,0,20;"
+                     + "background:darken($ComboBox.background,10%)");
+             JButton cmd = new JButton(new FlatSVGIcon("raven/combobox/close.svg", 0.6f));
+             cmd.putClientProperty(FlatClientProperties.STYLE, ""
+                     + "arc:999;"
+                     + "margin:1,1,1,1;"
+                     + "background:null;"
+                     + "focusWidth:0");
+             cmd.addActionListener((e) -> {
+                 removeItemObject(item);
+             });
+             cmd.setFocusable(false);
+             setLayout(new MigLayout("fill"));
+             add(cmd, "pos 1al 0.5al 10 10");
         }
 
-        @Override
-        protected void paintComponent(Graphics g) {
-            Graphics2D g2 = (Graphics2D) g.create();
-            FlatUIUtils.setRenderingHints(g2);
-            int arc = UIScale.scale(10);
-            g2.setColor(getBackground());
-            FlatUIUtils.paintComponentBackground(g2, 0, 0, getWidth(), getHeight(), 0, arc);
-            g2.dispose();
-            super.paintComponent(g);
-        }
     }
 }
