@@ -4,6 +4,9 @@ package Pannel;
 import Entity.NhanVien;
 import Entity.TaiKhoan;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class pnlThongKe extends javax.swing.JPanel {
@@ -87,14 +90,22 @@ public class pnlThongKe extends javax.swing.JPanel {
     }//GEN-LAST:event_btnSachActionPerformed
 
     private void btnVanPhongPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVanPhongPhamActionPerformed
-        // TODO add your handling code here:
-        pnlSouth.removeAll();
-        btnVanPhongPham.setBackground(Color.red);
-        btnSach.setBackground(Color.white);
-        pnlSouth.add(new Pannel.pnlThemVanPhongPham());
-        System.out.println(tk.getTenTK());
-        pnlSouth.repaint();
-        pnlSouth.revalidate();
+        try {
+            // TODO add your handling code here:
+            pnlSouth.removeAll();
+            btnVanPhongPham.setBackground(Color.red);
+            btnSach.setBackground(Color.white);
+            
+            pnlSouth.add(new Pannel.pnlThemVanPhongPham());
+            
+            pnlSouth.add(new Pannel.pnlTraCuuVanPhongPham());
+            
+            System.out.println(tk.getTenTK());
+            pnlSouth.repaint();
+            pnlSouth.revalidate();
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlThongKe.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnVanPhongPhamActionPerformed
 
 

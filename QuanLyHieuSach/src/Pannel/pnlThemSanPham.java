@@ -102,7 +102,17 @@ public class pnlThemSanPham extends javax.swing.JPanel {
         pnlSouth.removeAll();
         btnVanPhongPham.setBackground(Color.red);
         btnSach.setBackground(Color.white);
-        pnlSouth.add(new Pannel.pnlThemVanPhongPham());
+
+        try {
+            pnlSouth.add(new Pannel.pnlThemVanPhongPham());
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlThemSanPham.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+      
+         //   pnlSouth.add(new Pannel.pnlThemVanPhongPham()); 
+        
+
         System.out.println(tk.getTenTK());
         pnlSouth.repaint();
         pnlSouth.revalidate();

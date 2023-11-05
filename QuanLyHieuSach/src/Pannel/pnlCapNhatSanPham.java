@@ -4,6 +4,9 @@ package Pannel;
 import Entity.NhanVien;
 import Entity.TaiKhoan;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class pnlCapNhatSanPham extends javax.swing.JPanel {
@@ -91,7 +94,15 @@ public class pnlCapNhatSanPham extends javax.swing.JPanel {
         pnlSouth.removeAll();
         btnVanPhongPham.setBackground(Color.red);
         btnSach.setBackground(Color.white);
-        pnlSouth.add(new Pannel.pnlThemVanPhongPham());
+
+        try {
+            pnlSouth.add(new Pannel.pnlThemVanPhongPham());
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlCapNhatSanPham.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+      
+
         System.out.println(tk.getTenTK());
         pnlSouth.repaint();
         pnlSouth.revalidate();
