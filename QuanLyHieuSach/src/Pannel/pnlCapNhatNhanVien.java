@@ -512,7 +512,7 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
             }
         });
 
-        btnCapNhatThongTinNhanVien.setText("Thêm nhân viên");
+        btnCapNhatThongTinNhanVien.setText("Cập nhật");
         btnCapNhatThongTinNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCapNhatThongTinNhanVienActionPerformed(evt);

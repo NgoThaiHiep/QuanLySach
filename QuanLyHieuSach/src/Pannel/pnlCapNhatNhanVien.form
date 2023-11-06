@@ -652,7 +652,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnCapNhatThongTinNhanVien">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Th&#xea;m nh&#xe2;n vi&#xea;n"/>
+            <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCapNhatThongTinNhanVienActionPerformed"/>
