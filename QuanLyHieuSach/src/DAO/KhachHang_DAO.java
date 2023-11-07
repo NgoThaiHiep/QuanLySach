@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 /**
  *
  * @author hongh
@@ -117,31 +118,46 @@ public class KhachHang_DAO {
         }
 	public boolean InsertKhachHang(KhachHang kh) {
 		ConnectDB.getInstance();
-		Connection con = ConnectDB.getConnection();
-		PreparedStatement state = null;
-		int n = 0;
-		try {
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                        
-			state = con.prepareStatement("INSERT INTO [dbo].[KhachHang]([KhachHangID],[TenKhachHang],[SoDienThoai],[DiaChi])VALUES(?,?,?,?)");
-			state.setString(1, kh.getMaKhachHang());
-			state.setString(2, kh.getTenKhachHang());
-			state.setString(3, kh.getSoDienThoai());
-			state.setString(4, kh.getDiaChi());
-			n = state.executeUpdate();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		finally {
-			try {
-				state.close();
-			} catch (SQLException e2) {
-				// TODO: handle exception
-				e2.printStackTrace();
-			}
-		}
-		return n>0;
+    Connection con = ConnectDB.getConnection();
+    PreparedStatement state = null;
+    ResultSet rs = null;
+    int n = 0;
+    try {
+        // Kiểm tra xem số điện thoại đã tồn tại trong cơ sở dữ liệu hay chưa
+        String checkPhoneNumberQuery = "SELECT COUNT(*) FROM [dbo].[KhachHang] WHERE [SoDienThoai] = ?";
+        state = con.prepareStatement(checkPhoneNumberQuery);
+        state.setString(1, kh.getSoDienThoai());
+        rs = state.executeQuery();
+        if (rs.next() && rs.getInt(1) > 0) {
+            // Số điện thoại đã tồn tại, không thực hiện thêm mới và thông báo cho người dùng
+            return n<0;
+        } else {
+            // Số điện thoại không tồn tại, thực hiện thêm mới
+            String insertQuery = "INSERT INTO [dbo].[KhachHang]([KhachHangID],[TenKhachHang],[SoDienThoai],[DiaChi]) VALUES(?,?,?,?)";
+            state = con.prepareStatement(insertQuery);
+            state.setString(1, kh.getMaKhachHang());
+            state.setString(2, kh.getTenKhachHang());
+            state.setString(3, kh.getSoDienThoai());
+            state.setString(4, kh.getDiaChi());
+            n = state.executeUpdate();
+        }
+    } catch (Exception e) {
+        // TODO: handle exception
+        e.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (state != null) {
+                state.close();
+            }
+        } catch (SQLException e2) {
+            // TODO: handle exception
+            e2.printStackTrace();
+        }
+    }
+    return n > 0;
 	}
         
 }

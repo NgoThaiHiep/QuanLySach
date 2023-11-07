@@ -558,42 +558,37 @@ public class pnlThemKhachHang extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
-        // TODO add your handling code here:
+        AbstractDocument document = (AbstractDocument) txtTenKhachHang.getDocument();
+
+        DocumentFilter oldFilter;
+        oldFilter = document.getDocumentFilter();
+        document.setDocumentFilter(null);
         txtTenKhachHang.setText("");
-        txtSoDienThoai.setText("");
-        txtSoDienThoai.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        cboTinh.setSelectedItem("Tỉnh/Thành phố");
+    
+    // Các dòng mã khác để làm mới các thành phần khác nếu cần thiết
+    txtSoDienThoai.setText("");
+    txtSoDienThoai.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+    cboTinh.setSelectedItem("Tỉnh/Thành phố");
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void btnThemKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKhachHangActionPerformed
-         if(cboTinh.getSelectedItem().equals("Tỉnh/Thành phố")){
-           
-                if(cboPhuong.getSelectedItem().equals("Quận/huyện") ){
-                    
-                }
-              if(cboPhuong.getSelectedItem().equals("Phường/xã") ){
-
-            }
-        }
-        
-        // KhachHang(String maNV, String hoTenKhachHang, LocalDate ngaySinh, String soDienThoai, boolean gioiTinh, String email, ChucVu chucVu, TaiKhoan taiKhoan, CaLamViec caLam, String trangThai, String hinhAnh);
-         
+         if(cboTinh.getSelectedItem().equals("Tỉnh/Thành phố") || cboQuan.getSelectedItem().equals("Quận/huyện") || cboPhuong.getSelectedItem().equals("Phường/xã") || txtMaKhachHang.getText().trim().isEmpty() || txtTenKhachHang.getText().trim().isEmpty() || txtSoDienThoai.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin trước khi thêm khách hàng.");
+    } else {
+        // Các biến không rỗng, thực hiện việc thêm khách hàng vào cơ sở dữ liệu
         String maKhachHang = txtMaKhachHang.getText();
-        String tenKhachHanginput = txtTenKhachHang.getText().trim();
-        String tenKhachHang = tenKhachHanginput.replaceAll("\\s+", " ");
-       
-      
-     
-       
+        String tenKhachHangInput = txtTenKhachHang.getText().trim();
+        String tenKhachHang = tenKhachHangInput.replaceAll("\\s+", " ");
         String soDienThoai = txtSoDienThoai.getText();
-        String diaChi = cboTinh.getSelectedItem() +"-"+cboQuan.getSelectedItem()+"-"+cboPhuong.getSelectedItem();
+        String diaChi = cboTinh.getSelectedItem() + "-" + cboQuan.getSelectedItem() + "-" + cboPhuong.getSelectedItem();
         String chucVu = "QL";
-   
-        
-        KhachHang kh = new KhachHang(maKhachHang, tenKhachHang, soDienThoai,diaChi);
-        if(khachHang_DAO.InsertKhachHang(kh)){
+        KhachHang kh = new KhachHang(maKhachHang, tenKhachHang, soDienThoai, diaChi);
+        if(khachHang_DAO.InsertKhachHang(kh)) {
             JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công");
+        }else{
+            JOptionPane.showMessageDialog(this, "Đã có dữ liệu của số điện thoại này");
         }
+    }
     }//GEN-LAST:event_btnThemKhachHangActionPerformed
 
     private void cboTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTinhActionPerformed
