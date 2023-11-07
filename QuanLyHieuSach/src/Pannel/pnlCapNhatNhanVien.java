@@ -145,7 +145,7 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
         date.toDay();
         SelectedDate day = date.getSelectedDate();
         
-       
+        
         
         date.setSelectedDate(new SelectedDate(day.getDay(),day.getMonth(),day.getYear() - 18) );
             capNhatDanhSachNhanVien();            
@@ -512,7 +512,7 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
             }
         });
 
-        btnCapNhatThongTinNhanVien.setText("Thêm nhân viên");
+        btnCapNhatThongTinNhanVien.setText("Cập nhật nhân viên");
         btnCapNhatThongTinNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCapNhatThongTinNhanVienActionPerformed(evt);
@@ -552,12 +552,15 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh sách nhân viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 12))); // NOI18N
 
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
+            }
+        });
+
         tblDanhSachNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Mã nhân viên", "Tên nhân viên", "CCCD", "Ngày sinh", "Giới tính", "Số điện thoại", "Email", "Địa chỉ", "Trạng thái", "Hình ảnh", "Chức vụ", "Ca làm"
@@ -713,21 +716,13 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
 
     private void btnCapNhatThongTinNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatThongTinNhanVienActionPerformed
         // TODO add your handling code here:
-        if(cboTinhThanhPho.getSelectedItem().equals("Tỉnh/Thành phố")){
-           
-                if(cboPhuongXa.getSelectedItem().equals("Phường/xã") ){
-                    
-                }
-              if(cboPhuongXa.getSelectedItem().equals("Phường/xã") ){
-
-            }
-        }
+       
         
         // NhanVien(String maNV, String hoTenNhanVien, LocalDate ngaySinh, String soDienThoai, boolean gioiTinh, String email, ChucVu chucVu, TaiKhoan taiKhoan, CaLamViec caLam, String trangThai, String hinhAnh);
          
         String maNhanVien = txtMaNhanVien.getText();
         String tenNhanVieninput = txtTenNhanVien.getText().trim();
-        String tenNhanVien = tenNhanVieninput.replaceAll("\\s+", " ");
+        
         String cccd = txtCCCD.getText();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
         String ngay = date.getSelectedDate().getYear() +"-"+date.getSelectedDate().getMonth()+"-"+ date.getSelectedDate().getDay();
@@ -739,35 +734,58 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
         }
         String email = txtEmail.getText();
         String soDienThoai = txtSoDienThoai.getText();
-        String diaChi = cboTinhThanhPho.getSelectedItem() +"-"+cboQuanHuyen.getSelectedItem()+"-"+cboPhuongXa.getSelectedItem();
-        String chucVu = "QL";
-        if(!cboChucVu.getSelectedItem().equals("Quản lý")){
-            chucVu = "NV";
+        //String diaChi = cboTinhThanhPho.getSelectedItem() +"-"+cboQuanHuyen.getSelectedItem()+"-"+cboPhuongXa.getSelectedItem();
+        String chucVu_Txt = "";
+        chucVu_DAO = new ChucVu_DAO();
+        ArrayList<ChucVu> dsChucVu = chucVu_DAO.layDanhSachChucVu();
+        for (ChucVu chucVu : dsChucVu) {
+            if(chucVu.getTenChucVu().equals(cboChucVu.getSelectedItem()))
+                chucVu_Txt = chucVu.getMaChucVu();
+            
         }
-        ChucVu cv = new ChucVu(chucVu);
-        CaLamViec clv = new CaLamViec("");
+        ChucVu cv = new ChucVu(chucVu_Txt);
+        
+        String caLam_Txt = "";
+        CaLamViec clv ;
+        clv = new CaLamViec("");
+        caLam_DAO = new CaLam_DAO(); 
+        ArrayList<CaLamViec> dsCaLam = caLam_DAO.layDanhSachCaLamViec();
+        if(!chucVu_Txt.equals("QL")){
+            for (CaLamViec caLamViec : dsCaLam) {
+                if(caLamViec.getTenCa().equals(cboCaLamViec.getSelectedItem()))
+                    caLam_Txt = caLamViec.getMaCa();
+                        clv = new CaLamViec(caLam_Txt);
+                    
+                 }
+        }
+        
+        
         String trangThai = "Đang làm";
         String hinhAnh = selectedFile.getAbsolutePath();
 
         nhanVien_DAO = new NhanVien_DAO();
         taiKhoan_DAO = new TaiKhoan_DAO();
         TaiKhoan taiKhoan = new TaiKhoan(maNhanVien, "123456");
-        nv = new NhanVien(maNhanVien, tenNhanVien, cccd, ngaySinh, gioiTinh, email, soDienThoai, cv,  taiKhoan, clv, trangThai, hinhAnh,diaChi);
-        try {
-            
-                if(nhanVien_DAO.InsertNhanVien(nv)){
-                    if(taiKhoan_DAO.inserTaiKhoan(taiKhoan)){
-                    JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công");
+        
+         String diaChi = "";
+        if(!cboTinhThanhPho.getSelectedItem().equals("Tỉnh/Thành phố")){
+            diaChi+=cboTinhThanhPho.getSelectedItem();
+                if(!cboQuanHuyen.getSelectedItem().equals("Quận/huyện") ){
+                    diaChi+="-"+cboQuanHuyen.getSelectedItem();
+                    if(!cboPhuongXa.getSelectedItem().equals("Phường/xã") ){
+                        diaChi+="-"+cboPhuongXa.getSelectedItem();
+                    }
                 }
-                    
-            }
-               
             
-        } catch (SQLException ex) {
-            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
-       // System.out.println(tenNhanVien);
-       // System.out.println(tenNhanVien);
+        nv = new NhanVien(maNhanVien, tenNhanVieninput, cccd, ngaySinh, gioiTinh, email, soDienThoai, cv,  taiKhoan, clv, trangThai, hinhAnh,diaChi);
+        System.out.println(nv);
+        System.out.println(nv.getDiaChi());
+        if (nhanVien_DAO.capNhatNhanVien(nv)) {
+            JOptionPane.showMessageDialog(this, "Cập nhật nhân viên thành công");
+            capNhatDanhSachNhanVien();
+        } // System.out.println(tenNhanVien);
+        // System.out.println(tenNhanVien);
     }//GEN-LAST:event_btnCapNhatThongTinNhanVienActionPerformed
 
     private void cboGioiTinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboGioiTinhActionPerformed
@@ -889,7 +907,7 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
 
     private void btnLamMoiBangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiBangActionPerformed
         // TODO add your handling code here:
-        
+        capNhatDanhSachNhanVien();
         
     }//GEN-LAST:event_btnLamMoiBangActionPerformed
 
@@ -972,6 +990,7 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                cboChucVu.setSelectedItem(tblDanhSachNhanVien.getValueAt(row, 10).toString());
                 cboCaLamViec.setVisible(false);
                     lblCaLam.setVisible(false);
                 if(!tblDanhSachNhanVien.getValueAt(row, 10).toString().equals("Quản lý")){
@@ -981,7 +1000,12 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
                 }
                 //txtTienLuong.setText(modelNhanVien.getValueAt(row, 5).toString());
 		//cboPhongBan.setSelectedItem(modelNhanVien.getValueAt(row, 6).toString());
+                
     }//GEN-LAST:event_tblDanhSachNhanVienMouseClicked
+
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane1MouseClicked
      
     public void addPlaceholderStyle(JTextField textFile){
         Font  font = textFile.getFont();
@@ -1481,8 +1505,9 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
         ArrayList<CaLamViec> dsCaLam = caLam_DAO.layDanhSachCaLamViec();
         
         ArrayList<NhanVien> dsNV = nhanVien_DAO.layDanhSachNhanVien();
-        String colTieuDe1[] = new String[]{"Mã nhân viên", "Tên nhân viên", "CCCD", "Ngày sinh", "Giới tính", "Số điện thoại", "Email", "Địa chỉ", "Trạng thái", "Hình ảnh", "Chức vụ", "Ca làm"};
-        DefaultTableModel model = new DefaultTableModel(colTieuDe1, 0);
+       String colTieuDe1[] = new String[]{"Mã nhân viên", "Tên nhân viên", "CCCD", "Ngày sinh", "Giới tính", "Số điện thoại", "Email", "Địa chỉ", "Trạng thái", "Hình ảnh", "Chức vụ", "Ca làm"};
+        
+        DefaultTableModel model = new DefaultTableModel(colTieuDe1,0);
            Object[] row;
         for (NhanVien nhanVien : dsNV) {
               row = new Object[12];

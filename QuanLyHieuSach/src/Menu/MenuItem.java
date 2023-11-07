@@ -116,11 +116,11 @@ public class MenuItem extends javax.swing.JPanel {
         if (showing) {
            hideMenu();
             isSelected1 = false;
-           setBackground(new java.awt.Color(250, 250, 250));
+          // setBackground(new java.awt.Color(250, 250, 250));
         } else {
             isSelected1 = true;
             showMenu();
-            setBackground(new java.awt.Color(250, 0, 0));
+            //setBackground(new java.awt.Color(250, 0, 0));
 
         }
         if (act != null) {
@@ -135,11 +135,11 @@ public class MenuItem extends javax.swing.JPanel {
         if (showing) {
            hideMenu();
            
-           setBackground(new java.awt.Color(250, 250, 250));
+          // setBackground(new java.awt.Color(250, 250, 250));
         } else {
             
             showMenu();
-            setBackground(new java.awt.Color(250, 0, 0));
+           // setBackground(new java.awt.Color(250, 0, 0));
 
         }
         if (act != null) {

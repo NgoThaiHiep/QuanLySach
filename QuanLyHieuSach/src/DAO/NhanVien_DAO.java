@@ -145,7 +145,6 @@ public class NhanVien_DAO {
 		int n = 0;
 		try {
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                        
 			state = con.prepareStatement("INSERT INTO [dbo].[NhanVien]([NhanVienID],[HoTenNhanVien],[CCCD],[GioiTinh],[NgaySinh],[SoDienThoai],[Email],[TrangThai],[HinhAnh],[ChucVu],[CaLamViec],[TaiKhoan])VALUES(?,?, ?, ?,?,?,?,?,?,?,?,?)");
 			state.setString(1, nv.getMaNV());
 			state.setString(2, nv.getHoTenNhanVien());
@@ -174,5 +173,47 @@ public class NhanVien_DAO {
 		}
 		return n>0;
 	}
+        public boolean capNhatNhanVien(NhanVien nv) {
+		ConnectDB.getInstance();
+		Connection con = ConnectDB.getConnection();
+		PreparedStatement state = null;
+		int n =0;
+		try {
+                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+			state = con.prepareStatement("UPDATE [dbo].[NhanVien]\n" +
+                                                    " SET [HoTenNhanVien] = ?,[CCCD] = ? ,[GioiTinh] = ? ,[NgaySinh] = ?,[SoDienThoai] = ?,[Email] = ?,[DiaChi] = ? ,[TrangThai] = ? ,[HinhAnh] =? ,[ChucVu] = ? , [CaLamViec] = ?,[TaiKhoan] = ?\n" +
+                                                    " WHERE [NhanVienID] = ? ");
+			
+			
+			state.setString(1, nv.getHoTenNhanVien());
+			state.setString(2, nv.getCCCD());
+			state.setBoolean(3, nv.getGioiTinh());
+			state.setString(4, formatter.format(nv.getNgaySinh()));
+			state.setString(5, nv.getSoDienThoai());
+                        state.setString(6, nv.getEmail());
+                        state.setString(7, nv.getDiaChi());
+			state.setString(8, nv.getTrangThai());
+                        state.setString(9, nv.getHinhAnh());
+                        state.setString(10, nv.getChucVu().getMaChucVu());
+                        state.setString(11, nv.getCaLam().getMaCa());
+                        state.setString(12, nv.getTaiKhoan().getTenTK());
+                        state.setString(13, nv.getMaNV());
+			n = state.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				state.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+		return n>0;
+	}
+
 
 }

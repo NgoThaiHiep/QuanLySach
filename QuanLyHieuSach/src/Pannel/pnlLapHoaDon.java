@@ -13,15 +13,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import Pannel.pnlTrangChu;
+
 import UI.TrangChu;
-import com.formdev.flatlaf.FlatLightLaf;
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import javax.swing.UIManager;
-import static javax.swing.UIManager.setLookAndFeel;
+import javax.swing.LookAndFeel;
+
 /**
  *
  * @author FPTSHOP
@@ -35,11 +30,11 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
     private NhanVien nv;
     private final HoaDon_DAO hoaDon_DAO;
     private TrangChu trangChu;
-    
-    public pnlLapHoaDon(TaiKhoan tk,NhanVien nv) {
+    private LookAndFeel originalLookAndFeel;
+    public pnlLapHoaDon(TaiKhoan tk,NhanVien nv, LookAndFeel originalLookAndFeel) {
         this.nv = nv;
         this.tk = tk;
-        
+        this.originalLookAndFeel = originalLookAndFeel;
        
         initComponents();
        
@@ -463,8 +458,8 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
         // TODO add your handling code here:
           
          
-       
-        
+       trangChu = new TrangChu(tk, nv, originalLookAndFeel);
+        trangChu.showThemKhachHang();
       
         
             
