@@ -4,19 +4,27 @@
  */
 package Pannel;
 
+import DAO.NhanVien_DAO;
+import Entity.NhanVien;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author FPTSHOP
  */
 public class pnlThongKeTheoThang extends javax.swing.JPanel {
 
+    private NhanVien_DAO nhanVien_DAO;
+
     /**
      * Creates new form pnlThongKeTheoThang
      */
     public pnlThongKeTheoThang() {
         initComponents();
+        capNhatDanhSachNhanVien();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -261,7 +269,22 @@ public class pnlThongKeTheoThang extends javax.swing.JPanel {
                 .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    private void capNhatDanhSachNhanVien(){
+        nhanVien_DAO = new NhanVien_DAO();
+        ArrayList<NhanVien> dsNhanVien = nhanVien_DAO.layDanhSachNhanVien();
+      
+        String colTieuDe1[] = new String[]{"Mã nhân viên", "Tên nhân viên"};
+        DefaultTableModel model = new DefaultTableModel(colTieuDe1, 0);
+           Object[] row = null;
+        for (NhanVien nhanVien : dsNhanVien) {
+              row = new Object[12];
+            // GÁN GIÁ TRỊ
+            row[0] = nhanVien.getMaNV();
+            row[1] = nhanVien.getHoTenNhanVien();
+            model.addRow(row);
+        }
+        jTable1.setModel(model);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

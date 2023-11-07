@@ -251,6 +251,12 @@ public class pnlThemNhanVien extends javax.swing.JPanel {
             }
         });
 
+        cboPhuongXa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboPhuongXaActionPerformed(evt);
+            }
+        });
+
         lblMaNhanVien.setText("Mã nhân viên");
 
         lblTenNhanVien.setText("Tên nhân viên");
@@ -271,6 +277,7 @@ public class pnlThemNhanVien extends javax.swing.JPanel {
 
         txtCCCD.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
+        btnChonNgaySinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/anhLich.png"))); // NOI18N
         btnChonNgaySinh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChonNgaySinhActionPerformed(evt);
@@ -360,7 +367,7 @@ public class pnlThemNhanVien extends javax.swing.JPanel {
                             .addComponent(txtTenNhanVien))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                         .addComponent(cboPhuongXa, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(209, 209, 209))))
         );
@@ -392,7 +399,7 @@ public class pnlThemNhanVien extends javax.swing.JPanel {
                         .addComponent(lblNgaySinh))
                     .addComponent(btnChonNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEmail)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -406,10 +413,10 @@ public class pnlThemNhanVien extends javax.swing.JPanel {
                     .addComponent(cboTinhThanhPho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cboQuanHuyen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cboPhuongXa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 89, -1, -1));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 89, 910, 430));
 
         btnLamMoi.setText("Làm mới");
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -417,7 +424,7 @@ public class pnlThemNhanVien extends javax.swing.JPanel {
                 btnLamMoiActionPerformed(evt);
             }
         });
-        add(btnLamMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(572, 577, -1, -1));
+        add(btnLamMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 540, 150, -1));
 
         lblAnhNhanVien.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblAnhNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -446,7 +453,7 @@ public class pnlThemNhanVien extends javax.swing.JPanel {
                 btnThemNhanVienActionPerformed(evt);
             }
         });
-        add(btnThemNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(807, 577, 158, -1));
+        add(btnThemNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 540, 158, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void cboTinhThanhPhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTinhThanhPhoActionPerformed
@@ -670,6 +677,7 @@ public class pnlThemNhanVien extends javax.swing.JPanel {
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
         // TODO add your handling code here:
         txtCCCD.setText("");
+        txtTenNhanVien.setText("");
         txtEmail.setText("");
         txtEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         txtCCCD.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -702,6 +710,10 @@ public class pnlThemNhanVien extends javax.swing.JPanel {
             cboCaLam.setVisible(true);   
         }
     }//GEN-LAST:event_cboChucVuActionPerformed
+
+    private void cboPhuongXaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhuongXaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboPhuongXaActionPerformed
      
 
 

@@ -5,6 +5,7 @@
         <group>
             <file>file:/D:/MON/PTUD/DoAn1/QuanLyHieuSach/src/UI/DoiMatKhau.java</file>
             <file>file:/D:/MON/PTUD/DoAn1/QuanLyHieuSach/src/UI/TrangChu.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLyHieuSach/src/DAO/KhachHang_DAO.java</file>
             <file>file:/D:/MON/PTUD/DoAn1/QuanLyHieuSach/src/ServiceUser/ComboBoxMultiSelection.java</file>
             <file>file:/D:/MON/PTUD/DoAn1/QuanLyHieuSach/src/Pannel/pnlLapHoaDon.java</file>
             <file>file:/D:/MON/PTUD/DoAn1/QuanLyHieuSach/src/ServiceUser/TextFieldTenDangNhap.java</file>
@@ -13,6 +14,7 @@
             <file>file:/D:/MON/PTUD/DoAn1/QuanLyHieuSach/src/ServiceUser/JTextFielMatKhau.java</file>
             <file>file:/D:/MON/PTUD/DoAn1/QuanLyHieuSach/src/UI/QuenMatKhauSoDienThoai.java</file>
             <file>file:/D:/MON/PTUD/DoAn1/QuanLyHieuSach/src/UI/DangNhap.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLyHieuSach/src/Pannel/pnlCapNhatNhanVien.java</file>
         </group>
     </open-files>
 </project-private>
