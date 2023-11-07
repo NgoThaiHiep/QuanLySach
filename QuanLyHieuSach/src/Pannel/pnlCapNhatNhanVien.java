@@ -965,7 +965,6 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
                 int thang = Integer.parseInt( tblDanhSachNhanVien.getValueAt(row, 3).toString().substring(5,7));
                 int ngay = Integer.parseInt( tblDanhSachNhanVien.getValueAt(row, 3).toString().substring(8,10));
                 date.setSelectedDate(new SelectedDate(ngay,thang,nam));
-                
 		cboGioiTinh.setSelectedItem(tblDanhSachNhanVien.getValueAt(row, 4).toString());
 		
                 txtSoDienThoai.setText("");

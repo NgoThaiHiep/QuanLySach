@@ -454,7 +454,13 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
             public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
               
                 pnlBody.removeAll();
-                pnlBody.add(new pnlThemKhachHang(tk));
+                try {
+                    pnlBody.add(new pnlThemKhachHang(tk));
+                } catch (IOException ex) {
+                    Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+                }
                // System.out.println(tk.getTenTK());
                 pnlBody.repaint();
                 pnlBody.revalidate(); 
@@ -885,7 +891,13 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
             @Override
             public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
                 pnlBody.removeAll();
-                pnlBody.add(new pnlThemKhachHang(tk));
+                try {
+                    pnlBody.add(new pnlThemKhachHang(tk));
+                } catch (IOException ex) {
+                    Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+                }
                // System.out.println(tk.getTenTK());
                 pnlBody.repaint();
                 pnlBody.revalidate(); 
