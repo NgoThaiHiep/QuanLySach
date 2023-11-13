@@ -11,18 +11,32 @@ import java.util.Objects;
 public class NhaCungCap {
     private String maNCC;
     private String tenNCC;
+    private String sanPhamCungCap;
     private String diaChiNCC;
     private String soDienThoai;
     private String email;
 
-    public NhaCungCap(String maNCC, String tenNCC, String diaChiNCC, String soDienThoai, String email) {
-        this.maNCC = maNCC;
-        this.tenNCC = tenNCC;
-        this.diaChiNCC = diaChiNCC;
-        this.soDienThoai = soDienThoai;
-        this.email = email;
-    }
-    public NhaCungCap(String maNCC, String tenNCC) {
+   
+    public NhaCungCap(String maNCC, String tenNCC, String sanPhamCungCap, String diaChiNCC, String soDienThoai,
+			String email) {
+		super();
+		this.maNCC = maNCC;
+		this.tenNCC = tenNCC;
+		this.sanPhamCungCap = sanPhamCungCap;
+		this.diaChiNCC = diaChiNCC;
+		this.soDienThoai = soDienThoai;
+		this.email = email;
+	}
+
+	public String getSanPhamCungCap() {
+		return sanPhamCungCap;
+	}
+
+	public void setSanPhamCungCap(String sanPhamCungCap) {
+		this.sanPhamCungCap = sanPhamCungCap;
+	}
+
+	public NhaCungCap(String maNCC, String tenNCC) {
         this.maNCC = maNCC;
         this.tenNCC = tenNCC;
     }

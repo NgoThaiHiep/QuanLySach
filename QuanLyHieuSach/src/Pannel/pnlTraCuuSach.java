@@ -1,5 +1,30 @@
 
 package Pannel;
+import javax.swing.*;
+
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JComboBox;
+
+import DAO.NhaCungCap_DAO;
+import DAO.NhaXuatBan_DAO;
+import DAO.NhanVien_DAO;
+import DAO.Sach_DAO;
+import DAO.Sach_TheLoai_DAO;
+import DAO.TacGia_DAO;
+import DAO.TheLoai_DAO;
+import Entity.LoaiSanPham;
+import Entity.NhaCungCap;
+import Entity.NhaXuatBan;
+import Entity.Sach;
+import Entity.TacGia;
+import Entity.TheLoai;
+import ServiceUser.CellSach;
+import ServiceUser.ScrollBarCustom;
+import java.awt.Color;
+import java.awt.Dimension;
 
 /**
  *
@@ -7,11 +32,34 @@ package Pannel;
  */
 public class pnlTraCuuSach extends javax.swing.JPanel {
 
+    private JPanel panel;
+    private int count = 0;
+    private Sach_DAO sach_DAO;
+    private NhanVien_DAO nhanVien_DAO;
+    private static final int PANEL_HEIGHT = 230;
+    private Sach sach;
+
     /**
      * Creates new form Sach
      */
     public pnlTraCuuSach() {
+        panel = new JPanel();
+      
+        JPanel newPanel = createPanels();
+        panel.add(newPanel);
+        panel.revalidate();
+        panel.repaint();
+        
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+      
+
+        JScrollPane scrollPane = new JScrollPane(panel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.getViewport().setPreferredSize(new Dimension(250, 400));
+        addTableStyle(scrollPane);
         initComponents();
+        jPanel3.add(scrollPane);
     }
 
     /**
@@ -49,8 +97,6 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
         checkboxNamSanXuat = new javax.swing.JCheckBox();
         textFieldSuggestion1 = new ServiceUser.TextFieldSuggestion();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
 
         jLabel5.setText("Tên sách");
 
@@ -133,7 +179,7 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
-        setPreferredSize(new java.awt.Dimension(963, 500));
+        setPreferredSize(new java.awt.Dimension(1500, 500));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1320, 500));
 
@@ -215,7 +261,7 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addGap(37, 37, 37)
                 .addComponent(cboSapXepTheo, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(572, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
@@ -255,33 +301,7 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Kết quả tra cứu"));
-
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Tên sản phẩm", "Thông tin sản phẩm", "Chức năng"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-        );
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.Y_AXIS));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -292,7 +312,7 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,15 +329,50 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 975, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1494, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+ private JPanel createPanels() {
+        JPanel containerPanel = new JPanel();
+        containerPanel.setLayout(new BoxLayout(containerPanel, BoxLayout.Y_AXIS));	
+        sach_DAO = new Sach_DAO();
+        nhanVien_DAO = new NhanVien_DAO();
+        ArrayList<Sach> dssps = sach_DAO.layDanhSanPhamSach();
+        for (Sach sach : dssps) {
+        	TheLoai tl = new TheLoai(sach.getTheLoai().getMaTheLoai());
+	       	 NhaXuatBan nhaXuatBan = new NhaXuatBan(sach.getNhaXuatBan().getMaNhaXuatBan());
+	       	 LoaiSanPham loaiSanPham = new LoaiSanPham(sach.getLoaiSanPham().getMaLoaiSanPham());
+	       	 NhaCungCap nhaCungCap = new NhaCungCap(sach.getNhaCungCap().getMaNCC());
+	       	sach = new Sach(sach.getTacGia(), /*Integer.parseInt(namXuatban) , Integer.parseInt(soTrang) */sach.getNamXuatBan(),sach.getSoTrang(), tl, nhaXuatBan, sach.getMaSanPham(), sach.getTenSanPham(),loaiSanPham, nhaCungCap,/*Integer.parseInt(soLuongTon),Float.parseFloat(donGia)*/sach.getSoLuongTon(),sach.getDonGia(),"Mô tả", "tinh trang", "hinh anh");
+	          
+	       	JPanel newPanel = new CellSach(sach);
+	           newPanel.setPreferredSize(new Dimension(newPanel.getWidth(), PANEL_HEIGHT));
+	           newPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, PANEL_HEIGHT)); // Ensure the panel doesn't expand horizontally
+	         //  newPanel.add(new JLabel("Panel " + (++count)));
 
+           containerPanel.add(newPanel);
+		}
+       // ArrayList<NhanVien> dsnv=nhanVien_DAO.layDanhSachNhanVien();
+      
+       
+
+        return containerPanel;
+    }
+    public void addTableStyle(JScrollPane scroll) {
+        scroll.getViewport().setOpaque(false);
+        scroll.setViewportBorder(null); 
+        scroll.setBorder(null);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setVerticalScrollBar(new ScrollBarCustom());
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(60, 60, 60));
+        scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, panel);
+    }
     private void cboSapXepTheoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSapXepTheoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cboSapXepTheoActionPerformed
@@ -374,8 +429,6 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAnhSachTimKiem;
     private javax.swing.JLabel lblTimKiem;
     private ServiceUser.TextFieldSuggestion textFieldSuggestion1;

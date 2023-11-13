@@ -348,9 +348,9 @@ public class TrangChu extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
                  try {
             UIManager.setLookAndFeel(originalLookAndFeel);
-        } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            } catch (UnsupportedLookAndFeelException ex) {
+                Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 pnlBody.removeAll();
                 pnlBody.add(new pnlTraCuuSanPham(tk));
                 System.out.println(tk.getTenTK());
@@ -480,8 +480,8 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
             @Override
             public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
                 pnlBody.removeAll();
-               // pnlBody.add(new pnlTraCuuNhanVien(tk));
-               pnlBody.add(new pnlThongKeTheoNam());
+                pnlBody.add(new pnlTraCuuNhanVien(tk));
+               //pnlBody.add(new pnlThongKeTheoNam());
                 System.out.println(tk.getTenTK());
                 pnlBody.repaint();
                 pnlBody.revalidate(); 
@@ -786,17 +786,20 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
         pnlMenu.setPreferredSize(new java.awt.Dimension(250, 425));
         pnlMenu.setLayout(new java.awt.BorderLayout());
 
-        jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(300, 602));
 
         pnlMenus.setBackground(new java.awt.Color(255, 255, 255));
-        pnlMenus.setPreferredSize(new java.awt.Dimension(250, 650));
+        pnlMenus.setPreferredSize(new java.awt.Dimension(300, 400));
+        pnlMenus.setRequestFocusEnabled(false);
         pnlMenus.setLayout(new javax.swing.BoxLayout(pnlMenus, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane1.setViewportView(pnlMenus);
 
         pnlMenu.add(jScrollPane1, java.awt.BorderLayout.PAGE_START);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(250, 50));
+        jPanel1.setPreferredSize(new java.awt.Dimension(50, 50));
 
         btnDangXuat.setText("Đăng xuất");
         btnDangXuat.addActionListener(new java.awt.event.ActionListener() {
@@ -826,7 +829,7 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(208, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnDangXuat)
@@ -841,7 +844,7 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
         pnlBody.setLayout(new java.awt.BorderLayout());
         getContentPane().add(pnlBody, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(577, 473));
+        setSize(new java.awt.Dimension(677, 943));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

@@ -2,11 +2,24 @@
 package DAO;
 
 import ConnectDB.ConnectDB;
+import Entity.CaLamViec;
+import Entity.ChucVu;
+import Entity.NhanVien;
+import Entity.Sach;
+import Entity.TaiKhoan;
+import Entity.TheLoai;
+import Entity.NhaCungCap;
+import Entity.NhaXuatBan;
+import Entity.LoaiSanPham;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
 
@@ -52,5 +65,39 @@ public class Sach_DAO {
             }
         return duplicate;
         }
-    
+    public ArrayList<Sach> layDanhSanPhamSach(){
+        ArrayList<Sach> dssps = new ArrayList<Sach>();
+	ConnectDB.getInstance();
+	Connection con = ConnectDB.getConnection();
+        
+        try {
+        String sql = "select * from Sach";
+        Statement state = con.createStatement();
+        ResultSet rs = state.executeQuery(sql);
+        while(rs.next()){
+        	
+        	  String maSanPham = rs.getString(1);
+              String tenSanPham = rs.getString(2);
+              String tacGia = rs.getString(3);
+              String soLuongTon = rs.getString(10);
+              int soTrang =rs.getInt("SoTrang");
+              Double donGia = rs.getDouble("DonGia");
+              TheLoai tl = new TheLoai(rs.getString("TheLoai"));
+              int namXuatban = rs.getInt("NamXuatBan");
+              String tinhTrang = rs.getString("TinhTrang");
+              NhaXuatBan nhaXuatBan = new NhaXuatBan(rs.getString("NhaXuatBan"));
+              NhaCungCap nhaCungCap = new NhaCungCap(rs.getString("NhaCungCap"));
+               //Sach sach = new Sach();
+               LoaiSanPham loaiSanPham = new LoaiSanPham(rs.getString("LoaiSanPham"));
+               loaiSanPham.setMaLoaiSanPham("");
+               Sach sach = new Sach(tacGia, namXuatban , soTrang, tl, nhaXuatBan, maSanPham, tenSanPham,loaiSanPham, nhaCungCap, Integer.parseInt(soLuongTon),donGia, null, tinhTrang, tinhTrang);  
+             dssps.add(sach);
+                
+            }    
+        } catch (SQLException e) {
+           e.printStackTrace();
+        }
+        
+        return dssps; 
+    }
 }
