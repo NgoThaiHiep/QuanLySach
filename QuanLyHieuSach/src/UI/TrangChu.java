@@ -480,7 +480,13 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
             @Override
             public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
                 pnlBody.removeAll();
-                pnlBody.add(new pnlTraCuuNhanVien(tk));
+                try {
+                    pnlBody.add(new pnlCapNhatNhanVien(tk));
+                } catch (IOException ex) {
+                    Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+                }
                //pnlBody.add(new pnlThongKeTheoNam());
                 System.out.println(tk.getTenTK());
                 pnlBody.repaint();
@@ -595,7 +601,7 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
                         menuThongKe,menuLapHoaDon, menuThongKe, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuDSTaiKhoan,menuTrangChu);
                   menuThongKe.setBackground(pnlMenus.getBackground());
             }
-        },menuTraCuuSanPham,menuThemSanPham,menuCapNhatSanPham);
+        },menuTraCuuSanPham,menuThemSanPham);
         menuHoaDon = new MenuItem(iconHoaDon, "Hóa đơn",new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -619,7 +625,7 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
                         menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuDSTaiKhoan,menuTrangChu);
                   menuThongKe.setBackground(pnlMenus.getBackground());
             }
-        },menuTraCuuNhanVien,menuThemNhanVien,menuCapNhatNhanVien);
+        },menuTraCuuNhanVien,menuThemNhanVien);
         menuThongKe = new MenuItem(iconThongKe, "Thống kê",new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

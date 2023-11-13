@@ -74,7 +74,8 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
     private TaiKhoan_DAO taiKhoan_DAO;
     private ChucVu_DAO chucVu_DAO;
     private CaLam_DAO caLam_DAO;
-    
+    private static final int HEIGHT = 189;
+     private static final int WIDTH= 174;
     public pnlCapNhatNhanVien(TaiKhoan tk) throws IOException, SQLException {
         this.tk = tk;
 
@@ -130,7 +131,7 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
             BufferedImage image = ImageIO.read(selectedFile); // Thay đổi đường dẫn đến ảnh
             
             // thay đổi kích thức ảnh cùng kích thước với lable 184x216
-             Image scaledImage = image.getScaledInstance(184, 216, Image.SCALE_SMOOTH);
+             Image scaledImage = image.getScaledInstance(WIDTH, HEIGHT, Image.SCALE_SMOOTH);
 
                     // Tạo ImageIcon với ảnh đã điều chỉnh kích thước
                     ImageIcon imageIcon = new ImageIcon(scaledImage);
@@ -501,7 +502,7 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
 
         lblThemNhanVien.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lblThemNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblThemNhanVien.setText("Cập nhật thông tin nhân viên");
+        lblThemNhanVien.setText("Tra cứu nhân viên");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tác vụ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 12))); // NOI18N
 
@@ -862,6 +863,7 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
 
     private void btnLamMoiThongTinNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiThongTinNhanVienActionPerformed
         // TODO add your handling code here:
+        txtMaNhanVien.setText("");
         txtCCCD.setText("");
         AbstractDocument document = (AbstractDocument) txtTenNhanVien.getDocument();
 
@@ -970,15 +972,45 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
                 txtSoDienThoai.setText("");
                 txtSoDienThoai.setText(tblDanhSachNhanVien.getValueAt(row, 5).toString());
                 txtEmail.setText(tblDanhSachNhanVien.getValueAt(row, 6).toString());
-
+                
+                if(tblDanhSachNhanVien.getValueAt(row, 7).toString().equals("")){
+                    cboTinhThanhPho.setSelectedIndex(0);
+                }else{
+                    	
+		    String part1 = "";
+                    String part2 = "";
+                    String part3 = "";
+                    String input = tblDanhSachNhanVien.getValueAt(row, 7).toString().toString();
+                    String[] parts = input.split("-");	
+                    for (int i = 0; i < parts.length; i++) {
+	        	 if(i == 0) {
+	        		 part1 = parts[i].toString();
+	        	 }else if(i == 1){
+	        		 part2 = parts[i].toString();
+	        	 }else {
+	        		 part3 =parts[i].toString();
+	        	 }
+			}
+                    
+                 
+                    cboTinhThanhPho.setSelectedItem(part1);
+                   
+                    if(!part2.equals("")){
+                        cboQuanHuyen.setSelectedItem(part2);
+                         if(!part3.equals("")){
+                            cboPhuongXa.setSelectedItem(part3);
+                        }
+                    }
+                            
+                }
                 cboTrangThai.setSelectedItem(tblDanhSachNhanVien.getValueAt(row, 8).toString());
                        
-                try {
-                    selectedFile =new File(tblDanhSachNhanVien.getValueAt(row, 9).toString());
-                    BufferedImage image = ImageIO.read(selectedFile); // Thay đổi đường dẫn đến ảnh
-
-                   // thay đổi kích thức ảnh cùng kích thước với lable 184x216
-                    Image scaledImage = image.getScaledInstance(184, 216, Image.SCALE_SMOOTH);
+                 try {
+            selectedFile =new File(tblDanhSachNhanVien.getValueAt(row, 9).toString());
+            BufferedImage image = ImageIO.read(selectedFile); // Thay đổi đường dẫn đến ảnh
+            
+            // thay đổi kích thức ảnh cùng kích thước với lable 184x216
+             Image scaledImage = image.getScaledInstance(WIDTH, HEIGHT, Image.SCALE_SMOOTH);
 
                     // Tạo ImageIcon với ảnh đã điều chỉnh kích thước
                     ImageIcon imageIcon = new ImageIcon(scaledImage);
@@ -986,9 +1018,24 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
                     // Thiết lập ImageIcon cho JLabel
                     lblAnhNhanVien.setIcon(imageIcon);
            
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        } catch (IOException e) {
+            try {
+                selectedFile =new File("src\\IMG\\anhSachMacDinh.png");
+                BufferedImage image = ImageIO.read(selectedFile); // Thay đổi đường dẫn đến ảnh
+                
+                // thay đổi kích thức ảnh cùng kích thước với lable 184x216
+                Image scaledImage = image.getScaledInstance(WIDTH, HEIGHT, Image.SCALE_SMOOTH);
+                
+                // Tạo ImageIcon với ảnh đã điều chỉnh kích thước
+                ImageIcon imageIcon = new ImageIcon(scaledImage);
+                
+                // Thiết lập ImageIcon cho JLabel
+                lblAnhNhanVien.setIcon(imageIcon);
+            } catch (IOException ex) {
+                Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
                 cboChucVu.setSelectedItem(tblDanhSachNhanVien.getValueAt(row, 10).toString());
                 cboCaLamViec.setVisible(false);
                     lblCaLam.setVisible(false);
@@ -997,6 +1044,7 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
                     lblCaLam.setVisible(true);
                     cboCaLamViec.setSelectedItem(tblDanhSachNhanVien.getValueAt(row, 11).toString());
                 }
+                
                 //txtTienLuong.setText(modelNhanVien.getValueAt(row, 5).toString());
 		//cboPhongBan.setSelectedItem(modelNhanVien.getValueAt(row, 6).toString());
                 

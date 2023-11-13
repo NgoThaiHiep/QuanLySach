@@ -4,10 +4,7 @@ package Pannel;
 import DAO.HoaDon_DAO;
 import Entity.NhanVien;
 import Entity.TaiKhoan;
-import Menu.MenuItem;
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.Panel;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -89,7 +86,6 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
         txtDiaChi = new javax.swing.JTextField();
         txtSoDienThoai = new javax.swing.JTextField();
         txtTenKhachHang = new javax.swing.JTextField();
-        btnAnhThemKhachHang = new javax.swing.JButton();
         pnlTacVu = new javax.swing.JPanel();
         btnLamMoi = new javax.swing.JButton();
         btnThemSanPham = new javax.swing.JButton();
@@ -181,14 +177,6 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
         });
         lblThongTinKhachHang.add(txtTenKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 360, -1));
 
-        btnAnhThemKhachHang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/dauCong.jpg"))); // NOI18N
-        btnAnhThemKhachHang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnhThemKhachHangActionPerformed(evt);
-            }
-        });
-        lblThongTinKhachHang.add(btnAnhThemKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 22, 22));
-
         pnlHoaDon.add(lblThongTinKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 575, 157));
 
         pnlTacVu.setBorder(javax.swing.BorderFactory.createTitledBorder("Tác vụ"));
@@ -279,17 +267,17 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
 
         tblDanhSachSanPhamTimKiem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "STT", "Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Đơn giá", "Thành tiền"
+                "STT", "Mã sản phẩm", "Tên sản phẩm", "Giá bán"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -453,21 +441,9 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
     private void txtSoLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoLuongActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSoLuongActionPerformed
-
-    private void btnAnhThemKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnhThemKhachHangActionPerformed
-        // TODO add your handling code here:
-          
-         
-       trangChu = new TrangChu(tk, nv, originalLookAndFeel);
-        trangChu.showThemKhachHang();
-      
-        
-            
-    }//GEN-LAST:event_btnAnhThemKhachHangActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAnhThemKhachHang;
     private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JButton btnThemSanPham;

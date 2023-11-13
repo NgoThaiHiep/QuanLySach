@@ -25,6 +25,7 @@ import ServiceUser.CellSach;
 import ServiceUser.ScrollBarCustom;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.io.IOException;
 
 /**
  *
@@ -42,7 +43,7 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
     /**
      * Creates new form Sach
      */
-    public pnlTraCuuSach() {
+    public pnlTraCuuSach() throws IOException {
         panel = new JPanel();
       
         JPanel newPanel = createPanels();
@@ -337,7 +338,7 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
- private JPanel createPanels() {
+ private JPanel createPanels() throws IOException {
         JPanel containerPanel = new JPanel();
         containerPanel.setLayout(new BoxLayout(containerPanel, BoxLayout.Y_AXIS));	
         sach_DAO = new Sach_DAO();
