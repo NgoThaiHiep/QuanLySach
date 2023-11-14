@@ -13,6 +13,9 @@ import Entity.NhaXuatBan;
 import Entity.Sach;
 import Entity.TacGia;
 import Entity.TheLoai;
+import Them.ThemTacGia1;
+import Them.frmNhaCungCap;
+import Them.frmThemTheLoai;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
@@ -841,14 +844,19 @@ private static boolean isValidInput(String currentText, String text) {
     }
     private void cboTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTheLoaiActionPerformed
         // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_cboTheLoaiActionPerformed
    
 
   
     private void btnThemTacGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemTacGiaActionPerformed
-        
+        //new ThemTacGia1().setVisible(true);
+        //new frmThemTheLoai().setVisible(true);
+        new frmNhaCungCap().setVisible(true);
     }//GEN-LAST:event_btnThemTacGiaActionPerformed
-     private void duLieuTenSach(){
+    
+    private void duLieuTenSach(){
             txtTenSach.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyReleased(KeyEvent e) {

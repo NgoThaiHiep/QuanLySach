@@ -15,7 +15,7 @@ public TacGia_DAO() {
 		
 	}
 
-  public String generateTacGia() throws SQLException{
+    public String generateTacGia() throws SQLException{
             String number = "";
         int n = 1;
         do{
@@ -75,17 +75,23 @@ public TacGia_DAO() {
         PreparedStatement state = null;
         int n = 0;
         try {
-            String sql = "INSERT INTO [dbo].[Sach_TacGia]\n" +
-"           ([SachID]\n" +
-"           ,[TacGiaID])\n" +
-"     VALUES\n" +
-"           (?,?)";
+            String sql = "INSERT INTO [dbo].[TacGia]([TacGiaID],[TenTacGia])VALUES(?,?)";
             state = con.prepareStatement(sql);
             state.setString(1, tacGia.getMaTacGia());
             state.setString(2, tacGia.getTenTacGia());
             n = state.executeUpdate();
-        } catch (Exception e) {
-        }
+        }  catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				state.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
         return n > 0;
     }
 }

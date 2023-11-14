@@ -168,7 +168,9 @@
                           <Component id="txtSoLuongTon" alignment="0" max="32767" attributes="0"/>
                           <Component id="cboChatlieu" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnThuongHieu" min="-2" pref="26" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -192,11 +194,14 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblNhaXuatBan" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cboThuongHieu" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblTenSach" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtTenSach" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblNhaXuatBan" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cboThuongHieu" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblTenSach" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtTenSach" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="btnThuongHieu" min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -361,6 +366,11 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnThuongHieu">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThuongHieuActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -879,6 +879,7 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
         txtTenNhanVien.removeAll();
         txtEmail.setText("");
         txtEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        
         txtCCCD.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         
         txtSoDienThoai.setText("");

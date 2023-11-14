@@ -1,12 +1,19 @@
 
-package UI;
+package Them;
 
 import DAO.TacGia_DAO;
 import Entity.TacGia;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 
 /**
  *
@@ -21,7 +28,98 @@ public class ThemTacGia1 extends javax.swing.JFrame {
      */
     public ThemTacGia1() {
         initComponents();
+        tacGia_DAO = new TacGia_DAO();
+        try {
+            lblMaTacGia1.setText(tacGia_DAO.generateTacGia());
+        } catch (SQLException ex) {
+            Logger.getLogger(ThemTacGia1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        duLieuTenNhanVien();
     }
+    private static String vietHoaChuCaiDauTienTrongJtextField(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+
+        StringBuilder formattedText = new StringBuilder();
+        boolean capitalizeNext = true;
+
+        for (char c : input.toCharArray()) {
+            if (Character.isWhitespace(c)) {
+                capitalizeNext = true;
+                formattedText.append(c);
+            } else {
+                if (capitalizeNext) {
+                    formattedText.append(Character.toUpperCase(c));
+                } else {
+                    formattedText.append(Character.toLowerCase(c));
+                }
+                capitalizeNext = false;
+            }
+        }
+
+        return formattedText.toString();
+    }
+    private void duLieuTenNhanVien(){
+            txtTacGia.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    String text =  txtTacGia.getText();
+                    String formattedText = vietHoaChuCaiDauTienTrongJtextField(text);
+                     txtTacGia.setText(formattedText);
+                }
+            });
+
+                    // Tạo một DocumentFilter để kiểm tra và lọc ký tự
+            AbstractDocument document = (AbstractDocument)  txtTacGia.getDocument();
+            document.setDocumentFilter(new DocumentFilter() {
+                @Override
+                public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                    // Chỉ cho phép chữ cái, mã UTF-8, và có đúng một dấu cách giữa các từ
+                    if (string == null)
+                        return;
+
+                    String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+                    String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+                    if (isValidText(newText)) {
+                        super.insertString(fb, offset, string, attr);
+                    }
+                }
+
+                @Override
+                public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                    // Chỉ cho phép chữ cái, mã UTF-8, và có đúng một dấu cách giữa các từ
+                    if (text == null)
+                        return;
+
+                    String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+                    String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+                    if (isValidText(newText)) {
+                        super.replace(fb, offset, length, text, attrs);
+                    }
+                }
+
+                private boolean isValidText(String text) {
+                    if (text.isEmpty() || text.startsWith(" ")) {
+                        return false; // Ký tự đầu tiên không được là dấu cách
+                    }
+
+                    String[] words = text.split(" ");
+                    if (words.length < 1) {
+                        return false; // Phải có ít nhất một từ
+                    }
+
+                    for (String word : words) {
+                        if (!Pattern.matches("^[\\p{L} ]*$", word)) {
+                            return false; // Chỉ mã UTF-8 và dấu cách được chấp nhận
+                        }
+                    }
+
+                    return true;
+                }
+            });
+        }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -129,7 +227,7 @@ public class ThemTacGia1 extends javax.swing.JFrame {
                         .addComponent(btnLamMoi)
                         .addGap(59, 59, 59)
                         .addComponent(btnThem)))
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,7 +292,7 @@ public class ThemTacGia1 extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        String maTacGia = lblMaTacGia.getText();
+        String maTacGia = lblMaTacGia1.getText();
         String tenTacGia = txtTacGia.getText();
         String gioiTinh = cboGioiTinh.getSelectedItem().toString();
         String quocTich = txtQuocTich.getText();

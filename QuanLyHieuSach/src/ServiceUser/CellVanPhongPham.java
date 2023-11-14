@@ -104,7 +104,7 @@ public class CellVanPhongPham extends javax.swing.JPanel {
         cboXuatXu.setSelectedIndex(-1);
         
         thuongHieu_DAO = new ThuongHieu_DAO();
-        ArrayList<ThuongHieu> dsth = thuongHieu_DAO.layDanhSachXuatXu();
+        ArrayList<ThuongHieu> dsth = thuongHieu_DAO.layDanhSachThuongHieu();
         for (ThuongHieu thuongHieu : dsth) {
             cboThuongHieu.addItem(thuongHieu.getTenThuongHieu());
                 if(thuongHieu.getMaThuongHieu().equals(vanPhongPham.getThuongHieu().getMaThuongHieu()))
@@ -727,7 +727,7 @@ public class CellVanPhongPham extends javax.swing.JPanel {
         
         String thuongHieu_CBO= cboThuongHieu.getSelectedItem().toString();
         thuongHieu_DAO = new ThuongHieu_DAO();
-         ArrayList<ThuongHieu> dsnxb = thuongHieu_DAO.layDanhSachXuatXu();
+         ArrayList<ThuongHieu> dsnxb = thuongHieu_DAO.layDanhSachThuongHieu();
         for (ThuongHieu thuongHieu : dsnxb) {
             if(thuongHieu.getTenThuongHieu().equals(thuongHieu_CBO)){
                 thuongHieu_CBO = thuongHieu.getMaThuongHieu();

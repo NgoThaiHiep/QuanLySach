@@ -13,6 +13,7 @@ import Entity.NhaCungCap;
 import Entity.ThuongHieu;
 import Entity.VanPhongPham;
 import Entity.XuatXu;
+import UI.ThemTH;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
@@ -109,7 +110,7 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
          cboXuatXu.setSelectedIndex(-1);
         
         thuongHieu_DAO = new ThuongHieu_DAO();
-        ArrayList<ThuongHieu> dsth = thuongHieu_DAO.layDanhSachXuatXu();
+        ArrayList<ThuongHieu> dsth = thuongHieu_DAO.layDanhSachThuongHieu();
         for (ThuongHieu thuongHieu : dsth) {
             cboThuongHieu.addItem(thuongHieu.getTenThuongHieu());
         }
@@ -251,6 +252,7 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
         txtNamSanXuat = new javax.swing.JTextField();
         lblSoTrang1 = new javax.swing.JLabel();
         cboChatlieu = new javax.swing.JComboBox<>();
+        btnThuongHieu = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -330,6 +332,12 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
         cboChatlieu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhựa", "Gỗ", "Cao Su" }));
         cboChatlieu.setSelectedIndex(-1);
 
+        btnThuongHieu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThuongHieuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -375,7 +383,9 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
                     .addComponent(cboXuatXu, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtSoLuongTon)
                     .addComponent(cboChatlieu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(49, 49, 49))
+                .addGap(18, 18, 18)
+                .addComponent(btnThuongHieu, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,11 +402,13 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
                             .addComponent(lblMaVPPKyTu, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblMaSach))
                         .addGap(18, 18, 18)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNhaXuatBan)
-                    .addComponent(cboThuongHieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTenSach)
-                    .addComponent(txtTenSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblNhaXuatBan)
+                        .addComponent(cboThuongHieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblTenSach)
+                        .addComponent(txtTenSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnThuongHieu, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNamXuatBan)
@@ -625,7 +637,7 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
         
          String thuongHieu_CBO= cboThuongHieu.getSelectedItem().toString();
         thuongHieu_DAO = new ThuongHieu_DAO();
-         ArrayList<ThuongHieu> dsnxb = thuongHieu_DAO.layDanhSachXuatXu();
+         ArrayList<ThuongHieu> dsnxb = thuongHieu_DAO.layDanhSachThuongHieu();
         for (ThuongHieu thuongHieu : dsnxb) {
             if(thuongHieu.getTenThuongHieu().equals(thuongHieu_CBO)){
                 thuongHieu_CBO = thuongHieu.getMaThuongHieu();
@@ -698,6 +710,11 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
         // TODO add your handling code here:
         lamMoiDuLieu();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnThuongHieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThuongHieuActionPerformed
+        // TODO add your handling code here:
+        new ThemTH().setVisible(true);
+    }//GEN-LAST:event_btnThuongHieuActionPerformed
     public void jframAnh(boolean a){
                     // TODO add your handling code here:
            // Tạo một JFrame mới để hiển thị ảnh phóng to
@@ -819,6 +836,7 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnThuongHieu;
     private javax.swing.JComboBox<String> cboChatlieu;
     private javax.swing.JComboBox<String> cboLoaiVanPhongPham;
     private javax.swing.JComboBox<String> cboNhaCungCap;
