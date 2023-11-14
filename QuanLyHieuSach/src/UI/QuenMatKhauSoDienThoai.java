@@ -40,6 +40,7 @@ public class QuenMatKhauSoDienThoai extends javax.swing.JFrame {
         txtMaXacNhan = new javax.swing.JTextField();
         txtMatKhauMoi = new javax.swing.JTextField();
         btnGuiMa = new javax.swing.JButton();
+        lblEmail1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -83,16 +84,33 @@ public class QuenMatKhauSoDienThoai extends javax.swing.JFrame {
 
         btnGuiMa.setText("Gửi mã");
 
+        lblEmail1.setText("<html><u>Đăng nhập</u></html>");
+        lblEmail1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblEmail1MouseMoved(evt);
+            }
+        });
+        lblEmail1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblEmail1MousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblSoDienThoai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblMaXacNhan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblSoDienThoai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblMaXacNhan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -134,7 +152,9 @@ public class QuenMatKhauSoDienThoai extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnXacNhan)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnXacNhan)
+                    .addComponent(lblEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
         );
 
@@ -180,6 +200,18 @@ public class QuenMatKhauSoDienThoai extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnXacNhanActionPerformed
 
+    private void lblEmail1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEmail1MouseMoved
+        // TODO add your handling code here:
+         lblEmail1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_lblEmail1MouseMoved
+
+    private void lblEmail1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEmail1MousePressed
+        // TODO add your handling code here:
+         DangNhap1 dangNhap = new DangNhap1 ();
+                    this.setVisible(false);
+                    dangNhap.setVisible(true);
+    }//GEN-LAST:event_lblEmail1MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -221,6 +253,7 @@ public class QuenMatKhauSoDienThoai extends javax.swing.JFrame {
     private javax.swing.JButton btnXacNhan;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblEmail1;
     private javax.swing.JLabel lblMaXacNhan;
     private javax.swing.JLabel lblPhuongThucXacNhanKhac;
     private javax.swing.JLabel lblSoDienThoai;

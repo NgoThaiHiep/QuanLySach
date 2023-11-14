@@ -2,8 +2,14 @@
 package Pannel;
 
 import DAO.HoaDon_DAO;
+import DAO.KhachHang_DAO;
+import DAO.Sach_DAO;
+import DAO.VanPhongPham_DAO;
+import Entity.KhachHang;
 import Entity.NhanVien;
+import Entity.Sach;
 import Entity.TaiKhoan;
+import Entity.VanPhongPham;
 import java.awt.Font;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -12,7 +18,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import UI.TrangChu;
+import java.util.ArrayList;
 import javax.swing.LookAndFeel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,9 +33,11 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
      */
     private TaiKhoan tk;
     private NhanVien nv;
-    private final HoaDon_DAO hoaDon_DAO;
+    private HoaDon_DAO hoaDon_DAO;
     private TrangChu trangChu;
     private LookAndFeel originalLookAndFeel;
+    private Sach_DAO sach_DAO;
+    private VanPhongPham_DAO vanPhongPham_DAO;
     public pnlLapHoaDon(TaiKhoan tk,NhanVien nv, LookAndFeel originalLookAndFeel) {
         this.nv = nv;
         this.tk = tk;
@@ -61,12 +71,69 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
    
         
         
-       
+       capNhatDanhSanPham();
        
         
        // lblTenNhanVien.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
     }
+    public void capNhatDanhSanPham(){
+       int count = 0;
+       sach_DAO = new Sach_DAO();
+       vanPhongPham_DAO = new VanPhongPham_DAO();
+        
+      
+        String colTieuDe1[] = new String[]{"STT", "Mã sản phẩm", "Tên sản phẩm", "Giá bán"};
+        
+        DefaultTableModel model = new DefaultTableModel(colTieuDe1, 0);
+           Object[] row;
+         ArrayList<Sach> dssach = sach_DAO.layDanhSanPhamSach();
+         ArrayList<VanPhongPham> dsvpp = vanPhongPham_DAO.layDanhSanPhamVanPhongPham();
+         
+         // Tạo một ArrayList mới để chứa cả hai danh sách
+        ArrayList<Object> combinedList = new ArrayList<>();
 
+        // Thêm danh sách sách vào danh sách kết hợp
+        combinedList.addAll(dssach);
+
+        // Thêm danh sách văn phòng phẩm vào danh sách kết hợp
+        combinedList.addAll(dsvpp);
+        
+        for (Object item : combinedList) {
+                row = new Object[4];
+                count ++;
+             if (item instanceof Sach) {
+                
+                Sach sach = (Sach) item;
+                // Thực hiện các thao tác với đối tượng Sach
+              row[0] = count ;
+              row[1] =   sach.getMaSanPham();
+              row[2] = sach.getTenSanPham();
+              row[3] = sach.getDonGia();
+                model.addRow(row);
+            } else if (item instanceof VanPhongPham) {
+                VanPhongPham vpp = (VanPhongPham) item;
+                // Thực hiện các thao tác với đối tượng VanPhongPham
+               row[0] = count ;
+              row[1] =   vpp.getMaSanPham();
+              row[2] = vpp.getTenSanPham();
+              row[3] = vpp.getDonGia();
+               model.addRow(row);
+            }
+             
+        }
+         tblDanhSachSanPhamTimKiem.setModel(model);
+       
+//        for (KhachHang nhanVien : dsKhachHang) {
+//              row = new Object[12];
+//            // GÁN GIÁ TRỊ
+//            row[0] = nhanVien.getMaKhachHang();
+//            row[1] = nhanVien.getTenKhachHang();
+//            row[2] = nhanVien.getSoDienThoai();
+//            row[3] = nhanVien.getDiaChi();
+//           model.addRow(row);
+//        }
+//        jTable1.setModel(model);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

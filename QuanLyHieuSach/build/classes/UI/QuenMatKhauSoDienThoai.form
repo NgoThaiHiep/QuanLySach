@@ -27,11 +27,19 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="lblSoDienThoai" alignment="0" max="32767" attributes="0"/>
-                  <Component id="lblMaXacNhan" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabel2" alignment="0" pref="79" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblSoDienThoai" alignment="0" max="32767" attributes="0"/>
+                          <Component id="lblMaXacNhan" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" pref="79" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblEmail1" min="-2" pref="62" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -85,7 +93,10 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnXacNhan" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnXacNhan" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblEmail1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -142,6 +153,15 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="G&#x1eed;i m&#xe3;"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEmail1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;u&gt;&#x110;&#x103;ng nh&#x1ead;p&lt;/u&gt;&lt;/html&gt;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="lblEmail1MouseMoved"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblEmail1MousePressed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

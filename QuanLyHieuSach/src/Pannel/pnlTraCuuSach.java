@@ -20,6 +20,9 @@ import ServiceUser.ScrollBarCustom;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -340,14 +343,19 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
         for (Sach sach : dssps) {
         	
 	          
-	       	JPanel newPanel = new CellSach(sach);
-	           newPanel.setPreferredSize(new Dimension(newPanel.getWidth(), PANEL_HEIGHT));
-	           newPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, PANEL_HEIGHT)); // Ensure the panel doesn't expand horizontally
-	         //  newPanel.add(new JLabel("Panel " + (++count)));
+            try {
+                JPanel newPanel = new CellSach(sach);
+                newPanel.setPreferredSize(new Dimension(newPanel.getWidth(), PANEL_HEIGHT));
+                newPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, PANEL_HEIGHT)); // Ensure the panel doesn't expand horizontally
+                //  newPanel.add(new JLabel("Panel " + (++count)));
 
-           containerPanel.add(newPanel);
+                containerPanel.add(newPanel);
+            }
+            // ArrayList<NhanVien> dsnv=nhanVien_DAO.layDanhSachNhanVien();
+            catch (SQLException ex) {
+                Logger.getLogger(pnlTraCuuSach.class.getName()).log(Level.SEVERE, null, ex);
+            }
 		}
-       // ArrayList<NhanVien> dsnv=nhanVien_DAO.layDanhSachNhanVien();
       
        
 

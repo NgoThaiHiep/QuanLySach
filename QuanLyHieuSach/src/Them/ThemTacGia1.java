@@ -144,6 +144,7 @@ public class ThemTacGia1 extends javax.swing.JFrame {
         txtQuocTich = new javax.swing.JTextField();
         btnThem = new javax.swing.JButton();
         btnLamMoi = new javax.swing.JButton();
+        lblTieuDe = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -191,6 +192,10 @@ public class ThemTacGia1 extends javax.swing.JFrame {
             }
         });
 
+        lblTieuDe.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblTieuDe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTieuDe.setText("Thêm tác giả");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -227,12 +232,14 @@ public class ThemTacGia1 extends javax.swing.JFrame {
                         .addComponent(btnLamMoi)
                         .addGap(59, 59, 59)
                         .addComponent(btnThem)))
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(174, Short.MAX_VALUE))
+            .addComponent(lblTieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addComponent(lblTieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblMaTacGia)
                     .addComponent(lblMaTacGia1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -259,7 +266,7 @@ public class ThemTacGia1 extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnThem)
                             .addComponent(btnLamMoi))
-                        .addGap(0, 28, Short.MAX_VALUE))))
+                        .addGap(0, 23, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -331,6 +338,7 @@ public class ThemTacGia1 extends javax.swing.JFrame {
     private javax.swing.JLabel lblMaTacGia;
     private javax.swing.JLabel lblMaTacGia1;
     private javax.swing.JLabel lblTenTacGia;
+    private javax.swing.JLabel lblTieuDe;
     private javax.swing.JTextField txtQuocTich;
     private javax.swing.JTextField txtTacGia;
     // End of variables declaration//GEN-END:variables

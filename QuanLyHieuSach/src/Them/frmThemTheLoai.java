@@ -48,9 +48,9 @@ public class frmThemTheLoai extends javax.swing.JFrame {
         jtaMoTa = new javax.swing.JTextArea();
         btnLamMoi = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
+        lblTieuDe1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(710, 500));
 
         lblMaTheLoai.setText("Mã thể loại");
 
@@ -76,6 +76,10 @@ public class frmThemTheLoai extends javax.swing.JFrame {
             }
         });
 
+        lblTieuDe1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblTieuDe1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTieuDe1.setText("Thêm thể loại");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,22 +103,24 @@ public class frmThemTheLoai extends javax.swing.JFrame {
                         .addGap(117, 117, 117)
                         .addComponent(btnThem)))
                 .addContainerGap(202, Short.MAX_VALUE))
+            .addComponent(lblTieuDe1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addComponent(lblTieuDe1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMaTheLoai)
                     .addComponent(lblMaTheLoai1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62)
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtTenTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
+                .addGap(77, 77, 77)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMoTa)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMoTa))
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLamMoi)
@@ -204,6 +210,7 @@ public class frmThemTheLoai extends javax.swing.JFrame {
     private javax.swing.JLabel lblMaTheLoai;
     private javax.swing.JLabel lblMaTheLoai1;
     private javax.swing.JLabel lblMoTa;
+    private javax.swing.JLabel lblTieuDe1;
     private javax.swing.JTextField txtTenTheLoai;
     // End of variables declaration//GEN-END:variables
 }

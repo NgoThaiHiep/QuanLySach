@@ -51,6 +51,7 @@ public class ThemTH extends javax.swing.JFrame {
         btnLamMoi = new javax.swing.JButton();
         lblTenTacGia1 = new javax.swing.JLabel();
         txtMoTa = new javax.swing.JTextField();
+        lblTieuDe = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,6 +83,10 @@ public class ThemTH extends javax.swing.JFrame {
 
         lblTenTacGia1.setText("Mô tả ");
 
+        lblTieuDe.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblTieuDe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTieuDe.setText("Thêm thương hiệu");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -108,12 +113,14 @@ public class ThemTH extends javax.swing.JFrame {
                         .addComponent(btnLamMoi)
                         .addGap(92, 92, 92)
                         .addComponent(btnThem)))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
+            .addComponent(lblTieuDe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addComponent(lblTieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblMaTacGia)
                     .addComponent(lblMaThuongHieu, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -136,9 +143,7 @@ public class ThemTH extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,7 +156,7 @@ public class ThemTH extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 655, Short.MAX_VALUE)
+            .addGap(0, 663, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -216,6 +221,7 @@ public class ThemTH extends javax.swing.JFrame {
     private javax.swing.JLabel lblMaThuongHieu;
     private javax.swing.JLabel lblTenTacGia;
     private javax.swing.JLabel lblTenTacGia1;
+    private javax.swing.JLabel lblTieuDe;
     private javax.swing.JTextField txtMoTa;
     private javax.swing.JTextField txtThuongHieu;
     // End of variables declaration//GEN-END:variables

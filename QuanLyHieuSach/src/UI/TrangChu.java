@@ -9,9 +9,7 @@ import Entity.NhanVien;
 import Entity.TaiKhoan;
 import Entity.ThoiGianHoatDong;
 import Menu.MenuItem;
-
 import Pannel.pnlCapNhatNhanVien;
-import Pannel.pnlCapNhatSanPham;
 import Pannel.pnlDanhSachHoaDon;
 import Pannel.pnlLapHoaDon;
 import Pannel.pnlTaiKhoan;
@@ -21,9 +19,10 @@ import Pannel.pnlThemSanPham;
 import Pannel.pnlThongKe;
 import Pannel.pnlThongKeTheoNam;
 import Pannel.pnlTraCuuKhachHang;
-import Pannel.pnlTraCuuNhanVien;
+
 import Pannel.pnlTraCuuSanPham;
 import Pannel.pnlTrangChu;
+import ServiceUser.ScrollBarCustom;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -47,6 +46,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.LookAndFeel;
 import javax.swing.Timer;
 import javax.swing.UIManager;
@@ -176,7 +176,9 @@ public class TrangChu extends javax.swing.JFrame {
 //       // mainPanel.add(pnlTrangChu,"Trang chủ");
 
         menuChucVu();
-//        pnlBody.add(mainPanel,BorderLayout.CENTER);
+//        pnlBody.add(mainPanel,BorderLayout.CENTER);4
+
+addTableStyle(jScrollPane1);
        
     }
     private void thoiGianLamViec(){
@@ -796,6 +798,7 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
         pnlMenu.setPreferredSize(new java.awt.Dimension(250, 425));
         pnlMenu.setLayout(new java.awt.BorderLayout());
 
+        jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(300, 602));
@@ -880,12 +883,21 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
            } catch (SQLException ex) {
                Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
            }
-            DangNhap dangNhap = new DangNhap ();
+            DangNhap1 dangNhap = new DangNhap1 ();
             this.setVisible(false);
             dangNhap.setVisible(true);
        }
     }//GEN-LAST:event_btnDangXuatActionPerformed
-
+    public void addTableStyle(JScrollPane scroll) {
+        scroll.getViewport().setOpaque(false);
+        scroll.setViewportBorder(null); 
+        scroll.setBorder(null);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setVerticalScrollBar(new ScrollBarCustom());
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(60, 60, 60));
+        scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, panel);
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try {

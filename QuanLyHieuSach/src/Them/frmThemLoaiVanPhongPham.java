@@ -4,17 +4,34 @@
  */
 package Them;
 
+
+import DAO.LoaiVanPhongPham_DAO;
+import Entity.LoaiVanPhongPham;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author FPTSHOP
  */
 public class frmThemLoaiVanPhongPham extends javax.swing.JFrame {
 
+    private LoaiVanPhongPham_DAO loaiVanPhongPham_DAO;
+
     /**
      * Creates new form frmThemLoaiVanPhongPham
      */
     public frmThemLoaiVanPhongPham() {
+        
         initComponents();
+        loaiVanPhongPham_DAO = new LoaiVanPhongPham_DAO();
+        try {
+                lblMaLoaiVanPhongPham1.setText( loaiVanPhongPham_DAO.generatMaLoaiVanPhongPham());
+            } catch (SQLException ex) {
+                Logger.getLogger(frmThemTheLoai.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     /**
@@ -35,11 +52,13 @@ public class frmThemLoaiVanPhongPham extends javax.swing.JFrame {
         lblKichThuoc = new javax.swing.JLabel();
         txtMauSac = new javax.swing.JTextField();
         txtKichThuoc = new javax.swing.JTextField();
-        lblMoTaChucNang = new javax.swing.JLabel();
+        lblChucNang = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jtaChucNang = new javax.swing.JTextArea();
         btnLamMoi = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
+        lblTieuDe1 = new javax.swing.JLabel();
+        lblTieuDe = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,11 +70,11 @@ public class frmThemLoaiVanPhongPham extends javax.swing.JFrame {
 
         lblKichThuoc.setText("Kích thước");
 
-        lblMoTaChucNang.setText("Chức năng");
+        lblChucNang.setText("Chức năng");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jtaChucNang.setColumns(20);
+        jtaChucNang.setRows(5);
+        jScrollPane1.setViewportView(jtaChucNang);
 
         btnLamMoi.setText("Làm mới");
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +84,15 @@ public class frmThemLoaiVanPhongPham extends javax.swing.JFrame {
         });
 
         btnThem.setText("Thêm loại văn phòng phẩm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
+
+        lblTieuDe1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblTieuDe1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTieuDe1.setText("Thêm nhà xuất bản");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -80,7 +108,7 @@ public class frmThemLoaiVanPhongPham extends javax.swing.JFrame {
                                 .addComponent(lblMaLoaiVanPhongPham)
                                 .addComponent(lblLoaiVanPhongPham))
                             .addComponent(lblKichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblMoTaChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblChucNang, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -89,18 +117,21 @@ public class frmThemLoaiVanPhongPham extends javax.swing.JFrame {
                             .addComponent(txtTenLoaiVanPhongPham, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMauSac, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
                         .addComponent(btnLamMoi)
-                        .addGap(103, 103, 103)
+                        .addGap(62, 62, 62)
                         .addComponent(btnThem)))
                 .addContainerGap(155, Short.MAX_VALUE))
+            .addComponent(lblTieuDe1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMaLoaiVanPhongPham)
-                    .addComponent(lblMaLoaiVanPhongPham1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblTieuDe1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMaLoaiVanPhongPham1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMaLoaiVanPhongPham))
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLoaiVanPhongPham)
@@ -115,24 +146,38 @@ public class frmThemLoaiVanPhongPham extends javax.swing.JFrame {
                     .addComponent(txtKichThuoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMoTaChucNang)
+                    .addComponent(lblChucNang)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem)
                     .addComponent(btnLamMoi))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
+
+        lblTieuDe.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblTieuDe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTieuDe.setText("Thêm nhà xuất bản");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(lblTieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(228, 228, 228)
+                    .addComponent(lblTieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(228, Short.MAX_VALUE)))
         );
 
         pack();
@@ -141,57 +186,62 @@ public class frmThemLoaiVanPhongPham extends javax.swing.JFrame {
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
         // TODO add your handling code here:
+        lamMoiDuLieu();
     }//GEN-LAST:event_btnLamMoiActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        
+        String maLoaiVanPhongPham = lblMaLoaiVanPhongPham1.getText();
+        String tenLoaiVanPhongPham = txtTenLoaiVanPhongPham.getText();
+        String mauSac = txtMauSac.getText();
+        String chucNang= jtaChucNang.getText();
+        String kichThuoc = txtKichThuoc.getText();
+        
+        LoaiVanPhongPham loaiVanPhongPham = new LoaiVanPhongPham(maLoaiVanPhongPham, tenLoaiVanPhongPham);
+        
+        loaiVanPhongPham_DAO = new LoaiVanPhongPham_DAO();
+        
+        
+         if(loaiVanPhongPham_DAO.InsertLoaiVanPhongPham(loaiVanPhongPham)){
+             lamMoiDuLieu();
+            try {
+                lblMaLoaiVanPhongPham1.setText( loaiVanPhongPham_DAO.generatMaLoaiVanPhongPham());
+            } catch (SQLException ex) {
+                Logger.getLogger(frmThemTheLoai.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+            JOptionPane.showMessageDialog(this, "Thêm thành công loại sản phẩm");
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnThemActionPerformed
     private void lamMoiDuLieu(){
-        txt
+        txtKichThuoc.setText("");
+        txtMauSac.setText("");
+        txtTenLoaiVanPhongPham.setText("");
+        jtaChucNang.setText("");
     }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmThemLoaiVanPhongPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmThemLoaiVanPhongPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmThemLoaiVanPhongPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmThemLoaiVanPhongPham.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmThemLoaiVanPhongPham().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnThem;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jtaChucNang;
+    private javax.swing.JLabel lblChucNang;
     private javax.swing.JLabel lblKichThuoc;
     private javax.swing.JLabel lblLoaiVanPhongPham;
     private javax.swing.JLabel lblMaLoaiVanPhongPham;
     private javax.swing.JLabel lblMaLoaiVanPhongPham1;
     private javax.swing.JLabel lblMauSac;
-    private javax.swing.JLabel lblMoTaChucNang;
+    private javax.swing.JLabel lblTieuDe;
+    private javax.swing.JLabel lblTieuDe1;
     private javax.swing.JTextField txtKichThuoc;
     private javax.swing.JTextField txtMauSac;
     private javax.swing.JTextField txtTenLoaiVanPhongPham;

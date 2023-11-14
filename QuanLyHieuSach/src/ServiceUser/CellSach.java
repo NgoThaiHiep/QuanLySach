@@ -518,34 +518,34 @@ public class CellSach extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTacGia.setText("Tác giả");
-        add(lblTacGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, -1, -1));
+        add(lblTacGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, -1, -1));
 
         lblTenSach.setText("Tên sách");
         add(lblTenSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, -1, -1));
 
         lblTheLoai.setText("Thể loại");
-        add(lblTheLoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, -1, -1));
+        add(lblTheLoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, -1));
 
         lblNhaXuatBan.setText("Nhà xuất bản");
-        add(lblNhaXuatBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 160, 70, -1));
+        add(lblNhaXuatBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 180, 70, -1));
         add(txtSoLuongTon, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 120, 210, -1));
-        add(txtTinhTrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 50, 180, -1));
+        add(txtTinhTrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 20, 180, -1));
 
         txtGiaBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtGiaBanActionPerformed(evt);
             }
         });
-        add(txtGiaBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 210, -1));
+        add(txtGiaBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 70, 210, -1));
 
         lblGiaBan.setText("Giá bán");
-        add(lblGiaBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 90, 70, -1));
+        add(lblGiaBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, 70, -1));
 
         lblSoLuongTon.setText("Số lượng tồn");
         add(lblSoLuongTon, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 80, -1));
 
         lblTinhTrang.setText("Tình trạng");
-        add(lblTinhTrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 50, 71, -1));
+        add(lblTinhTrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 20, 71, -1));
 
         btnSua.setText("Sửa");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -553,7 +553,7 @@ public class CellSach extends javax.swing.JPanel {
                 btnSuaActionPerformed(evt);
             }
         });
-        add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 160, 62, -1));
+        add(btnSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 170, 62, -1));
 
         btnNgungKinhDoanh.setText("Ngừng kinh doanh");
         btnNgungKinhDoanh.addActionListener(new java.awt.event.ActionListener() {
@@ -561,40 +561,40 @@ public class CellSach extends javax.swing.JPanel {
                 btnNgungKinhDoanhActionPerformed(evt);
             }
         });
-        add(btnNgungKinhDoanh, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 160, 130, -1));
+        add(btnNgungKinhDoanh, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 170, 130, -1));
         add(txtTenSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 260, -1));
 
         lblNamXuatBan.setText("Năm xuất bản");
-        add(lblNamXuatBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 130, 84, -1));
-        add(txtNamXuatBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 130, 180, -1));
-        add(txtMaSanPham, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 147, -1));
-        add(txtSoTrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 210, -1));
+        add(lblNamXuatBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 120, 84, -1));
+        add(txtNamXuatBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 110, 180, -1));
+        add(txtMaSanPham, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, 147, -1));
+        add(txtSoTrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 20, 210, -1));
 
         lblMaSanPham.setText("Mã sách");
-        add(lblMaSanPham, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, -1, -1));
+        add(lblMaSanPham, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
 
         lblSoTrang.setText("Số  trang");
-        add(lblSoTrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, 50, -1));
+        add(lblSoTrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 50, -1));
         add(lblTacGia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 260, 30));
         add(lblTenSach1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 260, 20));
-        add(lblTheLoai1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 260, 30));
-        add(lblMaSanPham1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 140, 20));
-        add(lblNhaXuatBan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 150, 210, 30));
-        add(lblGiaBan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 210, 20));
+        add(lblTheLoai1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 260, 30));
+        add(lblMaSanPham1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, 140, 20));
+        add(lblNhaXuatBan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 170, 210, 30));
+        add(lblGiaBan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 70, 210, 20));
         add(lblSoLuongTon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 120, 210, 20));
-        add(lblSoTrang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 210, 20));
-        add(lblTinhTrang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 50, 180, 20));
-        add(lblNhaCungCap1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 80, 180, 30));
-        add(lblNamXuatBan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 130, 180, 20));
+        add(lblSoTrang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 20, 210, 20));
+        add(lblTinhTrang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 20, 180, 20));
+        add(lblNhaCungCap1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 60, 180, 30));
+        add(lblNamXuatBan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 110, 180, 20));
 
         lblNhaCungCap.setText("Nhà cung cấp");
-        add(lblNhaCungCap, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 90, 84, -1));
+        add(lblNhaCungCap, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 70, 84, -1));
         add(cboTacGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 260, 30));
-        add(cboTheLoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 260, 30));
+        add(cboTheLoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 260, 30));
 
-        add(cboNhaXuatBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 150, 210, 30));
+        add(cboNhaXuatBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 170, 210, 30));
 
-        add(cboNhaCungCap, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 80, 180, 30));
+        add(cboNhaCungCap, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 60, 180, 30));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -630,7 +630,7 @@ public class CellSach extends javax.swing.JPanel {
                 btnLuuActionPerformed(evt);
             }
         });
-        add(btnLuu, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 160, 62, -1));
+        add(btnLuu, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 170, 62, -1));
 
         btnBanLai.setText("Bán lại");
         btnBanLai.addActionListener(new java.awt.event.ActionListener() {
@@ -638,7 +638,7 @@ public class CellSach extends javax.swing.JPanel {
                 btnBanLaiActionPerformed(evt);
             }
         });
-        add(btnBanLai, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 160, 130, -1));
+        add(btnBanLai, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 170, 130, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed

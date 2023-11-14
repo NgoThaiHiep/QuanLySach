@@ -192,6 +192,7 @@ private void duLieuSDT(){
         cboTinhThanhPho = new javax.swing.JComboBox<>();
         cboQuanHuyen = new javax.swing.JComboBox<>();
         cboPhuongXa = new javax.swing.JComboBox<>();
+        lblTieuDe = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -233,6 +234,10 @@ private void duLieuSDT(){
             }
         });
 
+        lblTieuDe.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblTieuDe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTieuDe.setText("Thêm nhà cung cấp");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -271,14 +276,16 @@ private void duLieuSDT(){
                             .addComponent(lblSoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblTenNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addComponent(lblTieuDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMaNhaCungCap)
-                    .addComponent(lblMaNhaCungCapp1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblTieuDe, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblMaNhaCungCapp1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMaNhaCungCap))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTenNhaCungCap)
@@ -312,24 +319,9 @@ private void duLieuSDT(){
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
-        // TODO add your handling code here:
-       lamMoiDuLieu();
-       
-        
-       
-    }//GEN-LAST:event_btnLamMoiActionPerformed
-    private void lamMoiDuLieu(){
-        txtTenNhaCungCap.setText("");
-        txtEmail.setText("");
-        txtSoDienThoai.setText("");
-        txtSanPhamCungCap.setText("");
-        txtEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        txtSoDienThoai.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-    }
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        
+
         String maTheLoai = lblMaNhaCungCapp1.getText();
         String tenTheLoai = txtTenNhaCungCap.getText();
         String sanPhamCungCap = txtSanPhamCungCap.getText();
@@ -338,31 +330,71 @@ private void duLieuSDT(){
         String diaChi = "";
         if(!cboTinhThanhPho.getSelectedItem().equals("Tỉnh/Thành phố")){
             diaChi+=cboTinhThanhPho.getSelectedItem();
-                if(!cboQuanHuyen.getSelectedItem().equals("Quận/huyện") ){
-                    diaChi+="-"+cboQuanHuyen.getSelectedItem();
-                    if(!cboPhuongXa.getSelectedItem().equals("Phường/xã") ){
-                        diaChi+="-"+cboPhuongXa.getSelectedItem();
-                    }
+            if(!cboQuanHuyen.getSelectedItem().equals("Quận/huyện") ){
+                diaChi+="-"+cboQuanHuyen.getSelectedItem();
+                if(!cboPhuongXa.getSelectedItem().equals("Phường/xã") ){
+                    diaChi+="-"+cboPhuongXa.getSelectedItem();
                 }
+            }
         }
-       // TheLoai theLoai = new TheLoai(maTheLoai, tenTheLoai);
+        // TheLoai theLoai = new TheLoai(maTheLoai, tenTheLoai);
         NhaCungCap nhaCungCap = new NhaCungCap(maTheLoai, tenTheLoai, sanPhamCungCap, diaChi, soDienThoai, email);
-       
-        
+
         nhaCungCap_DAO = new NhaCungCap_DAO();
-        
+
         if(nhaCungCap_DAO.InsertNhaCungCap(nhaCungCap)){
-           lamMoiDuLieu();
+            lamMoiDuLieu();
             try {
                 lblMaNhaCungCapp1.setText( nhaCungCap_DAO.generateNhaCungCap());
             } catch (SQLException ex) {
                 Logger.getLogger(frmNhaCungCap.class.getName()).log(Level.SEVERE, null, ex);
             }
-           
+
             JOptionPane.showMessageDialog(this, "Thêm thành công thể loại");
         }
-        
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
+        // TODO add your handling code here:
+        lamMoiDuLieu();
+    }//GEN-LAST:event_btnLamMoiActionPerformed
+
+    private void cboQuanHuyenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboQuanHuyenActionPerformed
+        // TODO add your handling code here:
+        String t = cboQuanHuyen.getSelectedItem()+"";
+
+        cboQuanHuyen.addItem(q);
+        // System.out.println(districtComboBox.getSelectedItem()+"");
+        if( q == "Tỉnh/Thành phố"){
+
+            //wardComboBox.removeAllItems();
+            //wardComboBox.addItem("Phường/xã");
+            // wardComboBox.setEnabled(true);
+            // updateWardComboBox();
+            // q = districtComboBox.getSelectedItem()+"";
+            cboPhuongXa.setEnabled(false);
+            cboPhuongXa.removeAllItems();
+            cboPhuongXa.addItem("Phường/xã");
+
+        }else{
+            cboPhuongXa.setEnabled(true);
+            try {
+                wardsDistricts = readExcel_wardsDistrict(cboQuanHuyen,cboPhuongXa);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            if(!cboDiaChi.equals(cboQuanHuyen.getSelectedItem())){
+                cboPhuongXa.removeAllItems();
+                cboPhuongXa.addItem("Phường/xã");
+                for (String wad : wardsDistricts) {
+                    cboPhuongXa.addItem(wad);
+                }
+            }
+        }
+        cboDiaChi = cboQuanHuyen.getSelectedItem()+"";
+        cboQuanHuyen.removeItem(q);
+    }//GEN-LAST:event_cboQuanHuyenActionPerformed
 
     private void cboTinhThanhPhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTinhThanhPhoActionPerformed
         // TODO add your handling code here:
@@ -409,7 +441,14 @@ private void duLieuSDT(){
         }
         tp = cboTinhThanhPho.getSelectedItem()+"";
     }//GEN-LAST:event_cboTinhThanhPhoActionPerformed
-public static String readExcel_City_Id(String ip) throws IOException {
+    private void lamMoiDuLieu(){
+        txtTenNhaCungCap.setText("");
+        txtEmail.setText("");
+        txtSoDienThoai.setText("");
+        txtSanPhamCungCap.setText("");
+        txtEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txtSoDienThoai.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+    }public static String readExcel_City_Id(String ip) throws IOException {
                     //Đọc dữ liệu từ file Diachi.xlsx
                     String cities = "";
                     FileInputStream file = new FileInputStream("src\\Li\\Tinh_2023.xlsx");
@@ -500,44 +539,6 @@ public static String readExcel_City_Id(String ip) throws IOException {
 		file.close();
 		return wardsDistrict;
 	}
-    private void cboQuanHuyenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboQuanHuyenActionPerformed
-        // TODO add your handling code here:
-        String t = cboQuanHuyen.getSelectedItem()+"";
-
-        cboQuanHuyen.addItem(q);
-        // System.out.println(districtComboBox.getSelectedItem()+"");
-        if( q == "Tỉnh/Thành phố"){
-
-            //wardComboBox.removeAllItems();
-            //wardComboBox.addItem("Phường/xã");
-            // wardComboBox.setEnabled(true);
-            // updateWardComboBox();
-            // q = districtComboBox.getSelectedItem()+"";
-            cboPhuongXa.setEnabled(false);
-            cboPhuongXa.removeAllItems();
-            cboPhuongXa.addItem("Phường/xã");
-
-        }else{
-            cboPhuongXa.setEnabled(true);
-            try {
-                wardsDistricts = readExcel_wardsDistrict(cboQuanHuyen,cboPhuongXa);
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            if(!cboDiaChi.equals(cboQuanHuyen.getSelectedItem())){
-                cboPhuongXa.removeAllItems();
-                cboPhuongXa.addItem("Phường/xã");
-                for (String wad : wardsDistricts) {
-                    cboPhuongXa.addItem(wad);
-                }
-            }
-        }
-        cboDiaChi = cboQuanHuyen.getSelectedItem()+"";
-        cboQuanHuyen.removeItem(q);
-
-    }//GEN-LAST:event_cboQuanHuyenActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -589,6 +590,7 @@ public static String readExcel_City_Id(String ip) throws IOException {
     private javax.swing.JLabel lblSanPhamCungCap;
     private javax.swing.JLabel lblSoDienThoai;
     private javax.swing.JLabel lblTenNhaCungCap;
+    private javax.swing.JLabel lblTieuDe;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtSanPhamCungCap;
     private javax.swing.JTextField txtSoDienThoai;

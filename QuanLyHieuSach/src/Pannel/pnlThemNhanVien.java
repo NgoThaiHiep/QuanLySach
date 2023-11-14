@@ -91,7 +91,7 @@ public class pnlThemNhanVien extends javax.swing.JPanel {
 	}
           
         cities = readExcel_City();
-          for (String city : cities) {
+            for (String city : cities) {
             cboTinhThanhPho.addItem(city);
         }
           txtMaNhanVien.setEnabled(false);

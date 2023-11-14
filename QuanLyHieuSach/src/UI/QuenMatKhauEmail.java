@@ -302,7 +302,7 @@ public class QuenMatKhauEmail extends javax.swing.JFrame {
 
     private void lblDangNhapMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDangNhapMousePressed
         // TODO add your handling code here:
-                    DangNhap dangNhap = new DangNhap ();
+                    DangNhap1 dangNhap = new DangNhap1 ();
                     this.setVisible(false);
                     dangNhap.setVisible(true);
     }//GEN-LAST:event_lblDangNhapMousePressed
