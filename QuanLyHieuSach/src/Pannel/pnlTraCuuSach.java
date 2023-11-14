@@ -8,18 +8,12 @@ import java.util.List;
 
 import javax.swing.JComboBox;
 
-import DAO.NhaCungCap_DAO;
-import DAO.NhaXuatBan_DAO;
 import DAO.NhanVien_DAO;
 import DAO.Sach_DAO;
-import DAO.Sach_TheLoai_DAO;
-import DAO.TacGia_DAO;
-import DAO.TheLoai_DAO;
 import Entity.LoaiSanPham;
 import Entity.NhaCungCap;
 import Entity.NhaXuatBan;
 import Entity.Sach;
-import Entity.TacGia;
 import Entity.TheLoai;
 import ServiceUser.CellSach;
 import ServiceUser.ScrollBarCustom;
@@ -237,7 +231,6 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
         });
 
         textFieldSuggestion1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        textFieldSuggestion1.setText("textFieldSuggestion1");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -345,11 +338,7 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
         nhanVien_DAO = new NhanVien_DAO();
         ArrayList<Sach> dssps = sach_DAO.layDanhSanPhamSach();
         for (Sach sach : dssps) {
-        	TheLoai tl = new TheLoai(sach.getTheLoai().getMaTheLoai());
-	       	 NhaXuatBan nhaXuatBan = new NhaXuatBan(sach.getNhaXuatBan().getMaNhaXuatBan());
-	       	 LoaiSanPham loaiSanPham = new LoaiSanPham(sach.getLoaiSanPham().getMaLoaiSanPham());
-	       	 NhaCungCap nhaCungCap = new NhaCungCap(sach.getNhaCungCap().getMaNCC());
-	       	sach = new Sach(sach.getTacGia(), /*Integer.parseInt(namXuatban) , Integer.parseInt(soTrang) */sach.getNamXuatBan(),sach.getSoTrang(), tl, nhaXuatBan, sach.getMaSanPham(), sach.getTenSanPham(),loaiSanPham, nhaCungCap,/*Integer.parseInt(soLuongTon),Float.parseFloat(donGia)*/sach.getSoLuongTon(),sach.getDonGia(),"Mô tả", "tinh trang", "hinh anh");
+        	
 	          
 	       	JPanel newPanel = new CellSach(sach);
 	           newPanel.setPreferredSize(new Dimension(newPanel.getWidth(), PANEL_HEIGHT));

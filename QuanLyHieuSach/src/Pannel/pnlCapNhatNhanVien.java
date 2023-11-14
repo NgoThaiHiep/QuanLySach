@@ -34,7 +34,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -991,8 +990,6 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
 	        		 part3 =parts[i].toString();
 	        	 }
 			}
-                    
-                 
                     cboTinhThanhPho.setSelectedItem(part1);
                    
                     if(!part2.equals("")){
@@ -1006,11 +1003,11 @@ public class pnlCapNhatNhanVien extends javax.swing.JPanel {
                 cboTrangThai.setSelectedItem(tblDanhSachNhanVien.getValueAt(row, 8).toString());
                        
                  try {
-            selectedFile =new File(tblDanhSachNhanVien.getValueAt(row, 9).toString());
-            BufferedImage image = ImageIO.read(selectedFile); // Thay đổi đường dẫn đến ảnh
+                selectedFile =new File(tblDanhSachNhanVien.getValueAt(row, 9).toString());
+                BufferedImage image = ImageIO.read(selectedFile); // Thay đổi đường dẫn đến ảnh
             
-            // thay đổi kích thức ảnh cùng kích thước với lable 184x216
-             Image scaledImage = image.getScaledInstance(WIDTH, HEIGHT, Image.SCALE_SMOOTH);
+                // thay đổi kích thức ảnh cùng kích thước với lable 184x216
+                 Image scaledImage = image.getScaledInstance(WIDTH, HEIGHT, Image.SCALE_SMOOTH);
 
                     // Tạo ImageIcon với ảnh đã điều chỉnh kích thước
                     ImageIcon imageIcon = new ImageIcon(scaledImage);

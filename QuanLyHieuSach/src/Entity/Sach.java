@@ -6,13 +6,13 @@ package Entity;
  * @author ThaiHiep
  */
 public class Sach extends SanPham{
-    private String tacGia ;
+    private TacGia tacGia ;
     private int namXuatBan ;
     private  int soTrang ;
     private TheLoai theLoai; 
     private NhaXuatBan nhaXuatBan ;
 
-    public Sach(String tacGia, int namXuatBan, int soTrang, TheLoai theLoai, NhaXuatBan nhaXuatBan, String maSanPham, String tenSanPham, LoaiSanPham loaiSanPham, NhaCungCap nhaCungCap, int soLuongTon, double donGia, String moTa, String tinhTrang, String hinhAnh) {
+    public Sach(TacGia tacGia, int namXuatBan, int soTrang, TheLoai theLoai, NhaXuatBan nhaXuatBan, String maSanPham, String tenSanPham, LoaiSanPham loaiSanPham, NhaCungCap nhaCungCap, int soLuongTon, double donGia, String moTa, String tinhTrang, String hinhAnh) {
         super(maSanPham, tenSanPham, loaiSanPham, nhaCungCap, soLuongTon, donGia, moTa, tinhTrang, hinhAnh);
         this.tacGia = tacGia;
         this.namXuatBan = namXuatBan;
@@ -29,11 +29,11 @@ public class Sach extends SanPham{
     public Sach() {
     }
 
-    public String getTacGia() {
+    public TacGia getTacGia() {
         return tacGia;
     }
 
-    public void setTacGia(String tacGia) {
+    public void setTacGia(TacGia tacGia) {
         this.tacGia = tacGia;
     }
 

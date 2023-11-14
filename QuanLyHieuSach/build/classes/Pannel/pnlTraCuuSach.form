@@ -373,7 +373,6 @@
                     <LineBorder/>
                   </Border>
                 </Property>
-                <Property name="text" type="java.lang.String" value="textFieldSuggestion1"/>
               </Properties>
             </Component>
           </SubComponents>

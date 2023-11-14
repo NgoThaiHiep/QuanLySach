@@ -352,7 +352,11 @@ public class TrangChu extends javax.swing.JFrame {
                 Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
             }
                 pnlBody.removeAll();
-                pnlBody.add(new pnlTraCuuSanPham(tk));
+                try {
+                    pnlBody.add(new pnlTraCuuSanPham(tk));
+                } catch (IOException ex) {
+                    Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 System.out.println(tk.getTenTK());
                 pnlBody.repaint();
                 pnlBody.revalidate();

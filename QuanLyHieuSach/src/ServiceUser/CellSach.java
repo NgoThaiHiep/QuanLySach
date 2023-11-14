@@ -9,6 +9,7 @@ import javax.swing.JComboBox;
 
 import DAO.NhaCungCap_DAO;
 import DAO.NhaXuatBan_DAO;
+import DAO.Sach_DAO;
 import DAO.Sach_TheLoai_DAO;
 import DAO.TacGia_DAO;
 import DAO.TheLoai_DAO;
@@ -20,15 +21,31 @@ import Entity.Sach;
 import Entity.TacGia;
 import Entity.TheLoai;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.PlainDocument;
 
 
 /**
@@ -42,15 +59,16 @@ public class CellSach extends javax.swing.JPanel {
 	private TheLoai_DAO theLoai_DAO;
 	private List<Object> selectedItemsTheLoai;
 	private List<Object>   selectedItemsTacGia;
-	private Sach_TheLoai_DAO sachTheLoai_DAO;
+        private Sach_DAO sach_DAO;
 	private TacGia_DAO tacGia_DAO;
+        private int soLuongToiThieu = 10;
     /**
      * Creates new form CellSach
      */
-    private String pathImage;
+
     private File selectedFile;
     private boolean show = false;
-    public CellSach(Sach sach) throws IOException {
+    public CellSach(Sach sach) throws IOException, SQLException {
         this.sach = sach;
          try {
             // Set the Look and Feel for the entire application
@@ -59,13 +77,13 @@ public class CellSach extends javax.swing.JPanel {
             ex.printStackTrace();
         }
         initComponents();
-        
-         txtTinhTrang.setVisible(false);
+        lblLoaiSanPham.setText(sach.getLoaiSanPham().getMaLoaiSanPham());
+        txtTinhTrang.setVisible(false);
         txtMaSanPham.setVisible(false);
         
         lblMaSanPham1.setText(sach.getMaSanPham());
         lblTenSach1.setText(sach.getTenSanPham());
-        lblTacGia1.setText(sach.getTacGia());
+        lblTacGia1.setText(sach.getTacGia().getMaTacGia());
         lblTheLoai1.setText(sach.getTheLoai().getMaTheLoai());
         lblSoTrang1.setText(sach.getSoTrang()+"");
         lblGiaBan1.setText(sach.getDonGia()+"");
@@ -76,10 +94,7 @@ public class CellSach extends javax.swing.JPanel {
         lblNamXuatBan1.setText(sach.getNamXuatBan()+"");
         
         nhaXuatBan_DAO = new NhaXuatBan_DAO();
-        
-        
         ArrayList<NhaXuatBan> dsnxb = nhaXuatBan_DAO.layDanhSachNhaXuatBan();
-        
         for (NhaXuatBan nhaXuatBan : dsnxb) {
       	  cboNhaXuatBan.addItem(nhaXuatBan.getTenNhaXuatBanl());
         }
@@ -93,7 +108,10 @@ public class CellSach extends javax.swing.JPanel {
         nhaCungCap_DAO = new NhaCungCap_DAO();
        ArrayList<NhaCungCap> dsncc = nhaCungCap_DAO.layDanhSachNhaCungCap();
         for (NhaCungCap nhaCungCap : dsncc) {
-            cboNhaCungCap.addItem(nhaCungCap.getTenNCC());
+            if(nhaCungCap.getSanPhamCungCap().equals("Sách")){
+                 cboNhaCungCap.addItem(nhaCungCap.getTenNCC());
+            }
+           
         }
        
         for (NhaCungCap nhaCungCap : dsncc) {
@@ -101,9 +119,11 @@ public class CellSach extends javax.swing.JPanel {
                 lblNhaCungCap1.setText(nhaCungCap.getTenNCC());
           
         }
-		 visibelTextField(false);
+	visibelTextField(false);
         visibelLable(true);
         
+        lblAnh.setText("1");
+        System.out.println(sach.getHinhAnh());
         try {
             selectedFile =new File(sach.getHinhAnh());
             BufferedImage image = ImageIO.read(selectedFile); // Thay đổi đường dẫn đến ảnh
@@ -128,11 +148,211 @@ public class CellSach extends javax.swing.JPanel {
                     ImageIcon imageIcon = new ImageIcon(scaledImage);
 
                     // Thiết lập ImageIcon cho JLabel
-                    lblAnh.setIcon(imageIcon);
+                    lblAnh.setIcon(imageIcon);      
         }
         
         btnLuu.setVisible(false);
+        
+        if(lblTinhTrang1.getText().equals("Ngừng kinh doanh")){
+            ngungKinhDoanh();
+        }
+        
+        kiemTraDuLieuFloat(txtGiaBan);
+        duLieuTenSach();
+        kiemTraSo(txtSoTrang);
+        kiemTraSo(txtSoLuongTon);
+        kiemTraSo(txtNamXuatBan);
+        tacGia_DAO = new TacGia_DAO();
+        tacGia_DAO.generateTacGia();
+        System.out.println(tacGia_DAO.generateTacGia());
+        
     }
+   
+    public void kiemTraSo(JTextField s){
+    PlainDocument document = (PlainDocument) s.getDocument();
+    document.setDocumentFilter(new DocumentFilter() {
+        @Override
+        public void insertString(DocumentFilter.FilterBypass fb, int offset, String text, AttributeSet attr) throws BadLocationException {
+            String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+            if (isValidInput(currentText, text)) {
+                super.insertString(fb, offset, text, attr);
+            }
+        }
+
+        @Override
+        public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+            String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+            if (isValidInput(currentText, text)) {
+                super.replace(fb, offset, length, text, attrs);
+            }
+        }
+    });
+}
+
+        private static boolean isValidInput(String currentText, String text) {
+            if (text.isEmpty()) {
+                return true;
+            }
+
+            for (char c : text.toCharArray()) {
+                if (!Character.isDigit(c)) {
+                    return false;
+                }
+            }
+
+            String newText = currentText + text;
+            if (newText.charAt(0) == '0' && newText.length() > 1) {
+                return false;
+            }
+
+            return true;
+        }
+        public void kiemTraDuLieuFloat(JTextField textField){
+        DecimalFormat df = new DecimalFormat("#,###");
+        textField.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                String text = textField.getText().replaceAll(",", "");
+                int dotIndex = text.indexOf('.');
+                if ((c < '0' || c > '9') && c != '.') { // Chỉ cho phép nhập số và dấu chấm
+                    e.consume();
+                } else if (c == '0' && text.isEmpty()) { // Số đầu tiên không được là 0
+                    e.consume();
+                } else if (c == '.' && (text.isEmpty() || dotIndex != -1)) { // Dấu chấm không được là ký tự đầu tiên và chỉ được nhập một lần
+                    e.consume();
+                } else if (dotIndex != -1 && text.substring(dotIndex).length() > 3 && textField.getCaretPosition() > dotIndex) { // Sau dấu chấm chỉ cho phép nhập tối đa 3 số
+                    e.consume();
+                }
+            }
+            public void keyReleased(KeyEvent e) {
+                String text = textField.getText().replaceAll(",", "");
+                if (!text.isEmpty() && !text.contains(".")) {
+                    try {
+                        long number = Long.parseLong(text);
+                        textField.setText(df.format(number));
+                    } catch (NumberFormatException ex) {
+                        // Không xử lý ngoại lệ này vì nó sẽ không xảy ra do kiểm tra nhập liệu ở trên
+                    }
+                }
+            }
+        });
+    }
+        private static String vietHoaChuCaiDauTienTrongJtextField(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+
+        StringBuilder formattedText = new StringBuilder();
+        boolean capitalizeNext = true;
+
+        for (char c : input.toCharArray()) {
+            if (Character.isWhitespace(c)) {
+                capitalizeNext = true;
+                formattedText.append(c);
+            } else {
+                if (capitalizeNext) {
+                    formattedText.append(Character.toUpperCase(c));
+                } else {
+                    formattedText.append(Character.toLowerCase(c));
+                }
+                capitalizeNext = false;
+            }
+        }
+
+        return formattedText.toString();
+    }
+         private void DuLieuTinhTrang(){
+            txtSoLuongTon.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    if( Integer.parseInt(txtSoLuongTon.getText()) < soLuongToiThieu ){
+                       
+                        lblTinhTrang1.setText("Hết hàng");
+                    }else{
+                        lblTinhTrang1.setText("Còn hàng");
+                    }
+                }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if( Integer.parseInt(txtSoLuongTon.getText()) < soLuongToiThieu ){
+                       
+                        lblTinhTrang1.setText("Hết hàng");
+                    }else{
+                        lblTinhTrang1.setText("Còn hàng");
+                    }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                if( Integer.parseInt(txtSoLuongTon.getText()) < soLuongToiThieu ){
+                       
+                        lblTinhTrang1.setText("Hết hàng");
+                    }else{
+                        lblTinhTrang1.setText("Còn hàng");
+                    }
+            }
+        });
+    }
+        private void duLieuTenSach(){
+            txtTenSach.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    String text = txtTenSach.getText();
+                    String formattedText = vietHoaChuCaiDauTienTrongJtextField(text);
+                    txtTenSach.setText(formattedText);
+                }
+            });
+
+                    // Tạo một DocumentFilter để kiểm tra và lọc ký tự
+            AbstractDocument document = (AbstractDocument) txtTenSach.getDocument();
+            document.setDocumentFilter(new DocumentFilter() {
+                @Override
+                public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                    // Chỉ cho phép chữ cái, mã UTF-8, và có đúng một dấu cách giữa các từ
+                    if (string == null)
+                        return;
+
+                    String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+                    String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+                    if (isValidText(newText)) {
+                        super.insertString(fb, offset, string, attr);
+                    }
+                }
+
+                @Override
+                public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                    // Chỉ cho phép chữ cái, mã UTF-8, và có đúng một dấu cách giữa các từ
+                    if (text == null)
+                        return;
+
+                    String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+                    String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+                    if (isValidText(newText)) {
+                        super.replace(fb, offset, length, text, attrs);
+                    }
+                }
+
+                private boolean isValidText(String text) {
+                    if (text.isEmpty() || text.startsWith(" ")) {
+                        return false; // Ký tự đầu tiên không được là dấu cách
+                    }
+
+                    String[] words = text.split(" ");
+                    if (words.length < 1) {
+                        return false; // Phải có ít nhất một từ
+                    }
+
+                    for (String word : words) {
+                        if (!Pattern.matches("^[\\p{L} ]*$", word)) {
+                            return false; // Chỉ mã UTF-8 và dấu cách được chấp nhận
+                        }
+                    }
+
+                    return true;
+                }
+            });
+        }
     public void visibelLable(boolean a) {
     	// lblMaSanPham1.setVisible(a);
          lblTenSach1.setVisible(a);
@@ -233,10 +453,11 @@ public class CellSach extends javax.swing.JPanel {
      // cboNhaXuatBan.setText(sach.getNhaXuatBan().getMaNhaXuatBan());
       
         lblTinhTrang1.setText(sach.getTinhTrang());
-      
+        
      // cboNhaCungCap.setText(sach.getNhaCungCap().getMaNCC());
-      txtNamXuatBan.setText(sach.getNamXuatBan()+"");
-      
+        txtNamXuatBan.setText(sach.getNamXuatBan()+"");
+      cboNhaCungCap.setSelectedItem(lblNhaCungCap1.getText());
+
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -247,6 +468,7 @@ public class CellSach extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblLoaiSanPham = new javax.swing.JLabel();
         lblTacGia = new javax.swing.JLabel();
         lblTenSach = new javax.swing.JLabel();
         lblTheLoai = new javax.swing.JLabel();
@@ -285,6 +507,7 @@ public class CellSach extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         lblAnh = new javax.swing.JLabel();
         btnLuu = new javax.swing.JButton();
+        btnBanLai = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -338,7 +561,7 @@ public class CellSach extends javax.swing.JPanel {
                 btnNgungKinhDoanhActionPerformed(evt);
             }
         });
-        add(btnNgungKinhDoanh, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 160, -1, -1));
+        add(btnNgungKinhDoanh, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 160, 130, -1));
         add(txtTenSach, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, 260, -1));
 
         lblNamXuatBan.setText("Năm xuất bản");
@@ -408,6 +631,14 @@ public class CellSach extends javax.swing.JPanel {
             }
         });
         add(btnLuu, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 160, 62, -1));
+
+        btnBanLai.setText("Bán lại");
+        btnBanLai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBanLaiActionPerformed(evt);
+            }
+        });
+        add(btnBanLai, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 160, 130, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -418,12 +649,26 @@ public class CellSach extends javax.swing.JPanel {
          btnSua.setVisible(false);
          btnLuu.setVisible(true);
          show = true;
+         
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnNgungKinhDoanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNgungKinhDoanhActionPerformed
         // TODO add your handling code here:
+        
+        lblTinhTrang1.setText("Ngừng kinh doanh");
+        ngungKinhDoanh();
+        sach_DAO = new Sach_DAO();
+        if(sach_DAO.updateTinhTrang(sach.getMaSanPham(), lblTinhTrang1.getText())){  
+        }
+        
     }//GEN-LAST:event_btnNgungKinhDoanhActionPerformed
-
+    public void ngungKinhDoanh(){
+        btnSua.setVisible(false);
+        btnLuu.setVisible(false);
+        btnNgungKinhDoanh.setVisible(false);
+        btnBanLai.setVisible(true);
+        setBackground(Color.GRAY);
+    }
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         // TODO add your handling code here:
         visibelTextField(false);
@@ -431,9 +676,8 @@ public class CellSach extends javax.swing.JPanel {
         btnLuu.setVisible(false);
         btnSua.setVisible(true);
         show = false;
-        
-       String maSach = lblMaSanPham1.getText();
-       String tenSach = txtTenSach.getText();
+        String maSach = lblMaSanPham1.getText();
+        String tenSach = txtTenSach.getText();
        
         List<Object> ItemTacGia = cboTacGia.getSelectedItems();
        String tacGia = "";
@@ -450,7 +694,7 @@ public class CellSach extends javax.swing.JPanel {
             	tacGia+=item.toString()+",";
             countCong++;
         }
-        
+        TacGia tacGias= new TacGia(tacGia);
         String theLoai= "";
         
          List<Object> ItemTheLoai = cboTheLoai.getSelectedItems();
@@ -470,47 +714,72 @@ public class CellSach extends javax.swing.JPanel {
         
         TheLoai tl = new TheLoai(theLoai);
         String soTrang = txtSoTrang.getText();
-        String giaBan = txtGiaBan.getText();
+        
+        String txtgiaBan = txtGiaBan.getText();
+              
+        // Xóa dấu phẩy trong chuỗi
+	     String cleanedInput = txtgiaBan.replaceAll(",", "");
+	     // Chuyển đổi thành số
+	     double giaBan = Double.parseDouble(cleanedInput);
+             
         String soLuongTon = txtSoLuongTon.getText();
         String nhaXuatBan = cboNhaXuatBan.getSelectedItem()+"";
         String tinhTrang = lblTinhTrang1.getText();
-        
+        String nhaXuatBanDuocChon = nhaXuatBan;
         
         nhaXuatBan_DAO = new NhaXuatBan_DAO();
+        
         ArrayList<NhaXuatBan> dsnxb = nhaXuatBan_DAO.layDanhSachNhaXuatBan();
-        String nhaXuatBan_Sua = "";
         for (NhaXuatBan nhaXuatBan1 : dsnxb) {
             if( nhaXuatBan1.getTenNhaXuatBanl().equals(nhaXuatBan)) {
+                 
       		 nhaXuatBan = nhaXuatBan1.getMaNhaXuatBan();
       	  }
         }
-        
+        System.out.println( nhaXuatBan);
          NhaXuatBan nxb = new NhaXuatBan(nhaXuatBan);
         
-        
+        String nhaCungCapDuocChon = "";
         nhaCungCap_DAO = new NhaCungCap_DAO();
        ArrayList<NhaCungCap> dsncc = nhaCungCap_DAO.layDanhSachNhaCungCap();
        String nhaCungCap_Sua = "";
         for (NhaCungCap nhaCungCap : dsncc) {
             if(cboNhaCungCap.getSelectedItem().equals(nhaCungCap.getTenNCC())){
                 nhaCungCap_Sua = nhaCungCap.getMaNCC()+"";
+                
             }
         }
+        
+        
         LoaiSanPham loaiSanPham = new LoaiSanPham(sach.getLoaiSanPham().getMaLoaiSanPham());
         NhaCungCap ncc = new NhaCungCap(nhaCungCap_Sua);
         String namXuatBan = txtNamXuatBan.getText();
         String hinhAnh = selectedFile.getAbsolutePath();
-        Sach s = new Sach(tacGia,  Integer.parseInt(namXuatBan), countCong, tl, nxb, maSach, tenSach, loaiSanPham, ncc, Integer.parseInt(soLuongTon), Float.parseFloat(giaBan), "", tinhTrang, hinhAnh);
-        //System.out.println(s.getHinhAnh());
+       tinhTrang = "Hết hàng";
+        if(Integer.parseInt(soLuongTon) >= soLuongToiThieu){
+            tinhTrang = "Còn hàng";
+        }
+        sach = new Sach(tacGias,  Integer.parseInt(namXuatBan), Integer.parseInt(soTrang), tl, nxb, maSach, tenSach, loaiSanPham, ncc, Integer.parseInt(soLuongTon), giaBan, "", tinhTrang, hinhAnh);
+        sach_DAO = new Sach_DAO();
+       // System.out.println();
         
+        if(sach_DAO.updateSach(sach)){
+           
+                   
         lblTenSach1.setText(tenSach);
         lblTacGia1.setText(tacGia);
         lblTheLoai1.setText(theLoai);
         lblSoTrang1.setText(soTrang);
-        lblGiaBan1.setText(giaBan);
+        lblGiaBan1.setText(txtgiaBan);
         lblSoLuongTon1.setText(soLuongTon);
-        cboNhaXuatBan.setSelectedItem(nhaXuatBan);
+        lblNhaXuatBan1.setText(nhaXuatBanDuocChon);
+        lblTinhTrang1.setText(tinhTrang);
         
+        lblNhaCungCap1.setText(cboNhaCungCap.getSelectedItem().toString());
+        JOptionPane.showMessageDialog(this,"Cập nhật sách thành công");
+        
+        }
+       
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void txtGiaBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaBanActionPerformed
@@ -520,12 +789,12 @@ public class CellSach extends javax.swing.JPanel {
     private void lblAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnhMouseClicked
         // TODO add your handling code here:
        if(show){
-          
+          clickChonAnh();
        }else{
                
         }
     }//GEN-LAST:event_lblAnhMouseClicked
-    private void clickChonAnh(){
+ private void clickChonAnh(){
          JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setFileFilter(new FileNameExtensionFilter("Hình ảnh", "jpg", "jpeg", "png", "gif"));
 
@@ -558,12 +827,30 @@ public class CellSach extends javax.swing.JPanel {
                             
                 }
     }
+    private void btnBanLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBanLaiActionPerformed
+        // TODO add your handling code here:
+        btnNgungKinhDoanh.setVisible(true);
+        btnBanLai.setVisible(false);
+        btnSua.setVisible(true);
+        lblTinhTrang1.setText("Còn hàng");
+        if( Integer.parseInt(lblSoLuongTon1.getText() )< soLuongToiThieu){
+             lblTinhTrang1.setText("Hết hàng");
+        }
+        setBackground(new Color(255,255,255));
+        sach_DAO = new Sach_DAO();
+        System.out.println(sach.getMaSanPham());
+        if(sach_DAO.updateTinhTrang(sach.getMaSanPham(), lblTinhTrang1.getText())){
+            JOptionPane.showMessageDialog(this, "U");
+        }
+    }//GEN-LAST:event_btnBanLaiActionPerformed
+   
     
 
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBanLai;
     private javax.swing.JButton btnLuu;
     private javax.swing.JButton btnNgungKinhDoanh;
     private javax.swing.JButton btnSua;
@@ -575,6 +862,7 @@ public class CellSach extends javax.swing.JPanel {
     private javax.swing.JLabel lblAnh;
     private javax.swing.JLabel lblGiaBan;
     private javax.swing.JLabel lblGiaBan1;
+    private javax.swing.JLabel lblLoaiSanPham;
     private javax.swing.JLabel lblMaSanPham;
     private javax.swing.JLabel lblMaSanPham1;
     private javax.swing.JLabel lblNamXuatBan;

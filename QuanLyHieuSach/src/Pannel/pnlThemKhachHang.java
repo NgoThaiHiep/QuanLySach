@@ -572,7 +572,7 @@ public class pnlThemKhachHang extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void btnThemKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemKhachHangActionPerformed
-         if(cboTinh.getSelectedItem().equals("Tỉnh/Thành phố") || cboQuan.getSelectedItem().equals("Quận/huyện") || cboPhuong.getSelectedItem().equals("Phường/xã") || txtMaKhachHang.getText().trim().isEmpty() || txtTenKhachHang.getText().trim().isEmpty() || txtSoDienThoai.getText().trim().isEmpty()) {
+        if(cboTinh.getSelectedItem().equals("Tỉnh/Thành phố") || cboQuan.getSelectedItem().equals("Quận/huyện") || cboPhuong.getSelectedItem().equals("Phường/xã") || txtMaKhachHang.getText().trim().isEmpty() || txtTenKhachHang.getText().trim().isEmpty() || txtSoDienThoai.getText().trim().isEmpty()) {
         JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin trước khi thêm khách hàng.");
     } else {
         // Các biến không rỗng, thực hiện việc thêm khách hàng vào cơ sở dữ liệu
@@ -585,6 +585,7 @@ public class pnlThemKhachHang extends javax.swing.JPanel {
         KhachHang kh = new KhachHang(maKhachHang, tenKhachHang, soDienThoai, diaChi);
         if(khachHang_DAO.InsertKhachHang(kh)) {
             JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công");
+            capNhatDanhSachKhachHang();
         }else{
             JOptionPane.showMessageDialog(this, "Đã có dữ liệu của số điện thoại này");
         }

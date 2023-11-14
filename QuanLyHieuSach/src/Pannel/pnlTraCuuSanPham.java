@@ -4,6 +4,7 @@ package Pannel;
 import Entity.NhanVien;
 import Entity.TaiKhoan;
 import java.awt.Color;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +15,7 @@ public class pnlTraCuuSanPham extends javax.swing.JPanel {
     private TaiKhoan tk;
     private NhanVien nv;
     
-    public pnlTraCuuSanPham(TaiKhoan tk) {
+    public pnlTraCuuSanPham(TaiKhoan tk) throws IOException {
         this.tk = tk;
         this.nv = nv;
         initComponents();
@@ -83,7 +84,11 @@ public class pnlTraCuuSanPham extends javax.swing.JPanel {
         pnlSouth.removeAll();
         btnSach.setBackground(Color.red);
         btnVanPhongPham.setBackground(Color.white);
-        pnlSouth.add(new Pannel.pnlTraCuuSach());
+        try {
+            pnlSouth.add(new Pannel.pnlTraCuuSach());
+        } catch (IOException ex) {
+            Logger.getLogger(pnlTraCuuSanPham.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println(tk.getTenTK());
         pnlSouth.repaint();
         pnlSouth.revalidate();
@@ -101,7 +106,11 @@ public class pnlTraCuuSanPham extends javax.swing.JPanel {
             Logger.getLogger(pnlTraCuuSanPham.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        pnlSouth.add(new Pannel.pnlTraCuuVanPhongPham());
+        try {
+            pnlSouth.add(new Pannel.pnlTraCuuVanPhongPham());
+        } catch (IOException ex) {
+            Logger.getLogger(pnlTraCuuSanPham.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         System.out.println(tk.getTenTK());
         pnlSouth.repaint();

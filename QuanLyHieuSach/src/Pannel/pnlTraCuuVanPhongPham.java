@@ -1,12 +1,64 @@
 
 package Pannel;
+import javax.swing.*;
+
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JComboBox;
+
+import DAO.NhanVien_DAO;
+import DAO.Sach_DAO;
+import DAO.VanPhongPham_DAO;
+import Entity.LoaiSanPham;
+import Entity.NhaCungCap;
+import Entity.NhaXuatBan;
+import Entity.Sach;
+import Entity.TheLoai;
+import Entity.VanPhongPham;
+import ServiceUser.CellSach;
+import ServiceUser.CellVanPhongPham;
+import ServiceUser.ScrollBarCustom;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.io.IOException;
+
+/**
+ *
+ * @author FPTSHOP
+ */
 public class pnlTraCuuVanPhongPham extends javax.swing.JPanel {
 
+    private JPanel panel;
+    private int count = 0;
+    private Sach_DAO sach_DAO;
+    private NhanVien_DAO nhanVien_DAO;
+    private static final int PANEL_HEIGHT = 230;
+    private Sach sach;
+    private VanPhongPham_DAO vanPhongPham_DAO;
+
     /**
-     * Creates new form VanPhongPham
+     * Creates new form Sach
      */
-    public pnlTraCuuVanPhongPham() {
+    public pnlTraCuuVanPhongPham() throws IOException {
+        panel = new JPanel();
+      
+        JPanel newPanel = createPanels();
+        panel.add(newPanel);
+        panel.revalidate();
+        panel.repaint();
+        
+
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+      
+
+        JScrollPane scrollPane = new JScrollPane(panel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.getViewport().setPreferredSize(new Dimension(250, 400));
+        addTableStyle(scrollPane);
         initComponents();
+        jPanel3.add(scrollPane);
     }
 
     /**
@@ -18,6 +70,17 @@ public class pnlTraCuuVanPhongPham extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel5 = new javax.swing.JPanel();
+        lblAnhSachTimKiem = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         lblTimKiem = new javax.swing.JLabel();
@@ -33,8 +96,89 @@ public class pnlTraCuuVanPhongPham extends javax.swing.JPanel {
         checkboxNamSanXuat = new javax.swing.JCheckBox();
         textFieldSuggestion1 = new ServiceUser.TextFieldSuggestion();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+
+        jLabel5.setText("Tên sách");
+
+        jLabel6.setText("Tác giả");
+
+        jLabel7.setText("Thể loại");
+
+        jLabel8.setText("Nhà xuất bản");
+
+        jLabel9.setText("Tình trạng");
+
+        jLabel10.setText("Giá bán");
+
+        jLabel11.setText("Số lượng tồn");
+
+        jButton1.setText("Sửa");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Ngừng kinh doanh");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(lblAnhSachTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addGap(237, 237, 237)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2))
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel10))
+                .addContainerGap(128, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel7))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel9)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jButton2)
+                            .addComponent(jButton1)))
+                    .addComponent(lblAnhSachTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+
+        setPreferredSize(new java.awt.Dimension(1500, 500));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1320, 500));
 
@@ -62,21 +206,21 @@ public class pnlTraCuuVanPhongPham extends javax.swing.JPanel {
             }
         });
 
-        checkboxTheLoai.setText("Loại dụng cụ");
+        checkboxTheLoai.setText("Thể loại");
         checkboxTheLoai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkboxTheLoaiActionPerformed(evt);
             }
         });
 
-        checkboxTacGia.setText("Thương hiệu");
+        checkboxTacGia.setText("Tác giả");
         checkboxTacGia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkboxTacGiaActionPerformed(evt);
             }
         });
 
-        checkboxNXB.setText("Xuất cứ");
+        checkboxNXB.setText("Nhà xuất bản");
         checkboxNXB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 checkboxNXBActionPerformed(evt);
@@ -91,7 +235,6 @@ public class pnlTraCuuVanPhongPham extends javax.swing.JPanel {
         });
 
         textFieldSuggestion1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        textFieldSuggestion1.setText("textFieldSuggestion1");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -116,7 +259,7 @@ public class pnlTraCuuVanPhongPham extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addGap(37, 37, 37)
                 .addComponent(cboSapXepTheo, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(572, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
@@ -156,33 +299,7 @@ public class pnlTraCuuVanPhongPham extends javax.swing.JPanel {
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Kết quả tra cứu"));
-
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Tên sản phẩm", "Thông tin sản phẩm", "Chức năng"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-        );
+        jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.Y_AXIS));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -193,7 +310,7 @@ public class pnlTraCuuVanPhongPham extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,17 +327,47 @@ public class pnlTraCuuVanPhongPham extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 975, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1494, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+ private JPanel createPanels() throws IOException {
+        JPanel containerPanel = new JPanel();
+        containerPanel.setLayout(new BoxLayout(containerPanel, BoxLayout.Y_AXIS));	
+       // sach_DAO = new Sach_DAO();
+       vanPhongPham_DAO = new VanPhongPham_DAO();
+       
+        nhanVien_DAO = new NhanVien_DAO();
+        //ArrayList<Sach> dssps = sach_DAO.layDanhSanPhamSach();
+        ArrayList<VanPhongPham> dsvpp = vanPhongPham_DAO.layDanhSanPhamVanPhongPham();
+        for (VanPhongPham vanPhongPham : dsvpp) {
+	       	JPanel newPanel = new CellVanPhongPham(vanPhongPham);
+	           newPanel.setPreferredSize(new Dimension(newPanel.getWidth(), PANEL_HEIGHT));
+	           newPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, PANEL_HEIGHT)); // Ensure the panel doesn't expand horizontally
+	         //  newPanel.add(new JLabel("Panel " + (++count)));
 
+           containerPanel.add(newPanel);
+		}
+       // ArrayList<NhanVien> dsnv=nhanVien_DAO.layDanhSachNhanVien();
+      
+       
+
+        return containerPanel;
+    }
+    public void addTableStyle(JScrollPane scroll) {
+        scroll.getViewport().setOpaque(false);
+        scroll.setViewportBorder(null); 
+        scroll.setBorder(null);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.setVerticalScrollBar(new ScrollBarCustom());
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(60, 60, 60));
+        scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, panel);
+    }
     private void cboSapXepTheoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSapXepTheoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cboSapXepTheoActionPerformed
@@ -245,6 +392,14 @@ public class pnlTraCuuVanPhongPham extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_checkboxNamSanXuatActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cboSapXepTheo;
@@ -253,14 +408,23 @@ public class pnlTraCuuVanPhongPham extends javax.swing.JPanel {
     private javax.swing.JCheckBox checkboxNamSanXuat;
     private javax.swing.JCheckBox checkboxTacGia;
     private javax.swing.JCheckBox checkboxTheLoai;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel lblAnhSachTimKiem;
     private javax.swing.JLabel lblTimKiem;
     private ServiceUser.TextFieldSuggestion textFieldSuggestion1;
     private javax.swing.JComboBox<String> txtTimKiemTheo;
