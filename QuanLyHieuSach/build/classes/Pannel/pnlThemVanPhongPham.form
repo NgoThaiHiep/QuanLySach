@@ -40,25 +40,33 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jPanel2" alignment="1" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="471" max="-2" attributes="0"/>
-                          <Component id="jButton2" min="-2" pref="119" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                          <Component id="jButton3" min="-2" pref="151" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="471" max="-2" attributes="0"/>
+                                  <Component id="jButton2" min="-2" pref="119" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                                  <Component id="jButton3" min="-2" pref="151" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="378" max="-2" attributes="0"/>
+                                  <Component id="lblAnhVanPhongPham" min="-2" pref="300" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="486" max="-2" attributes="0"/>
+                                  <Component id="jButton1" min="-2" pref="89" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="0" pref="321" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="378" max="-2" attributes="0"/>
-                          <Component id="lblAnhVanPhongPham" min="-2" pref="300" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="486" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" pref="89" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jPanel2" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -175,7 +183,7 @@
                                   <Group type="102" attributes="0">
                                       <Component id="lblTacGia" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                                      <Component id="cboXuatXu" pref="379" max="32767" attributes="0"/>
+                                      <Component id="cboXuatXu" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="107" pref="107" max="-2" attributes="0"/>
@@ -224,10 +232,8 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblDonGia" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtDonGia" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="txtDonGia" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDonGia" min="-2" max="-2" attributes="0"/>
                           <Component id="lblNamXuatBan" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="cboChatlieu" min="-2" max="-2" attributes="0"/>
                           <Component id="btnThuongHieu4" min="-2" pref="22" max="-2" attributes="0"/>
@@ -240,11 +246,13 @@
                               <Component id="btnThuongHieu1" min="-2" pref="22" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txtSoLuongTon" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblNhaCungCap" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cboLoaiVanPhongPham" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblSoTrang" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblNhaCungCap" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cboLoaiVanPhongPham" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblSoTrang" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">

@@ -11,6 +11,7 @@ import Entity.TheLoai;
 import Entity.NhaCungCap;
 import Entity.NhaXuatBan;
 import Entity.LoaiSanPham;
+import Entity.SanPham;
 import Entity.TacGia;
 
 import java.sql.Connection;
@@ -193,6 +194,30 @@ public class Sach_DAO {
                 state.setString(13,sach.getHinhAnh());
                 state.setString(14, sach.getMaSanPham());
                n = state.executeUpdate();
+        } catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				state.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+                return n > 0;
+    }
+    public boolean updateSoLuongSach(SanPham sanPham, int soLuong){
+        ConnectDB.getInstance();
+	Connection con = ConnectDB.getConnection();
+	PreparedStatement state = null;
+        int n = 0;
+        try {
+            String sql = "UPDATE [dbo].[Sach]SET [SoLuongTon] =  [SoLuongTon]  - ? WHERE [SachID] = ? ";
+           state = con.prepareStatement(sql);
+           state.setInt(1,soLuong);
+           state.setString(2,sanPham.getMaSanPham());
         } catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

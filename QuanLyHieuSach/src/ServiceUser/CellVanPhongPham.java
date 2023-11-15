@@ -640,13 +640,18 @@ public class CellVanPhongPham extends javax.swing.JPanel {
 
     private void btnNgungKinhDoanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNgungKinhDoanhActionPerformed
         // TODO add your handling code here:
-        
+      
+        vanPhongPham_DAO = new VanPhongPham_DAO();
+        int hoiNhac = JOptionPane.showConfirmDialog(this, "Sản phẩm "+lblMaSanPham1.getText()+" có muốn ngừng kinh doanh không?", "Thông báo", JOptionPane.YES_NO_OPTION);
+        if(hoiNhac == JOptionPane.YES_OPTION){
+  
         lblTinhTrang1.setText("Ngừng kinh doanh");
         ngungKinhDoanh();
-        vanPhongPham_DAO = new VanPhongPham_DAO();
         if(vanPhongPham_DAO.updateTinhTrangVanPhongPham(vanPhongPham.getMaSanPham(), lblTinhTrang1.getText())){
             
         }
+        }
+      
 //        sach_DAO = new Sach_DAO();
 //        if(sach_DAO.updateTinhTrang(vanPhongPham.getMaSanPham(), lblTinhTrang1.getText())){  
 //        }
@@ -857,7 +862,7 @@ public class CellVanPhongPham extends javax.swing.JPanel {
         sach_DAO = new Sach_DAO();
 //        System.out.println(sach.getMaSanPham());
 //        if(sach_DAO.updateTinhTrang(sach.getMaSanPham(), lblTinhTrang1.getText())){
-//            JOptionPane.showMessageDialog(this, "U");
+           JOptionPane.showMessageDialog(this, "Bán lại sản phẩm");
 //        }
     }//GEN-LAST:event_btnBanLaiActionPerformed
    

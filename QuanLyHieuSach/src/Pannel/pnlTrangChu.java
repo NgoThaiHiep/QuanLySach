@@ -2,11 +2,16 @@
 package Pannel;
 
 import Entity.TaiKhoan;
+import java.awt.Image;
 import javax.swing.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+import javax.imageio.ImageIO;
 /**
  *
  * @author ThaiHiep
@@ -22,12 +27,31 @@ public class pnlTrangChu extends javax.swing.JPanel {
     private long startTime;
     private long elapsedTime;
     private  JLabel timJLabel ;
+    private File selectedFile;
     public pnlTrangChu(TaiKhoan tk, JLabel timJLabel) {
         this.tk= tk;
         this.timJLabel = timJLabel;
         initComponents();
         System.out.println("x"+timJLabel.getText());
         init();
+        
+        try {
+            selectedFile =new File("src\\IMG\\anhTrangChu.png");
+            BufferedImage image = ImageIO.read(selectedFile); // Thay đổi đường dẫn đến ảnh
+            
+            // thay đổi kích thức ảnh cùng kích thước với lable 184x216
+             Image scaledImage = image.getScaledInstance(1300, 800,Image.SCALE_SMOOTH);
+
+                    // Tạo ImageIcon với ảnh đã điều chỉnh kích thước
+                    ImageIcon imageIcon = new ImageIcon(scaledImage);
+
+                    // Thiết lập ImageIcon cho JLabel
+                    jLabel5.setIcon(imageIcon);
+           
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
     }
     public void init(){
         System.out.println("X2 : "+timJLabel.getText());
@@ -76,13 +100,15 @@ public class pnlTrangChu extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        lblAnh = new javax.swing.JLabel();
         lblThoiGianLam = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        lblAnh = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
+
+        lblAnh.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblThoiGianLam.setText("Thời gian đã làm : ");
 
@@ -90,45 +116,15 @@ public class pnlTrangChu extends javax.swing.JPanel {
 
         jLabel3.setText("jLabel3");
 
-        lblAnh.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/anhTrangChu.png"))); // NOI18N
-        jLabel5.setText("jLabel5");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblThoiGianLam, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 1210, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(lblAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(lblThoiGianLam)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -167,12 +167,10 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="txtSoLuongTon" pref="368" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtSoTrang" max="32767" attributes="0"/>
-                              <Component id="txtNamXuatBan" alignment="1" max="32767" attributes="0"/>
-                              <Component id="cboNhaXuatBan" alignment="1" pref="368" max="32767" attributes="0"/>
-                              <Component id="cboTacGia" alignment="1" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="txtSoTrang" max="32767" attributes="0"/>
+                          <Component id="txtNamXuatBan" alignment="1" max="32767" attributes="0"/>
+                          <Component id="cboNhaXuatBan" alignment="1" pref="368" max="32767" attributes="0"/>
+                          <Component id="cboTacGia" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Component id="btnThemTacGia" min="-2" pref="26" max="-2" attributes="0"/>
@@ -253,9 +251,9 @@
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="lblTheLoai" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="btnThemTheLoai" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
+                                      <Component id="lblTheLoai" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="cboTheLoai" min="-2" max="-2" attributes="0"/>
                               </Group>

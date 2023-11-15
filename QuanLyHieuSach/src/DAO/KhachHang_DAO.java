@@ -26,15 +26,15 @@ public class KhachHang_DAO {
     public KhachHang_DAO(){
         
     }
-    public KhachHang layThongTinKhachHang(TaiKhoan  tk){
+    public KhachHang layThongTinKhachHang(String sdt){
         ConnectDB.getInstance();
 	Connection con = ConnectDB.getConnection();
         PreparedStatement pst = null;
         KhachHang kh;
         try{
-            String sql = "select * from KhachHang where TaiKhoan = ?";
+            String sql = "select * from KhachHang where SoDienThoai = ?";
             pst = con.prepareStatement(sql);
-            pst.setString(1,tk.getTenTK());    
+            pst.setString(1,sdt);    
             ResultSet rs = pst.executeQuery();
             if(rs.next()){
                 String maKH = rs.getString(1);

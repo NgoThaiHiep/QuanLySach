@@ -5,6 +5,8 @@
 package DAO;
 
 import ConnectDB.ConnectDB;
+import Entity.HoaDon;
+import Entity.KhachHang;
 import Entity.NhanVien;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -59,4 +61,44 @@ public class HoaDon_DAO {
             }
         return duplicate;
         }
+    public boolean InsertHoaDon(HoaDon hd,NhanVien nv, KhachHang kh) {
+		ConnectDB.getInstance();
+    Connection con = ConnectDB.getConnection();
+    PreparedStatement state = null;
+    ResultSet rs = null;
+    int n = 0;
+     Date currentDate = new Date();
+        SimpleDateFormat formatterDay = new SimpleDateFormat("yyyy-MM-dd");
+	String formattedDate = formatterDay.format(currentDate);
+    try {
+       
+        // Kiểm tra xem số điện thoại đã tồn tại trong cơ sở dữ liệu hay chưa
+        String sql = "INSERT INTO [dbo].[HoaDon] ([HoaDonID],[NgayLapHD],[NhanVienID],[KhachHangID])\n" +
+"     VALUES (?,?,?,?)";
+        
+        state = con.prepareStatement(sql);
+        state.setString(1,  hd.getMaHoaDon());
+        state.setString(2,formattedDate);
+        state.setString(3, nv.getMaNV());
+        state.setString(4,kh.getMaKhachHang());
+        n = state.executeUpdate();
+
+    } catch (Exception e) {
+        // TODO: handle exception
+        e.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (state != null) {
+                state.close();
+            }
+        } catch (SQLException e2) {
+            // TODO: handle exception
+            e2.printStackTrace();
+        }
+    }
+    return n > 0;
+	}
 }

@@ -9,6 +9,7 @@ import Entity.LoaiVanPhongPham;
 import Entity.NhaCungCap;
 import Entity.NhaXuatBan;
 import Entity.Sach;
+import Entity.SanPham;
 import Entity.TacGia;
 import Entity.TheLoai;
 import Entity.ThuongHieu;
@@ -236,6 +237,30 @@ public class VanPhongPham_DAO {
 			}
 		}
         return n > 0;
+    }
+      public boolean updateSoLuongVanPhongPham(SanPham sanPham, int soLuong){
+        ConnectDB.getInstance();
+	Connection con = ConnectDB.getConnection();
+	PreparedStatement state = null;
+        int n = 0;
+        try {
+            String sql = "UPDATE [dbo].[VanPhongPham] SET [SoLuongTon] = ? WHERE [VanPhongPhamID] = ?";
+           state = con.prepareStatement(sql);
+           state.setInt(1,soLuong);
+           state.setString(2,sanPham.getMaSanPham());
+        } catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				state.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+                return n > 0;
     }
    
 }
