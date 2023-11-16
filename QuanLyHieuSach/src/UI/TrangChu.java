@@ -9,22 +9,19 @@ import Entity.NhanVien;
 import Entity.TaiKhoan;
 import Entity.ThoiGianHoatDong;
 import Menu.MenuItem;
-import Pannel.pnlCapNhatNhanVien;
+import Pannel.pnlBaoCao;
+import Pannel.pnTraCuuNhanVien;
 import Pannel.pnlDanhSachHoaDon;
 import Pannel.pnlLapHoaDon;
+import Pannel.pnlQuyDinh;
 import Pannel.pnlTaiKhoan;
 import Pannel.pnlThemKhachHang;
 import Pannel.pnlThemNhanVien;
 import Pannel.pnlThemSanPham;
 import Pannel.pnlThongKe;
-import Pannel.pnlThongKeTheoNam;
 import Pannel.pnlTraCuuKhachHang;
-
 import Pannel.pnlTraCuuSanPham;
-import Pannel.pnlTrangChu;
 import ServiceUser.ScrollBarCustom;
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,6 +38,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -71,28 +69,12 @@ public class TrangChu extends javax.swing.JFrame {
     private JLabel lblThoiGianDaLam;
     private LocalTime thoiGianDangNhap;
     private TaiKhoan_DAO taiKhoan_DAO;
-    private MenuItem menuThemKhachHang;
-    private javax.swing.ImageIcon iconThemKhachHang;
-    private MenuItem menuLapHoaDon;
-    private MenuItem menuDanhSachHoaDon;
-    private MenuItem menuTraCuuKhachHang;
-    private MenuItem menuTraCuuNhanVien;
-    private MenuItem menuThemNhanVien;
-    private MenuItem menuCapNhatNhanVien;
-    private MenuItem menuTrangChu;
+    private MenuItem menuTrangChu,menuSanPham,menuThemSanPham,menuTraCuuSanPham,menuKhachHang ,menuTraCuuKhachHang, menuThemKhachHang
+                    ,menuHoaDon,menuLapHoaDon, menuDanhSachHoaDon
+                    ,menuNhanVien ,menuTraCuuNhanVien, menuThemNhanVien
+                   ,menuDoanhThu,menuThongKe, menuBaoCao 
+                   ,menuTaiKhoan, menuQuyDinh,menuTroGiup;
     private LookAndFeel originalLookAndFeel;
-    private MenuItem menuThemSanPham;
-    private MenuItem menuCapNhatSanPham;
-    private MenuItem menuTraCuuSanPham;
-    private MenuItem menuDSTaiKhoan;
-    private MenuItem menuDSThongKe;
-    private MenuItem menuSanPham;
-    private MenuItem menuHoaDon;
-    private MenuItem menuKhachHang;
-    private MenuItem menuNhanVien;
-    private MenuItem menuThongKe;
-    private MenuItem menuTaiKhoan;
-    private MenuItem menuTroGiup;
 //    private final pnlTrangChu pnlTrangChu;
 //    private final pnlTraCuuSanPham pnlTraCuuSanPham;
 //    private final pnlThemSanPham pnlThemSanPham;
@@ -108,8 +90,9 @@ public class TrangChu extends javax.swing.JFrame {
 //    private final pnlTaiKhoan pnlTaiKhoan;
 //    private final CardLayout cardLayout;
 //    private final JPanel mainPanel;
-    private ImageIcon iconHoaDon;
-    private ImageIcon iconKhachHang;
+
+
+
     public TrangChu(TaiKhoan tk,NhanVien nv,LookAndFeel originalLookAndFeel) {     
         super("Trang chủ");
         this.tk = tk;
@@ -327,31 +310,78 @@ addTableStyle(jScrollPane1);
         menuItem20.setBackground(pnlMenus.getBackground()); 
     }
     private void menuChucVu(){
-        
+        //Trang chủ
         javax.swing.ImageIcon iconTrangChu = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
-        javax.swing.ImageIcon iconSanPham = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
-        iconHoaDon = new javax.swing.ImageIcon(getClass().getResource("/IMG/hoaDon.png"));
-        iconKhachHang = new javax.swing.ImageIcon(getClass().getResource("/IMG/khachHang.png"));
-        javax.swing.ImageIcon iconNhanVien = new javax.swing.ImageIcon(getClass().getResource("/IMG/nhanVien.png"));
-        javax.swing.ImageIcon iconThongKe = new javax.swing.ImageIcon(getClass().getResource("/IMG/thongKe.png"));
-        javax.swing.ImageIcon iconTaiKhoan = new javax.swing.ImageIcon(getClass().getResource("/IMG/taiKhoan.png"));
-        javax.swing.ImageIcon iconTroGiup = new javax.swing.ImageIcon(getClass().getResource("/IMG/troGiup.png"));
         
         //Tạo icon cho sản phẩm
+        javax.swing.ImageIcon iconSanPham = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
         javax.swing.ImageIcon iconTraCuuSanPham = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
         javax.swing.ImageIcon iconThemSanPham = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
-        javax.swing.ImageIcon iconCapNhatSanPham = new javax.swing.ImageIcon(getClass().getResource("/IMG/hoaDon.png"));
-        //tạo submenu cho sản phẩm
-       
         
- 
+        //Hóa đơn
+        javax.swing.ImageIcon iconHoaDon = new javax.swing.ImageIcon(getClass().getResource("/IMG/hoaDon.png"));
+        javax.swing.ImageIcon iconLapHoaDon = new javax.swing.ImageIcon(getClass().getResource("/IMG/hoaDon.png"));
+        javax.swing.ImageIcon iconDanhSachHoaDon = new javax.swing.ImageIcon(getClass().getResource("/IMG/hoaDon.png"));
+        
+        //Khách hàng
+        javax.swing.ImageIcon iconKhachHang = new javax.swing.ImageIcon(getClass().getResource("/IMG/khachHang.png"));
+        javax.swing.ImageIcon iconTraCuuKhachHang = new javax.swing.ImageIcon(getClass().getResource("/IMG/khachHang.png"));
+        javax.swing.ImageIcon iconThemKhachHang = new javax.swing.ImageIcon(getClass().getResource("/IMG/nhanVien.png"));
+
+        //Nhân viên
+        javax.swing.ImageIcon iconNhanVien = new javax.swing.ImageIcon(getClass().getResource("/IMG/nhanVien.png"));
+        javax.swing.ImageIcon iconTraCuuNhanVien = new javax.swing.ImageIcon(getClass().getResource("/IMG/nhanVien.png"));
+        javax.swing.ImageIcon iconThemNhanVien = new javax.swing.ImageIcon(getClass().getResource("/IMG/nhanVien.png"));
+        
+        //Thống kê
+        javax.swing.ImageIcon iconDoanhThu = new javax.swing.ImageIcon(getClass().getResource("/IMG/thongKe.png"));
+        javax.swing.ImageIcon iconThongKe = new javax.swing.ImageIcon(getClass().getResource("/IMG/thongKe.png"));
+        javax.swing.ImageIcon iconBaoCao = new javax.swing.ImageIcon(getClass().getResource("/IMG/hoaDon.png"));
+       
+        // Tài khoản
+        javax.swing.ImageIcon iconTaiKhoan = new javax.swing.ImageIcon(getClass().getResource("/IMG/taiKhoan.png"));
+        
+        //Quy định 
+        javax.swing.ImageIcon iconQuyDinh = new javax.swing.ImageIcon(getClass().getResource("/IMG/hoaDon.png"));
+
+        //Trợ giúp
+        javax.swing.ImageIcon iconTroGiup = new javax.swing.ImageIcon(getClass().getResource("/IMG/troGiup.png"));
+        
+        
+        
+        //tạo submenu cho trang chủ
+        menuTrangChu = new MenuItem(iconTrangChu, "Trang chủ",new ActionListener() {
+             @Override
+            public void actionPerformed(ActionEvent e) {                 
+                try {            UIManager.setLookAndFeel(originalLookAndFeel);        
+                } catch (UnsupportedLookAndFeelException ex) {            
+                    Logger.getLogger(pnTraCuuNhanVien.class.getName()).log(Level.SEVERE, null, ex);        
+                }
+            pnlBody.removeAll();
+            pnlBody.add(new Pannel.pnlTrangChu(tk,lblThoiGianDaLam ));
+            System.out.println(tk.getTenTK());
+            pnlBody.repaint();
+            pnlBody.revalidate();
+                 System.out.println();
+//        cardLayout.show(mainPanel, "Trang chủ");
+
+//        setbackground(menuTrangChu,menuNhanVien,menuCapNhatNhanVien,menuSanPham, menuHoaDon, menuKhachHang,menuThongKe,menuTaiKhoan,menuTroGiup, menuTraCuuSanPham,
+//                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuDSThongKe,menuDSTaiKhoan);
+//                        menuNhanVien.setBackground(pnlMenus.getBackground());
+            }
+        });
+        
+        
+        //---------------------------------------------------------------------------------------------------//
+        
+        //tạo submenu cho sản phẩm
         menuTraCuuSanPham = new MenuItem(iconTraCuuSanPham, "Tra cứu sản phẩm",new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
+            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnTraCuuNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
                  try {
             UIManager.setLookAndFeel(originalLookAndFeel);
             } catch (UnsupportedLookAndFeelException ex) {
-                Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(pnTraCuuNhanVien.class.getName()).log(Level.SEVERE, null, ex);
             }
                 pnlBody.removeAll();
                 try {
@@ -363,11 +393,12 @@ addTableStyle(jScrollPane1);
                 pnlBody.repaint();
                 pnlBody.revalidate();
 //              cardLayout.show(mainPanel, "Tra cứu sản phẩm");
-                setbackground(menuTraCuuSanPham,menuSanPham,menuTrangChu,menuHoaDon, menuKhachHang, menuNhanVien,menuThongKe,menuTaiKhoan,menuTroGiup, menuThemSanPham,
-                        menuCapNhatSanPham,menuLapHoaDon, menuDanhSachHoaDon, menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien,menuThemNhanVien, menuCapNhatNhanVien, menuDSThongKe,menuDSTaiKhoan);
-               
+//                setbackground(menuTraCuuSanPham,menuSanPham,menuTrangChu,menuHoaDon, menuKhachHang, menuNhanVien,menuThongKe,menuTaiKhoan,menuTroGiup, menuThemSanPham,
+//                        menuCapNhatSanPham,menuLapHoaDon, menuDanhSachHoaDon, menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien,menuThemNhanVien, menuCapNhatNhanVien, menuDSThongKe,menuDSTaiKhoan);
+//               
             }
         });
+        
         menuThemSanPham= new MenuItem(iconThemSanPham, "Thêm sản phẩm", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -375,70 +406,74 @@ addTableStyle(jScrollPane1);
                  try {
             UIManager.setLookAndFeel(originalLookAndFeel);
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(pnTraCuuNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
                 pnlBody.removeAll();
                 pnlBody.add(new pnlThemSanPham(tk));
                 pnlBody.repaint();
                 pnlBody.revalidate();
-                setbackground(menuThemSanPham,menuSanPham,menuTrangChu,menuHoaDon, menuKhachHang, menuNhanVien,menuThongKe,menuTaiKhoan,menuTroGiup, menuTraCuuSanPham,
-                        menuCapNhatSanPham,menuLapHoaDon, menuDanhSachHoaDon, menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien,menuThemNhanVien, menuCapNhatNhanVien, menuDSThongKe,menuDSTaiKhoan);
+//                setbackground(menuThemSanPham,menuSanPham,menuTrangChu,menuHoaDon, menuKhachHang, menuNhanVien,menuThongKe,menuTaiKhoan,menuTroGiup, menuTraCuuSanPham,
+//                        menuCapNhatSanPham,menuLapHoaDon, menuDanhSachHoaDon, menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien,menuThemNhanVien, menuCapNhatNhanVien, menuDSThongKe,menuDSTaiKhoan);
+
 //            cardLayout.show(mainPanel, "Thêm sản phẩm");
             }
         });
-        menuCapNhatSanPham = new MenuItem(iconCapNhatSanPham, "Cập nhật sản phẩm", new ActionListener() {
+        
+        //Menu cha
+         menuSanPham = new MenuItem(iconSanPham, "Sản phẩm",new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               
-                 try {
-            UIManager.setLookAndFeel(originalLookAndFeel);
-        } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                setbackground(menuCapNhatSanPham,menuSanPham,menuTrangChu,menuHoaDon, menuKhachHang, menuNhanVien,menuThongKe,menuTaiKhoan,menuTroGiup, menuTraCuuSanPham,
-                        menuThemSanPham,menuLapHoaDon, menuDanhSachHoaDon, menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien,menuThemNhanVien, menuCapNhatNhanVien, menuDSThongKe,menuDSTaiKhoan);                 
+//                  setbackground(menuSanPham,menuThongKe,menuCapNhatNhanVien,menuDSThongKe, menuHoaDon, menuKhachHang,menuTaiKhoan,menuNhanVien,menuTroGiup, menuThongKe,
+//                        menuThongKe,menuLapHoaDon, menuThongKe, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuDSTaiKhoan,menuTrangChu);
+//                  menuThongKe.setBackground(pnlMenus.getBackground());
             }
-           
-        });
+        },menuTraCuuSanPham,menuThemSanPham);
         
-         //Tạo icon cho hóa đơn
-        javax.swing.ImageIcon iconTaoHoaDon = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
-        javax.swing.ImageIcon iconDanhSachHoaDon = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
+         
+        //------------------------------------------------------------------------------------------------//
         //tạo submenu cho hóa đơn
-        menuLapHoaDon = new MenuItem(iconTaoHoaDon, "Lập hóa đơn",new ActionListener() {
+        menuLapHoaDon = new MenuItem(iconLapHoaDon, "Lập hóa đơn",new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
+            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnTraCuuNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
                 pnlBody.removeAll();
                 pnlBody.add(new pnlLapHoaDon(tk,nv,originalLookAndFeel));
                 pnlBody.repaint();
                 pnlBody.revalidate(); 
 //                     cardLayout.show(mainPanel, "Lập hóa đơn");
             
- setbackground(menuLapHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachHang, menuNhanVien,menuThongKe,menuTaiKhoan,menuTroGiup, menuTraCuuSanPham,
-               menuThemSanPham,menuCapNhatSanPham, menuDanhSachHoaDon, menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien,menuThemNhanVien, menuCapNhatNhanVien, menuDSThongKe,menuDSTaiKhoan);                                
+//            setbackground(menuLapHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachHang, menuNhanVien,menuThongKe,menuTaiKhoan,menuTroGiup, menuTraCuuSanPham,
+//               menuThemSanPham,menuCapNhatSanPham, menuDanhSachHoaDon, menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien,menuThemNhanVien, menuCapNhatNhanVien, menuDSThongKe,menuDSTaiKhoan);                                
             }
         });
        menuDanhSachHoaDon =  new MenuItem(iconDanhSachHoaDon, "Danh sách hóa đơn",new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
+            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnTraCuuNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
                 pnlBody.removeAll();
                 pnlBody.add(new pnlDanhSachHoaDon(tk,nv));
                // System.out.println(tk.getTenTK());
                 pnlBody.repaint();
                 pnlBody.revalidate(); 
-//                            cardLayout.show(mainPanel,"Danh sách hóa đơn");
-setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachHang, menuNhanVien,menuThongKe,menuTaiKhoan,menuTroGiup, menuTraCuuSanPham,
-                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien,menuThemNhanVien, menuCapNhatNhanVien, menuDSThongKe,menuDSTaiKhoan);                 
+            //                            cardLayout.show(mainPanel,"Danh sách hóa đơn");
+//            setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachHang, menuNhanVien,menuThongKe,menuTaiKhoan,menuTroGiup, menuTraCuuSanPham,
+//                                    menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien,menuThemNhanVien, menuCapNhatNhanVien, menuDSThongKe,menuDSTaiKhoan);                 
             }
         });
         
-        //Tạo icon cho khachHang
-        javax.swing.ImageIcon iconTraCuuKhachHang = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
-        
+       //Menu HoaDon cha
+       menuHoaDon = new MenuItem(iconHoaDon, "Hóa đơn",new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                 setbackground(menuHoaDon,menuThongKe,menuCapNhatNhanVien,menuDSThongKe, menuSanPham, menuKhachHang,menuTaiKhoan,menuNhanVien,menuTroGiup, menuTraCuuSanPham,
+//                        menuThemSanPham,menuThongKe, menuCapNhatSanPham, menuThongKe,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuDSTaiKhoan,menuTrangChu);
+//                  menuThongKe.setBackground(pnlMenus.getBackground());
+            }
+        },menuLapHoaDon,menuDanhSachHoaDon);
+       
+        //------------------------------------------------------------------------------------------------// 
         //tạo submenu cho khachHang
         menuTraCuuKhachHang = new MenuItem(iconTraCuuKhachHang, "Tra cứu khách hàng", new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
+            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnTraCuuNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
                 pnlBody.removeAll();
                 try {
                     pnlBody.add(new pnlTraCuuKhachHang(tk));
@@ -449,17 +484,18 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
                 pnlBody.repaint();
                 pnlBody.revalidate(); 
 //                  cardLayout.show(mainPanel,"Tra cứu khách hàng");
-        setbackground(menuTraCuuKhachHang,menuKhachHang,menuTrangChu,menuSanPham, menuHoaDon, menuNhanVien,menuThongKe,menuTaiKhoan,menuTroGiup, menuTraCuuSanPham,
-                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuThemKhachHang,menuTraCuuNhanVien,menuThemNhanVien, menuCapNhatNhanVien, menuDSThongKe,menuDSTaiKhoan);  
+//        setbackground(menuTraCuuKhachHang,menuKhachHang,menuTrangChu,menuSanPham, menuHoaDon, menuNhanVien,menuThongKe,menuTaiKhoan,menuTroGiup, menuTraCuuSanPham,
+//                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuThemKhachHang,menuTraCuuNhanVien,menuThemNhanVien, menuCapNhatNhanVien, menuDSThongKe,menuDSTaiKhoan);  
             }
         });
-        iconThemKhachHang = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
        
-        menuThemKhachHang= new MenuItem(iconThemKhachHang, "Thêm khách hàng", new ActionListener() {
+        menuThemKhachHang = new MenuItem(iconThemKhachHang, "Thêm khách hàng", new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
-              
-                pnlBody.removeAll();
+            public void actionPerformed(ActionEvent e) {                 
+                try {            
+                    UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            
+                    Logger.getLogger(pnTraCuuNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
+                    pnlBody.removeAll();
                 try {
                     pnlBody.add(new pnlThemKhachHang(tk));
                 } catch (IOException ex) {
@@ -471,23 +507,32 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
                 pnlBody.repaint();
                 pnlBody.revalidate(); 
 //                cardLayout.show(mainPanel,"Thêm khách hàng");
-        setbackground(menuThemKhachHang,menuKhachHang,menuTrangChu,menuSanPham, menuHoaDon, menuNhanVien,menuThongKe,menuTaiKhoan,menuTroGiup, menuTraCuuSanPham,
-                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuTraCuuNhanVien,menuThemNhanVien, menuCapNhatNhanVien, menuDSThongKe,menuDSTaiKhoan);
+//        setbackground(menuThemKhachHang,menuKhachHang,menuTrangChu,menuSanPham, menuHoaDon, menuNhanVien,menuThongKe,menuTaiKhoan,menuTroGiup, menuTraCuuSanPham,
+//                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuTraCuuNhanVien,menuThemNhanVien, menuCapNhatNhanVien, menuDSThongKe,menuDSTaiKhoan);
             }
         });
-         
-        //Tạo icon cho nhân viên
-        javax.swing.ImageIcon iconTraCuuNhanVien = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
-        javax.swing.ImageIcon iconThemNhanVien = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
-        javax.swing.ImageIcon iconCapNhatNhanVien = new javax.swing.ImageIcon(getClass().getResource("/IMG/hoaDon.png"));
-        
+       //menuKhachHang cha
+        menuKhachHang = new MenuItem(iconKhachHang, "Khách hàng",new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                setbackground(menuKhachHang,menuThongKe,menuCapNhatNhanVien,menuDSThongKe, menuSanPham, menuHoaDon,menuTaiKhoan,menuNhanVien,menuTroGiup, menuTraCuuSanPham,
+//                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuThongKe,menuThongKe,menuTraCuuNhanVien, menuThemNhanVien, menuDSTaiKhoan,menuTrangChu);
+//                  menuThongKe.setBackground(pnlMenus.getBackground());
+            }
+        },menuTraCuuKhachHang,menuThemKhachHang);
+      
+        //------------------------------------------------------------------------------------------------//    
         //tạo submenu cho nhân viên
         menuTraCuuNhanVien = new MenuItem(iconTraCuuNhanVien, "Tra cứu nhân viên", new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
+            public void actionPerformed(ActionEvent e) {                 
+                try {           
+                    UIManager.setLookAndFeel(originalLookAndFeel);        
+                } catch (UnsupportedLookAndFeelException ex) {            
+                    Logger.getLogger(pnTraCuuNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
                 pnlBody.removeAll();
                 try {
-                    pnlBody.add(new pnlCapNhatNhanVien(tk));
+                    pnlBody.add(new pnTraCuuNhanVien(tk));
                 } catch (IOException ex) {
                     Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {
@@ -498,14 +543,18 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
                 pnlBody.repaint();
                 pnlBody.revalidate(); 
 //                cardLayout.show(mainPanel,"Tra cứu nhân viên");
-        setbackground(menuTraCuuNhanVien,menuNhanVien,menuTrangChu,menuSanPham, menuHoaDon, menuKhachHang,menuThongKe,menuTaiKhoan,menuTroGiup, menuTraCuuSanPham,
-                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuThemNhanVien, menuCapNhatNhanVien, menuDSThongKe,menuDSTaiKhoan);
+//        setbackground(menuTraCuuNhanVien,menuNhanVien,menuTrangChu,menuSanPham, menuHoaDon, menuKhachHang,menuThongKe,menuTaiKhoan,menuTroGiup, menuTraCuuSanPham,
+//                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuThemNhanVien, menuCapNhatNhanVien, menuDSThongKe,menuDSTaiKhoan);
             }
         });
         menuThemNhanVien =  new MenuItem(iconThemNhanVien, "Thêm nhân viên", new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
-                pnlBody.removeAll();
+            public void actionPerformed(ActionEvent e) {                 
+                try {            UIManager.setLookAndFeel(originalLookAndFeel);        
+                } catch (UnsupportedLookAndFeelException ex) {            
+                    Logger.getLogger(pnTraCuuNhanVien.class.getName()).log(Level.SEVERE, null, ex);        
+                }
+                    pnlBody.removeAll();
                 try {
                     try {
                         pnlBody.add(new pnlThemNhanVien(tk));
@@ -520,56 +569,80 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
                 pnlBody.revalidate();
                 
 //        cardLayout.show(mainPanel,"Thêm nhân viên");
-        setbackground(menuThemNhanVien,menuNhanVien,menuTrangChu,menuSanPham, menuHoaDon, menuKhachHang,menuThongKe,menuTaiKhoan,menuTroGiup, menuTraCuuSanPham,
-                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuCapNhatNhanVien, menuDSThongKe,menuDSTaiKhoan);
+//        setbackground(menuThemNhanVien,menuNhanVien,menuTrangChu,menuSanPham, menuHoaDon, menuKhachHang,menuThongKe,menuTaiKhoan,menuTroGiup, menuTraCuuSanPham,
+//                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuCapNhatNhanVien, menuDSThongKe,menuDSTaiKhoan);
             }
         });
-        menuCapNhatNhanVien = new MenuItem(iconCapNhatNhanVien, "Cập nhật nhân viên", new ActionListener() {
+        
+        //MenuNhanVien cha
+        menuNhanVien = new MenuItem(iconNhanVien, "Nhân viên",new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
-                pnlBody.removeAll();
-                try {
-                    pnlBody.add(new pnlCapNhatNhanVien(tk));
-                } catch (IOException ex) {
-                    Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
+            public void actionPerformed(ActionEvent e) {
+//                setbackground(menuNhanVien,menuThongKe,menuCapNhatNhanVien,menuDSThongKe, menuSanPham, menuHoaDon,menuTaiKhoan,menuKhachHang,menuTroGiup, menuTraCuuSanPham,
+//                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuDSTaiKhoan,menuTrangChu);
+//                  menuThongKe.setBackground(pnlMenus.getBackground());
+            }
+        },menuTraCuuNhanVien,menuThemNhanVien);
+        
+        //------------------------------------------------------------------------------------------------//
+        //tạo submenu cho Doanh thu
+        menuThongKe = new MenuItem(iconThongKe, "Thông kê",new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 try {
+                    UIManager.setLookAndFeel(originalLookAndFeel);
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(pnTraCuuNhanVien.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                pnlBody.removeAll();
+                pnlBody.add(new pnlThongKe(tk));
+                pnlBody.repaint();
+                pnlBody.revalidate(); 
+//               setbackground(menuThongKe,menuKhachHang,menuCapNhatNhanVien,menuCapNhatNhanVien, menuSanPham, menuHoaDon,menuTaiKhoan,menuNhanVien,menuTroGiup, menuTraCuuSanPham,
+//                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuDSTaiKhoan,menuTrangChu);
+//                  menuKhachHang.setBackground(pnlMenus.getBackground());
+            }
+        });
+        menuBaoCao = new  MenuItem(iconSanPham, "Báo cáo",new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                 try {
+                    UIManager.setLookAndFeel(originalLookAndFeel);
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(pnTraCuuNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                 
+                pnlBody.removeAll();
+                pnlBody.add(new pnlBaoCao());
                 System.out.println(tk.getTenTK());
                 pnlBody.repaint();
-                pnlBody.revalidate();
-//        cardLayout.show(mainPanel,"Cập nhật nhân viên");
-        setbackground(menuCapNhatNhanVien,menuNhanVien,menuTrangChu,menuSanPham, menuHoaDon, menuKhachHang,menuThongKe,menuTaiKhoan,menuTroGiup, menuTraCuuSanPham,
-                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuDSThongKe,menuDSTaiKhoan);
-            }
-        }); 
-        //menu chính
-        menuTrangChu = new MenuItem(iconTrangChu, "Trang chủ",new ActionListener() {
-             @Override
-            public void actionPerformed(ActionEvent e) {                 
-                try {            UIManager.setLookAndFeel(originalLookAndFeel);        
-                } catch (UnsupportedLookAndFeelException ex) {            
-                    Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        
-                }
-            pnlBody.removeAll();
-            pnlBody.add(new Pannel.pnlTrangChu(tk,lblThoiGianDaLam ));
-            System.out.println(tk.getTenTK());
-            pnlBody.repaint();
-            pnlBody.revalidate();
-                 System.out.println();
-//        cardLayout.show(mainPanel, "Trang chủ");
-        setbackground(menuTrangChu,menuNhanVien,menuCapNhatNhanVien,menuSanPham, menuHoaDon, menuKhachHang,menuThongKe,menuTaiKhoan,menuTroGiup, menuTraCuuSanPham,
-                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuDSThongKe,menuDSTaiKhoan);
-                        menuNhanVien.setBackground(pnlMenus.getBackground());
+                pnlBody.revalidate(); 
+  //        cardLayout.show(mainPanel,"Thống kê");
+//              setbackground(menuDSThongKe,menuThongKe,menuCapNhatNhanVien,menuSanPham, menuHoaDon, menuKhachHang,menuTaiKhoan,menuNhanVien,menuTroGiup, menuTraCuuSanPham,
+//                          menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuDSTaiKhoan,menuTrangChu);
+//              
             }
         });
-       menuDSTaiKhoan = new MenuItem(iconTaiKhoan, "Tài khoản", new ActionListener() {
+        
+        //MenuDoanhThu cha
+        menuDoanhThu = new MenuItem(iconThongKe, "Doanh thu",new ActionListener() {
             @Override
-                public void actionPerformed(ActionEvent e) {
-                      try {
+            public void actionPerformed(ActionEvent e) {
+            }
+        },menuThongKe, menuBaoCao);
+      
+        
+      
+        
+        //menuTaiKhoan cha
+        menuTaiKhoan = new MenuItem(iconTaiKhoan, "Tài khoản",new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                 try {
                 UIManager.setLookAndFeel(originalLookAndFeel);
             } catch (UnsupportedLookAndFeelException ex) {
-                Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(pnTraCuuNhanVien.class.getName()).log(Level.SEVERE, null, ex);
             }
                 pnlBody.removeAll();
                 pnlBody.add(new pnlTaiKhoan(tk,nv));
@@ -577,88 +650,42 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
                 pnlBody.repaint();
                 pnlBody.revalidate(); 
 //        cardLayout.show(mainPanel,"Tài khoản");
-            setbackground(menuDSTaiKhoan,menuTaiKhoan,menuCapNhatNhanVien,menuSanPham, menuHoaDon, menuKhachHang,menuThongKe,menuNhanVien,menuTroGiup, menuTraCuuSanPham,
-                                  menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuDSThongKe,menuTrangChu);
-                        
+//                 setbackground(menuTaiKhoan,menuThongKe,menuCapNhatNhanVien,menuDSThongKe, menuSanPham, menuHoaDon,menuKhachHang,menuNhanVien,menuTroGiup, menuTraCuuSanPham,
+//                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuThongKe,menuTrangChu);
+//                  menuThongKe.setBackground(pnlMenus.getBackground());
             }
         });
-        menuDSThongKe = new MenuItem(iconThongKe, "Thống kê", new ActionListener() {
+        
+        
+        //menuQuyDinh cha
+        menuQuyDinh = new MenuItem(iconQuyDinh,"Quy định", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                  try {
-                    UIManager.setLookAndFeel(originalLookAndFeel);
-                } catch (UnsupportedLookAndFeelException ex) {
-                    Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                try {            UIManager.setLookAndFeel(originalLookAndFeel);        
+                } catch (UnsupportedLookAndFeelException ex) {            
+                    Logger.getLogger(pnTraCuuNhanVien.class.getName()).log(Level.SEVERE, null, ex);        
                 }
-                pnlBody.removeAll();
-                pnlBody.add(new pnlThongKe(tk));
-                System.out.println(tk.getTenTK());
-                pnlBody.repaint();
-                pnlBody.revalidate(); 
-//        cardLayout.show(mainPanel,"Thống kê");
-  setbackground(menuDSThongKe,menuThongKe,menuCapNhatNhanVien,menuSanPham, menuHoaDon, menuKhachHang,menuTaiKhoan,menuNhanVien,menuTroGiup, menuTraCuuSanPham,
-                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuDSTaiKhoan,menuTrangChu);
+                    pnlBody.removeAll();
+                    pnlBody.add(new pnlQuyDinh());
+                    System.out.println(tk.getTenTK());
+                    pnlBody.repaint();
+                    pnlBody.revalidate();
+                    System.out.println();
             }
         });
-        menuSanPham = new MenuItem(iconSanPham, "Sản phẩm",new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                  setbackground(menuSanPham,menuThongKe,menuCapNhatNhanVien,menuDSThongKe, menuHoaDon, menuKhachHang,menuTaiKhoan,menuNhanVien,menuTroGiup, menuThongKe,
-                        menuThongKe,menuLapHoaDon, menuThongKe, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuDSTaiKhoan,menuTrangChu);
-                  menuThongKe.setBackground(pnlMenus.getBackground());
-            }
-        },menuTraCuuSanPham,menuThemSanPham);
-        menuHoaDon = new MenuItem(iconHoaDon, "Hóa đơn",new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                 setbackground(menuHoaDon,menuThongKe,menuCapNhatNhanVien,menuDSThongKe, menuSanPham, menuKhachHang,menuTaiKhoan,menuNhanVien,menuTroGiup, menuTraCuuSanPham,
-                        menuThemSanPham,menuThongKe, menuCapNhatSanPham, menuThongKe,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuDSTaiKhoan,menuTrangChu);
-                  menuThongKe.setBackground(pnlMenus.getBackground());
-            }
-        },menuLapHoaDon,menuDanhSachHoaDon);
-        menuKhachHang = new MenuItem(iconKhachHang, "Khách hàng",new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setbackground(menuKhachHang,menuThongKe,menuCapNhatNhanVien,menuDSThongKe, menuSanPham, menuHoaDon,menuTaiKhoan,menuNhanVien,menuTroGiup, menuTraCuuSanPham,
-                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuThongKe,menuThongKe,menuTraCuuNhanVien, menuThemNhanVien, menuDSTaiKhoan,menuTrangChu);
-                  menuThongKe.setBackground(pnlMenus.getBackground());
-            }
-        },menuTraCuuKhachHang,menuThemKhachHang);
-        menuNhanVien = new MenuItem(iconNhanVien, "Nhân viên",new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setbackground(menuNhanVien,menuThongKe,menuCapNhatNhanVien,menuDSThongKe, menuSanPham, menuHoaDon,menuTaiKhoan,menuKhachHang,menuTroGiup, menuTraCuuSanPham,
-                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuDSTaiKhoan,menuTrangChu);
-                  menuThongKe.setBackground(pnlMenus.getBackground());
-            }
-        },menuTraCuuNhanVien,menuThemNhanVien);
-        menuThongKe = new MenuItem(iconThongKe, "Thống kê",new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               setbackground(menuThongKe,menuKhachHang,menuCapNhatNhanVien,menuCapNhatNhanVien, menuSanPham, menuHoaDon,menuTaiKhoan,menuNhanVien,menuTroGiup, menuTraCuuSanPham,
-                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuDSTaiKhoan,menuTrangChu);
-                  menuKhachHang.setBackground(pnlMenus.getBackground());
-            }
-        },menuDSThongKe);
-        menuTaiKhoan = new MenuItem(iconTaiKhoan, "Tài khoản",new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                 setbackground(menuTaiKhoan,menuThongKe,menuCapNhatNhanVien,menuDSThongKe, menuSanPham, menuHoaDon,menuKhachHang,menuNhanVien,menuTroGiup, menuTraCuuSanPham,
-                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuThongKe,menuTrangChu);
-                  menuThongKe.setBackground(pnlMenus.getBackground());
-            }
-        },menuDSTaiKhoan);
+        
+        //menuTroGiup cha
         menuTroGiup = new MenuItem(iconTroGiup, "Trợ Giúp",new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               setbackground(menuTroGiup,menuThongKe,menuCapNhatNhanVien,menuDSThongKe, menuSanPham, menuHoaDon,menuTaiKhoan,menuNhanVien,menuKhachHang, menuTraCuuSanPham,
-                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuDSTaiKhoan,menuTrangChu);
-                  menuThongKe.setBackground(pnlMenus.getBackground());
+//               setbackground(menuTroGiup,menuThongKe,menuCapNhatNhanVien,menuDSThongKe, menuSanPham, menuHoaDon,menuTaiKhoan,menuNhanVien,menuKhachHang, menuTraCuuSanPham,
+//                        menuThemSanPham,menuLapHoaDon, menuCapNhatSanPham, menuDanhSachHoaDon,menuTraCuuKhachHang,menuThemKhachHang,menuTraCuuNhanVien, menuThemNhanVien, menuDSTaiKhoan,menuTrangChu);
+//                  menuThongKe.setBackground(pnlMenus.getBackground());
             }
         });
         
         if(nv.getChucVu().getMaChucVu().equals("QL")){
-            addMenu(menuTrangChu,menuSanPham,menuHoaDon,menuKhachHang,menuNhanVien,menuThongKe,menuTaiKhoan,menuTroGiup);
+            addMenu(menuTrangChu,menuSanPham,menuHoaDon,menuKhachHang,menuNhanVien,menuDoanhThu,menuTaiKhoan,menuQuyDinh ,menuTroGiup);
         }else{
             addMenu(menuTrangChu,menuSanPham,menuHoaDon,menuKhachHang,menuThongKe,menuTroGiup);
         }
@@ -866,7 +893,7 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
         try {
             UIManager.setLookAndFeel(originalLookAndFeel);
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(pnTraCuuNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
        int hoiDeDangXuat =   JOptionPane.showConfirmDialog(this, "Bạn có muốn đăng xuất không?","Thông báo",JOptionPane.YES_NO_OPTION);
        if(hoiDeDangXuat == JOptionPane.YES_OPTION){
@@ -903,7 +930,7 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
         try {
             UIManager.setLookAndFeel(originalLookAndFeel);
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(pnTraCuuNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
         DoiMatKhau doiMatKhau = new DoiMatKhau (tk);
         doiMatKhau.setVisible(true);
@@ -911,25 +938,7 @@ setbackground(menuDanhSachHoaDon,menuHoaDon,menuTrangChu,menuSanPham, menuKhachH
 
     public void showThemKhachHang(){
         
-        menuKhachHang = new MenuItem(iconKhachHang, "Khách hàng",null,menuTraCuuKhachHang,menuThemKhachHang);
-        menuThemKhachHang= new MenuItem(iconThemKhachHang, "Thêm khách hàng", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {                 try {            UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            Logger.getLogger(pnlCapNhatNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
-                pnlBody.removeAll();
-                try {
-                    pnlBody.add(new pnlThemKhachHang(tk));
-                } catch (IOException ex) {
-                    Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(TrangChu.class.getName()).log(Level.SEVERE, null, ex);
-                }
-               // System.out.println(tk.getTenTK());
-                pnlBody.repaint();
-                pnlBody.revalidate(); 
-//                cardLayout.show(mainPanel,"Thêm khách hàng");
-            }
-        });
-        
+     
      
        
    

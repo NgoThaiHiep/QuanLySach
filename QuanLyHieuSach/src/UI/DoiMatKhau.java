@@ -206,7 +206,7 @@ public class DoiMatKhau extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null ,"Đã thay đổi mật khẩu");
             this.dispose();
         }else{
-          JOptionPane.showMessageDialog(null ,"Mật khẩu sai");
+          JOptionPane.showMessageDialog(null ,"Sai mật khẩu cũ");
           lblMatKhauCu.requestFocus();
         }
     }

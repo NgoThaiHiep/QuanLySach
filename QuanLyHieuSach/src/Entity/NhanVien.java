@@ -38,6 +38,12 @@ public class NhanVien {
         this.diaChi = diaChi;
     }
 
+    public NhanVien(String maNV, String hoTenNhanVien, ChucVu chucVu) {
+        this.maNV = maNV;
+        this.hoTenNhanVien = hoTenNhanVien;
+        this.chucVu = chucVu;
+    }
+
     public void setCCCD(String CCCD) {
         this.CCCD = CCCD;
     }

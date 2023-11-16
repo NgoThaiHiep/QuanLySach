@@ -80,8 +80,7 @@ public class KhachHang_DAO {
         
         return dskh; 
     }
-    
-   public String generateVerifyCode() throws SQLException {
+    public String generateVerifyCode_KhachHangLe() throws SQLException {
     DecimalFormat df = new DecimalFormat("0000000000");
     Random ran = new Random();
 
@@ -95,7 +94,23 @@ public class KhachHang_DAO {
         code = df.format(month * 100000000 + year * 1000000 + ran.nextInt(100000));
     } while (checkDuplicateCode(code));
     return code;
-}
+    }
+    
+    public String generateVerifyCode() throws SQLException {
+    DecimalFormat df = new DecimalFormat("0000000000");
+    Random ran = new Random();
+
+    // Lấy hai số cuối cùng của năm
+    Calendar calendar = Calendar.getInstance();
+    int year = calendar.get(Calendar.YEAR) % 100; // Lấy 2 số cuối của năm
+    // Lấy 2 số của tháng
+    int month = calendar.get(Calendar.MONTH) + 1; // Tháng bắt đầu từ 0, cần cộng thêm 1
+    String code;
+    do {
+        code = "KHL"+df.format(month * 100000000 + year * 1000000 + ran.nextInt(100000));
+    } while (checkDuplicateCode(code));
+    return code;
+    }
     public boolean checkDuplicateCode(String code) throws SQLException{
 	boolean duplicate = false;
 

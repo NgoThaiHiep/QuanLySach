@@ -9,11 +9,13 @@ public class ChiTietHoaDon {
     private HoaDon hoaDon;
     private SanPham sanPham;
     private int soLuong;
+    private double donGia;
 
-    public ChiTietHoaDon(HoaDon hoaDon, SanPham sanPham, int soLuong) {
+    public ChiTietHoaDon(HoaDon hoaDon, SanPham sanPham, int soLuong, double donGia) {
         this.hoaDon = hoaDon;
         this.sanPham = sanPham;
         this.soLuong = soLuong;
+        this.donGia = donGia;
     }
 
     public ChiTietHoaDon() {
@@ -43,10 +45,19 @@ public class ChiTietHoaDon {
         this.soLuong = soLuong;
     }
 
+    public double getDonGia() {
+        return donGia;
+    }
+
+    public void setDonGia(double donGia) {
+        this.donGia = donGia;
+    }
+
     @Override
     public String toString() {
-        return "ChiTietHoaDon{" + "hoaDon=" + hoaDon + ", sanPham=" + sanPham + ", soLuong=" + soLuong + '}';
+        return "ChiTietHoaDon{" + "hoaDon=" + hoaDon + ", sanPham=" + sanPham + ", soLuong=" + soLuong + ", donGia=" + donGia + '}';
     }
-    
+
+  
     
 }

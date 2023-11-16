@@ -52,6 +52,7 @@ public class TaiKhoan_DAO {
 	}
         return null;
     }
+       
     public ArrayList<TaiKhoan> layDanhSachTaiKhoan(){
         ArrayList<TaiKhoan> dstk = new ArrayList<TaiKhoan>();
 	ConnectDB.getInstance();
@@ -77,6 +78,7 @@ public class TaiKhoan_DAO {
         
         return dstk; 
     }
+    
     
 	public boolean login(TaiKhoan tk){
         ConnectDB.getInstance();

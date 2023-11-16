@@ -215,5 +215,28 @@ public class NhanVien_DAO {
 		return n>0;
 	}
 
-
+     public ArrayList<NhanVien> timKiemDanhSachTaiKhoanTheoTenDangNhap(String TenDangNhap){
+        ArrayList<NhanVien> dsnv = new ArrayList<NhanVien>();
+	ConnectDB.getInstance();
+	Connection con = ConnectDB.getConnection();
+        
+        try {
+        String sql = " select NhanVienID, HoTenNhanVien, ChucVu from NhanVien where  TaiKhoan like '%"+TenDangNhap+"%' and TrangThai = 'Đang làm'";
+            Statement state = con.createStatement();
+            ResultSet rs = state.executeQuery(sql);
+        while(rs.next()){
+                String maNhanVien = rs.getString(1);
+                String tenNhanVien = rs.getString(2);
+                ChucVu chucVu = new ChucVu(rs.getString(3));
+                NhanVien nhanVien = new NhanVien(maNhanVien, tenNhanVien,chucVu);
+                dsnv.add(nhanVien);
+                
+            }    
+        } catch (SQLException e) {
+           e.printStackTrace();
+        }
+        
+        return dsnv; 
+    }
+    
 }

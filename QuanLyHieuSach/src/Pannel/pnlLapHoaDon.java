@@ -14,7 +14,6 @@ import Entity.Sach;
 import Entity.SanPham;
 import Entity.TaiKhoan;
 import Entity.VanPhongPham;
-import Them.frmHangCho;
 import java.awt.Font;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -779,17 +778,61 @@ for (int i = 0; i < rowCount; i++) {
      //  addToPendingPayment();
      
    // new frmHangCho().setVisible(true);
+    KhachHang kh = new KhachHang();
+        khachHang_DAO = new KhachHang_DAO();
+        try {
+            if(txtSoDienThoai.getText().equals("")) {
+               kh.setMaKhachHang(khachHang_DAO.generateVerifyCode());
+            }else{
+                
+              kh =   khachHang_DAO.layThongTinKhachHang(txtSoDienThoai.getText());
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlLapHoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        LocalDate localDate = LocalDate.now();
    
+    DefaultTableModel model = (DefaultTableModel) tblGioHang.getModel();
+    int rowCount = model.getRowCount();
+    int columnCount = model.getColumnCount();
    
-   DefaultTableModel model = (DefaultTableModel) tblGioHang.getModel();
-int rowCount = model.getRowCount();
-int columnCount = model.getColumnCount();
-
+    SanPham sanPham = null ;
+        int soLuong = 0;
+        double donGia = 0;
 // Duyệt qua từng hàng và cột để lấy dữ liệu
 for (int row = 0; row < rowCount; row++) {
     for (int col = 0; col < columnCount; col++) {
-        Object cellValue = model.getValueAt(row, col);
-        System.out.print(cellValue + "\t"); // In ra giá trị của ô
+       
+        
+        if(col == 1){
+            Object cellValue = model.getValueAt(row, col);
+             // System.out.print("sách " + cellValue + "\t");
+                   sanPham = new SanPham((String) cellValue);
+        }
+        //số lượng
+        if(col == 3){
+            Object cellValue = model.getValueAt(row, col);
+             // System.out.print("sách " + cellValue + "\t");
+              soLuong = Integer.parseInt((String) cellValue);
+        }    
+        //đơn giá
+        if(col == 4){
+            Object cellValue = model.getValueAt(row, col);
+//              System.out.print("sách " + cellValue + "\t");
+            donGia = Double.parseDouble((String) cellValue);
+        }
+        //thành tiền
+        if(col == 5){
+            Object cellValue = model.getValueAt(row, col);
+              //System.out.print("sách " + cellValue + "\t");
+              HoaDon hoaDon = new HoaDon(lblMaHoaDonFont.getText(), localDate, nv, kh);
+                ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(hoaDon, sanPham, soLuong,donGia);
+                System.out.println(chiTietHoaDon);
+        }
+        
+        
+       // In ra giá trị của ô
         // Thực hiện xử lý với giá trị của ô ở đây
     }
     System.out.println(); // Xuống dòng sau khi duyệt qua một hàng
@@ -804,6 +847,8 @@ for (int row = 0; row < rowCount; row++) {
         try {
             if(txtSoDienThoai.getText().equals("")) {
                kh.setMaKhachHang(khachHang_DAO.generateVerifyCode());
+               kh.setTenKhachHang("No name");
+               
             }else{
                 
               kh =   khachHang_DAO.layThongTinKhachHang(txtSoDienThoai.getText());
