@@ -99,7 +99,7 @@ public class pnTraCuuNhanVien extends javax.swing.JPanel {
         
         
     }
-        
+    
     public void init() throws IOException, SQLException{
         try {
             ConnectDB.getInstance().connect();

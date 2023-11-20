@@ -101,6 +101,41 @@ public class VanPhongPham_DAO {
         
         return dssps; 
     }
+     public ArrayList<VanPhongPham> layDanhSanPhamVanPhongPham_TheoMa(String maVanPhongPham){
+        ArrayList<VanPhongPham> dssps = new ArrayList<VanPhongPham>();
+	ConnectDB.getInstance();
+	Connection con = ConnectDB.getConnection();
+        
+        try {
+        String sql = "select * from VanPhongPham where VanPhongPhamID LIKE '%"+maVanPhongPham+"%'";
+        Statement state = con.createStatement();
+        ResultSet rs = state.executeQuery(sql);
+        while(rs.next()){
+        	
+                String maSanPham = rs.getString(1);
+                String tenSanPham = rs.getString(2);
+                LoaiSanPham loaiSanPham = new LoaiSanPham(rs.getString("LoaiSanPham"));
+                NhaCungCap nhaCungCap = new NhaCungCap(rs.getString("NhaCungCap"));
+                int soLuongTon = rs.getInt(5);
+                Double donGia = rs.getDouble("DonGia");
+                String moTa = rs.getString("MoTa");
+                String tinhTrang = rs.getString("TinhTrang");
+                String hinhAnh = rs.getString("HinhAnh");
+                XuatXu xuatXu = new XuatXu(rs.getString("XuatXu"));
+                int namXuatban = rs.getInt("NamSanXuat");
+                String chatLieu = rs.getString("ChatLieu");
+                ThuongHieu thuongHieu = new ThuongHieu(rs.getString("ThuongHieu"));
+                LoaiVanPhongPham loaiVanPhongPham = new LoaiVanPhongPham(rs.getString("LoaiVanPhongPham"));
+                 //Sach sach = new Sach();
+                VanPhongPham vanPhongPham = new VanPhongPham(xuatXu, thuongHieu, loaiVanPhongPham, chatLieu, namXuatban, maSanPham, tenSanPham, loaiSanPham, nhaCungCap, soLuongTon , donGia , moTa, tinhTrang, hinhAnh);
+                dssps.add(vanPhongPham);
+            }    
+        } catch (SQLException e) {
+           e.printStackTrace();
+        }
+        
+        return dssps; 
+    }
     public boolean inserVanPhongPham(VanPhongPham vanPhongPham){
      
        ConnectDB.getInstance();

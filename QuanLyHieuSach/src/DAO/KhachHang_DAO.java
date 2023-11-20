@@ -1,23 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package DAO;
 import ConnectDB.ConnectDB;
 import Entity.KhachHang;
-import Entity.TaiKhoan;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
 import java.sql.Statement;
-import javax.swing.JOptionPane;
+
 /**
  *
  * @author hongh
@@ -35,6 +29,59 @@ public class KhachHang_DAO {
             String sql = "select * from KhachHang where SoDienThoai = ?";
             pst = con.prepareStatement(sql);
             pst.setString(1,sdt);    
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                String maKH = rs.getString(1);
+                String tenKH = rs.getString(2);
+                String soDT = rs.getString(3);
+                String diaChi = rs.getString(4);
+                kh = new KhachHang(maKH, tenKH, soDT, diaChi);
+                return kh;
+            }    
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+	try {
+		pst.close();
+		} catch (SQLException e2) {
+		// TODO: handle exceptione2 
+		e2.printStackTrace();
+            }
+	}
+        return null;
+    }
+    public ArrayList<KhachHang> layDanhSachTheoMaSach_TheoSoDienThoai(String sdt) throws SQLException{
+        ArrayList<KhachHang> dsKhachHang = new ArrayList<KhachHang>();
+        ConnectDB.getInstance();
+	Connection con = ConnectDB.getConnection();
+         try{
+            String sql = "Select * from KhachHang where  SoDienThoai LIKE '%"+sdt+"%'";
+            Statement state = con.createStatement();
+            ResultSet rs = state.executeQuery(sql);
+            while(rs.next()){
+                String maKH = rs.getString(1);
+                String tenKH = rs.getString(2);
+                String soDT = rs.getString(3);
+                String diaChi = rs.getString(4);
+                KhachHang kh = new KhachHang(maKH, tenKH, soDT, diaChi);
+                dsKhachHang.add(kh);
+            }
+             }catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+         return dsKhachHang;
+    }
+     public KhachHang layThongTinKhachHang_TheoMa(String maKhachHang){
+        ConnectDB.getInstance();
+	Connection con = ConnectDB.getConnection();
+        PreparedStatement pst = null;
+        KhachHang kh;
+        try{
+            String sql = "select * from KhachHang where KhachHangID = ?";
+            pst = con.prepareStatement(sql);
+            pst.setString(1,maKhachHang);    
             ResultSet rs = pst.executeQuery();
             if(rs.next()){
                 String maKH = rs.getString(1);
@@ -80,7 +127,8 @@ public class KhachHang_DAO {
         
         return dskh; 
     }
-    public String generateVerifyCode_KhachHangLe() throws SQLException {
+         
+    public String generateVerifyCode() throws SQLException {
     DecimalFormat df = new DecimalFormat("0000000000");
     Random ran = new Random();
 
@@ -96,7 +144,7 @@ public class KhachHang_DAO {
     return code;
     }
     
-    public String generateVerifyCode() throws SQLException {
+    public String generateVerifyCode_KhachHangLe() throws SQLException {
     DecimalFormat df = new DecimalFormat("0000000000");
     Random ran = new Random();
 

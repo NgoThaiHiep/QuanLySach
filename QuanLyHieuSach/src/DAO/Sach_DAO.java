@@ -232,4 +232,41 @@ public class Sach_DAO {
 		}
                 return n > 0;
     }
+    public ArrayList<Sach> layDanhSachTheoMaSach(String maSach){
+        ArrayList<Sach> dsSach =  new ArrayList<Sach> ();
+        ConnectDB.getInstance();
+	Connection con = ConnectDB.getConnection();
+	
+         try{
+          
+            String sql = "Select * from Sach where SachID LIKE '%"+maSach+"%'";
+            Statement state = con.createStatement();
+            ResultSet rs = state.executeQuery(sql);
+            while(rs.next()){
+                    String maSanPham = rs.getString(1);
+                    String tenSanPham = rs.getString(2);
+                    String tacGia = rs.getString(3);
+                    TacGia tacGias = new TacGia(tacGia);
+                    String soLuongTon = rs.getString(10);
+                    int soTrang =rs.getInt("SoTrang");
+                    Double donGia = rs.getDouble("DonGia");
+                    TheLoai tl = new TheLoai(rs.getString("TheLoai"));
+                    int namXuatban = rs.getInt("NamXuatBan");
+                    String tinhTrang = rs.getString("TinhTrang");
+                    NhaXuatBan nhaXuatBan = new NhaXuatBan(rs.getString("NhaXuatBan"));
+                    NhaCungCap nhaCungCap = new NhaCungCap(rs.getString("NhaCungCap"));
+                     //Sach sach = new Sach();
+                     String hinhAnh = rs.getString("HinhAnh");
+                    LoaiSanPham loaiSanPham = new LoaiSanPham(rs.getString("LoaiSanPham"));
+                    Sach sach = new Sach(tacGias, namXuatban , soTrang, tl, nhaXuatBan, maSanPham, tenSanPham,loaiSanPham, nhaCungCap, Integer.parseInt(soLuongTon),donGia, null, tinhTrang, hinhAnh );  
+                    dsSach.add(sach);
+                
+            }
+    }catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+         return dsSach;
+    }
+         
 }

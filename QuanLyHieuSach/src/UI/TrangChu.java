@@ -311,41 +311,41 @@ addTableStyle(jScrollPane1);
     }
     private void menuChucVu(){
         //Trang chủ
-        javax.swing.ImageIcon iconTrangChu = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
+        javax.swing.ImageIcon iconTrangChu = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconTrangChu.png"));
         
         //Tạo icon cho sản phẩm
-        javax.swing.ImageIcon iconSanPham = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
-        javax.swing.ImageIcon iconTraCuuSanPham = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
-        javax.swing.ImageIcon iconThemSanPham = new javax.swing.ImageIcon(getClass().getResource("/IMG/trangChu.png"));
+        javax.swing.ImageIcon iconSanPham = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconSanPham.png"));
+        javax.swing.ImageIcon iconTraCuuSanPham = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconTraCuuSanPham.png"));
+        javax.swing.ImageIcon iconThemSanPham = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconSanPham.png"));
         
         //Hóa đơn
-        javax.swing.ImageIcon iconHoaDon = new javax.swing.ImageIcon(getClass().getResource("/IMG/hoaDon.png"));
-        javax.swing.ImageIcon iconLapHoaDon = new javax.swing.ImageIcon(getClass().getResource("/IMG/hoaDon.png"));
-        javax.swing.ImageIcon iconDanhSachHoaDon = new javax.swing.ImageIcon(getClass().getResource("/IMG/hoaDon.png"));
+        javax.swing.ImageIcon iconHoaDon = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconHoaDon.png"));
+        javax.swing.ImageIcon iconLapHoaDon = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconHoaDon.png"));
+        javax.swing.ImageIcon iconDanhSachHoaDon = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconHoaDon.png"));
         
         //Khách hàng
-        javax.swing.ImageIcon iconKhachHang = new javax.swing.ImageIcon(getClass().getResource("/IMG/khachHang.png"));
-        javax.swing.ImageIcon iconTraCuuKhachHang = new javax.swing.ImageIcon(getClass().getResource("/IMG/khachHang.png"));
-        javax.swing.ImageIcon iconThemKhachHang = new javax.swing.ImageIcon(getClass().getResource("/IMG/nhanVien.png"));
+        javax.swing.ImageIcon iconKhachHang = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconKhachHang.png"));
+        javax.swing.ImageIcon iconTraCuuKhachHang = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconTraCuuKhachHang.png"));
+        javax.swing.ImageIcon iconThemKhachHang = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconKhachHang.png"));
 
         //Nhân viên
-        javax.swing.ImageIcon iconNhanVien = new javax.swing.ImageIcon(getClass().getResource("/IMG/nhanVien.png"));
-        javax.swing.ImageIcon iconTraCuuNhanVien = new javax.swing.ImageIcon(getClass().getResource("/IMG/nhanVien.png"));
-        javax.swing.ImageIcon iconThemNhanVien = new javax.swing.ImageIcon(getClass().getResource("/IMG/nhanVien.png"));
+        javax.swing.ImageIcon iconNhanVien = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconNhanVien.png"));
+        javax.swing.ImageIcon iconTraCuuNhanVien = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconNhanVien.png"));
+        javax.swing.ImageIcon iconThemNhanVien = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconNhanVien.png"));
         
         //Thống kê
-        javax.swing.ImageIcon iconDoanhThu = new javax.swing.ImageIcon(getClass().getResource("/IMG/thongKe.png"));
-        javax.swing.ImageIcon iconThongKe = new javax.swing.ImageIcon(getClass().getResource("/IMG/thongKe.png"));
-        javax.swing.ImageIcon iconBaoCao = new javax.swing.ImageIcon(getClass().getResource("/IMG/hoaDon.png"));
+        javax.swing.ImageIcon iconDoanhThu = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconThongKe.png"));
+        javax.swing.ImageIcon iconThongKe = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconThongKe.png"));
+        javax.swing.ImageIcon iconBaoCao = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconThongKe.png"));
        
         // Tài khoản
-        javax.swing.ImageIcon iconTaiKhoan = new javax.swing.ImageIcon(getClass().getResource("/IMG/taiKhoan.png"));
+        javax.swing.ImageIcon iconTaiKhoan = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconTaiKhoan.png"));
         
         //Quy định 
-        javax.swing.ImageIcon iconQuyDinh = new javax.swing.ImageIcon(getClass().getResource("/IMG/hoaDon.png"));
+        javax.swing.ImageIcon iconQuyDinh = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconHoaDon.png"));
 
         //Trợ giúp
-        javax.swing.ImageIcon iconTroGiup = new javax.swing.ImageIcon(getClass().getResource("/IMG/troGiup.png"));
+        javax.swing.ImageIcon iconTroGiup = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconTroGiup.png"));
         
         
         

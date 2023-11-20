@@ -8,9 +8,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
@@ -42,6 +47,8 @@ public class pnlTraCuuKhachHang extends javax.swing.JPanel {
             cboTinhThanhPho.addItem(city);
         }
           capNhatDanhSachKhachHang();
+          khachHang_DAO = new KhachHang_DAO();
+       capNhatDanhSachKhachHangTheoSoDienThoai();
     }
 
     /**
@@ -122,8 +129,6 @@ public class pnlTraCuuKhachHang extends javax.swing.JPanel {
 
         btnLapHoaDon.setText("Lập hóa đơn");
 
-        lblMaKHKyTu.setText("jLabel1");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -170,9 +175,9 @@ public class pnlTraCuuKhachHang extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblMaKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMaKHKyTu))
+                    .addComponent(lblMaKHKyTu, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTenKhachHang)
@@ -184,9 +189,8 @@ public class pnlTraCuuKhachHang extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDiaChi)
                     .addComponent(cboTinhThanhPho, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cboQuanHuyen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cboPhuongXa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cboQuanHuyen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboPhuongXa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLamMoi)
@@ -542,6 +546,42 @@ public static ArrayList<String> readExcel_City() throws IOException {
 		file.close();
 		return wardsDistrict;
 	}
+     
+     public void capNhatDanhSachKhachHangTheoSoDienThoai(){
+         khachHang_DAO = new KhachHang_DAO();
+        
+         txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+             @Override
+             public void insertUpdate(DocumentEvent e) {
+                 try {
+                    ArrayList<KhachHang> dsKhachHangSoDienThoai = khachHang_DAO.layDanhSachTheoMaSach_TheoSoDienThoai(txtTimKiem.getText());
+                    String colTieuDe1[] = new String[]{"Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Địa chỉ"};
+                     DefaultTableModel model = new DefaultTableModel(colTieuDe1, 0);
+                        Object[] row;
+                     for (KhachHang khachHang : dsKhachHangSoDienThoai) {
+                           row = new Object[12];
+                         // GÁN GIÁ TRỊ
+                         row[0] = khachHang.getMaKhachHang();
+                         row[1] = khachHang.getTenKhachHang();
+                         row[2] = khachHang.getSoDienThoai();
+                         row[3] = khachHang.getDiaChi();
+                        model.addRow(row);
+        }
+        jTable1.setModel(model);
+                 } catch (SQLException ex) {
+                     Logger.getLogger(pnlTraCuuKhachHang.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+             }
+
+             @Override
+             public void removeUpdate(DocumentEvent e) {
+             }
+
+             @Override
+             public void changedUpdate(DocumentEvent e) {
+             }
+         });
+     }
      private void capNhatDanhSachKhachHang(){
         khachHang_DAO = new KhachHang_DAO();
         ArrayList<KhachHang> dsKhachHang = khachHang_DAO.layDanhSachKhachHang();
@@ -549,13 +589,13 @@ public static ArrayList<String> readExcel_City() throws IOException {
         String colTieuDe1[] = new String[]{"Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Địa chỉ"};
         DefaultTableModel model = new DefaultTableModel(colTieuDe1, 0);
            Object[] row;
-        for (KhachHang nhanVien : dsKhachHang) {
+        for (KhachHang khachHang : dsKhachHang) {
               row = new Object[12];
             // GÁN GIÁ TRỊ
-            row[0] = nhanVien.getMaKhachHang();
-            row[1] = nhanVien.getTenKhachHang();
-            row[2] = nhanVien.getSoDienThoai();
-            row[3] = nhanVien.getDiaChi();
+            row[0] = khachHang.getMaKhachHang();
+            row[1] = khachHang.getTenKhachHang();
+            row[2] = khachHang.getSoDienThoai();
+            row[3] = khachHang.getDiaChi();
            model.addRow(row);
         }
         jTable1.setModel(model);

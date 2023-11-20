@@ -4,19 +4,16 @@
  */
 package Pannel;
 
-import DAO.CaLam_DAO;
 import DAO.ChucVu_DAO;
 import DAO.NhanVien_DAO;
 import DAO.TaiKhoan_DAO;
 import Entity.ChucVu;
 import Entity.NhanVien;
 import Entity.TaiKhoan;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
@@ -321,7 +318,6 @@ public class pnlTaiKhoan extends javax.swing.JPanel {
                         int row = model.getRowCount();
                         Object cellValue_Ten = model.getValueAt(row - 1, 1);
                         
-                        Object cellValue_ChucVu = model.getValueAt(row - 1, 3);
                         lblTenNVKyTu.setText(cellValue_Ten.toString());
                       
                     }

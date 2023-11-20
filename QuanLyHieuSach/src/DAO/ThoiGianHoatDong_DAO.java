@@ -28,7 +28,6 @@ public class ThoiGianHoatDong_DAO {
 		try {
                       // Thực hiện truy vấn SQL để lưu trữ giá trị vào cơ sở dữ liệu
                 pst = con.prepareStatement("select ThoiGianDangNhap,ThoiGianDaLam,ThoiGianHoatDongID  from ThoiGianHoatDong where NhanVienID = ? and NgayDangNhap = ? and ThoiGianDangNhap >= ? and ThoiGianDangNhap <= ?");
-                pst.setString(1,tghd.getNhanVien().getMaNV());
                 LocalDate localDate = LocalDate.now();
                 pst.setString(1, tghd.getNhanVien().getMaNV());
                 pst.setDate(2, Date.valueOf(localDate));
