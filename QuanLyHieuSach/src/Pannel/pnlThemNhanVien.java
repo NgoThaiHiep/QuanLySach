@@ -277,7 +277,7 @@ public class pnlThemNhanVien extends javax.swing.JPanel {
 
         txtCCCD.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        btnChonNgaySinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/anhLich.png"))); // NOI18N
+        btnChonNgaySinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/iconAnhLich.png"))); // NOI18N
         btnChonNgaySinh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChonNgaySinhActionPerformed(evt);
@@ -613,7 +613,7 @@ public class pnlThemNhanVien extends javax.swing.JPanel {
 
     private void btnChonAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonAnhActionPerformed
         // TODO add your handling code here:
-        JFileChooser fileChooser = new JFileChooser();
+        JFileChooser fileChooser = new JFileChooser(selectedFile);
                 fileChooser.setFileFilter(new FileNameExtensionFilter("Hình ảnh", "jpg", "jpeg", "png", "gif"));
 
                 int returnValue = fileChooser.showOpenDialog(null);

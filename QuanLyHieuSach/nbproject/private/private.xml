@@ -3,16 +3,28 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlLapHoaDon.java</file>
-            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlBaoCao.java</file>
-            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/UI/TrangChu.java</file>
-            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnTraCuuNhanVien.java</file>
-            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlTraCuuKhachHang.java</file>
-            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlQuyDinh.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/ServiceUser/CellVanPhongPham.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlThemNhanVien.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlThemSach.java</file>
             <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Them/frmHangCho1.java</file>
-            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/DAO/Sach_DAO.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/ServiceUser/TextFieldSuggestion.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/DAO/TheLoai_DAO.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Entity/Thue.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/ServiceUser/CellSach.java</file>
             <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/DAO/HangCho_DAO.java</file>
-            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlDanhSachHoaDon.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/ServiceUser/TextFieldSuggestionUI.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlLapHoaDon.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/UI/TrangChu.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/DAO/KhachHang_DAO.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnTraCuuNhanVien.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/DAO/Thue_DAO.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlQuyDinh.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlTraCuuKhachHang.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/DAO/NhanVien_DAO.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/DAO/Sach_DAO.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlTraCuuVanPhongPham.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlThongKeTheoNgay.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlTraCuuSach.java</file>
         </group>
     </open-files>
 </project-private>

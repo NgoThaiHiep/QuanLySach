@@ -7,3 +7,16 @@ SUM(DATEPART(HOUR, ThoiGianDaLam) * 3600 + DATEPART(MINUTE, ThoiGianDaLam) * 60 
 FROM ThoiGianHoatDong where NhanVienID = '234397'
 
 select * from NhanVien where  HoTenNhanVien like N'%ngô thái hiệ%'
+update TaiKhoan 
+set TrangThai = N'Đã đăng xuất'
+where TenDangNhap = '232108'
+
+select * from ThoiGianHoatDong
+select * from HangCho
+
+
+SELECT * FROM KhachHang WHERE CONVERT(NVARCHAR(MAX), SoDienThoai) LIKE '%0123%'
+
+exec sp_helpconstraint HangCho
+
+

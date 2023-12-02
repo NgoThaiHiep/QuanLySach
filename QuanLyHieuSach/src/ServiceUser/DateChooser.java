@@ -247,7 +247,7 @@ public final class DateChooser extends javax.swing.JPanel {
         header.setMaximumSize(new java.awt.Dimension(262, 40));
 
         cmdForward.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cmdForward.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/forward.png"))); // NOI18N
+        cmdForward.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/iconForward.png"))); // NOI18N
         cmdForward.setFocusable(true);
         cmdForward.setPaintBackground(false);
         cmdForward.addActionListener(new java.awt.event.ActionListener() {
@@ -292,7 +292,7 @@ public final class DateChooser extends javax.swing.JPanel {
         MY.add(cmdYear);
 
         cmdPrevious.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        cmdPrevious.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/previous.png"))); // NOI18N
+        cmdPrevious.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/iconPrevious.png"))); // NOI18N
         cmdPrevious.setFocusable(true);
         cmdPrevious.setPaintBackground(false);
         cmdPrevious.addActionListener(new java.awt.event.ActionListener() {

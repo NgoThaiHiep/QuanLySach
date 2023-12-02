@@ -191,6 +191,36 @@ public class VanPhongPham_DAO {
         
         return n > 0;
     }
+     public boolean updateVanPhongPhamMoTaHinhAnh(VanPhongPham vanPhongPham){
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement state = null;
+        int n = 0;
+         try {
+               String sql = "UPDATE [dbo].[VanPhongPham]\n" +
+            "   SET "+ 
+            "      [HinhAnh] = ?\n" +    
+            "      ,[MoTa] = ?\n" +
+            " WHERE  [VanPhongPhamID] = ? ";
+        state = con.prepareStatement(sql);
+        state.setString(1, vanPhongPham.getHinhAnh());
+        state.setString(2,vanPhongPham.getMoTa());  
+        state.setString(3, vanPhongPham.getMaSanPham());
+        n = state.executeUpdate();        
+         } catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				state.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+        return n > 0;
+     }
     public boolean updateVanPhongPham(VanPhongPham vanPhongPham){
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
@@ -199,18 +229,17 @@ public class VanPhongPham_DAO {
 
         try {
             String sql = "UPDATE [dbo].[VanPhongPham]\n" +
-"   SET[TenVanPhongPham] =  ?, "+
-"[LoaiSanPham] = ?\n" +
-"      ,[NhaCungCap] = ? ,[SoLuongTon] = ?,[DonGia] = ?\n" +
-"      ,[MoTa] = ?\n" +
-"      ,[TinhTrang] = ?\n" +
-"      ,[HinhAnh] = ?\n" +
-"      ,[XuatXu] =?\n" +
-"      ,[NamSanXuat] = ?\n" +
-"      ,[ChatLieu] = ?\n" +
-"      ,[ThuongHieu] = ?\n" +
-"      ,[LoaiVanPhongPham] = ?\n" +
-" WHERE  [VanPhongPhamID] = ? ";
+            "   SET[TenVanPhongPham] =  ?, "+
+            "[LoaiSanPham] = ?\n" +
+            "      ,[NhaCungCap] = ? ,[SoLuongTon] = ?,[DonGia] = ?\n" +
+            "      ,[TinhTrang] = ?\n" +
+            "      ,[HinhAnh] = ?\n" +
+            "      ,[XuatXu] =?\n" +
+            "      ,[NamSanXuat] = ?\n" +
+            "      ,[ChatLieu] = ?\n" +
+            "      ,[ThuongHieu] = ?\n" +
+            "      ,[LoaiVanPhongPham] = ?\n" +
+            " WHERE  [VanPhongPhamID] = ? ";
             state = con.prepareStatement(sql);
            
             state.setString(1, vanPhongPham.getTenSanPham());
@@ -218,16 +247,15 @@ public class VanPhongPham_DAO {
             state.setString(3,vanPhongPham.getNhaCungCap().getMaNCC());
             state.setInt(4, vanPhongPham.getSoLuongTon());
             state.setDouble(5, vanPhongPham.getDonGia());
-            state.setString(6,vanPhongPham.getMoTa());
-            state.setString(7, vanPhongPham.getTinhTrang());
-            state.setString(8, vanPhongPham.getHinhAnh());
-            state.setString(9,vanPhongPham.getXuatXu().getMaXuatXu());
-            state.setInt(10, vanPhongPham.getNamSanXuat());
-            state.setString(11, vanPhongPham.getChatLieu());
-            state.setString(12, vanPhongPham.getThuongHieu().getMaThuongHieu());
-            state.setString(13, vanPhongPham.getLoaiVanPhongPham().getMaLoaiVanPhongPham());
-            state.setString(14, vanPhongPham.getMaSanPham());
-             n = state.executeUpdate();
+            state.setString(6, vanPhongPham.getTinhTrang());
+            state.setString(7, vanPhongPham.getHinhAnh());
+            state.setString(8,vanPhongPham.getXuatXu().getMaXuatXu());
+            state.setInt(9, vanPhongPham.getNamSanXuat());
+            state.setString(10, vanPhongPham.getChatLieu());
+            state.setString(11, vanPhongPham.getThuongHieu().getMaThuongHieu());
+            state.setString(12, vanPhongPham.getLoaiVanPhongPham().getMaLoaiVanPhongPham());
+            state.setString(13, vanPhongPham.getMaSanPham());
+            n = state.executeUpdate();
         }  catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

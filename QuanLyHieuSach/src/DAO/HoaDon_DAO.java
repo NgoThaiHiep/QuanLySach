@@ -24,13 +24,13 @@ public class HoaDon_DAO {
         public String generateHoaDon(NhanVien nv) throws SQLException{
             Date currentDate = new Date();
 	SimpleDateFormat formatterDay = new SimpleDateFormat("ddMMyy");
-	String formattedDate = formatterDay.format(currentDate);
-        formattedDate +=nv.getMaNV().substring(2, 6);
+	String formattedDate = "";
+        
            
              
         for (int i = 1; i < 9999; i++) {
             // Định dạng số thành chuỗi và thêm các số 0 bổ sung để đảm bảo đủ 5 chữ số
-            formattedDate +=String.format("%04d", i);
+            formattedDate =  formatterDay.format(currentDate) + nv.getMaNV().substring(2, 6)+  String.format("%04d", i);
             
             if(!kiemTraMaHoaDon(formattedDate)){
                 break;

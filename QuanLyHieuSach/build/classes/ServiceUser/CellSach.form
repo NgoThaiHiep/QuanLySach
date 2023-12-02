@@ -180,7 +180,7 @@
     <Component class="javax.swing.JTextField" name="txtNamXuatBan">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="1030" y="110" width="180" height="-1"/>
+          <AbsoluteConstraints x="1030" y="120" width="180" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -291,7 +291,7 @@
     <Component class="javax.swing.JLabel" name="lblNamXuatBan1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="1030" y="110" width="180" height="20"/>
+          <AbsoluteConstraints x="1030" y="120" width="180" height="20"/>
         </Constraint>
       </Constraints>
     </Component>

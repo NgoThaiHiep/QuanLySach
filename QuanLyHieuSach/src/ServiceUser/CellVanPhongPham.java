@@ -5,13 +5,8 @@ package ServiceUser;
 import DAO.LoaiVanPhongPham_DAO;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JComboBox;
-
 import DAO.NhaCungCap_DAO;
-import DAO.NhaXuatBan_DAO;
 import DAO.Sach_DAO;
-import DAO.Sach_TheLoai_DAO;
 import DAO.TacGia_DAO;
 import DAO.TheLoai_DAO;
 import DAO.ThuongHieu_DAO;
@@ -20,11 +15,6 @@ import DAO.XuatXu_DAO;
 import Entity.LoaiSanPham;
 import Entity.LoaiVanPhongPham;
 import Entity.NhaCungCap;
-
-import Entity.NhaXuatBan;
-import Entity.Sach;
-import Entity.TacGia;
-import Entity.TheLoai;
 import Entity.ThuongHieu;
 import Entity.VanPhongPham;
 import Entity.XuatXu;
@@ -67,6 +57,8 @@ public class CellVanPhongPham extends javax.swing.JPanel {
 	private TacGia_DAO tacGia_DAO;
         private XuatXu_DAO xuatXu_DAO;
         private int soLuongToiThieu = 10;
+         private int width = 148;
+        private int height = 198;
     /**
      * Creates new form CellSach
      */
@@ -164,7 +156,7 @@ public class CellVanPhongPham extends javax.swing.JPanel {
             BufferedImage image = ImageIO.read(selectedFile); // Thay đổi đường dẫn đến ảnh
             
             // thay đổi kích thức ảnh cùng kích thước với lable 184x216
-             Image scaledImage = image.getScaledInstance(148, 198, Image.SCALE_SMOOTH);
+             Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 
                     // Tạo ImageIcon với ảnh đã điều chỉnh kích thước
                     ImageIcon imageIcon = new ImageIcon(scaledImage);
@@ -173,11 +165,11 @@ public class CellVanPhongPham extends javax.swing.JPanel {
                     lblAnh.setIcon(imageIcon);
            
         } catch (IOException e) {
-            selectedFile =new File("src\\IMG\\anhSachMacDinh.png");
+            selectedFile =new File("src\\IMG\\khongCoAnh.png");
             BufferedImage image = ImageIO.read(selectedFile); // Thay đổi đường dẫn đến ảnh
             
             // thay đổi kích thức ảnh cùng kích thước với lable 184x216
-             Image scaledImage = image.getScaledInstance(148, 198, Image.SCALE_SMOOTH);
+             Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 
                     // Tạo ImageIcon với ảnh đã điều chỉnh kích thước
                     ImageIcon imageIcon = new ImageIcon(scaledImage);
@@ -627,7 +619,220 @@ public class CellVanPhongPham extends javax.swing.JPanel {
 
         add(cboLoaiVanPhongPham, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 122, 260, 30));
     }// </editor-fold>//GEN-END:initComponents
+    public class FrmSuaAnhVPP extends javax.swing.JFrame {
 
+    public FrmSuaAnhVPP() {
+        initComponents();
+        init();
+    }
+    public void init(){
+      lblTenSachKyTu.setText(vanPhongPham.getTenSanPham());
+        try {
+            BufferedImage image = ImageIO.read(selectedFile); // Thay đổi đường dẫn đến ảnh
+            
+            // thay đổi kích thức ảnh cùng kích thước với lable 184x216
+             Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+                    // Tạo ImageIcon với ảnh đã điều chỉnh kích thước
+                    ImageIcon imageIcon = new ImageIcon(scaledImage);
+
+                    // Thiết lập ImageIcon cho JLabel
+                    jLabel1.setIcon(imageIcon);
+           
+        } catch (IOException e) {
+        }
+        taxMoTa.setText(vanPhongPham.getMoTa());
+    }
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+     private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnChonAnh = new javax.swing.JButton();
+        lblTenSach = new javax.swing.JLabel();
+        lblTenSachKyTu = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        taxMoTa = new javax.swing.JTextArea();
+        btnCapNhat = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel2.setText("Mô tả");
+
+        btnChonAnh.setText("Chọn Ảnh");
+        btnChonAnh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonAnhActionPerformed(evt);
+            }
+        });
+
+        lblTenSach.setText("Tên văn phòng phẩm");
+
+        taxMoTa.setColumns(20);
+        taxMoTa.setRows(5);
+        taxMoTa.setPreferredSize(new java.awt.Dimension(200, 84));
+        jScrollPane1.setViewportView(taxMoTa);
+
+        btnCapNhat.setText("Cập nhật");
+        btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Thông tin văn phòng phẩm");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(50, 50, 50)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblTenSach)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addComponent(btnChonAnh)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTenSachKyTu, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(216, 216, 216)
+                        .addComponent(btnCapNhat)))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnChonAnh)
+                        .addGap(65, 65, 65)
+                        .addComponent(btnCapNhat))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblTenSach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTenSachKyTu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>                        
+
+    private void btnChonAnhActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+        clickChonAnhFrmSua();
+    }                                          
+
+    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+        vanPhongPham_DAO = new VanPhongPham_DAO();
+        String hinhAnh = selectedFile.getAbsolutePath();
+        vanPhongPham.setHinhAnh(hinhAnh);
+        vanPhongPham.setMoTa(taxMoTa.getText());
+        if( vanPhongPham_DAO.updateVanPhongPhamMoTaHinhAnh(vanPhongPham)){
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+             BufferedImage b;
+                    try {
+                        b = ImageIO.read(selectedFile);
+                        // Thiết lập kích thước ảnh bằng với kích thước của JLabel
+                   
+                    
+                    Image scaledImage = b.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+                    // Tạo ImageIcon với ảnh đã điều chỉnh kích thước
+                    ImageIcon imageIcon = new ImageIcon(scaledImage);
+
+                    // Thiết lập ImageIcon cho JLabel
+                    lblAnh.setIcon(imageIcon);
+                     //  lblAnh.setIcon(new javax.swing.ImageIcon(b));
+
+                    } catch (Exception e) {
+                    }
+        }
+       
+    }                                          
+private void clickChonAnhFrmSua(){
+         JFileChooser fileChooser = new JFileChooser(selectedFile);
+                fileChooser.setFileFilter(new FileNameExtensionFilter("Hình ảnh", "jpg", "jpeg", "png", "gif"));
+
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    // Lấy tệp được chọn
+                    selectedFile = fileChooser.getSelectedFile();
+                  //  String filePath = selectedFile.getAbsolutePath().replace("\\", "/");
+                  //  filePath = "/"+filePath;
+                   // System.out.println("Đường dẫn tệp: " + filePath);
+                   // lblAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource(filePath)));
+                    BufferedImage b;
+                    try {
+                        b = ImageIO.read(selectedFile);
+                        // Thiết lập kích thước ảnh bằng với kích thước của JLabel
+                    int labelWidth = jLabel1.getWidth();
+                    int labelHeight = jLabel1.getHeight();
+                    
+                    Image scaledImage = b.getScaledInstance(labelWidth, labelHeight, Image.SCALE_SMOOTH);
+
+                    // Tạo ImageIcon với ảnh đã điều chỉnh kích thước
+                    ImageIcon imageIcon = new ImageIcon(scaledImage);
+
+                    // Thiết lập ImageIcon cho JLabel
+                    jLabel1.setIcon(imageIcon);
+                     //  lblAnh.setIcon(new javax.swing.ImageIcon(b));
+
+                    } catch (Exception e) {
+                    }
+                            
+                }
+    }
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton btnCapNhat;
+    private javax.swing.JButton btnChonAnh;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTenSach;
+    private javax.swing.JLabel lblTenSachKyTu;
+    private javax.swing.JTextArea taxMoTa;
+    // End of variables declaration                   
+}
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
          visibelTextField(true);
@@ -810,11 +1015,7 @@ public class CellVanPhongPham extends javax.swing.JPanel {
 
     private void lblAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnhMouseClicked
         // TODO add your handling code here:
-       if(show){
-          clickChonAnh();
-       }else{
-               
-        }
+        new FrmSuaAnhVPP().setVisible(true);
     }//GEN-LAST:event_lblAnhMouseClicked
  private void clickChonAnh(){
          JFileChooser fileChooser = new JFileChooser();

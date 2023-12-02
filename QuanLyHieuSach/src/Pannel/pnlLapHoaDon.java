@@ -35,6 +35,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -102,7 +103,7 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
         tblGioHang.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(event));
 	hoaDon_DAO = new HoaDon_DAO();
         
-	 String formattedDate = null;
+	String formattedDate = null;
         try {
            formattedDate = hoaDon_DAO.generateHoaDon(nv);
         } catch (SQLException ex) {
@@ -647,10 +648,7 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
 
         tblDanhSachSanPhamTimKiem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "STT", "Mã sản phẩm", "Tên sản phẩm", "Giá bán", "Số lượng tồn"
@@ -688,18 +686,18 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
         pnlThongTinHoaDon.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblNgayLapHoaDon.setText("Ngày lập hóa đơn :");
-        pnlThongTinHoaDon.add(lblNgayLapHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 110, 22));
+        pnlThongTinHoaDon.add(lblNgayLapHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 110, 22));
 
         lblMaHoaDon.setText("Mã hóa đơn :");
         pnlThongTinHoaDon.add(lblMaHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 80, 22));
 
         lblTenNhanVien.setText("Tên nhân viên :");
-        pnlThongTinHoaDon.add(lblTenNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 80, 20));
-        pnlThongTinHoaDon.add(lblNgayLapHoaDonFont, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, 100, 22));
-        pnlThongTinHoaDon.add(lblMaHoaDonFont, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 130, 22));
-        pnlThongTinHoaDon.add(lblTenNhanVienFont, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 120, 22));
+        pnlThongTinHoaDon.add(lblTenNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, 80, 20));
+        pnlThongTinHoaDon.add(lblNgayLapHoaDonFont, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 100, 22));
+        pnlThongTinHoaDon.add(lblMaHoaDonFont, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 150, 22));
+        pnlThongTinHoaDon.add(lblTenNhanVienFont, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 150, 22));
 
-        pnlHoaDon.add(pnlThongTinHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(581, 0, 630, 60));
+        pnlHoaDon.add(pnlThongTinHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(581, 0, 700, 60));
 
         pnlThongTinSanPham.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin sản phẩm"));
         pnlThongTinSanPham.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1088,35 +1086,40 @@ xoaSanPham();
      */
     public frmHangCho() {
         initComponents();
+        
         capNhatDanhSachHangCho();
         capNhatDanhSachTimKiemTheoSoDienThoai(txtTimKiemSoDienThoai);
     }
     private  int count = 0;
     public void capNhatDanhSachHangCho(){
-    String colTieuDe1[] = new String[]{"STT", "Mã Khách Hàng", "Tên khách hàng", "Số điện thoại"};
-    DefaultTableModel model = new DefaultTableModel(colTieuDe1, 0);
-    hangCho_DAO = new HangCho_DAO();
-    khachHang_DAO = new KhachHang_DAO();
-    ArrayList<HangCho> dsHangCho = hangCho_DAO.layDanhSachHangCho();
-    Object[] row;
+        String colTieuDe1[] = new String[]{"STT", "Mã Khách Hàng", "Tên khách hàng", "Số điện thoại"};
+        DefaultTableModel model = new DefaultTableModel(colTieuDe1, 0);
+        hangCho_DAO = new HangCho_DAO();
+        khachHang_DAO = new KhachHang_DAO();
+        hangCho_DAO.DeleteHangChoQuaNgay();
+        ArrayList<HangCho> dsHangCho = hangCho_DAO.layDanhSachHangCho();
+        Object[] row;
 
-    Set<String> maKhachHangSet = new HashSet<>(); // Sử dụng Set để lưu trữ giá trị mã khách hàng đã xuất hiện
-    for (HangCho hangCho : dsHangCho) {
-    row = new Object[12];
-    String khachHang = hangCho.getKhachHang().getMaKhachHang();
-        if (!maKhachHangSet.contains(khachHang)) { // Kiểm tra xem mã khách hàng đã xuất hiện chưa
-            maKhachHangSet.add(khachHang); // Thêm mã khách hàng vào Set
-            count++;
-            row[0] = count;
-            row[1] = khachHang;
-            KhachHang dsKhachHang = khachHang_DAO.layThongTinKhachHang_TheoMa(khachHang);
-            row[2] = dsKhachHang.getTenKhachHang();
-            row[3] = dsKhachHang.getSoDienThoai();
-            model.addRow(row);
-        }
-    }
+        Set<String> maKhachHangSet = new HashSet<>(); // Sử dụng Set để lưu trữ giá trị mã khách hàng đã xuất hiện
+        for (HangCho hangCho : dsHangCho) {
+            
+                row = new Object[12];
+                String khachHang = hangCho.getKhachHang().getMaKhachHang();
+                if (!maKhachHangSet.contains(khachHang)) { // Kiểm tra xem mã khách hàng đã xuất hiện chưa
+                    maKhachHangSet.add(khachHang); // Thêm mã khách hàng vào Set
+                    count++;
+                    row[0] = count;
+                    row[1] = khachHang;
+                    KhachHang dsKhachHang = khachHang_DAO.layThongTinKhachHang_TheoMa(khachHang);
+                    row[2] = dsKhachHang.getTenKhachHang();
+                    row[3] = dsKhachHang.getSoDienThoai();
+                    model.addRow(row);
+                }
+            }
+        
     tblHangCho.setModel(model);
     }
+    
     public void capNhatDanhSachKhachHangTheoMa_HangCho(String sdt){
     String colTieuDe1[] = new String[]{"STT", "Mã Khách Hàng", "Tên khách hàng", "Số điện thoại"};
     DefaultTableModel model = new DefaultTableModel(colTieuDe1, 0);
@@ -1124,7 +1127,7 @@ xoaSanPham();
     khachHang_DAO = new KhachHang_DAO();
     ArrayList<HangCho> dsHangCho = hangCho_DAO.layDanhSachHangCho();
     Object[] row;
-    int count = 1;
+    int dem = 0;
     Set<String> maKhachHangSet = new HashSet<>(); // Sử dụng Set để lưu trữ giá trị mã khách hàng đã xuất hiện
     for (HangCho hangCho : dsHangCho) {
     row = new Object[12];
@@ -1135,8 +1138,8 @@ xoaSanPham();
             for (KhachHang khachHang1 : dsKhachHangSoDienThoai) {
                 if(khachHang1.getMaKhachHang().equals(hangCho.getKhachHang().getMaKhachHang())){
                     maKhachHangSet.add(khachHang); // Thêm mã khách hàng vào Set
-                    count++;
-                    row[0] = count;
+                    dem++;
+                    row[0] = dem;
                     row[1] = khachHang;
                     row[2] = khachHang1.getTenKhachHang();
                     row[3] = khachHang1.getSoDienThoai();
@@ -1158,7 +1161,7 @@ xoaSanPham();
         lblHangCho = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHangCho = new javax.swing.JTable();
-        btnXoaTatCa = new javax.swing.JButton();
+        
         btnXoa = new javax.swing.JButton();
         btnThanhToan = new javax.swing.JButton();
         pnlTimKiemKhachHang = new javax.swing.JPanel();
@@ -1189,7 +1192,7 @@ xoaSanPham();
         });
         jScrollPane1.setViewportView(tblHangCho);
 
-        btnXoaTatCa.setText("Xóa tất cả");
+       
 
         btnXoa.setText("Xóa");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
@@ -1242,7 +1245,7 @@ xoaSanPham();
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnXoaTatCa)
+                        
                         .addGap(26, 26, 26)
                         .addComponent(btnXoa)
                         .addGap(27, 27, 27)
@@ -1260,7 +1263,7 @@ xoaSanPham();
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnXoaTatCa)
+                    
                     .addComponent(btnXoa)
                     .addComponent(btnThanhToan))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1288,14 +1291,22 @@ xoaSanPham();
         int rowToRemove = tblHangCho.getSelectedRow();
         if (rowToRemove != -1) {
             DefaultTableModel model = (DefaultTableModel) tblHangCho.getModel();
+            hangCho_DAO = new HangCho_DAO();
+            hangCho_DAO.DeleteDanhSachHangCho(model.getValueAt(rowToRemove, 1)+"");
+        
             model.removeRow(rowToRemove);
-
+            
             // Cập nhật lại STT sau khi xóa hàng
             for (int i = rowToRemove; i < model.getRowCount(); i++) {
                 model.setValueAt(i + 1, i, 0); // Cột STT ở đây là cột đầu tiên (0)
             }
             count--;
+
+            
         }
+        
+        
+        
     }                                      
     
     public void capNhatDanhSachTimKiemTheoSoDienThoai(JTextField txt){
@@ -1384,7 +1395,7 @@ xoaSanPham();
     // Variables declaration - do not modify                     
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JButton btnXoa;
-    private javax.swing.JButton btnXoaTatCa;
+    
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblHangCho;
@@ -1429,8 +1440,8 @@ xoaSanPham();
    if(kh != null && !maKhachHang.equals("KHL")){
        
         if(rowCount!=0){
-             hangCho_DAO = new HangCho_DAO();
-             hangCho_DAO.DeleteDanhSachHangCho(kh.getMaKhachHang());
+            hangCho_DAO = new HangCho_DAO();
+            hangCho_DAO.DeleteDanhSachHangCho(kh.getMaKhachHang());
             for (int row = 0; row < rowCount; row++) {
                 for (int col = 0; col < columnCount; col++) {
                     if(col == 1){
@@ -1468,12 +1479,35 @@ xoaSanPham();
                 }
             }
             JOptionPane.showMessageDialog(this, "Đã thêm vào hàng chờ");
+            model.setRowCount(0);
+            DecimalFormat decimalFormat = new DecimalFormat("#,###.000");
+            String formattedTongTien = decimalFormat.format(tongTien());
+            lamMoiDuLieu_KhachHang();
+            lamMoiDuLieu_SanPham();
+            AbstractDocument document = (AbstractDocument) txtSoDienThoai.getDocument();
+             
+            DocumentFilter oldFilter;
+            oldFilter = document.getDocumentFilter();
+            document.setDocumentFilter(null);
+
+    // Đặt lại giá trị
+        txtSoDienThoai.setText("");
+
+        // Đặt lại DocumentFilter
+        document.setDocumentFilter(oldFilter);
+        txtSoDienThoai.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+            if(tongTien() == 0.0 ){
+                lblTongTien1.setText("0"+formattedTongTien+" VND");
+            }else
+                lblTongTien1.setText(formattedTongTien+" VND");
         }else{
             JOptionPane.showMessageDialog(this, "Không có sản phẩm để thêm vào hàng chờ");
         }
     }else{
         JOptionPane.showMessageDialog(this, "Nhập số điện thoại để thêm vào hàng chờ");
         }
+  
     }//GEN-LAST:event_btnThemVaoHangChoActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
@@ -1488,30 +1522,41 @@ xoaSanPham();
                
             }else{
                 
-                kh =   khachHang_DAO.layThongTinKhachHang(txtSoDienThoai.getText());
-                int diemTichLuy = kh.getDiemTL();
-	         // Loại bỏ chữ cái không cần thiết từ chuỗi số
-	        String priceWithoutCurrency = lblTongTien1.getText().replaceAll("[^\\d.]+", "");
-
-                double parsedNumber = Double.parseDouble(priceWithoutCurrency);
-                diemTichLuy += (int) parsedNumber / 100000 ;
-                kh.setDiemTL(diemTichLuy);
+                kh = khachHang_DAO.layThongTinKhachHang(txtSoDienThoai.getText());
             }
         } catch (SQLException ex) {
             Logger.getLogger(pnlLapHoaDon.class.getName()).log(Level.SEVERE, null, ex);
         }
         LocalDate localDate = LocalDate.now();
         
-        HoaDon hoaDon = new HoaDon(lblMaHoaDon.getText(), localDate, nv, kh);
+        HoaDon hoaDon = new HoaDon(lblMaHoaDonFont.getText(), localDate, nv, kh);
         hoaDon_DAO = new HoaDon_DAO();
         System.out.println(hoaDon);
-        //hoaDon_DAO.InsertHoaDon(hoaDon, nv, kh);
+        
+        if(txtSoDienThoai.getText().equals("")) {
+            int diemTichLuy = kh.getDiemTL();
+	     // Loại bỏ chữ cái không cần thiết từ chuỗi số
+	    String priceWithoutCurrency = lblTongTien1.getText().replaceAll("[^\\d.]+", "");
+            double parsedNumber = Double.parseDouble(priceWithoutCurrency);
+            diemTichLuy += (int) parsedNumber / 100000 ;
+            kh.setDiemTL(diemTichLuy);
+            khachHang_DAO.InsertKhachHang(kh);
+        }
+        
+        hoaDon_DAO.InsertHoaDon(hoaDon, nv, kh);
         
         SanPham sanPham = new SanPham(txtMaSanPham.getText());
         chiTietHoaDon_DAO = new ChiTietHoaDon_DAO();
-       // chiTietHoaDon_DAO.InsertCTHoaDon(hoaDon, txtSoLuong.getText(), WIDTH, sanPham);
+        //chiTietHoaDon_DAO.InsertCTHoaDon(hoaDon, txtSoLuong.getText(), WIDTH, sanPham);
+        String formattedDate = null;
+        try {
+           formattedDate = hoaDon_DAO.generateHoaDon(nv);
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlLapHoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        lblMaHoaDonFont.setText(formattedDate);
+        lblMaHoaDonFont.setFont(new java.awt.Font("Times New Roman", Font.BOLD, 15)); 
         
-       
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void txtTienTraLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienTraLaiActionPerformed

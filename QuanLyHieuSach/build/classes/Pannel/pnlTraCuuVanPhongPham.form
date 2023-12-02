@@ -209,17 +209,19 @@
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="textFieldSuggestion1" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="checkboxTheLoai" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                              <Component id="checkboxTacGia" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="checkboxNXB" min="-2" pref="106" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="checkboxNamSanXuat" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTimKiemSanPhamTheoMa" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="checkboxTheLoai" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Component id="checkboxTacGia" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="checkboxNXB" min="-2" pref="106" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="checkboxNamSanXuat" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="txtTimKiemTheo" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="txtTimKiemTheo" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -243,9 +245,8 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                      <Component id="textFieldSuggestion1" min="-2" pref="28" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="txtTimKiemSanPhamTheoMa" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -366,14 +367,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkboxNamSanXuatActionPerformed"/>
               </Events>
             </Component>
-            <Component class="ServiceUser.TextFieldSuggestion" name="textFieldSuggestion1">
-              <Properties>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                    <LineBorder/>
-                  </Border>
-                </Property>
-              </Properties>
+            <Component class="javax.swing.JTextField" name="txtTimKiemSanPhamTheoMa">
             </Component>
           </SubComponents>
         </Container>

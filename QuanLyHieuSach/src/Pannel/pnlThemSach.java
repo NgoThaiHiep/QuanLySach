@@ -254,7 +254,7 @@ private static boolean isValidInput(String currentText, String text) {
     public void init(){
                 // Đặt ảnh vào JLabel và thiết lập kích thước bằng với JLabel
         try {
-            selectedFile =new File("src\\IMG\\anhSachMacDinh_daThayDoi.png");
+            selectedFile =new File("src\\IMG\\khongCoAnh.png");
             BufferedImage image = ImageIO.read(selectedFile); // Thay đổi đường dẫn đến ảnh
             
             //thay đổi kích thước ảnh phù hợp vs lable 259x137
@@ -749,7 +749,7 @@ private static boolean isValidInput(String currentText, String text) {
         }else{
             tinhTrang = "Còn hàng";
         }
-        Sach sach = new Sach(tacGias,  Integer.parseInt(namXuatBan), Integer.parseInt(soTrang), tl, nxb, maSach, tenSach, loaiSanPham, ncc, Integer.parseInt(soLuongTon),giaBan, "", tinhTrang, hinhAnh);
+        Sach sach = new Sach(tacGias,  Integer.parseInt(namXuatBan), Integer.parseInt(soTrang), tl, nxb, maSach, tenSach, loaiSanPham, ncc, Integer.parseInt(soLuongTon),giaBan, tinhTrang, hinhAnh);
         sach_DAO = new Sach_DAO();
         
         if(sach_DAO.InsertSach(sach)){

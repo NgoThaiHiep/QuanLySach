@@ -30,7 +30,16 @@ public class SanPham {
         this.hinhAnh = hinhAnh;
     }
 
-  
+  public SanPham(String maSanPham, String tenSanPham, LoaiSanPham loaiSanPham, NhaCungCap nhaCungCap, int soLuongTon, double donGia, String tinhTrang, String hinhAnh) {
+        this.maSanPham = maSanPham;
+        this.tenSanPham = tenSanPham;
+        this.loaiSanPham = loaiSanPham;
+        this.nhaCungCap = nhaCungCap;
+        this.soLuongTon = soLuongTon;
+        this.donGia = donGia;
+        this.tinhTrang = tinhTrang;
+        this.hinhAnh = hinhAnh;
+    }
     public SanPham(String maSanPham) {
         this.maSanPham = maSanPham;
     }

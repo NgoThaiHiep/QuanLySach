@@ -135,5 +135,28 @@ public class HangCho_DAO {
 			}
 		}
 
-
+public void DeleteHangChoQuaNgay(){
+         LocalDate localDate = LocalDate.now();
+         ConnectDB.getInstance();
+		PreparedStatement pst = null;
+		 Connection con = ConnectDB.getConnection();
+		
+		 String sql ="DELETE FROM HangCho WHERE CONVERT(DATE, ngayMua) <> CONVERT(DATE, GETDATE())";
+                  try {
+			 pst = con.prepareStatement(sql);
+			
+			 pst.executeUpdate() ;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				pst.close();
+			} catch (SQLException e2) {
+				// TODO: handle exceptione2 
+				e2.printStackTrace();
+			}
+		}
+    }
 }

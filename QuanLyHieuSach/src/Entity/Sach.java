@@ -11,18 +11,37 @@ public class Sach extends SanPham{
     private  int soTrang ;
     private TheLoai theLoai; 
     private NhaXuatBan nhaXuatBan ;
-
-    public Sach(TacGia tacGia, int namXuatBan, int soTrang, TheLoai theLoai, NhaXuatBan nhaXuatBan, String maSanPham, String tenSanPham, LoaiSanPham loaiSanPham, NhaCungCap nhaCungCap, int soLuongTon, double donGia, String moTa, String tinhTrang, String hinhAnh) {
+    private String ngonNgu;
+    public Sach(TacGia tacGia, int namXuatBan, int soTrang, TheLoai theLoai, NhaXuatBan nhaXuatBan, String maSanPham, String tenSanPham, LoaiSanPham loaiSanPham, NhaCungCap nhaCungCap, int soLuongTon, double donGia, String moTa, String tinhTrang, String hinhAnh,String ngonNgu) {
         super(maSanPham, tenSanPham, loaiSanPham, nhaCungCap, soLuongTon, donGia, moTa, tinhTrang, hinhAnh);
         this.tacGia = tacGia;
         this.namXuatBan = namXuatBan;
         this.soTrang = soTrang;
         this.theLoai = theLoai;
         this.nhaXuatBan = nhaXuatBan;
+        this.ngonNgu = ngonNgu;
     }
+
+    public Sach(TacGia tacGia, int namXuatBan, int soTrang, TheLoai theLoai, NhaXuatBan nhaXuatBan, String maSanPham, String tenSanPham, LoaiSanPham loaiSanPham, NhaCungCap nhaCungCap, int soLuongTon, double donGia, String tinhTrang, String hinhAnh) {
+        super(maSanPham, tenSanPham, loaiSanPham, nhaCungCap, soLuongTon, donGia, tinhTrang, hinhAnh);
+        this.tacGia = tacGia;
+        this.namXuatBan = namXuatBan;
+        this.soTrang = soTrang;
+        this.theLoai = theLoai;
+        this.nhaXuatBan = nhaXuatBan;
+    }
+    
 
     public Sach(String maSanPham) {
         super(maSanPham);
+    }
+
+    public String getNgonNgu() {
+        return ngonNgu;
+    }
+
+    public void setNgonNgu(String ngonNgu) {
+        this.ngonNgu = ngonNgu;
     }
 
     
@@ -71,8 +90,10 @@ public class Sach extends SanPham{
 
     @Override
     public String toString() {
-        return "Sach{" + "tacGia=" + tacGia + ", namXuatBan=" + namXuatBan + ", soTrang=" + soTrang + ", theLoai=" + theLoai + ", nhaXuatBan=" + nhaXuatBan + '}';
+        return "Sach{" + "tacGia=" + tacGia + ", namXuatBan=" + namXuatBan + ", soTrang=" + soTrang + ", theLoai=" + theLoai + ", nhaXuatBan=" + nhaXuatBan + ", ngonNgu=" + ngonNgu + '}';
     }
+
+
     
     
     

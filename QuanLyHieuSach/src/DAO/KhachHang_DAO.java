@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 /**
  *
@@ -180,11 +181,11 @@ public class KhachHang_DAO {
         return duplicate;
         }
 	public boolean InsertKhachHang(KhachHang kh) {
-		ConnectDB.getInstance();
-    Connection con = ConnectDB.getConnection();
-    PreparedStatement state = null;
-    ResultSet rs = null;
-    int n = 0;
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+            PreparedStatement state = null;
+            ResultSet rs = null;
+            int n = 0;
     try {
         // Kiểm tra xem số điện thoại đã tồn tại trong cơ sở dữ liệu hay chưa
         String checkPhoneNumberQuery = "SELECT COUNT(*) FROM [dbo].[KhachHang] WHERE [SoDienThoai] = ?";
@@ -196,12 +197,13 @@ public class KhachHang_DAO {
             return n<0;
         } else {
             // Số điện thoại không tồn tại, thực hiện thêm mới
-            String insertQuery = "INSERT INTO [dbo].[KhachHang]([KhachHangID],[TenKhachHang],[SoDienThoai],[DiaChi]) VALUES(?,?,?,?)";
+            String insertQuery = "INSERT INTO [dbo].[KhachHang]([KhachHangID],[TenKhachHang],[SoDienThoai],[DiaChi],[DiemTL]) VALUES(?,?,?,?,?)";
             state = con.prepareStatement(insertQuery);
             state.setString(1, kh.getMaKhachHang());
             state.setString(2, kh.getTenKhachHang());
             state.setString(3, kh.getSoDienThoai());
             state.setString(4, kh.getDiaChi());
+            state.setInt(5, kh.getDiemTL());
             n = state.executeUpdate();
         }
     } catch (Exception e) {
@@ -222,5 +224,6 @@ public class KhachHang_DAO {
     }
     return n > 0;
 	}
-        
+       
+    
 }

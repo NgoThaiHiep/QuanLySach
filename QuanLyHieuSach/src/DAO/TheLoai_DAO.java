@@ -26,10 +26,8 @@ public class TheLoai_DAO {
             while(rs.next()){
                 String maTheLoai =  rs.getString(1);
                 String tenTheloai = rs.getString(2);
-               
-              
-             TheLoai tl = new TheLoai(maTheLoai, tenTheloai);
-             dstl.add(tl);
+                TheLoai tl = new TheLoai(maTheLoai, tenTheloai);
+                dstl.add(tl);
                 }
             } catch (Exception e) {
         }

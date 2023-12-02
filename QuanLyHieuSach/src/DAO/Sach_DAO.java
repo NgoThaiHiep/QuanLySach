@@ -2,28 +2,19 @@
 package DAO;
 
 import ConnectDB.ConnectDB;
-import Entity.CaLamViec;
-import Entity.ChucVu;
-import Entity.NhanVien;
 import Entity.Sach;
-import Entity.TaiKhoan;
 import Entity.TheLoai;
 import Entity.NhaCungCap;
 import Entity.NhaXuatBan;
 import Entity.LoaiSanPham;
 import Entity.SanPham;
 import Entity.TacGia;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DecimalFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Random;
 
 /**
  *
@@ -93,7 +84,9 @@ public class Sach_DAO {
                  //Sach sach = new Sach();
                  String hinhAnh = rs.getString("HinhAnh");
                 LoaiSanPham loaiSanPham = new LoaiSanPham(rs.getString("LoaiSanPham"));
-                Sach sach = new Sach(tacGias, namXuatban , soTrang, tl, nhaXuatBan, maSanPham, tenSanPham,loaiSanPham, nhaCungCap, Integer.parseInt(soLuongTon),donGia, null, tinhTrang, hinhAnh );  
+                String ngonNgu = rs.getString("NgonNgu");
+                String moTa  = rs.getString("MoTa");
+                Sach sach = new Sach(tacGias, namXuatban , soTrang, tl, nhaXuatBan, maSanPham, tenSanPham,loaiSanPham, nhaCungCap, Integer.parseInt(soLuongTon),donGia, moTa, tinhTrang, hinhAnh ,ngonNgu );  
                 dssps.add(sach);
                 
             }    
@@ -110,8 +103,8 @@ public class Sach_DAO {
         int n = 0;
         try {
             String sql = "INSERT INTO Sach (SachID, TenSach, TacGia, NhaXuatBan, NamXuatBan, SoTrang, TheLoai, "
-                    + "LoaiSanPham, NhaCungCap, SoLuongTon, DonGia, MoTa, TinhTrang, HinhAnh)"
-                    +"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    + "LoaiSanPham, NhaCungCap, SoLuongTon, DonGia, MoTa, TinhTrang, HinhAnh,NgonNgu)"
+                    +"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             state = con.prepareStatement(sql);
             state.setString(1, sach.getMaSanPham());
             state.setString(2, sach.getTenSanPham());
@@ -127,6 +120,7 @@ public class Sach_DAO {
             state.setString(12, sach.getMoTa());
             state.setString(13, sach.getTinhTrang());
             state.setString(14,sach.getHinhAnh());
+            state.setString(15,sach.getNgonNgu());
             n = state.executeUpdate();
         } catch (Exception e) {
 			// TODO: handle exception
@@ -167,6 +161,36 @@ public class Sach_DAO {
         }
               return n > 0;
     }
+    public boolean updateSachNgonNguMoTa(Sach sach){
+       ConnectDB.getInstance();
+		Connection con = ConnectDB.getConnection();
+		PreparedStatement state = null;
+                int n = 0;
+                try {
+              String sql = "UPDATE [dbo].[Sach]\n" +
+                       "   SET\n" +
+                       "   NgonNgu = ?, MoTa = ? , HinhAnh= ?"+
+                         "	WHERE [SachID] = ?";
+                state = con.prepareStatement(sql);
+                state.setString(1, sach.getNgonNgu());
+                state.setString(2, sach.getMoTa());
+                state.setString(3, sach.getHinhAnh());
+                state.setString(4, sach.getMaSanPham());
+                n = state.executeUpdate();
+        }  catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				state.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+                return n > 0;
+    }
     public boolean updateSach(Sach sach){
        ConnectDB.getInstance();
 		Connection con = ConnectDB.getConnection();
@@ -176,7 +200,7 @@ public class Sach_DAO {
                 String sql = "UPDATE [dbo].[Sach]\n" +
                             "   SET\n" +
                             "   TenSach = ?, TacGia = ? , NhaXuatBan = ?, NamXuatBan= ?, SoTrang= ?, TheLoai= ?, "
-                    + "LoaiSanPham= ?, NhaCungCap= ?, SoLuongTon= ?, DonGia= ?, MoTa= ?, TinhTrang= ?, HinhAnh= ?"+
+                    + "LoaiSanPham= ?, NhaCungCap= ?, SoLuongTon= ?, DonGia= ?, TinhTrang= ?"+
                             "	WHERE [SachID] = ?";
                 state = con.prepareStatement(sql);
                 state.setString(1, sach.getTenSanPham());
@@ -189,10 +213,8 @@ public class Sach_DAO {
                 state.setString(8, sach.getNhaCungCap().getMaNCC());
                 state.setInt(9, sach.getSoLuongTon());
                 state.setDouble(10, sach.getDonGia());
-                state.setString(11, sach.getMoTa());
-                state.setString(12, sach.getTinhTrang());
-                state.setString(13,sach.getHinhAnh());
-                state.setString(14, sach.getMaSanPham());
+                state.setString(11, sach.getTinhTrang());
+                state.setString(12, sach.getMaSanPham());
                n = state.executeUpdate();
         } catch (Exception e) {
 			// TODO: handle exception
@@ -255,10 +277,12 @@ public class Sach_DAO {
                     String tinhTrang = rs.getString("TinhTrang");
                     NhaXuatBan nhaXuatBan = new NhaXuatBan(rs.getString("NhaXuatBan"));
                     NhaCungCap nhaCungCap = new NhaCungCap(rs.getString("NhaCungCap"));
-                     //Sach sach = new Sach();
-                     String hinhAnh = rs.getString("HinhAnh");
+                    //Sach sach = new Sach();
+                    String moTa = rs.getString("MoTa");
+                    String hinhAnh = rs.getString("HinhAnh");
                     LoaiSanPham loaiSanPham = new LoaiSanPham(rs.getString("LoaiSanPham"));
-                    Sach sach = new Sach(tacGias, namXuatban , soTrang, tl, nhaXuatBan, maSanPham, tenSanPham,loaiSanPham, nhaCungCap, Integer.parseInt(soLuongTon),donGia, null, tinhTrang, hinhAnh );  
+                    String ngonNgu = rs.getString("NgonNgu");
+                    Sach sach = new Sach(tacGias, namXuatban , soTrang, tl, nhaXuatBan, maSanPham, tenSanPham,loaiSanPham, nhaCungCap, Integer.parseInt(soLuongTon),donGia,  moTa, tinhTrang, hinhAnh,ngonNgu );  
                     dsSach.add(sach);
                 
             }

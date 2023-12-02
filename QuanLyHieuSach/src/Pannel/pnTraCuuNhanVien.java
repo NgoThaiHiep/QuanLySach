@@ -77,7 +77,7 @@ public class pnTraCuuNhanVien extends javax.swing.JPanel {
      private static final int WIDTH= 174;
     public pnTraCuuNhanVien(TaiKhoan tk) throws IOException, SQLException {
         this.tk = tk;
-
+      
         initComponents();
        
         init();
@@ -126,7 +126,8 @@ public class pnTraCuuNhanVien extends javax.swing.JPanel {
         
         // Đặt ảnh vào JLabel và thiết lập kích thước bằng với JLabel
         try {
-            selectedFile =new File("src\\IMG\\anhMacDinhNhanVien.png");
+            
+            selectedFile =new File("src\\IMG\\khongCoAnh.png");
             BufferedImage image = ImageIO.read(selectedFile); // Thay đổi đường dẫn đến ảnh
             
             // thay đổi kích thức ảnh cùng kích thước với lable 184x216
@@ -301,7 +302,7 @@ public class pnTraCuuNhanVien extends javax.swing.JPanel {
             }
         });
 
-        btnChonNgaySinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/anhLich.png"))); // NOI18N
+        btnChonNgaySinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/iconAnhLich.png"))); // NOI18N
         btnChonNgaySinh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChonNgaySinhActionPerformed(evt);
@@ -439,8 +440,8 @@ public class pnTraCuuNhanVien extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(lblAnhNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(btnChonAnh))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnChonAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -496,7 +497,7 @@ public class pnTraCuuNhanVien extends javax.swing.JPanel {
                                 .addGap(6, 6, 6)
                                 .addComponent(lblCaLam))
                             .addComponent(cboCaLamViec, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 5, Short.MAX_VALUE))
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         lblThemNhanVien.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -591,7 +592,7 @@ public class pnTraCuuNhanVien extends javax.swing.JPanel {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -799,7 +800,7 @@ public class pnTraCuuNhanVien extends javax.swing.JPanel {
 
     private void btnChonAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonAnhActionPerformed
         // TODO add your handling code here:
-        JFileChooser fileChooser = new JFileChooser();
+        JFileChooser fileChooser = new JFileChooser(selectedFile);
                 fileChooser.setFileFilter(new FileNameExtensionFilter("Hình ảnh", "jpg", "jpeg", "png", "gif"));
 
                 int returnValue = fileChooser.showOpenDialog(null);

@@ -426,7 +426,7 @@
                 <Component class="javax.swing.JTable" name="tblDanhSachSanPhamTimKiem">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="5" rowCount="4">
+                      <Table columnCount="5" rowCount="0">
                         <Column editable="true" title="STT" type="java.lang.String"/>
                         <Column editable="true" title="M&#xe3; s&#x1ea3;n ph&#x1ea9;m" type="java.lang.String"/>
                         <Column editable="true" title="T&#xea;n s&#x1ea3;n ph&#x1ea9;m" type="java.lang.String"/>
@@ -485,7 +485,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="581" y="0" width="630" height="60"/>
+              <AbsoluteConstraints x="581" y="0" width="700" height="60"/>
             </Constraint>
           </Constraints>
 
@@ -499,7 +499,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="210" y="20" width="110" height="22"/>
+                  <AbsoluteConstraints x="230" y="20" width="110" height="22"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -519,28 +519,28 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="420" y="20" width="80" height="20"/>
+                  <AbsoluteConstraints x="440" y="20" width="80" height="20"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="javax.swing.JLabel" name="lblNgayLapHoaDonFont">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="310" y="20" width="100" height="22"/>
+                  <AbsoluteConstraints x="330" y="20" width="100" height="22"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="javax.swing.JLabel" name="lblMaHoaDonFont">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="80" y="20" width="130" height="22"/>
+                  <AbsoluteConstraints x="80" y="20" width="150" height="22"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="javax.swing.JLabel" name="lblTenNhanVienFont">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="500" y="20" width="120" height="22"/>
+                  <AbsoluteConstraints x="530" y="20" width="150" height="22"/>
                 </Constraint>
               </Constraints>
             </Component>

@@ -91,6 +91,7 @@ public class pnlTraCuuKhachHang extends javax.swing.JPanel {
 
         lblDiaChi.setText("Địa chỉ");
 
+        lblTenKhachHang.setBackground(new java.awt.Color(0, 0, 0));
         lblTenKhachHang.setText("Tên khách hàng");
 
         txtTenKhachHang.addActionListener(new java.awt.event.ActionListener() {
@@ -233,7 +234,7 @@ public class pnlTraCuuKhachHang extends javax.swing.JPanel {
 
         lblTimKiem.setText("Tìm kiếm");
 
-        txtTimKiem.setText("Tìm kiếm theo mã, số điện thoại, tên khách hàng");
+        txtTimKiem.setText("Tìm kiếm theo số điện thoại");
         txtTimKiem.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtTimKiemFocusGained(evt);
@@ -310,7 +311,7 @@ public class pnlTraCuuKhachHang extends javax.swing.JPanel {
 
     private void txtTimKiemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTimKiemFocusGained
         // TODO add your handling code here:
-        if(txtTimKiem.getText().equals("Tìm kiếm theo mã, số điện thoại, tên khách hàng")){
+        if(txtTimKiem.getText().equals("Tìm kiếm theo số điện thoại")){
             txtTimKiem.setText("");
             txtTimKiem.requestFocus();
             removePlaceholderStyle(txtTimKiem);
@@ -320,7 +321,7 @@ public class pnlTraCuuKhachHang extends javax.swing.JPanel {
         Font  font = textFile.getFont();
         font = font.deriveFont(Font.ITALIC);
         textFile.setFont(font);
-        textFile.setForeground(Color.GRAY);
+        textFile.setForeground(Color.black);
     }
     public void removePlaceholderStyle(JTextField textFile){
          Font  font = textFile.getFont();
@@ -332,7 +333,7 @@ public class pnlTraCuuKhachHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(txtTimKiem.getText().length()==0){
             addPlaceholderStyle(txtTimKiem);
-            txtTimKiem.setText("Tìm kiếm theo mã, số điện thoại, tên khách hàng");
+            txtTimKiem.setText("Tìm kiếm theo số điện thoại");
         }
     }//GEN-LAST:event_txtTimKiemFocusLost
 
@@ -575,8 +576,29 @@ public static ArrayList<String> readExcel_City() throws IOException {
 
              @Override
              public void removeUpdate(DocumentEvent e) {
+                  ArrayList<KhachHang> dsKhachHangSoDienThoai;
+                 try {
+                     dsKhachHangSoDienThoai = khachHang_DAO.layDanhSachTheoMaSach_TheoSoDienThoai(txtTimKiem.getText());
+                     String colTieuDe1[] = new String[]{"Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Địa chỉ"};
+                     DefaultTableModel model = new DefaultTableModel(colTieuDe1, 0);
+                        Object[] row;
+                     for (KhachHang khachHang : dsKhachHangSoDienThoai) {
+                           row = new Object[12];
+                         // GÁN GIÁ TRỊ
+                         row[0] = khachHang.getMaKhachHang();
+                         row[1] = khachHang.getTenKhachHang();
+                         row[2] = khachHang.getSoDienThoai();
+                         row[3] = khachHang.getDiaChi();
+                        model.addRow(row);
+        }
+                jTable1.setModel(model);
+                 } catch (SQLException ex) {
+                     Logger.getLogger(pnlTraCuuKhachHang.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                    
+                
              }
-
+             
              @Override
              public void changedUpdate(DocumentEvent e) {
              }

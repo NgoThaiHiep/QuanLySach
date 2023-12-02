@@ -1,20 +1,10 @@
 
 package Pannel;
 import javax.swing.*;
-
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JComboBox;
-
 import DAO.NhanVien_DAO;
 import DAO.Sach_DAO;
-import Entity.LoaiSanPham;
-import Entity.NhaCungCap;
-import Entity.NhaXuatBan;
 import Entity.Sach;
-import Entity.TheLoai;
 import ServiceUser.CellSach;
 import ServiceUser.ScrollBarCustom;
 import java.awt.Color;
@@ -23,6 +13,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -30,7 +22,7 @@ import java.util.logging.Logger;
  */
 public class pnlTraCuuSach extends javax.swing.JPanel {
 
-    private JPanel panel;
+    
     private int count = 0;
     private Sach_DAO sach_DAO;
     private NhanVien_DAO nhanVien_DAO;
@@ -41,23 +33,11 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
      * Creates new form Sach
      */
     public pnlTraCuuSach() throws IOException {
-        panel = new JPanel();
-      
-        JPanel newPanel = createPanels();
-        panel.add(newPanel);
-        panel.revalidate();
-        panel.repaint();
-        
 
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-      
-
-        JScrollPane scrollPane = new JScrollPane(panel);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.getViewport().setPreferredSize(new Dimension(250, 400));
-        addTableStyle(scrollPane);
         initComponents();
-        jPanel3.add(scrollPane);
+       
+        
+        danhSachTheoMa(txtTimKiemTheoMa);
     }
 
     /**
@@ -93,7 +73,7 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
         checkboxTacGia = new javax.swing.JCheckBox();
         checkboxNXB = new javax.swing.JCheckBox();
         checkboxNamSanXuat = new javax.swing.JCheckBox();
-        textFieldSuggestion1 = new ServiceUser.TextFieldSuggestion();
+        txtTimKiemTheoMa = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
 
         jLabel5.setText("Tên sách");
@@ -233,8 +213,6 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
             }
         });
 
-        textFieldSuggestion1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -244,16 +222,17 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(textFieldSuggestion1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(checkboxTheLoai)
-                        .addGap(45, 45, 45)
-                        .addComponent(checkboxTacGia)
-                        .addGap(39, 39, 39)
-                        .addComponent(checkboxNXB, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(checkboxNamSanXuat))
-                    .addComponent(txtTimKiemTheo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtTimKiemTheoMa)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(checkboxTheLoai)
+                            .addGap(45, 45, 45)
+                            .addComponent(checkboxTacGia)
+                            .addGap(39, 39, 39)
+                            .addComponent(checkboxNXB, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(checkboxNamSanXuat))
+                        .addComponent(txtTimKiemTheo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(65, 65, 65)
                 .addComponent(jLabel4)
                 .addGap(37, 37, 37)
@@ -272,9 +251,8 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(textFieldSuggestion1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(txtTimKiemTheoMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4)
@@ -334,21 +312,44 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
- private JPanel createPanels() throws IOException {
+
+// private JPanel createPanels() throws IOException {
+//        JPanel containerPanel = new JPanel();
+//        containerPanel.setLayout(new BoxLayout(containerPanel, BoxLayout.Y_AXIS));	
+//        sach_DAO = new Sach_DAO();
+//        nhanVien_DAO = new NhanVien_DAO();
+//        ArrayList<Sach> dssps = sach_DAO.layDanhSanPhamSach();
+//        for (Sach sach : dssps) {
+//        	
+//	          
+//            try {
+//                JPanel newPanel = new CellSach(sach);
+//                newPanel.setPreferredSize(new Dimension(newPanel.getWidth(), PANEL_HEIGHT));
+//                newPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, PANEL_HEIGHT)); // Ensure the panel doesn't expand horizontally
+//                //  newPanel.add(new JLabel("Panel " + (++count)));
+//
+//                containerPanel.add(newPanel);
+//            }
+//            // ArrayList<NhanVien> dsnv=nhanVien_DAO.layDanhSachNhanVien();
+//            catch (SQLException ex) {
+//                Logger.getLogger(pnlTraCuuSach.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//		}
+//        return containerPanel;
+//    }
+ private JPanel createPanelsTheoMa(String maSach) throws IOException {
         JPanel containerPanel = new JPanel();
+        containerPanel.removeAll();
         containerPanel.setLayout(new BoxLayout(containerPanel, BoxLayout.Y_AXIS));	
         sach_DAO = new Sach_DAO();
         nhanVien_DAO = new NhanVien_DAO();
-        ArrayList<Sach> dssps = sach_DAO.layDanhSanPhamSach();
-        for (Sach sach : dssps) {
-        	
-	          
+        ArrayList<Sach> dssps = sach_DAO.layDanhSachTheoMaSach(maSach);
+        for (Sach sach : dssps) {     
             try {
                 JPanel newPanel = new CellSach(sach);
                 newPanel.setPreferredSize(new Dimension(newPanel.getWidth(), PANEL_HEIGHT));
                 newPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, PANEL_HEIGHT)); // Ensure the panel doesn't expand horizontally
                 //  newPanel.add(new JLabel("Panel " + (++count)));
-
                 containerPanel.add(newPanel);
             }
             // ArrayList<NhanVien> dsnv=nhanVien_DAO.layDanhSachNhanVien();
@@ -356,10 +357,56 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
                 Logger.getLogger(pnlTraCuuSach.class.getName()).log(Level.SEVERE, null, ex);
             }
 		}
-      
-       
-
         return containerPanel;
+    }
+    public void danhSachTheoMa(JTextField txt){
+        txt.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                try {
+                    jPanel3.removeAll();
+                    JPanel panel;
+                    panel = new JPanel();
+                    JPanel newPanel =  createPanelsTheoMa(txt.getText());
+                    panel.add(newPanel);
+                    panel.revalidate();
+                    panel.repaint();
+                    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+                    JScrollPane scrollPane = new JScrollPane(panel);
+                    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                    scrollPane.getViewport().setPreferredSize(new Dimension(250, 400));
+                    addTableStyle(scrollPane);
+                    jPanel3.add(scrollPane);
+                } catch (IOException ex) {
+                    Logger.getLogger(pnlTraCuuSach.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                try {
+                    jPanel3.removeAll();
+                    JPanel panel;
+                    panel = new JPanel();
+                    JPanel newPanel =  createPanelsTheoMa(txt.getText());
+                    panel.add(newPanel);
+                    panel.revalidate();
+                    panel.repaint();
+                    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+                    JScrollPane scrollPane = new JScrollPane(panel);
+                    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                    scrollPane.getViewport().setPreferredSize(new Dimension(250, 400));
+                    addTableStyle(scrollPane);
+                    jPanel3.add(scrollPane);
+                } catch (IOException ex) {
+                    Logger.getLogger(pnlTraCuuSach.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
     }
     public void addTableStyle(JScrollPane scroll) {
         scroll.getViewport().setOpaque(false);
@@ -429,7 +476,7 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lblAnhSachTimKiem;
     private javax.swing.JLabel lblTimKiem;
-    private ServiceUser.TextFieldSuggestion textFieldSuggestion1;
     private javax.swing.JComboBox<String> txtTimKiemTheo;
+    private javax.swing.JTextField txtTimKiemTheoMa;
     // End of variables declaration//GEN-END:variables
 }

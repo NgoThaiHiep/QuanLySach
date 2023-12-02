@@ -59,6 +59,7 @@ public class pnlThemKhachHang extends javax.swing.JPanel {
     private ArrayList<String> cities ;
     private ArrayList<String> districts ;
     private ArrayList<String> wardsDistricts ;
+    private int diemTL = 0;
     public pnlThemKhachHang(TaiKhoan tk) throws IOException, SQLException {
         this.tk = tk;
         initComponents();
@@ -582,7 +583,7 @@ public class pnlThemKhachHang extends javax.swing.JPanel {
         String soDienThoai = txtSoDienThoai.getText();
         String diaChi = cboTinh.getSelectedItem() + "-" + cboQuan.getSelectedItem() + "-" + cboPhuong.getSelectedItem();
         String chucVu = "QL";
-        KhachHang kh = new KhachHang(maKhachHang, tenKhachHang, soDienThoai, diaChi);
+        KhachHang kh = new KhachHang(maKhachHang, tenKhachHang, soDienThoai, diaChi,diemTL);
         if(khachHang_DAO.InsertKhachHang(kh)) {
             JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công");
             capNhatDanhSachKhachHang();
