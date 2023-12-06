@@ -131,7 +131,7 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
         duLieuSDT();
       //  kiemTraDuLieuFloat(txtTienKhachDua);
         kiemTraSoTienTraLai();
-       capNhatDanhSach_TheoMa(txtTimKiemMaSanPham);
+        capNhatDanhSach_TheoMa(txtTimKiemMaSanPham);
        // lblTenNhanVien.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
     }
     public void capNhatDanhSach_TheoMa(JTextField txt){
@@ -220,7 +220,7 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
                         lblTongTien1.setText(formattedTongTien+" VND");
     }
     public void kiemTraSoTienTraLai(){
-         DecimalFormat df = new DecimalFormat("#,###");
+        DecimalFormat df = new DecimalFormat("#,###");
         txtTienKhachDua.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -229,14 +229,12 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
 	    // Loại bỏ chữ cái không cần thiết từ chuỗi số
 	    String priceWithoutCurrency = priceWithCurrency.replaceAll("[^\\d.]+", "");
 	    double giaBan = Double.parseDouble(priceWithoutCurrency);
-             if(giaBan < Integer.parseInt(txtTienKhachDua.getText())){
+            if(giaBan < Integer.parseInt(txtTienKhachDua.getText())){
                         txtTienTraLai.setText(  df.format( Double.parseDouble(txtTienKhachDua.getText())- giaBan)+" VND");
-                        
                 }else{
                        txtTienTraLai.setText("0.0 VND");
                 }
             }
-
             @Override
             public void removeUpdate(DocumentEvent e) {
                 String priceWithCurrency =  lblTongTien1.getText();
@@ -246,12 +244,10 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
 	    double giaBan = Double.parseDouble(priceWithoutCurrency);
              
              if(giaBan < Integer.parseInt(txtTienKhachDua.getText())){
-                        txtTienTraLai.setText(  df.format( Double.parseDouble(txtTienKhachDua.getText())- giaBan)+" VND");
-                        
+                        txtTienTraLai.setText(  df.format( Double.parseDouble(txtTienKhachDua.getText())- giaBan)+" VND");    
                 }else{
                        txtTienTraLai.setText("0.0 VND");
                 }
-            
             }
 
             @Override
@@ -1432,13 +1428,13 @@ xoaSanPham();
         int soLuong = 0;
         double donGia = 0;
 // Duyệt qua từng hàng và cột để lấy dữ liệu\
+
     String maKhachHang = "";
     if(kh != null){
           maKhachHang = kh.getMaKhachHang().substring(0,3); 
     }
    
-   if(kh != null && !maKhachHang.equals("KHL")){
-       
+    if(kh != null && !maKhachHang.equals("KHL")){
         if(rowCount!=0){
             hangCho_DAO = new HangCho_DAO();
             hangCho_DAO.DeleteDanhSachHangCho(kh.getMaKhachHang());
@@ -1467,11 +1463,14 @@ xoaSanPham();
                           //System.out.print("sách " + cellValue + "\t");
                             HoaDon hoaDon = new HoaDon(lblMaHoaDonFont.getText(), localDate, nv, kh);
                             ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(hoaDon, sanPham, soLuong,donGia);
-                            System.out.println(chiTietHoaDon);
+                            hoaDon_DAO = new HoaDon_DAO();
+                            hoaDon_DAO.InsertHoaDon(hoaDon, nv, kh);
                             HangCho hangCho = new HangCho(kh, sanPham, soLuong, localDate);
                             System.out.println(hangCho ); // Xuống dòng sau khi duyệt qua một hàng
                             System.out.println("\n");
                             hangCho_DAO = new HangCho_DAO();
+                            chiTietHoaDon_DAO = new ChiTietHoaDon_DAO();
+                            chiTietHoaDon_DAO.InsertCTHoaDon(hoaDon, soLuong, donGia, sanPham);
                             if(hangCho_DAO.InsertHangCho(hangCho)){
                                 
                             }
@@ -1512,16 +1511,20 @@ xoaSanPham();
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:
-        
+         DefaultTableModel model = (DefaultTableModel) tblGioHang.getModel();
+         
+         SanPham sanPham = null ;
+        int soLuong = 0;
+        double donGia = 0;
+// Duyệt qua từng hàng và cột để lấy dữ liệu\
+   
         KhachHang kh = new KhachHang();
         khachHang_DAO = new KhachHang_DAO();
         try {
-            if(txtSoDienThoai.getText().equals("")) {
+            if(txtSoDienThoai.getText().equals("") ||  khachHang_DAO.layThongTinKhachHang(txtSoDienThoai.getText()) == null) {
                kh.setMaKhachHang(khachHang_DAO.generateVerifyCode_KhachHangLe());
                kh.setTenKhachHang("No name");
-               
             }else{
-                
                 kh = khachHang_DAO.layThongTinKhachHang(txtSoDienThoai.getText());
             }
         } catch (SQLException ex) {
@@ -1529,25 +1532,56 @@ xoaSanPham();
         }
         LocalDate localDate = LocalDate.now();
         
-        HoaDon hoaDon = new HoaDon(lblMaHoaDonFont.getText(), localDate, nv, kh);
-        hoaDon_DAO = new HoaDon_DAO();
-        System.out.println(hoaDon);
-        
-        if(txtSoDienThoai.getText().equals("")) {
-            int diemTichLuy = kh.getDiemTL();
-	     // Loại bỏ chữ cái không cần thiết từ chuỗi số
-	    String priceWithoutCurrency = lblTongTien1.getText().replaceAll("[^\\d.]+", "");
-            double parsedNumber = Double.parseDouble(priceWithoutCurrency);
-            diemTichLuy += (int) parsedNumber / 100000 ;
-            kh.setDiemTL(diemTichLuy);
-            khachHang_DAO.InsertKhachHang(kh);
-        }
-        
-        hoaDon_DAO.InsertHoaDon(hoaDon, nv, kh);
-        
-        SanPham sanPham = new SanPham(txtMaSanPham.getText());
-        chiTietHoaDon_DAO = new ChiTietHoaDon_DAO();
-        //chiTietHoaDon_DAO.InsertCTHoaDon(hoaDon, txtSoLuong.getText(), WIDTH, sanPham);
+       int columnCount = model.getColumnCount();
+   
+        int rowCount = model.getRowCount();
+        if(rowCount!=0){
+            
+            if(txtSoDienThoai.getText().equals("")) {
+                int diemTichLuy = kh.getDiemTL();
+                 // Loại bỏ chữ cái không cần thiết từ chuỗi số
+                String priceWithoutCurrency = lblTongTien1.getText().replaceAll("[^\\d.]+", "");
+                double parsedNumber = Double.parseDouble(priceWithoutCurrency);
+                diemTichLuy += (int) parsedNumber / 100000 ;
+                kh.setDiemTL(diemTichLuy);
+                khachHang_DAO.InsertKhachHang(kh);
+            }
+            HoaDon hoaDon = new HoaDon(lblMaHoaDonFont.getText(), localDate, nv, kh);
+            hoaDon_DAO = new HoaDon_DAO();
+            hoaDon_DAO.InsertHoaDon(hoaDon, nv, kh);
+            
+            hangCho_DAO = new HangCho_DAO();
+            hangCho_DAO.DeleteDanhSachHangCho(kh.getMaKhachHang());
+            
+            for (int row = 0; row < rowCount; row++) {
+                for (int col = 0; col < columnCount; col++) {
+                    if(col == 1){
+                        Object cellValue = model.getValueAt(row, col);
+                         // System.out.print("sách " + cellValue + "\t");
+                               sanPham = new SanPham((String) cellValue);
+                    }
+                    //số lượng
+                    if(col == 3){
+                        Object cellValue = model.getValueAt(row, col).toString();
+                         // System.out.print("sách " + cellValue + "\t");
+                          soLuong = Integer.parseInt((String) cellValue);
+                    }    
+                    //đơn giá
+                    if(col == 4){
+                        Object cellValue = model.getValueAt(row, col).toString();
+            //              System.out.print("sách " + cellValue + "\t");
+                        donGia = Double.parseDouble((String) cellValue);
+                    }
+                    //thành tiền
+                    if(col == 5){
+                        Object cellValue = model.getValueAt(row, col);
+                        //System.out.print("sách " + cellValue + "\t");
+                        ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(hoaDon, sanPham, soLuong,donGia);
+                        chiTietHoaDon_DAO = new ChiTietHoaDon_DAO();
+                        chiTietHoaDon_DAO.InsertCTHoaDon(hoaDon, soLuong, donGia, sanPham);
+                    }
+                }
+            }
         String formattedDate = null;
         try {
            formattedDate = hoaDon_DAO.generateHoaDon(nv);
@@ -1557,6 +1591,11 @@ xoaSanPham();
         lblMaHoaDonFont.setText(formattedDate);
         lblMaHoaDonFont.setFont(new java.awt.Font("Times New Roman", Font.BOLD, 15)); 
         
+       
+        }else{
+            JOptionPane.showMessageDialog(this, "Thêm sản phẩm để thanh toán");
+        }
+       
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void txtTienTraLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienTraLaiActionPerformed

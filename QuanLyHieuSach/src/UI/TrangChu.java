@@ -12,6 +12,7 @@ import Menu.MenuItem;
 import Pannel.pnlBaoCao;
 import Pannel.pnTraCuuNhanVien;
 import Pannel.pnlDanhSachHoaDon;
+import Pannel.pnlKhuyenMai;
 import Pannel.pnlLapHoaDon;
 import Pannel.pnlQuyDinh;
 import Pannel.pnlTaiKhoan;
@@ -73,7 +74,7 @@ public class TrangChu extends javax.swing.JFrame {
                     ,menuHoaDon,menuLapHoaDon, menuDanhSachHoaDon
                     ,menuNhanVien ,menuTraCuuNhanVien, menuThemNhanVien
                    ,menuDoanhThu,menuThongKe, menuBaoCao 
-                   ,menuTaiKhoan, menuQuyDinh,menuTroGiup;
+                   ,menuTaiKhoan, menuQuyDinh,menuTroGiup,menuKhuyenMai;
     private LookAndFeel originalLookAndFeel;
 //    private final pnlTrangChu pnlTrangChu;
 //    private final pnlTraCuuSanPham pnlTraCuuSanPham;
@@ -343,7 +344,8 @@ addTableStyle(jScrollPane1);
         
         //Quy định 
         javax.swing.ImageIcon iconQuyDinh = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconHoaDon.png"));
-
+        javax.swing.ImageIcon iconKhuyenMai = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconHoaDon.png"));
+        
         //Trợ giúp
         javax.swing.ImageIcon iconTroGiup = new javax.swing.ImageIcon(getClass().getResource("/IMG/iconTroGiup.png"));
         
@@ -673,6 +675,21 @@ addTableStyle(jScrollPane1);
                     System.out.println();
             }
         });
+        menuKhuyenMai = new MenuItem(iconKhuyenMai,"Khuyến mãi", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {            UIManager.setLookAndFeel(originalLookAndFeel);        
+                } catch (UnsupportedLookAndFeelException ex) {            
+                    Logger.getLogger(pnTraCuuNhanVien.class.getName()).log(Level.SEVERE, null, ex);        
+                }
+                    pnlBody.removeAll();
+                    pnlBody.add(new pnlKhuyenMai());
+                  
+                    pnlBody.repaint();
+                    pnlBody.revalidate();
+                    System.out.println();
+            }
+        });
         
         //menuTroGiup cha
         menuTroGiup = new MenuItem(iconTroGiup, "Trợ Giúp",new ActionListener() {
@@ -685,7 +702,7 @@ addTableStyle(jScrollPane1);
         });
         
         if(nv.getChucVu().getMaChucVu().equals("QL")){
-            addMenu(menuTrangChu,menuSanPham,menuHoaDon,menuKhachHang,menuNhanVien,menuDoanhThu,menuTaiKhoan,menuQuyDinh ,menuTroGiup);
+            addMenu(menuTrangChu,menuSanPham,menuHoaDon,menuKhachHang,menuNhanVien,menuDoanhThu,menuTaiKhoan,menuQuyDinh,menuKhuyenMai ,menuTroGiup);
         }else{
             addMenu(menuTrangChu,menuSanPham,menuHoaDon,menuKhachHang,menuThongKe,menuTroGiup);
         }
