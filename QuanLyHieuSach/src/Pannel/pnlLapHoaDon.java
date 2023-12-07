@@ -270,7 +270,7 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
     }
     public int  soLuongToiDaDeThem(String maSanPham){
         int soLuongTon = 0 ;
-         ArrayList<Sach> dssach = sach_DAO.layDanhSanPhamSach();
+        ArrayList<Sach> dssach = sach_DAO.layDanhSanPhamSach();
         ArrayList<VanPhongPham> dsvpp = vanPhongPham_DAO.layDanhSanPhamVanPhongPham();
          // Tạo một ArrayList mới để chứa cả hai danh sách
         ArrayList<Object> combinedList = new ArrayList<>();
@@ -474,6 +474,8 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
         txtTienKhachDua = new javax.swing.JTextField();
         lblTienKhachDua1 = new javax.swing.JLabel();
         txtTienTraLai = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         lblTieuDeLapHoaDon = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1300, 700));
@@ -635,10 +637,12 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
         );
         pnlGioHangLayout.setVerticalGroup(
             pnlGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrGioHang, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+            .addGroup(pnlGioHangLayout.createSequentialGroup()
+                .addComponent(scrGioHang, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        pnlHoaDon.add(pnlGioHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(581, 232, 700, 310));
+        pnlHoaDon.add(pnlGioHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(581, 232, 700, 290));
 
         pnlDanhSachSanPhamTimKiem.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sách sản phẩm tìm kiếm"));
 
@@ -673,10 +677,12 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
         );
         pnlDanhSachSanPhamTimKiemLayout.setVerticalGroup(
             pnlDanhSachSanPhamTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrDanhSachSanPhamTimKiem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+            .addGroup(pnlDanhSachSanPhamTimKiemLayout.createSequentialGroup()
+                .addComponent(scrDanhSachSanPhamTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
-        pnlHoaDon.add(pnlDanhSachSanPhamTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 232, 575, 430));
+        pnlHoaDon.add(pnlDanhSachSanPhamTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 232, 575, 290));
 
         pnlThongTinHoaDon.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin hóa đơn"));
         pnlThongTinHoaDon.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -747,7 +753,7 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
 
         lblTongTien1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lblTongTien1.setText("0.0 VND");
-        pnlHoaDon.add(lblTongTien1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 550, 270, 20));
+        pnlHoaDon.add(lblTongTien1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 550, 220, 20));
 
         btnThanhToan.setText("Thanh toán");
         btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
@@ -757,8 +763,8 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
         });
         pnlHoaDon.add(btnThanhToan, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 630, -1, -1));
 
-        lblTongTien.setText("Tổng tiền            :");
-        pnlHoaDon.add(lblTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 550, 100, 20));
+        lblTongTien.setText("Tổng tiền          :");
+        pnlHoaDon.add(lblTongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 550, 100, 20));
 
         lblTienKhachDua.setText("Tiền khách đưa   :");
         pnlHoaDon.add(lblTienKhachDua, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 586, 100, 30));
@@ -773,6 +779,11 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
             }
         });
         pnlHoaDon.add(txtTienTraLai, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 590, 220, -1));
+
+        jLabel1.setText("Khuyến mãi         :");
+        pnlHoaDon.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 550, 100, -1));
+
+        pnlHoaDon.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 550, 220, -1));
 
         lblTieuDeLapHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         lblTieuDeLapHoaDon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1471,8 +1482,7 @@ xoaSanPham();
                             hangCho_DAO = new HangCho_DAO();
                             chiTietHoaDon_DAO = new ChiTietHoaDon_DAO();
                             chiTietHoaDon_DAO.InsertCTHoaDon(hoaDon, soLuong, donGia, sanPham);
-                            if(hangCho_DAO.InsertHangCho(hangCho)){
-                                
+                            if(hangCho_DAO.InsertHangCho(hangCho)){ 
                             }
                     }
                 }
@@ -1752,6 +1762,8 @@ private void duLieuSDT(){
     private javax.swing.JButton btnThemSanPham;
     private javax.swing.JButton btnThemVaoHangCho;
     private javax.swing.JButton btnXoaSanPham;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblDiaChi;
     private javax.swing.JLabel lblGiaBan;
     private javax.swing.JLabel lblMaHoaDon;

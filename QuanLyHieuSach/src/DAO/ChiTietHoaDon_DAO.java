@@ -26,8 +26,7 @@ public class ChiTietHoaDon_DAO {
 		Connection con = ConnectDB.getConnection();
 		PreparedStatement state = null;
 		int n = 0;
-		try {
-                        
+		try { 
 			state = con.prepareStatement("INSERT INTO [dbo].[ChiTietHoaDon]([HoaDonID],[SanPhamID],[SoLuong],[DonGia])VALUES(?,?,?,?)");
 			state.setString(1,hd.getMaHoaDon());
                         state.setString(2, sanPham.getMaSanPham());

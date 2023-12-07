@@ -63,7 +63,7 @@ public class pnlThongKeTheoNgay extends javax.swing.JPanel {
 
         jLabel2.setText("Ngày thống kê: ");
 
-        btnChonNgay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/anhLich.png"))); // NOI18N
+        btnChonNgay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/iconAnhLich.png"))); // NOI18N
         btnChonNgay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChonNgayActionPerformed(evt);
