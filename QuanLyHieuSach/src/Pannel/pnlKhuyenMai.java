@@ -20,6 +20,8 @@ import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -49,8 +51,9 @@ public class pnlKhuyenMai extends javax.swing.JPanel {
         kiemTraDuLieuFloat(txtTyLe2);
         kiemTraDuLieuFloat(txtTyLe3);
         
-       maHoaDon_GiaTri(lblMaKhuyenMaiKyTu);
+        maHoaDon_GiaTri(lblMaKhuyenMaiKyTu);
         duLieu();
+        kiemTraDuLieuFloat1(txtNgayBatDau);
     }
    public void duLieu(){
          sach_DAO = new Sach_DAO();
@@ -97,7 +100,28 @@ public void kiemTraDuLieuFloat(JTextField textField){
             }
         });
     }
-
+public void kiemTraDuLieuFloat1(JTextField textField){
+       
+        textField.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                String text = textField.getText().replaceAll(",", "");
+                System.out.println(".keyTyped()");
+//                if ((c < '0' || c > '9') && c != '.') { // Chỉ cho phép nhập số và dấu chấm
+//                   
+//                } else if (c == '0' && text.isEmpty()) { // Số đầu tiên không được là 0
+//                   
+//                } else if (c == '.' && (text.isEmpty() || dotIndex != -1)) { // Dấu chấm không được là ký tự đầu tiên và chỉ được nhập một lần
+//                   
+//                } else if (dotIndex != -1 && text.substring(dotIndex).length() > 3 && textField.getCaretPosition() > dotIndex) { // Sau dấu chấm chỉ cho phép nhập tối đa 3 số
+//                   
+//                }
+            }
+            public void keyReleased(KeyEvent e) {
+                System.out.println(".keyReleased()");
+            }
+        });
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,8 +133,8 @@ public void kiemTraDuLieuFloat(JTextField textField){
     private void initComponents() {
 
         btg1 = new javax.swing.ButtonGroup();
-        btg2 = new javax.swing.ButtonGroup();
         dateNgayBatDau = new ServiceUser.DateChooser();
+        btg2 = new javax.swing.ButtonGroup();
         dateNgayKetThuc = new ServiceUser.DateChooser();
         jLabel1 = new javax.swing.JLabel();
         lblmaKhuyenMai = new javax.swing.JLabel();
@@ -156,10 +180,42 @@ public void kiemTraDuLieuFloat(JTextField textField){
         btnNgayKetThuc = new javax.swing.JButton();
 
         dateNgayBatDau.setTextRefernce(txtNgayBatDau);
+        dateNgayBatDau.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                dateNgayBatDauFocusGained(evt);
+            }
+        });
+        dateNgayBatDau.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dateNgayBatDauMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                dateNgayBatDauMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                dateNgayBatDauMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                dateNgayBatDauMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                dateNgayBatDauMouseReleased(evt);
+            }
+        });
 
         dateNgayKetThuc.setTextRefernce(txtNgayKetThuc);
+        dateNgayKetThuc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dateNgayKetThucMouseClicked(evt);
+            }
+        });
 
         setPreferredSize(new java.awt.Dimension(1300, 982));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Khuyến mãi");
 
@@ -183,6 +239,20 @@ public void kiemTraDuLieuFloat(JTextField textField){
         jLabel11.setText("Ngày bắt đầu");
 
         jLabel12.setText("Ngày kết thúc");
+
+        txtNgayBatDau.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtNgayBatDauFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNgayBatDauFocusLost(evt);
+            }
+        });
+        txtNgayBatDau.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNgayBatDauMouseClicked(evt);
+            }
+        });
 
         jLabel6.setText("Chi tiết");
 
@@ -401,11 +471,12 @@ public void kiemTraDuLieuFloat(JTextField textField){
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel11)
-                                    .addComponent(txtNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(btnNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnNgayBatDau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel11)
+                                        .addComponent(txtNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel6)))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel12)
@@ -446,11 +517,11 @@ public void kiemTraDuLieuFloat(JTextField textField){
                     txtGiaTien3.setText(khuyenMaiThanhToan.getSoLuong()+"");
                     int namBatDau= Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 2).toString().substring(0,4));
                     int thangBatDau = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 2).toString().substring(5,7));
-                    int ngayBatDau = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(8,10));
+                    int ngayBatDau = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 2).toString().substring(8,10));
                     dateNgayBatDau.setSelectedDate(new SelectedDate(ngayBatDau,thangBatDau,namBatDau));
                     
-                    int namKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 2).toString().substring(0,4));
-                    int thangKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 2).toString().substring(5,7));
+                    int namKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(0,4));
+                    int thangKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(5,7));
                     int ngayKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(8,10));
                     dateNgayKetThuc.setSelectedDate(new SelectedDate(ngayKetThuc,thangKetThuc,namKetThuc));
                     
@@ -674,7 +745,7 @@ public void kiemTraDuLieuFloat(JTextField textField){
         isSelected(txtSanPham4,txtSanPham3);
         lamMoi_sanPham();
     }//GEN-LAST:event_radTyLeSanPhamActionPerformed
-
+    
     private void btnNgayBatDauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNgayBatDauActionPerformed
         // TODO add your handling code here:
         dateNgayBatDau.showPopup();
@@ -684,6 +755,62 @@ public void kiemTraDuLieuFloat(JTextField textField){
         // TODO add your handling code here:
         dateNgayKetThuc.showPopup();
     }//GEN-LAST:event_btnNgayKetThucActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+       
+        
+    }//GEN-LAST:event_formMouseClicked
+
+    private void dateNgayKetThucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateNgayKetThucMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_dateNgayKetThucMouseClicked
+    
+    private void dateNgayBatDauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateNgayBatDauMouseClicked
+        // TODO add your handling code here:
+        System.out.println("Pannel.pnlKhuyenMai.dateNgayBatDauMouseClicked()");
+    }//GEN-LAST:event_dateNgayBatDauMouseClicked
+
+    private void txtNgayBatDauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNgayBatDauMouseClicked
+        // TODO add your handling code here:
+        System.out.println("Pannel.pnlKhuyenMai.txtNgayBatDauMouseClicked()");
+    }//GEN-LAST:event_txtNgayBatDauMouseClicked
+
+    private void txtNgayBatDauFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNgayBatDauFocusLost
+        // TODO add your handling code here:
+        System.out.println("Pannel.pnlKhuyenMai.txtNgayBatDauFocusLost()");
+    }//GEN-LAST:event_txtNgayBatDauFocusLost
+
+    private void txtNgayBatDauFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNgayBatDauFocusGained
+        // TODO add your handling code here:
+        System.out.println("Pannel.pnlKhuyenMai.txtNgayBatDauFocusGained()");
+    }//GEN-LAST:event_txtNgayBatDauFocusGained
+
+    private void dateNgayBatDauMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateNgayBatDauMouseExited
+        // TODO add your handling code here:
+        System.out.println("Pannel.pnlKhuyenMai.dateNgayBatDauMouseExited()");
+    }//GEN-LAST:event_dateNgayBatDauMouseExited
+
+    private void dateNgayBatDauMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateNgayBatDauMouseEntered
+        // TODO add your handling code here:
+        //System.out.println("Pannel.pnlKhuyenMai.dateNgayBatDauMouseEntered()");
+    }//GEN-LAST:event_dateNgayBatDauMouseEntered
+
+    private void dateNgayBatDauMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateNgayBatDauMousePressed
+        // TODO add your handling code here:
+        System.out.println("Pannel.pnlKhuyenMai.dateNgayBatDauMousePressed()");
+    }//GEN-LAST:event_dateNgayBatDauMousePressed
+
+    private void dateNgayBatDauFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dateNgayBatDauFocusGained
+        // TODO add your handling code here:
+        System.out.println("Pannel.pnlKhuyenMai.dateNgayBatDauFocusGained()");
+    }//GEN-LAST:event_dateNgayBatDauFocusGained
+
+    private void dateNgayBatDauMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateNgayBatDauMouseReleased
+        // TODO add your handling code here:
+        System.out.println("Pannel.pnlKhuyenMai.dateNgayBatDauMouseReleased()");
+    }//GEN-LAST:event_dateNgayBatDauMouseReleased
     
     public void danhSachGiamGia(){
         String colTieuDe[] = new String [] {"Mã Khuyến mãi", "Tên Khuyến mãi","Tên sản phẩm", "Ngày bắt đầu", "Ngày kết thúc", "Tình trạng"};

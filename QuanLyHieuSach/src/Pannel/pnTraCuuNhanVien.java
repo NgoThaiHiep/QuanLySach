@@ -145,9 +145,6 @@ public class pnTraCuuNhanVien extends javax.swing.JPanel {
         
         date.toDay();
         SelectedDate day = date.getSelectedDate();
-        
-        
-        
         date.setSelectedDate(new SelectedDate(day.getDay(),day.getMonth(),day.getYear() - 18) );
             capNhatDanhSachNhanVien();            
     }

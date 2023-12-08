@@ -16,6 +16,9 @@ import Entity.Sach;
 import Entity.SanPham;
 import Entity.TaiKhoan;
 import Entity.VanPhongPham;
+import InHoaDon.FieldHoaDon;
+import InHoaDon.ParameterHoaDon;
+import InHoaDon.XuLyHoaDon;
 import ServiceUser.ScrollBarCustom;
 import ServiceUser.TableActionCellEditor;
 import ServiceUser.TableActionCellRender;
@@ -26,7 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import java.time.format.DateTimeFormatter;
 import UI.TrangChu;
 import java.awt.Color;
 import java.awt.event.FocusAdapter;
@@ -35,9 +38,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
+import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
+
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -52,6 +58,7 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
+import net.sf.jasperreports.engine.JRException;
 
 
 
@@ -161,6 +168,54 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
             }
         });
     }
+    
+public void inHoaDon() throws JRException {
+        XuLyHoaDon.getInstance().compileReport();
+        if (tblGioHang.getRowCount() == 0) {
+        } else {
+            try {
+                    List<FieldHoaDon> fields = new ArrayList<>();
+                    for (int i = 0; i < tblGioHang.getRowCount(); i++) {
+                    // Kiểm tra và chuyển đổi kiểu dữ liệu một cách an toàn
+                    String tenSP = String.valueOf(tblGioHang.getValueAt(i, 2));
+                        Object soLuongObj = tblGioHang.getValueAt(i, 3);
+                        System.out.println(soLuongObj+" ");
+                    int soLuong = Integer.parseInt(soLuongObj+"");
+
+                    // Kiểm tra và chuyển đổi kiểu dữ liệu cho giaBan
+                    Object giaBanObj = tblGioHang.getValueAt(i, 4);
+                    
+                        System.out.println(giaBanObj+" ");
+                    double giaBan = Double.parseDouble(giaBanObj+"");
+
+                    // Kiểm tra và chuyển đổi kiểu dữ liệu cho soLuong
+                   
+                    // Kiểm tra và chuyển đổi kiểu dữ liệu cho tongTienSP
+                    Object tongTienSPObj = tblGioHang.getValueAt(i, 5);
+                    System.out.println(tongTienSPObj+" ");
+                    double tongTienSP = Double.parseDouble(tongTienSPObj+"");
+
+                     fields.add(new FieldHoaDon(tenSP, soLuong, giaBan, tongTienSP));
+                }
+                String tenNhanVien = lblTenNhanVienFont.getText();
+                String maHoaDon = lblMaHoaDonFont.getText();
+                String tienThanhToan = lblTongTien1.getText();
+                LocalDate ngay = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String ngayTao = ngay.format(formatter);
+                String sdt = txtSoDienThoai.getText();
+                if(sdt.length()!=0){
+                    sdt = txtSoDienThoai.getText();
+                }else{
+                    sdt = "Khách vãng lai";
+                }
+                ParameterHoaDon dataprint = new ParameterHoaDon(tenNhanVien, maHoaDon, tienThanhToan, ngayTao, sdt,fields);
+                XuLyHoaDon.getInstance().printReportPayment(dataprint);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
     public void editThemSanPhamOnTable(int row, int soLuong){
                      DefaultTableModel model = (DefaultTableModel) tblGioHang.getModel();
                     // Cập nhật số lượng và thành tiền
@@ -183,7 +238,7 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
                     model.setValueAt(newThanhTien, row, 5);
                     tblGioHang.setModel(model);
                     
-                    DecimalFormat decimalFormat = new DecimalFormat("#,###.000");
+                    DecimalFormat decimalFormat = new DecimalFormat("#,###");
                     String formattedTongTien = decimalFormat.format(tongTien());
                    if(tongTien() == 0 ){
                         lblTongTien1.setText("0"+formattedTongTien+" VND");
@@ -607,7 +662,7 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, true
@@ -633,12 +688,20 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
         pnlGioHang.setLayout(pnlGioHangLayout);
         pnlGioHangLayout.setHorizontalGroup(
             pnlGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(scrGioHang)
+            .addGroup(pnlGioHangLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrGioHang)
+                .addContainerGap())
         );
         pnlGioHangLayout.setVerticalGroup(
             pnlGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlGioHangLayout.createSequentialGroup()
+
                 .addComponent(scrGioHang, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+
+                .addContainerGap()
+                .addComponent(scrGioHang, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+
                 .addContainerGap())
         );
 
@@ -939,7 +1002,7 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
                         model.addRow(new Object[]{count, maSanPham, tenSanPham, soLuong, giaBan, thanhTien});                                }
             }
             tblGioHang.setModel(model);
-            DecimalFormat decimalFormat = new DecimalFormat("#,###.000");
+            DecimalFormat decimalFormat = new DecimalFormat("#,###");
             String formattedTongTien = decimalFormat.format(tongTien());
            if(tongTien() == 0.0 ){
                 lblTongTien1.setText("0"+formattedTongTien+" VND");
@@ -1051,7 +1114,7 @@ xoaSanPham();
             }
             count--;
         }
-            DecimalFormat decimalFormat = new DecimalFormat("#,###.000");
+            DecimalFormat decimalFormat = new DecimalFormat("#,###");
             String formattedTongTien = decimalFormat.format(tongTien());
            
          if(tongTien() == 0.0 ){
@@ -1391,7 +1454,7 @@ xoaSanPham();
         
         tblGioHang.setModel(model);
   
-                    DecimalFormat decimalFormat = new DecimalFormat("#,###.000");
+                    DecimalFormat decimalFormat = new DecimalFormat("#,###");
                     String formattedTongTien = decimalFormat.format(tongTien());
                     if(tongTien() == 0.0 ){
                         lblTongTien1.setText("0"+formattedTongTien+" VND");
@@ -1489,7 +1552,7 @@ xoaSanPham();
             }
             JOptionPane.showMessageDialog(this, "Đã thêm vào hàng chờ");
             model.setRowCount(0);
-            DecimalFormat decimalFormat = new DecimalFormat("#,###.000");
+            DecimalFormat decimalFormat = new DecimalFormat("#,###");
             String formattedTongTien = decimalFormat.format(tongTien());
             lamMoiDuLieu_KhachHang();
             lamMoiDuLieu_SanPham();
@@ -1605,7 +1668,11 @@ xoaSanPham();
         }else{
             JOptionPane.showMessageDialog(this, "Thêm sản phẩm để thanh toán");
         }
-       
+        try {
+            inHoaDon();
+        } catch (JRException ex) {
+            Logger.getLogger(pnlLapHoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void txtTienTraLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienTraLaiActionPerformed
