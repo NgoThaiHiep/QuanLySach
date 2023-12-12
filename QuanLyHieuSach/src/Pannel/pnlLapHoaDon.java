@@ -440,22 +440,31 @@ public void inHoaDon() throws JRException {
              if (item instanceof Sach) {
                 
                 Sach sach = (Sach) item;
-                // Thực hiện các thao tác với đối tượng Sach
-              row[0] = count ;
-              row[1] =   sach.getMaSanPham();
-              row[2] = sach.getTenSanPham();
-              row[3] = sach.getDonGia();
-              row[4] = sach.getSoLuongTon();
-                model.addRow(row);
+                    // Thực hiện các thao tác với đối tượng Sach
+                    if(sach.getTinhTrang().equals("Ngừng kinh doanh")){
+                        
+                    }else{
+                           row[0] = count ;
+                        row[1] =   sach.getMaSanPham();
+                        row[2] = sach.getTenSanPham();
+                        row[3] = sach.getDonGia();
+                        row[4] = sach.getSoLuongTon();
+                        model.addRow(row);
+                    }
+                 
             } else if (item instanceof VanPhongPham) {
                 VanPhongPham vpp = (VanPhongPham) item;
                 // Thực hiện các thao tác với đối tượng VanPhongPham
-               row[0] = count ;
-                row[1] =   vpp.getMaSanPham();
-                row[2] = vpp.getTenSanPham();
-                row[3] = vpp.getDonGia();
-               row[4] = vpp.getSoLuongTon();
-               model.addRow(row);
+                if(vpp.getTinhTrang().equals("Ngừng kinh doanh")){
+                        
+                }else{
+                    row[0] = count ;
+                    row[1] =   vpp.getMaSanPham();
+                    row[2] = vpp.getTenSanPham();
+                    row[3] = vpp.getDonGia();
+                    row[4] = vpp.getSoLuongTon();
+                    model.addRow(row);
+                }
             }
              
         }
@@ -696,12 +705,7 @@ public void inHoaDon() throws JRException {
         pnlGioHangLayout.setVerticalGroup(
             pnlGioHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlGioHangLayout.createSequentialGroup()
-
                 .addComponent(scrGioHang, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
-
-                .addContainerGap()
-                .addComponent(scrGioHang, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-
                 .addContainerGap())
         );
 
@@ -869,7 +873,7 @@ public void inHoaDon() throws JRException {
                 .addComponent(lblTieuDeLapHoaDon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -976,7 +980,6 @@ public void inHoaDon() throws JRException {
                            
                         }else{
                         JOptionPane.showMessageDialog(this, "Sản phẩm đã thêm số lượng tối đa");
-       
                         }
                         found = true;
                         break;

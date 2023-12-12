@@ -46,7 +46,7 @@ public class pnlTraCuuKhachHang extends javax.swing.JPanel {
           for (String city : cities) {
             cboTinhThanhPho.addItem(city);
         }
-          capNhatDanhSachKhachHang();
+          
           khachHang_DAO = new KhachHang_DAO();
        capNhatDanhSachKhachHangTheoSoDienThoai();
     }
@@ -205,10 +205,7 @@ public class pnlTraCuuKhachHang extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Địa chỉ"
@@ -549,60 +546,7 @@ public static ArrayList<String> readExcel_City() throws IOException {
 	}
      
      public void capNhatDanhSachKhachHangTheoSoDienThoai(){
-         khachHang_DAO = new KhachHang_DAO();
-        
-         txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
-             @Override
-             public void insertUpdate(DocumentEvent e) {
-                 try {
-                    ArrayList<KhachHang> dsKhachHangSoDienThoai = khachHang_DAO.layDanhSachTheoMaSach_TheoSoDienThoai(txtTimKiem.getText());
-                    String colTieuDe1[] = new String[]{"Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Địa chỉ"};
-                     DefaultTableModel model = new DefaultTableModel(colTieuDe1, 0);
-                        Object[] row;
-                     for (KhachHang khachHang : dsKhachHangSoDienThoai) {
-                           row = new Object[12];
-                         // GÁN GIÁ TRỊ
-                         row[0] = khachHang.getMaKhachHang();
-                         row[1] = khachHang.getTenKhachHang();
-                         row[2] = khachHang.getSoDienThoai();
-                         row[3] = khachHang.getDiaChi();
-                        model.addRow(row);
-        }
-        jTable1.setModel(model);
-                 } catch (SQLException ex) {
-                     Logger.getLogger(pnlTraCuuKhachHang.class.getName()).log(Level.SEVERE, null, ex);
-                 }
-             }
-
-             @Override
-             public void removeUpdate(DocumentEvent e) {
-                  ArrayList<KhachHang> dsKhachHangSoDienThoai;
-                 try {
-                     dsKhachHangSoDienThoai = khachHang_DAO.layDanhSachTheoMaSach_TheoSoDienThoai(txtTimKiem.getText());
-                     String colTieuDe1[] = new String[]{"Mã khách hàng", "Tên khách hàng", "Số điện thoại", "Địa chỉ"};
-                     DefaultTableModel model = new DefaultTableModel(colTieuDe1, 0);
-                        Object[] row;
-                     for (KhachHang khachHang : dsKhachHangSoDienThoai) {
-                           row = new Object[12];
-                         // GÁN GIÁ TRỊ
-                         row[0] = khachHang.getMaKhachHang();
-                         row[1] = khachHang.getTenKhachHang();
-                         row[2] = khachHang.getSoDienThoai();
-                         row[3] = khachHang.getDiaChi();
-                        model.addRow(row);
-        }
-                jTable1.setModel(model);
-                 } catch (SQLException ex) {
-                     Logger.getLogger(pnlTraCuuKhachHang.class.getName()).log(Level.SEVERE, null, ex);
-                 }
-                    
-                
-             }
-             
-             @Override
-             public void changedUpdate(DocumentEvent e) {
-             }
-         });
+       
      }
      private void capNhatDanhSachKhachHang(){
         khachHang_DAO = new KhachHang_DAO();

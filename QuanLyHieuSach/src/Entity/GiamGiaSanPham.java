@@ -18,7 +18,7 @@ public class GiamGiaSanPham {
     private String tinhTrang;
     private String chiTiet;
     private int loai;
-    
+    private LoaiSanPham loaiSanPham;
     public GiamGiaSanPham() {
     }
 
@@ -46,9 +46,19 @@ public class GiamGiaSanPham {
         this.chiTiet = chiTiet;
         this.loai = loai;
     }
+
+    
     
     public String getMaGiamGiaSanPham() {
         return maGiamGiaSanPham;
+    }
+
+    public LoaiSanPham getLoaiSanPham() {
+        return loaiSanPham;
+    }
+
+    public void setLoaiSanPham(LoaiSanPham loaiSanPham) {
+        this.loaiSanPham = loaiSanPham;
     }
 
     public void setMaGiamGiaSanPham(String maGiamGiaSanPham) {
@@ -125,6 +135,11 @@ public class GiamGiaSanPham {
 
     public void setLoai(int loai) {
         this.loai = loai;
+    }
+
+    @Override
+    public String toString() {
+        return "GiamGiaSanPham{" + "maGiamGiaSanPham=" + maGiamGiaSanPham + ", tenGiamGia=" + tenGiamGia + ", sanPham=" + sanPham + ", soTienGiam=" + soTienGiam + ", tyLeGiam=" + tyLeGiam + ", ngayBatDau=" + ngayBatDau + ", ngayKetThuc=" + ngayKetThuc + ", tinhTrang=" + tinhTrang + ", chiTiet=" + chiTiet + ", loai=" + loai + '}';
     }
     
     

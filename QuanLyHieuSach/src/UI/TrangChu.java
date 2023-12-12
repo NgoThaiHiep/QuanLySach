@@ -496,7 +496,7 @@ addTableStyle(jScrollPane1);
             public void actionPerformed(ActionEvent e) {                 
                 try {            
                     UIManager.setLookAndFeel(originalLookAndFeel);        } catch (UnsupportedLookAndFeelException ex) {            
-                    Logger.getLogger(pnTraCuuNhanVien.class.getName()).log(Level.SEVERE, null, ex);        }
+                    Logger.getLogger(pnlTraCuuKhachHang.class.getName()).log(Level.SEVERE, null, ex);        }
                     pnlBody.removeAll();
                 try {
                     pnlBody.add(new pnlThemKhachHang(tk));

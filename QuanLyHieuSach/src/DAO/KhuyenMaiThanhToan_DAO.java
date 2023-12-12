@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -134,6 +135,78 @@ public class KhuyenMaiThanhToan_DAO {
              e.printStackTrace();
         }
         return dsKhuyenMai;
+    }
+        
+        public boolean themGiamGiaSanPham_TyLe(KhuyenMaiThanhToan khuyenMaiThanhToan){
+            ConnectDB.getInstance();
+		Connection con = ConnectDB.getConnection();
+		PreparedStatement state = null;
+		int n = 0;
+		      try {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        String sql ="INSERT INTO [dbo].[KhuyenMaiThanhToan]([MaKhuyenMai],[TenKhuyenMai],[PhanTramGiam],[GiaTriToiThieuDonHang],[GiamToiDa],[NgayBatDau],[NgayKetThuc],[TinhTrang],[ChiTiet] ,[Loai],[SoLuong])\n" +
+                                    "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                        state = con.prepareStatement(sql);
+                        state.setString(1, khuyenMaiThanhToan.getMaKhuyenMai());
+                        state.setString(2, khuyenMaiThanhToan.getTenKhuyenMai());
+                        state.setFloat(3, khuyenMaiThanhToan.getPhanTramGiam());
+                        state.setFloat(4, khuyenMaiThanhToan.getGiaTriToiThieuDonHang());
+                        state.setFloat(5, khuyenMaiThanhToan.getGiamToiDa());
+                        state.setString(6,formatter.format(khuyenMaiThanhToan.getNgayBatDau()));
+                        state.setString(7,formatter.format(khuyenMaiThanhToan.getNgayKetThuc()));   
+                        state.setString(8, khuyenMaiThanhToan.getTinhTrang());
+                        state.setString(9, khuyenMaiThanhToan.getChiTiet());
+                        state.setInt(10, khuyenMaiThanhToan.getLoai());
+                        state.setInt(11,khuyenMaiThanhToan.getSoLuong());
+                        n = state.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				state.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+		return n>0;
+    }
+        public boolean themGiamGiaSanPham_GiaTien(KhuyenMaiThanhToan khuyenMaiThanhToan){
+            ConnectDB.getInstance();
+		Connection con = ConnectDB.getConnection();
+		PreparedStatement state = null;
+		int n = 0;
+		      try {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        String sql ="INSERT INTO [dbo].[KhuyenMaiThanhToan]([MaKhuyenMai],[TenKhuyenMai],[GiaTriToiThieuDonHang],[SoTienGiam],[NgayBatDau],[NgayKetThuc],[TinhTrang],[ChiTiet] ,[Loai],[SoLuong])\n" +
+                                    "VALUES(?,?,?,?,?,?,?,?,?,?)";
+                        state = con.prepareStatement(sql);
+                        state.setString(1, khuyenMaiThanhToan.getMaKhuyenMai());
+                        state.setString(2, khuyenMaiThanhToan.getTenKhuyenMai());
+                        state.setFloat(3, khuyenMaiThanhToan.getGiaTriToiThieuDonHang());
+                        state.setFloat(4, khuyenMaiThanhToan.getSoTienGiam());
+                        state.setString(5,formatter.format(khuyenMaiThanhToan.getNgayBatDau()));
+                        state.setString(6,formatter.format(khuyenMaiThanhToan.getNgayKetThuc()));   
+                        state.setString(7, khuyenMaiThanhToan.getTinhTrang());
+                        state.setString(8, khuyenMaiThanhToan.getChiTiet());
+                        state.setInt(9, khuyenMaiThanhToan.getLoai());
+                        state.setInt(10,khuyenMaiThanhToan.getSoLuong());
+                        n = state.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				state.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+		return n>0;
     }
 }
 

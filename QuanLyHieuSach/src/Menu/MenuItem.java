@@ -16,15 +16,10 @@ import javax.swing.border.EmptyBorder;
 public class MenuItem extends javax.swing.JPanel {
     
 
-    private boolean isSelected = false;
-     private boolean isSelected1 = false;
     public void setShowing(boolean showing) {
         this.showing = showing;
     }
 
-    /**
-     * @return the subMenu
-     */
     public ArrayList<MenuItem> getSubMenu() {
         return subMenu;
     }
@@ -33,32 +28,23 @@ public class MenuItem extends javax.swing.JPanel {
      * Creates new form MenuItem
      */
     private final ArrayList<MenuItem> subMenu = new ArrayList<>();
-    private final ArrayList<MenuItem> subMenu1 = new ArrayList<>();
-    
     private ActionListener act;
-    
-    public MenuItem(Icon icon, String menuName,ActionListener act, MenuItem...subMenu) {
+
+    public MenuItem(Icon icon, String menuName, ActionListener act, MenuItem... subMenu) {
         initComponents();
         lblIcon.setIcon(icon);
         lblName.setText(menuName);
-        if(act != null){
+        if (act != null) {
             this.act = act;
         }
         this.setSize(new Dimension(Integer.MAX_VALUE, 45));
         this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 45));
         this.setMinimumSize(new Dimension(Integer.MAX_VALUE, 45));
-        int leftMargin = 10; // Điều chỉnh khoảng cách từ bên trái
-        this.setBorder(new EmptyBorder(0, leftMargin, 0, 0));
-            
-            
-                for (int i = 0; i < subMenu.length; i++) {
-                this.subMenu.add(subMenu[i]);
-                this.subMenu1.add(subMenu[i]);
-                subMenu[i].setVisible(false);
-            
-            }
+        for (int i = 0; i < subMenu.length; i++) {
+            this.subMenu.add(subMenu[i]);
+            subMenu[i].setVisible(false);
+        }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -113,15 +99,10 @@ public class MenuItem extends javax.swing.JPanel {
    private boolean showing = false;
     private void lblNameMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNameMousePressed
         // TODO add your handling code here:
-        if (showing) {
-           hideMenu();
-            isSelected1 = false;
-          // setBackground(new java.awt.Color(250, 250, 250));
+       if (showing) {
+            hideMenu();
         } else {
-            isSelected1 = true;
             showMenu();
-            //setBackground(new java.awt.Color(250, 0, 0));
-
         }
         if (act != null) {
             act.actionPerformed(null);
@@ -132,15 +113,10 @@ public class MenuItem extends javax.swing.JPanel {
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         // TODO add your handling code here:
         
-        if (showing) {
-           hideMenu();
-           
-          // setBackground(new java.awt.Color(250, 250, 250));
+      if (showing) {
+            hideMenu();
         } else {
-            
             showMenu();
-           // setBackground(new java.awt.Color(250, 0, 0));
-
         }
         if (act != null) {
             act.actionPerformed(null);
@@ -150,33 +126,29 @@ public class MenuItem extends javax.swing.JPanel {
    // Thêm phương thức đệ quy để ẩn tất cả phần tử con
 
    
-    private void showMenu(){ 
-    new Thread(new Runnable() { 
+    private void showMenu() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 for (int i = 0; i < subMenu.size(); i++) {
                     sleep();
-                    int leftMargin = 30; // Điều chỉnh khoảng cách từ bên trái
-                    subMenu.get(i).setBorder(new EmptyBorder(0, leftMargin, 0, 0));
-                    System.out.println(subMenu.get(i).getSubMenu());
                     subMenu.get(i).setVisible(true);
                 }
-                 
                 showing = true;
                 getParent().repaint();
-                getParent().revalidate(); 
+                getParent().revalidate();
             }
         }).start();
+    }
 
-}
-    private void hideMenu(){
+    private void hideMenu() {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 for (int i = subMenu.size() - 1; i >= 0; i--) {
                     sleep();
                     subMenu.get(i).setVisible(false);
-                   // subMenu.get(i).hideMenu();
+                    subMenu.get(i).hideMenu();
                 }
                 getParent().repaint();
                 getParent().revalidate();
@@ -184,13 +156,13 @@ public class MenuItem extends javax.swing.JPanel {
             }
         }).start();
     }
-       
-private void sleep(){
-    try {
-        Thread.sleep(20);
-    } catch (Exception e) {
+
+    private void sleep() {
+        try {
+            Thread.sleep(20);
+        } catch (Exception e) {
+        }
     }
-}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblIcon;

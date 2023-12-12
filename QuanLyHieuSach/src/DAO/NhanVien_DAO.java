@@ -179,7 +179,7 @@ public class NhanVien_DAO {
 		PreparedStatement state = null;
 		int n =0;
 		try {
-                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 			state = con.prepareStatement("UPDATE [dbo].[NhanVien]\n" +
                                                     " SET [HoTenNhanVien] = ?,[CCCD] = ? ,[GioiTinh] = ? ,[NgaySinh] = ?,[SoDienThoai] = ?,[Email] = ?,[DiaChi] = ? ,[TrangThai] = ? ,[HinhAnh] =? ,[ChucVu] = ? , [CaLamViec] = ?,[TaiKhoan] = ?\n" +

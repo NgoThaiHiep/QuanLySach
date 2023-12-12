@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -52,14 +53,15 @@ public class GiamGiaSanPham_DAO {
         return dsGiamGiaSanPham;
     }
     
-    public ArrayList<GiamGiaSanPham> layDanhSachGiamGiaSanPham_GiaTien (){
+    public ArrayList<GiamGiaSanPham> layDanhSachGiamGiaSanPham_GiaTien (int loai){
          ArrayList<GiamGiaSanPham> dsGiamGiaSanPham = new  ArrayList<GiamGiaSanPham> ();
            ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement pst = null;
         try {
-            String sql = "select * from GiamGiaSanPham where Loai = 1";
+            String sql = "select * from GiamGiaSanPham where Loai = ?";
             pst = con.prepareStatement(sql);
+            pst.setInt(1,loai);
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
                 String maGiamGiaSanPham = rs.getString("GiamGiaSanPhamID");
@@ -72,7 +74,7 @@ public class GiamGiaSanPham_DAO {
                 LocalDate ngayKetThuc = sqlNgayKetThuc.toLocalDate();
                 String tinhTrang = rs.getString("TinhTrang");
                 String chiTiet = rs.getString("ChiTiet");
-                int loai = rs.getInt("Loai");
+                
                 GiamGiaSanPham giamGiaSanPham = new GiamGiaSanPham(maGiamGiaSanPham, tenGiamGia, sanPham, soTienGiam, ngayBatDau, ngayKetThuc, tinhTrang, chiTiet,loai);
                 dsGiamGiaSanPham.add(giamGiaSanPham);
             }
@@ -157,4 +159,137 @@ public class GiamGiaSanPham_DAO {
         return duplicate;
         }
     
+    public boolean themGiamGiaSanPham_TyLe(GiamGiaSanPham giamGiaSanPham){
+        ConnectDB.getInstance();
+		Connection con = ConnectDB.getConnection();
+		PreparedStatement state = null;
+		int n = 0;
+		      try {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        String sql ="INSERT INTO [dbo].[GiamGiaSanPham]([GiamGiaSanPhamID] ,[TenGiamGia],[SanPhamID],[NgayBatDau],[NgayKetThuc],[TinhTrang],[ChiTiet],[Loai],[TyLeGiam])\n" +
+                                    "VALUES(?,?,?,?,?,?,?,?,?)";
+                        state = con.prepareStatement(sql);
+                        state.setString(1, giamGiaSanPham.getMaGiamGiaSanPham());
+                        state.setString(2, giamGiaSanPham.getTenGiamGia());
+                        state.setString(3, giamGiaSanPham.getSanPham().getMaSanPham());
+                        state.setString(4,formatter.format(giamGiaSanPham.getNgayBatDau()));
+                        state.setString(5,formatter.format(giamGiaSanPham.getNgayKetThuc()));   
+                        state.setString(6, giamGiaSanPham.getTinhTrang());
+                        state.setString(7, giamGiaSanPham.getChiTiet());
+                        state.setInt(8, giamGiaSanPham.getLoai());
+                        state.setFloat(9, giamGiaSanPham.getTyLeGiam());
+                        n = state.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				state.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+		return n>0;
+    }
+    public boolean themGiamGiaSanPham_GiaTien(GiamGiaSanPham giamGiaSanPham){
+                ConnectDB.getInstance();
+		Connection con = ConnectDB.getConnection();
+		PreparedStatement state = null;
+		int n = 0;
+		      try {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        String sql ="INSERT INTO [dbo].[GiamGiaSanPham]([GiamGiaSanPhamID] ,[TenGiamGia],[SanPhamID],[SoTienGiam],[NgayBatDau],[NgayKetThuc],[TinhTrang],[ChiTiet],[Loai])\n" +
+                                    "     VALUES(?,?,?,?,?,?,?,?,?)";
+                        state = con.prepareStatement(sql);
+                        state.setString(1, giamGiaSanPham.getMaGiamGiaSanPham());
+                        state.setString(2, giamGiaSanPham.getTenGiamGia());
+                        state.setString(3, giamGiaSanPham.getSanPham().getMaSanPham());
+                        state.setFloat(4, giamGiaSanPham.getSoTienGiam());
+                        state.setString(5,formatter.format(giamGiaSanPham.getNgayBatDau()));
+                        state.setString(6,formatter.format(giamGiaSanPham.getNgayKetThuc()));   
+                        state.setString(7, giamGiaSanPham.getTinhTrang());
+                        state.setString(8, giamGiaSanPham.getChiTiet());
+                        state.setInt(9, giamGiaSanPham.getLoai());
+                        n = state.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				state.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+		return n>0;
+    }
+    
+    public boolean updateGiamGiaSanPham_GiaTien(GiamGiaSanPham giamGiaSanPham){
+        ConnectDB.getInstance();
+	Connection con = ConnectDB.getConnection();
+	PreparedStatement state = null;
+        int n = 0;
+        try {
+             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String sql = "UPDATE [dbo].[GiamGiaSanPham]\n" +
+                        "SET [TenGiamGia] = ?,[SanPhamID] = ?,[SoTienGiam] = ?,[NgayBatDau] = ?,[NgayKetThuc] = ?,[TinhTrang] = ?,[ChiTiet] = ?\n" +
+                        "WHERE [GiamGiaSanPhamID] = ?";
+            state = con.prepareStatement(sql);
+            state.setString(1, giamGiaSanPham.getTenGiamGia());
+            state.setString(2, giamGiaSanPham.getSanPham().getMaSanPham());
+            state.setFloat(3, giamGiaSanPham.getSoTienGiam());
+            state.setString(4, formatter.format( giamGiaSanPham.getNgayBatDau()));
+            state.setString(5, formatter.format( giamGiaSanPham.getNgayKetThuc()));
+            state.setString(6, giamGiaSanPham.getTinhTrang());
+            state.setString(7, giamGiaSanPham.getChiTiet());
+            state.setString(8, giamGiaSanPham.getMaGiamGiaSanPham());
+            n = state.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+			try {
+				state.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+                return n > 0;
+    }
+    public boolean updateGiamGiaSanPham_TyLe(GiamGiaSanPham giamGiaSanPham){
+        ConnectDB.getInstance();
+	Connection con = ConnectDB.getConnection();
+	PreparedStatement state = null;
+        int n = 0;
+        try {
+             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String sql ="UPDATE [dbo].[GiamGiaSanPham]\n" +
+                        "SET [TenGiamGia] = ?,[SanPhamID] = ?,[TyLeGiam]  = ?,[NgayBatDau] = ?,[NgayKetThuc] = ?,[TinhTrang] = ?,[ChiTiet] = ?\n" +
+                        "WHERE [GiamGiaSanPhamID] = ?";
+            state = con.prepareStatement(sql);
+            state.setString(1, giamGiaSanPham.getTenGiamGia());
+            state.setString(2, giamGiaSanPham.getSanPham().getMaSanPham());
+            state.setFloat(3, giamGiaSanPham.getTyLeGiam());
+            state.setString(4, formatter.format( giamGiaSanPham.getNgayBatDau()));
+            state.setString(5, formatter.format( giamGiaSanPham.getNgayKetThuc()));
+            state.setString(6, giamGiaSanPham.getTinhTrang());
+            state.setString(7, giamGiaSanPham.getChiTiet());
+            state.setString(8, giamGiaSanPham.getMaGiamGiaSanPham());
+            n = state.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+			try {
+				state.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+                return n > 0;
+    }
 }
