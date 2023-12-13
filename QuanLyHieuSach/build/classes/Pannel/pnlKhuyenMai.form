@@ -151,12 +151,14 @@
                   <Component id="lblMaKhuyenMaiKyTu" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblTenKhuyenMai" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
-                  <Component id="txtTenKhuyenMai" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblSoLuong" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jCheckBox1" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblTenKhuyenMai" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
+                      <Component id="txtTenKhuyenMai" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblSoLuong" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace pref="8" max="32767" attributes="0"/>
               <Component id="jPanel2" min="-2" pref="151" max="-2" attributes="0"/>

@@ -230,16 +230,18 @@ public class Sach_DAO {
 		}
                 return n > 0;
     }
-    public boolean updateSoLuongSach(SanPham sanPham, int soLuong){
-        ConnectDB.getInstance();
-	Connection con = ConnectDB.getConnection();
-	PreparedStatement state = null;
-        int n = 0;
-        try {
-            String sql = "UPDATE [dbo].[Sach]SET [SoLuongTon] =  [SoLuongTon]  - ? WHERE [SachID] = ? ";
-           state = con.prepareStatement(sql);
-           state.setInt(1,soLuong);
-           state.setString(2,sanPham.getMaSanPham());
+    public boolean updateSoLuongSach(String ma, int soLuong){
+         ConnectDB.getInstance();
+		Connection con = ConnectDB.getConnection();
+		PreparedStatement state = null;
+                int n = 0;
+                try {
+              String sql = "UPDATE [dbo].[Sach] SET [SoLuongTon] =  [SoLuongTon]  - ? WHERE [SachID] = ?";
+                      
+                state = con.prepareStatement(sql);
+                state.setInt(1, soLuong);
+                state.setString(2, ma);
+                n = state.executeUpdate();
         } catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

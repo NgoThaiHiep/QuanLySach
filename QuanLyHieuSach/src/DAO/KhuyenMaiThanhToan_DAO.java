@@ -302,5 +302,34 @@ public class KhuyenMaiThanhToan_DAO {
 		}
 		return n>0;	
         }
+        public boolean updateSoLuongKhuyenMai(String ma, int soLuong){
+      
+                 ConnectDB.getInstance();
+		Connection con = ConnectDB.getConnection();
+		PreparedStatement state = null;
+                int n = 0;
+                try {
+              String sql = "UPDATE [dbo].[KhuyenMaiThanhToan] SET [SoLuong] =  [SoLuong]  - ? WHERE [MaKhuyenMai] = ?";
+                      
+                state = con.prepareStatement(sql);
+                state.setInt(1, soLuong);
+                state.setString(2, ma);
+                n = state.executeUpdate();
+           
+           
+        } catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				state.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+                return n > 0;
+    }
 }
 

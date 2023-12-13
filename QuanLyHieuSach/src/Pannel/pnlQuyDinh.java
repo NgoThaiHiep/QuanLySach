@@ -434,6 +434,7 @@ public class pnlQuyDinh extends javax.swing.JPanel {
 
     private void btnApDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApDungActionPerformed
         // TODO add your handling code here:
+        
         quyDinh_DAO = new QuyDinh_DAO();
         soLuongToiThieu = Integer.parseInt(txtSoLuongToiThieu.getText());
         soLuongToiDa = Integer.parseInt(txtSoLuongToiDa.getText());

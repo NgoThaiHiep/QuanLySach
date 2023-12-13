@@ -19,8 +19,6 @@ public class pnlTraCuuSanPham extends javax.swing.JPanel {
         this.tk = tk;
         this.nv = nv;
         initComponents();
-        
-        btnSach.setBackground(Color.red);
         pnlSouth.add(new Pannel.pnlTraCuuSach());
         pnlSouth.repaint();
         pnlSouth.revalidate();

@@ -301,16 +301,18 @@ public class VanPhongPham_DAO {
 		}
         return n > 0;
     }
-      public boolean updateSoLuongVanPhongPham(SanPham sanPham, int soLuong){
-        ConnectDB.getInstance();
-	Connection con = ConnectDB.getConnection();
-	PreparedStatement state = null;
-        int n = 0;
-        try {
-            String sql = "UPDATE [dbo].[VanPhongPham] SET [SoLuongTon] = ? WHERE [VanPhongPhamID] = ?";
-           state = con.prepareStatement(sql);
-           state.setInt(1,soLuong);
-           state.setString(2,sanPham.getMaSanPham());
+      public boolean updateSoLuongVanPhongPham(String ma, int soLuong){
+                 ConnectDB.getInstance();
+		Connection con = ConnectDB.getConnection();
+		PreparedStatement state = null;
+                int n = 0;
+                try {
+              String sql = "UPDATE [dbo].[VanPhongPham] SET [SoLuongTon] =  [SoLuongTon]  - ? WHERE [VanPhongPhamID] = ?";
+                      
+                state = con.prepareStatement(sql);
+                state.setInt(1, soLuong);
+                state.setString(2, ma);
+                n = state.executeUpdate();
         } catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

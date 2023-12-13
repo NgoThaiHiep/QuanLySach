@@ -387,9 +387,7 @@ public class TrangChu extends javax.swing.JFrame {
                         showForm(new pnlKhuyenMai());
                     }
                 } else if (index == 9) {
-                    
                         showForm(new pnlTroGiup());
-               
                 } 
                 
             }
@@ -397,6 +395,10 @@ public class TrangChu extends javax.swing.JFrame {
     }
 
     public void showForm(Component com) {
+        try { UIManager.setLookAndFeel(originalLookAndFeel);        
+                } catch (UnsupportedLookAndFeelException ex) {            
+                         
+        }
         pnlBody.removeAll();
         pnlBody.add(com);
         pnlBody.repaint();
