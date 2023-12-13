@@ -36,7 +36,7 @@
               <Component id="lblTieuDeLapHoaDon" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnlHoaDon" min="-2" pref="671" max="-2" attributes="0"/>
-              <EmptySpace pref="44" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -331,6 +331,9 @@
           </Layout>
           <SubComponents>
             <Container class="javax.swing.JScrollPane" name="scrGioHang">
+              <Properties>
+                <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+              </Properties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
@@ -430,6 +433,9 @@
           </Layout>
           <SubComponents>
             <Container class="javax.swing.JScrollPane" name="scrDanhSachSanPhamTimKiem">
+              <Properties>
+                <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+              </Properties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>

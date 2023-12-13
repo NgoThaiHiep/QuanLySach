@@ -7,7 +7,7 @@ import DAO.TheLoai_DAO;
 import Entity.NhaCungCap;
 import Entity.NhaXuatBan;
 import Entity.TheLoai;
-import static Pannel.pnTraCuuNhanVien.readExcel_City;
+import static Pannel.pnlTraCuuNhanVien.readExcel_City;
 import java.awt.Color;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;

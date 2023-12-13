@@ -298,7 +298,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblDonGia">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#x110;&#x1a1;n gi&#xe1;"/>
+                <Property name="text" type="java.lang.String" value="&#x110;&#x1a1;n gi&#xe1; nh&#x1ead;p"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtDonGia">
@@ -395,6 +395,9 @@
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnThemNhaCungCap">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemNhaCungCapActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnThemTacGia">
               <Events>
@@ -407,6 +410,9 @@
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnThemNhaXuatBan1">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemNhaXuatBan1ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

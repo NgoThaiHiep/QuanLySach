@@ -2,12 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package UI;
+package Them;
 
 import DAO.XuatXu_DAO;
 import Entity.XuatXu;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author hongh
@@ -19,14 +21,11 @@ public class ThemXuatXu extends javax.swing.JFrame {
     /**
      * Creates new form ThemXuatXu
      */
-    public ThemXuatXu() throws java.sql.SQLException {
+    public ThemXuatXu() throws SQLException{
         initComponents();
         xuatXu_DAO = new XuatXu_DAO();
-        try {
             lblMaXuatXu.setText(xuatXu_DAO.generateXuatXu());
-        } catch (java.sql.SQLException ex) {
-            java.util.logging.Logger.getLogger(ThemTH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+       
     }
 
     /**
@@ -155,8 +154,9 @@ public class ThemXuatXu extends javax.swing.JFrame {
             try {
                 lblMaXuatXu.setText(xuatXu_DAO.generateXuatXu());
             } catch (SQLException ex) {
-                java.util.logging.Logger.getLogger(ThemTH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                Logger.getLogger(ThemXuatXu.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
             JOptionPane.showMessageDialog(this, "Thêm thành công");
         }
     }//GEN-LAST:event_btnThemActionPerformed

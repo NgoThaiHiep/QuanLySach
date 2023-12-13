@@ -13,8 +13,12 @@ import Entity.NhaXuatBan;
 import Entity.Sach;
 import Entity.TacGia;
 import Entity.TheLoai;
+import Them.ThemTacGia1;
+import Them.frmNhaCungCap;
 import Them.frmNhaXuatBan;
 import Them.frmThemLoaiVanPhongPham;
+import Them.frmThemTheLoai;
+import Them.ThemTH;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
@@ -348,7 +352,7 @@ private static boolean isValidInput(String currentText, String text) {
             }
         });
 
-        lblDonGia.setText("Đơn giá");
+        lblDonGia.setText("Đơn giá nhập");
 
         txtDonGia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -403,6 +407,12 @@ private static boolean isValidInput(String currentText, String text) {
             }
         });
 
+        btnThemNhaCungCap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemNhaCungCapActionPerformed(evt);
+            }
+        });
+
         btnThemTacGia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemTacGiaActionPerformed(evt);
@@ -412,6 +422,12 @@ private static boolean isValidInput(String currentText, String text) {
         cboTheLoai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboTheLoaiActionPerformed(evt);
+            }
+        });
+
+        btnThemNhaXuatBan1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemNhaXuatBan1ActionPerformed(evt);
             }
         });
 
@@ -808,8 +824,23 @@ private static boolean isValidInput(String currentText, String text) {
 
     private void btnThemTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemTheLoaiActionPerformed
         
-        jframThemTheLoai(true);
-      
+        frmThemTheLoai themTL = new frmThemTheLoai();
+
+        // Thiết lập loại đóng cửa sổ
+        themTL.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Thêm sự kiện WindowListener để ẩn frame khi đóng
+        themTL.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                // Ẩn frame thay vì đóng nó
+                ((JFrame) windowEvent.getSource()).setVisible(false);
+            }
+        });
+
+        // Hiển thị frame ThemTH
+        themTL.setVisible(true);
+      lamMoiDuLieu();
     }//GEN-LAST:event_btnThemTheLoaiActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -847,13 +878,67 @@ private static boolean isValidInput(String currentText, String text) {
 
   
     private void btnThemTacGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemTacGiaActionPerformed
-        //new ThemTacGia1().setVisible(true);
-        //new frmThemTheLoai().setVisible(true);
-       // new frmNhaCungCap().setVisible(true);
-         // new frmThemTheLoai().setVisible(true);
-        //new frmThemLoaiVanPhongPham().setVisible(true);
-        new frmNhaXuatBan().setVisible(true);
+        ThemTacGia1 themTG = new ThemTacGia1();
+
+        // Thiết lập loại đóng cửa sổ
+        themTG.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Thêm sự kiện WindowListener để ẩn frame khi đóng
+        themTG.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                // Ẩn frame thay vì đóng nó
+                ((JFrame) windowEvent.getSource()).setVisible(false);
+            }
+        });
+
+        // Hiển thị frame ThemTH
+        themTG.setVisible(true);
+        
     }//GEN-LAST:event_btnThemTacGiaActionPerformed
+
+    private void btnThemNhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNhaCungCapActionPerformed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        // Tạo một đối tượng của frame ThemTH
+        frmNhaCungCap themNCC = new frmNhaCungCap();
+
+        // Thiết lập loại đóng cửa sổ
+        themNCC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Thêm sự kiện WindowListener để ẩn frame khi đóng
+        themNCC.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                // Ẩn frame thay vì đóng nó
+                ((JFrame) windowEvent.getSource()).setVisible(false);
+            }
+        });
+
+        // Hiển thị frame ThemTH
+        themNCC.setVisible(true);
+        
+    }//GEN-LAST:event_btnThemNhaCungCapActionPerformed
+
+    private void btnThemNhaXuatBan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNhaXuatBan1ActionPerformed
+        frmNhaXuatBan themNXB = new frmNhaXuatBan();
+
+        // Thiết lập loại đóng cửa sổ
+        themNXB.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Thêm sự kiện WindowListener để ẩn frame khi đóng
+        themNXB.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                // Ẩn frame thay vì đóng nó
+                ((JFrame) windowEvent.getSource()).setVisible(false);
+            }
+        });
+
+        // Hiển thị frame ThemTH
+        themNXB.setVisible(true);
+        
+    }//GEN-LAST:event_btnThemNhaXuatBan1ActionPerformed
     
     private void duLieuTenSach(){
             txtTenSach.addKeyListener(new KeyAdapter() {
@@ -1163,7 +1248,7 @@ private static boolean isValidInput(String currentText, String text) {
             imageFrame = null;
         }
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnThemNhaCungCap;
     private javax.swing.JButton btnThemNhaXuatBan1;
