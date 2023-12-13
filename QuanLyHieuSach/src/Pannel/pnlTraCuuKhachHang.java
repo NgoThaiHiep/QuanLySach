@@ -240,6 +240,11 @@ public class pnlTraCuuKhachHang extends javax.swing.JPanel {
                 txtTimKiemFocusLost(evt);
             }
         });
+        txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -310,7 +315,6 @@ public class pnlTraCuuKhachHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(txtTimKiem.getText().equals("Tìm kiếm theo số điện thoại")){
             txtTimKiem.setText("");
-            txtTimKiem.requestFocus();
             removePlaceholderStyle(txtTimKiem);
         }
     }//GEN-LAST:event_txtTimKiemFocusGained
@@ -454,6 +458,10 @@ public class pnlTraCuuKhachHang extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimKiemActionPerformed
 public static ArrayList<String> readExcel_City() throws IOException {
 		//Đọc dữ liệu từ file Diachi.xlsx
                 ArrayList<String> cities = new ArrayList<>();

@@ -27,7 +27,7 @@ public class NhaCungCap {
 		this.soDienThoai = soDienThoai;
 		this.email = email;
 	}
-
+    
 	public String getSanPhamCungCap() {
 		return sanPhamCungCap;
 	}
@@ -43,10 +43,13 @@ public class NhaCungCap {
 
     public NhaCungCap() {
     }
-    
+
     public NhaCungCap(String maNCC) {
         this.maNCC = maNCC;
     }
+
+    
+    
 
     public String getMaNCC() {
         return maNCC;

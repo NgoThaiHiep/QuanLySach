@@ -49,6 +49,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -1799,7 +1800,22 @@ xoaSanPham();
 
     private void btnDanhSachHangChoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDanhSachHangChoActionPerformed
         // TODO add your handling code here:
-        new frmHangCho().setVisible(true);
+        frmHangCho themHC = new frmHangCho();
+
+        // Thiết lập loại đóng cửa sổ
+        themHC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Thêm sự kiện WindowListener để ẩn frame khi đóng
+        themHC.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                // Ẩn frame thay vì đóng nó
+                ((JFrame) windowEvent.getSource()).setVisible(false);
+            }
+        });
+
+        // Hiển thị frame ThemTH
+        themHC.setVisible(true);
     }//GEN-LAST:event_btnDanhSachHangChoActionPerformed
 
     private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed

@@ -11,10 +11,10 @@ public class XuatXu {
     private String maXuatXu;
     private String tenQuocGia;
 
-    public XuatXu(String maXuatXu) {
-        this.maXuatXu = maXuatXu;
+    public XuatXu(String tenQuocGia) {
+        this.tenQuocGia = tenQuocGia;
     }
-
+    
     public XuatXu(String maXuatXu, String tenQuocGia) {
         this.maXuatXu = maXuatXu;
         this.tenQuocGia = tenQuocGia;

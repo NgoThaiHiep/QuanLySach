@@ -102,17 +102,15 @@ public class Sach_DAO {
         PreparedStatement state = null;
         int n = 0;
         try {
-            String sql = "INSERT INTO Sach (SachID, TenSach, TacGia, NhaXuatBan, NamXuatBan, SoTrang, TheLoai, "
-                    + "LoaiSanPham, NhaCungCap, SoLuongTon, DonGia, MoTa, TinhTrang, HinhAnh,NgonNgu)"
-                    +"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into Sach values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             state = con.prepareStatement(sql);
             state.setString(1, sach.getMaSanPham());
             state.setString(2, sach.getTenSanPham());
-            state.setString(3, sach.getTacGia().getMaTacGia());
+            state.setString(3, sach.getTacGia().getTenTacGia());
             state.setString(4, sach.getNhaXuatBan().getMaNhaXuatBan());
             state.setInt(5, sach.getNamXuatBan());
             state.setInt(6, sach.getSoTrang());
-            state.setString(7, sach.getTheLoai().getMaTheLoai());
+            state.setString(7, sach.getTheLoai().getTenTheLoai());
             state.setString(8, sach.getLoaiSanPham().getMaLoaiSanPham());
             state.setString(9, sach.getNhaCungCap().getMaNCC());
             state.setInt(10, sach.getSoLuongTon());
