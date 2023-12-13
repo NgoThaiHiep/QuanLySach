@@ -748,6 +748,8 @@ public void inHoaDon() throws JRException {
 
         pnlGioHang.setBorder(javax.swing.BorderFactory.createTitledBorder("Giỏ hàng"));
 
+        scrGioHang.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
         tblGioHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -798,6 +800,8 @@ public void inHoaDon() throws JRException {
         pnlHoaDon.add(pnlGioHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(581, 232, 700, 290));
 
         pnlDanhSachSanPhamTimKiem.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sách sản phẩm tìm kiếm"));
+
+        scrDanhSachSanPhamTimKiem.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         tblDanhSachSanPhamTimKiem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

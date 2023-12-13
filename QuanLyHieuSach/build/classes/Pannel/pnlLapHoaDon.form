@@ -338,6 +338,9 @@
           </Layout>
           <SubComponents>
             <Container class="javax.swing.JScrollPane" name="scrGioHang">
+              <Properties>
+                <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+              </Properties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
@@ -437,6 +440,9 @@
           </Layout>
           <SubComponents>
             <Container class="javax.swing.JScrollPane" name="scrDanhSachSanPhamTimKiem">
+              <Properties>
+                <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+              </Properties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>

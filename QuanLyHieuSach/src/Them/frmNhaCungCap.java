@@ -5,7 +5,7 @@ import DAO.NhaCungCap_DAO;
 import DAO.TheLoai_DAO;
 import Entity.NhaCungCap;
 import Entity.TheLoai;
-import static Pannel.pnTraCuuNhanVien.readExcel_City;
+import static Pannel.pnlTraCuuNhanVien.readExcel_City;
 import java.awt.Color;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -350,7 +350,7 @@ private void duLieuSDT(){
                 Logger.getLogger(frmNhaCungCap.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            JOptionPane.showMessageDialog(this, "Thêm thành công thể loại");
+            JOptionPane.showMessageDialog(this, "Thêm thành công nhà cung cấp");
         }
     }//GEN-LAST:event_btnThemActionPerformed
 

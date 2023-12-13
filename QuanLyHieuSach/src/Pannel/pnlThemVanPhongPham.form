@@ -155,8 +155,8 @@
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="btnThuongHieu1" alignment="1" min="-2" pref="26" max="-2" attributes="0"/>
-                                          <Component id="btnThuongHieu2" alignment="1" min="-2" pref="26" max="-2" attributes="0"/>
+                                          <Component id="btnNhaCungCap" alignment="1" min="-2" pref="26" max="-2" attributes="0"/>
+                                          <Component id="btnLoaiDungCu" alignment="1" min="-2" pref="26" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="txtDonGia" max="32767" attributes="0"/>
@@ -183,7 +183,7 @@
                                   <Group type="102" attributes="0">
                                       <Component id="lblTacGia" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                                      <Component id="cboXuatXu" max="32767" attributes="0"/>
+                                      <Component id="cboXuatXu" pref="367" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="107" pref="107" max="-2" attributes="0"/>
@@ -196,8 +196,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="btnThuongHieu" min="-2" pref="26" max="-2" attributes="0"/>
-                                  <Component id="btnThuongHieu3" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <Component id="btnThuongHieu4" alignment="0" min="-2" pref="26" max="-2" attributes="0"/>
+                                  <Component id="btnXuatXu" min="-2" pref="25" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -218,7 +217,7 @@
                               <Component id="cboXuatXu" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblTacGia" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="btnThuongHieu3" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="btnXuatXu" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -236,14 +235,13 @@
                           <Component id="lblDonGia" min="-2" max="-2" attributes="0"/>
                           <Component id="lblNamXuatBan" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="cboChatlieu" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnThuongHieu4" min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="btnThuongHieu2" min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="btnLoaiDungCu" min="-2" pref="22" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btnThuongHieu1" min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="btnNhaCungCap" min="-2" pref="22" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -411,24 +409,19 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThuongHieuActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnThuongHieu1">
+            <Component class="javax.swing.JButton" name="btnNhaCungCap">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThuongHieu1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNhaCungCapActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnThuongHieu2">
+            <Component class="javax.swing.JButton" name="btnLoaiDungCu">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThuongHieu2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoaiDungCuActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnThuongHieu3">
+            <Component class="javax.swing.JButton" name="btnXuatXu">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThuongHieu3ActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnThuongHieu4">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThuongHieu4ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXuatXuActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

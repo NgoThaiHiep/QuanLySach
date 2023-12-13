@@ -13,7 +13,11 @@ import Entity.NhaCungCap;
 import Entity.ThuongHieu;
 import Entity.VanPhongPham;
 import Entity.XuatXu;
-import UI.ThemTH;
+import Them.ThemXuatXu;
+import Them.frmNhaCungCap;
+import Them.frmThemLoaiVanPhongPham;
+import Them.ThemTH;
+import Them.ThemXuatXu;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
@@ -253,10 +257,9 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
         lblSoTrang1 = new javax.swing.JLabel();
         cboChatlieu = new javax.swing.JComboBox<>();
         btnThuongHieu = new javax.swing.JButton();
-        btnThuongHieu1 = new javax.swing.JButton();
-        btnThuongHieu2 = new javax.swing.JButton();
-        btnThuongHieu3 = new javax.swing.JButton();
-        btnThuongHieu4 = new javax.swing.JButton();
+        btnNhaCungCap = new javax.swing.JButton();
+        btnLoaiDungCu = new javax.swing.JButton();
+        btnXuatXu = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -342,27 +345,21 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
             }
         });
 
-        btnThuongHieu1.addActionListener(new java.awt.event.ActionListener() {
+        btnNhaCungCap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThuongHieu1ActionPerformed(evt);
+                btnNhaCungCapActionPerformed(evt);
             }
         });
 
-        btnThuongHieu2.addActionListener(new java.awt.event.ActionListener() {
+        btnLoaiDungCu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThuongHieu2ActionPerformed(evt);
+                btnLoaiDungCuActionPerformed(evt);
             }
         });
 
-        btnThuongHieu3.addActionListener(new java.awt.event.ActionListener() {
+        btnXuatXu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThuongHieu3ActionPerformed(evt);
-            }
-        });
-
-        btnThuongHieu4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThuongHieu4ActionPerformed(evt);
+                btnXuatXuActionPerformed(evt);
             }
         });
 
@@ -400,8 +397,8 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
                                     .addComponent(cboNhaCungCap, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnThuongHieu1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnThuongHieu2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(btnNhaCungCap, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnLoaiDungCu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(txtDonGia))))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -420,7 +417,7 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(lblTacGia)
                                 .addGap(67, 67, 67)
-                                .addComponent(cboXuatXu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(cboXuatXu, 0, 367, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(107, 107, 107)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -429,8 +426,7 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnThuongHieu, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnThuongHieu3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnThuongHieu4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnXuatXu, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(15, 15, 15))
         );
         jPanel2Layout.setVerticalGroup(
@@ -444,7 +440,7 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cboXuatXu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblTacGia))
-                    .addComponent(btnThuongHieu3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnXuatXu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -458,14 +454,13 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
                     .addComponent(txtDonGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDonGia)
                     .addComponent(lblNamXuatBan)
-                    .addComponent(cboChatlieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnThuongHieu4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboChatlieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnThuongHieu2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLoaiDungCu, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnThuongHieu1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnNhaCungCap, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtSoLuongTon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -649,25 +644,93 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
         lamMoiDuLieu();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void btnThuongHieu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThuongHieu4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnThuongHieu4ActionPerformed
+    private void btnXuatXuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatXuActionPerformed
 
-    private void btnThuongHieu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThuongHieu3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnThuongHieu3ActionPerformed
+            ThemXuatXu themXX;
+        try {
+            themXX = new ThemXuatXu();
+            // Thiết lập loại đóng cửa sổ
+        themXX.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-    private void btnThuongHieu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThuongHieu2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnThuongHieu2ActionPerformed
+        // Thêm sự kiện WindowListener để ẩn frame khi đóng
+        themXX.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                // Ẩn frame thay vì đóng nó
+                ((JFrame) windowEvent.getSource()).setVisible(false);
+            }
+        });
 
-    private void btnThuongHieu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThuongHieu1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnThuongHieu1ActionPerformed
+        // Hiển thị frame ThemTH
+        themXX.setVisible(true);
+        lamMoiDuLieu();
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlThemVanPhongPham.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+        
+    }//GEN-LAST:event_btnXuatXuActionPerformed
+
+    private void btnLoaiDungCuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoaiDungCuActionPerformed
+        frmThemLoaiVanPhongPham themLoaiVPP = new frmThemLoaiVanPhongPham();
+
+        // Thiết lập loại đóng cửa sổ
+        themLoaiVPP.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Thêm sự kiện WindowListener để ẩn frame khi đóng
+        themLoaiVPP.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                // Ẩn frame thay vì đóng nó
+                ((JFrame) windowEvent.getSource()).setVisible(false);
+            }
+        });
+
+        // Hiển thị frame ThemTH
+        themLoaiVPP.setVisible(true);
+        lamMoiDuLieu();
+    }//GEN-LAST:event_btnLoaiDungCuActionPerformed
+
+    private void btnNhaCungCapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhaCungCapActionPerformed
+        frmNhaCungCap themNCC = new frmNhaCungCap();
+
+        // Thiết lập loại đóng cửa sổ
+        themNCC.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Thêm sự kiện WindowListener để ẩn frame khi đóng
+        themNCC.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                // Ẩn frame thay vì đóng nó
+                ((JFrame) windowEvent.getSource()).setVisible(false);
+            }
+        });
+
+        // Hiển thị frame ThemTH
+        themNCC.setVisible(true);
+        lamMoiDuLieu();
+    }//GEN-LAST:event_btnNhaCungCapActionPerformed
 
     private void btnThuongHieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThuongHieuActionPerformed
         // TODO add your handling code here:
-        new ThemTH().setVisible(true);
+        ThemTH themTH = new ThemTH();
+
+        // Thiết lập loại đóng cửa sổ
+        themTH.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Thêm sự kiện WindowListener để ẩn frame khi đóng
+        themTH.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                // Ẩn frame thay vì đóng nó
+                ((JFrame) windowEvent.getSource()).setVisible(false);
+            }
+        });
+
+        // Hiển thị frame ThemTH
+        themTH.setVisible(true);
+        lamMoiDuLieu();
     }//GEN-LAST:event_btnThuongHieuActionPerformed
 
     private void txtNamSanXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamSanXuatActionPerformed
@@ -901,11 +964,10 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLoaiDungCu;
+    private javax.swing.JButton btnNhaCungCap;
     private javax.swing.JButton btnThuongHieu;
-    private javax.swing.JButton btnThuongHieu1;
-    private javax.swing.JButton btnThuongHieu2;
-    private javax.swing.JButton btnThuongHieu3;
-    private javax.swing.JButton btnThuongHieu4;
+    private javax.swing.JButton btnXuatXu;
     private javax.swing.JComboBox<String> cboChatlieu;
     private javax.swing.JComboBox<String> cboLoaiVanPhongPham;
     private javax.swing.JComboBox<String> cboNhaCungCap;
