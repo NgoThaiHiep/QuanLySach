@@ -1,10 +1,20 @@
 
 package Pannel;
 
+import DAO.HoaDon_DAO;
+import DAO.KhachHang_DAO;
+import DAO.NhanVien_DAO;
+import Entity.HoaDon;
+import Entity.KhachHang;
 import Entity.NhanVien;
 import Entity.TaiKhoan;
+import ServiceUser.SelectedDate;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Locale;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,17 +27,23 @@ public class pnlDanhSachHoaDon extends javax.swing.JPanel {
      */
     private TaiKhoan tk;
     private NhanVien nv;
+    private HoaDon_DAO hoaDon_DAO;
+    private KhachHang_DAO khachHang_DAO;
+    private NhanVien_DAO nhanVien_DAO;
     public pnlDanhSachHoaDon(TaiKhoan tk,NhanVien nv) {
         this.nv = nv;
         this.tk = tk;
         initComponents();
         lblMaNhanVienFont.setText(nv.getMaNV());
         lblTenNhanVienFont.setText(nv.getHoTenNhanVien());
+        maHoaDon();
     }
     public void maHoaDon(){
         txtMaHoaDon.getDocument().addDocumentListener(new DocumentListener() {
+            private HoaDon_DAO hoaDon_DAO;
             @Override
             public void insertUpdate(DocumentEvent e) {
+               capNhatDanhSachHangCho();
                 
             }
 
@@ -40,6 +56,39 @@ public class pnlDanhSachHoaDon extends javax.swing.JPanel {
             }
         });
     }
+    
+    public void capNhatDanhSachHangCho(){
+        String colTieuDe1[] = new String[]{"Mã hóa đơn", "Mã khách hàng", "Số điện thoại", "Mã nhân viên", "Tên nhân viên", "Ngày lập hóa đơn", "Tổng tiền thanh toán"};
+        DefaultTableModel model = new DefaultTableModel(colTieuDe1, 0);
+        
+        hoaDon_DAO = new HoaDon_DAO();
+                
+        LocalDate localNgayLapHoaDon = ngay(data);
+                
+        HoaDon hoaDon = hoaDon_DAO.layHoaDon( txtMaHoaDon.getText(), localNgayLapHoaDon+"");
+        if(hoaDon!=null){
+            khachHang_DAO = new KhachHang_DAO();
+            KhachHang dsKhachHang = khachHang_DAO.layThongTinKhachHang_TheoMa(hoaDon.getKhachHanh().getMaKhachHang());
+            nhanVien_DAO = new NhanVien_DAO();
+            NhanVien nhanVien = nhanVien_DAO.layThongTinNhanVien(new TaiKhoan(hoaDon.getNhanVien().getMaNV()));
+
+                        Object[] row;
+                        row = new Object[12];
+                        row[0] = hoaDon.getMaHoaDon();
+                        row[1] = dsKhachHang.getMaKhachHang();
+                        row[2] = dsKhachHang.getSoDienThoai();
+
+                        row[3] = nhanVien.getMaNV();
+                        row[4] = nhanVien.getHoTenNhanVien();
+                        row[5] = hoaDon.getNgayLap();
+
+
+                        model.addRow(row);
+
+            tblDanhSachHoaDon.setModel(model);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,7 +113,7 @@ public class pnlDanhSachHoaDon extends javax.swing.JPanel {
         lblMaNhanVienFont = new javax.swing.JLabel();
         lblTenNhanVienFont = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblDanhSachHoaDon = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -172,7 +221,7 @@ public class pnlDanhSachHoaDon extends javax.swing.JPanel {
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin hóa đơn"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDanhSachHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -191,7 +240,7 @@ public class pnlDanhSachHoaDon extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblDanhSachHoaDon);
 
         jButton1.setText("Làm mới");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -258,7 +307,30 @@ public class pnlDanhSachHoaDon extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+ 
+     private LocalDate parseDate(String inputDate) {
+    String[] parts = inputDate.split("-"); // Tách chuỗi thành mảng các phần tử
 
+    if (parts.length == 3) { // Kiểm tra có đủ phần tử ngày, tháng, năm không
+        int day = Integer.parseInt(parts[0]);
+        int month = Integer.parseInt(parts[1]);
+        int year = Integer.parseInt(parts[2]);
+
+        // Kiểm tra và xử lý ngày, tháng, năm nếu cần
+        // Ví dụ: nếu các thành phần không thỏa mãn điều kiện ngày, tháng, năm hợp lệ
+
+        return LocalDate.of(year, month, day); // Tạo đối tượng LocalDate
+    } else {
+        // Xử lý khi chuỗi không đúng định dạng
+        return null; // hoặc throw exception tùy thuộc vào cách xử lý của bạn
+    }
+}
+private LocalDate ngay(ServiceUser.DateChooser dateTextField){
+    SelectedDate selectedNgayKetThuc = dateTextField.getSelectedDate();
+    String inputDate = selectedNgayKetThuc.getDay() + "-" + selectedNgayKetThuc.getMonth() + "-" + selectedNgayKetThuc.getYear();
+    LocalDate ngay = parseDate(inputDate);
+    return ngay;
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -283,13 +355,13 @@ public class pnlDanhSachHoaDon extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblMaHoaDon;
     private javax.swing.JLabel lblMaKhachHang4;
     private javax.swing.JLabel lblMaNhanVienFont;
     private javax.swing.JLabel lblNgayLapHoaDon;
     private javax.swing.JLabel lblTenKhachHang4;
     private javax.swing.JLabel lblTenNhanVienFont;
+    private javax.swing.JTable tblDanhSachHoaDon;
     private javax.swing.JTextField txtMaHoaDon;
     private javax.swing.JTextField txtNgayHienTai;
     // End of variables declaration//GEN-END:variables

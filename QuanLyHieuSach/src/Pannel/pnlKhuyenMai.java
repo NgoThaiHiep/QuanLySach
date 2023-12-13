@@ -715,6 +715,7 @@ public void kiemTraDuLieuFloat(JTextField textField){
                     int thangBatDau = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 2).toString().substring(5,7));
                     int ngayBatDau = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 2).toString().substring(8,10));
                     dateNgayBatDau.setSelectedDate(new SelectedDate(ngayBatDau,thangBatDau,namBatDau));
+                   
                     int namKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(0,4));
                     int thangKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(5,7));
                     int ngayKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(8,10));

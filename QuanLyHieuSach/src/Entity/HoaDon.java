@@ -12,14 +12,25 @@ public class HoaDon {
     private LocalDate ngayLap;
     private NhanVien nhanVien;
     private KhachHang khachHanh;
+    private double TongTien; 
+   
 
-    public HoaDon(String maHoaDon, LocalDate ngayLap, NhanVien nhanVien, KhachHang khachHanh) {
+    public HoaDon(String maHoaDon, LocalDate ngayLap, NhanVien nhanVien, KhachHang khachHanh, double TongTien) {
         this.maHoaDon = maHoaDon;
         this.ngayLap = ngayLap;
         this.nhanVien = nhanVien;
         this.khachHanh = khachHanh;
+        this.TongTien = TongTien;
     }
 
+    public double getTongTien() {
+        return TongTien;
+    }
+
+    public void setTongTien(double TongTien) {
+        this.TongTien = TongTien;
+    }
+    
     public HoaDon(String maHoaDon) {
         this.maHoaDon = maHoaDon;
     }
@@ -83,8 +94,10 @@ public class HoaDon {
 
     @Override
     public String toString() {
-        return "HoaDon{" + "maHoaDon=" + maHoaDon + ", ngayLap=" + ngayLap + ", nhanVien=" + nhanVien + ", khachHanh=" + khachHanh + '}';
+        return "HoaDon{" + "maHoaDon=" + maHoaDon + ", ngayLap=" + ngayLap + ", nhanVien=" + nhanVien + ", khachHanh=" + khachHanh + ", TongTien=" + TongTien + '}';
     }
+
+   
     
     
 }

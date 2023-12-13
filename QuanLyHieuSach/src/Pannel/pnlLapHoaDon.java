@@ -552,7 +552,7 @@ public void inHoaDon() throws JRException {
                 
                 Sach sach = (Sach) item;
                     // Thực hiện các thao tác với đối tượng Sach
-                    if(sach.getTinhTrang().equals("Ngừng kinh doanh")){
+                    if(sach.getTinhTrang().equals("Ngừng kinh doanh") || sach.getSoLuongTon()==0){
                         
                     }else{
                            row[0] = count ;
@@ -566,7 +566,7 @@ public void inHoaDon() throws JRException {
             } else if (item instanceof VanPhongPham) {
                 VanPhongPham vpp = (VanPhongPham) item;
                 // Thực hiện các thao tác với đối tượng VanPhongPham
-                if(vpp.getTinhTrang().equals("Ngừng kinh doanh")){
+                if(vpp.getTinhTrang().equals("Ngừng kinh doanh")|| vpp.getSoLuongTon()==0){
                         
                 }else{
                     row[0] = count ;
@@ -1014,7 +1014,7 @@ public void inHoaDon() throws JRException {
                 .addComponent(lblTieuDeLapHoaDon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1679,8 +1679,10 @@ xoaSanPham();
                     if(col == 5){
                         Object cellValue = model.getValueAt(row, col);
                           //System.out.print("sách " + cellValue + "\t");
-                            HoaDon hoaDon = new HoaDon(lblMaHoaDonFont.getText(), localDate, nv, kh);
-                            ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(hoaDon, sanPham, soLuong,donGia);
+                            String priceWithoutCurrency = lblTongTienThanhToanKyTu.getText().replaceAll("[^\\d.]+", "");
+                            double giaBan = Double.parseDouble(priceWithoutCurrency);
+                            HoaDon hoaDon = new HoaDon(lblMaHoaDonFont.getText(), localDate, nv, kh,giaBan );
+                           
                             hoaDon_DAO = new HoaDon_DAO();
                             hoaDon_DAO.InsertHoaDon(hoaDon, nv, kh);
                             HangCho hangCho = new HangCho(kh, sanPham, soLuong, localDate);
@@ -1781,7 +1783,9 @@ xoaSanPham();
                 kh.setDiemTL(diemTichLuy);
                 khachHang_DAO.InsertKhachHang(kh);
             }
-            HoaDon hoaDon = new HoaDon(lblMaHoaDonFont.getText(), localDate, nv, kh);
+            String priceWithoutCurrency = lblTongTienThanhToanKyTu.getText().replaceAll("[^\\d.]+", "");
+            double giaBan = Double.parseDouble(priceWithoutCurrency);
+            HoaDon hoaDon = new HoaDon(lblMaHoaDonFont.getText(), localDate, nv, kh,giaBan);
             hoaDon_DAO = new HoaDon_DAO();
             hoaDon_DAO.InsertHoaDon(hoaDon, nv, kh);
             
@@ -1816,11 +1820,11 @@ xoaSanPham();
                     }
                     //thành tiền
                     if(col == 5){
-//                        Object cellValue = model.getValueAt(row, col);
-//                        //System.out.print("sách " + cellValue + "\t");
-//                        ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(hoaDon, sanPham, soLuong,donGia);
-//                        chiTietHoaDon_DAO = new ChiTietHoaDon_DAO();
-//                        chiTietHoaDon_DAO.InsertCTHoaDon(hoaDon, soLuong, donGia, sanPham);
+                        Object cellValue = model.getValueAt(row, col);
+                        //System.out.print("sách " + cellValue + "\t");
+                        ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(hoaDon, sanPham, soLuong,donGia);
+                        chiTietHoaDon_DAO = new ChiTietHoaDon_DAO();
+                        chiTietHoaDon_DAO.InsertCTHoaDon(hoaDon, soLuong, donGia, sanPham);
                     }
                 }
             }
@@ -1888,6 +1892,7 @@ xoaSanPham();
         QuyDinh quyDinh = quyDinh_DAO.layDuLieuQuyDinh();
         
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
+        
         Object selectedItem = cboKhuyenMai.getSelectedItem();
         if (selectedItem != null && !selectedItem.equals("Không áp mã")) {
             khuyenMaiThanhToan_DAO = new KhuyenMaiThanhToan_DAO();

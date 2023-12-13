@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Entity/GiamGiaSanPham.java</file>
             <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlLapHoaDon.java</file>
-            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/DAO/TaiKhoan_DAO.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Entity/HoaDon.java</file>
             <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlTraCuuSanPham.java</file>
-            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlKhuyenMai.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/DAO/ChiTietHoaDon_DAO.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/DAO/HoaDon_DAO.java</file>
             <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlDanhSachHoaDon.java</file>
         </group>
     </open-files>

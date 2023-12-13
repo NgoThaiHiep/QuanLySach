@@ -2,14 +2,19 @@
 package DAO;
 
 import ConnectDB.ConnectDB;
+import Entity.HangCho;
 import Entity.HoaDon;
 import Entity.KhachHang;
 import Entity.NhanVien;
+import Entity.SanPham;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -70,14 +75,15 @@ public class HoaDon_DAO {
     try {
        
         // Kiểm tra xem số điện thoại đã tồn tại trong cơ sở dữ liệu hay chưa
-        String sql = "INSERT INTO [dbo].[HoaDon] ([HoaDonID],[NgayLapHD],[NhanVienID],[KhachHangID])\n" +
-"     VALUES (?,?,?,?)";
+        String sql = "INSERT INTO [dbo].[HoaDon] ([HoaDonID],[NgayLapHD],[NhanVienID],[KhachHangID],[TongTien])\n" +
+"     VALUES (?,?,?,?,?)";
         
         state = con.prepareStatement(sql);
         state.setString(1,  hd.getMaHoaDon());
         state.setString(2,formattedDate);
         state.setString(3, nv.getMaNV());
         state.setString(4,kh.getMaKhachHang());
+        state.setDouble(5,hd.getTongTien());
         n = state.executeUpdate();
 
     } catch (Exception e) {
@@ -98,4 +104,33 @@ public class HoaDon_DAO {
     }
     return n > 0;
 	}
+    
+     public HoaDon layHoaDon(String ma,String ngay){
+         HoaDon hoaDon = new HoaDon();
+         ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+         PreparedStatement p = null;
+           
+            try {
+            String sql = "select * from HoaDon where HoaDonID = ? and NgayLapHD = ? ";
+            p = con.prepareStatement(sql);
+            p.setString(1, ma);
+            p.setString(2, ngay);
+            ResultSet rs = p.executeQuery();
+            if(rs.next()){
+                
+                java.sql.Date sqlNgayLapHD = rs.getDate("NgayLapHD");
+                LocalDate ngayLapHD = sqlNgayLapHD.toLocalDate();
+                NhanVien nv = new NhanVien(rs.getString("NhanVienID"));
+                KhachHang kh = new KhachHang(rs.getString("KhachHangID"));
+                
+                double thanhTien = rs.getDouble("TongTien");
+                hoaDon = new HoaDon(ma, ngayLapHD, nv, kh,thanhTien);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+        }
+        return  hoaDon;
+    }
 }
