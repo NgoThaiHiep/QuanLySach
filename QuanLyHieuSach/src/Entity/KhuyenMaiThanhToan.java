@@ -145,6 +145,11 @@ public class KhuyenMaiThanhToan {
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
     }
+
+    @Override
+    public String toString() {
+        return "KhuyenMaiThanhToan{" + "maKhuyenMai=" + maKhuyenMai + ", tenKhuyenMai=" + tenKhuyenMai + ", PhanTramGiam=" + PhanTramGiam + ", giaTriToiThieuDonHang=" + giaTriToiThieuDonHang + ", GiamToiDa=" + GiamToiDa + ", soTienGiam=" + soTienGiam + ", ngayBatDau=" + ngayBatDau + ", ngayKetThuc=" + ngayKetThuc + ", tinhTrang=" + tinhTrang + ", loai=" + loai + ", chiTiet=" + chiTiet + ", soLuong=" + soLuong + '}';
+    }
     
     
     

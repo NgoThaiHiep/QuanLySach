@@ -84,14 +84,15 @@ public class GiamGiaSanPham_DAO {
         return dsGiamGiaSanPham;
     }
     
-    public ArrayList<GiamGiaSanPham> layDanhSachGiamGiaSanPham_TyLe (){
-         ArrayList<GiamGiaSanPham> dsGiamGiaSanPham = new  ArrayList<GiamGiaSanPham> ();
-           ConnectDB.getInstance();
+    public ArrayList<GiamGiaSanPham> layDanhSachGiamGiaSanPham_TyLe (int loai){
+        ArrayList<GiamGiaSanPham> dsGiamGiaSanPham = new  ArrayList<GiamGiaSanPham> ();
+        ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
         PreparedStatement pst = null;
         try {
-            String sql = "select * from GiamGiaSanPham where Loai = 2";
+            String sql = "select * from GiamGiaSanPham where Loai = ?";
             pst = con.prepareStatement(sql);
+             pst.setInt(1, loai);
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
                 String maGiamGiaSanPham = rs.getString("GiamGiaSanPhamID");
@@ -104,7 +105,7 @@ public class GiamGiaSanPham_DAO {
                 LocalDate ngayKetThuc = sqlNgayKetThuc.toLocalDate();
                 String tinhTrang = rs.getString("TinhTrang");
                 String chiTiet = rs.getString("ChiTiet");
-                int loai = rs.getInt("Loai");
+               
                 GiamGiaSanPham giamGiaSanPham = new GiamGiaSanPham(maGiamGiaSanPham, tenGiamGia, sanPham, ngayBatDau, ngayKetThuc, tinhTrang, chiTiet, loai, tyLeGiam);
                 dsGiamGiaSanPham.add(giamGiaSanPham);
             }
@@ -292,4 +293,31 @@ public class GiamGiaSanPham_DAO {
 		}
                 return n > 0;
     }
+     public boolean update_tinhTrang(String ma,String tinhTrang){
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+            PreparedStatement state = null;
+            int n = 0;
+            String sql =  "UPDATE [dbo].[GiamGiaSanPham]\n" +
+                            "SET  [TinhTrang] = ?\n" +
+                            "WHERE [GiamGiaSanPhamID] = ?";
+            try {
+                    state = con.prepareStatement(sql);
+	            state.setString(1,tinhTrang);
+                    state.setString(2, ma);
+                    n = state.executeUpdate();
+		} catch ( SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				state.close();
+			} catch (SQLException e2) {
+                            // TODO: handle exception
+
+			}
+		}
+		return n>0;	
+        }
 }

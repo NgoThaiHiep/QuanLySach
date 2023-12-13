@@ -57,17 +57,47 @@ public class pnlKhuyenMai extends javax.swing.JPanel {
      */
     public pnlKhuyenMai() {
         initComponents();
+        capNhatTinhTrang();
         giaTienRad();
         kiemTraDuLieuFloat(txtGiaTien1);
         kiemTraDuLieuFloat(txtGiaTien2);
+        kiemTraDuLieuFloat(txtGiaTien3);
         
         kiemTraDuLieuFloat(txtTyLe2);
         kiemTraDuLieuFloat(txtTyLe3);
+        kiemTraDuLieuFloat(txtTyLe4);
+        
+        kiemTraDuLieuFloat(txtSanPham3);
         
         maHoaDon_GiaTri(lblMaKhuyenMaiKyTu);
         duLieu();
         tinhTrang();
         Ngay();
+        
+    }
+    public void capNhatTinhTrang(){
+        khuyenMaiThanhToan_DAO = new KhuyenMaiThanhToan_DAO();
+        ArrayList<KhuyenMaiThanhToan> dsKhuyenMaiGiaTien= khuyenMaiThanhToan_DAO.layDanhSachKhuyenMai_GiaTien();
+        for (KhuyenMaiThanhToan khuyenMaiThanhToan : dsKhuyenMaiGiaTien) {
+            String tinhTrang = handleDateChange_CapNhatTinhTrang(khuyenMaiThanhToan.getNgayBatDau(),khuyenMaiThanhToan.getNgayKetThuc());
+            System.out.println(tinhTrang);
+            khuyenMaiThanhToan_DAO.update_tinhTrang(khuyenMaiThanhToan.getMaKhuyenMai(),tinhTrang);
+        }
+        ArrayList<KhuyenMaiThanhToan> dsKhuyenMaiTyLe= khuyenMaiThanhToan_DAO.layDanhSachKhuyenMai_TyLe();
+        for (KhuyenMaiThanhToan khuyenMaiThanhToan : dsKhuyenMaiTyLe) {
+            String tinhTrang = handleDateChange_CapNhatTinhTrang(khuyenMaiThanhToan.getNgayBatDau(),khuyenMaiThanhToan.getNgayKetThuc());
+            System.out.println(tinhTrang);
+            khuyenMaiThanhToan_DAO.update_tinhTrang(khuyenMaiThanhToan.getMaKhuyenMai(),tinhTrang);
+        }
+        giamGiaSanPham_DAO = new GiamGiaSanPham_DAO();
+        ArrayList<GiamGiaSanPham> dsGiamGia =  giamGiaSanPham_DAO.layDanhSachGiamGiaSanPham();
+        for (GiamGiaSanPham giamGiaSanPham : dsGiamGia) {
+         String tinhTrang = handleDateChange_CapNhatTinhTrang(giamGiaSanPham.getNgayBatDau(),giamGiaSanPham.getNgayKetThuc());
+            System.out.println(tinhTrang);
+            giamGiaSanPham_DAO.update_tinhTrang(giamGiaSanPham.getMaGiamGiaSanPham(),tinhTrang);
+        }
+       
+        
     }
     int demNgayBatDau =0, demNgayKetThuc =0;
     
@@ -129,7 +159,6 @@ public class pnlKhuyenMai extends javax.swing.JPanel {
     }
     public void tinhTrang(){
         Timer timer = new Timer(1000, new ActionListener() {
-
         @Override
         public void actionPerformed(ActionEvent e) {
            String lbl = "Tình trạng  : ";
@@ -140,7 +169,7 @@ public class pnlKhuyenMai extends javax.swing.JPanel {
     timer.start(); 
     }
     
-   public void duLieu(){
+    public void duLieu(){
         sach_DAO = new Sach_DAO();
         vanPhongPham_DAO = new VanPhongPham_DAO();
         
@@ -244,6 +273,7 @@ public void kiemTraDuLieuFloat(JTextField textField){
         btnNgayKetThuc = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         lblSoLuong = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         dateNgayBatDau.setTextRefernce(txtNgayBatDau);
         dateNgayBatDau.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -283,6 +313,8 @@ public void kiemTraDuLieuFloat(JTextField textField){
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Khuyến mãi");
 
         lblmaKhuyenMai.setText("Mã khuyến mãi");
@@ -378,6 +410,15 @@ public void kiemTraDuLieuFloat(JTextField textField){
         });
         jPanel2.add(txtGiaTien1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 160, -1));
         jPanel2.add(txtGiaTien2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 160, -1));
+
+        txtTyLe1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtTyLe1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTyLe1FocusLost(evt);
+            }
+        });
         jPanel2.add(txtTyLe1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 160, -1));
 
         txtSanPham1.setText("textFieldSuggestion2");
@@ -385,6 +426,15 @@ public void kiemTraDuLieuFloat(JTextField textField){
 
         lblViTri4.setText("jLabel3");
         jPanel2.add(lblViTri4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 140, -1));
+
+        txtTyLe4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtTyLe4FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTyLe4FocusLost(evt);
+            }
+        });
         jPanel2.add(txtTyLe4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 160, -1));
         jPanel2.add(txtGiaTien3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 160, -1));
 
@@ -407,10 +457,19 @@ public void kiemTraDuLieuFloat(JTextField textField){
         });
         jPanel2.add(radTyLeSanPham, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, -1, -1));
         jPanel2.add(txtSanPham3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 160, -1));
+
+        txtSanPham4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtSanPham4FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSanPham4FocusLost(evt);
+            }
+        });
         jPanel2.add(txtSanPham4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 160, -1));
         jPanel2.add(txtTyLe2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 160, -1));
 
-        cboSanPham.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toàn bộ sản phẩm", "Theo tên sản phẩm", "Toàn bộ sách", "Toàn bộ văn phòng phẩm", " " }));
+        cboSanPham.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toàn bộ sản phẩm", "Theo tên sản phẩm", "Toàn bộ sách", "Toàn bộ văn phòng phẩm" }));
         cboSanPham.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboSanPhamActionPerformed(evt);
@@ -466,6 +525,11 @@ public void kiemTraDuLieuFloat(JTextField textField){
         });
 
         btnLamMoi.setText("Làm mới");
+        btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLamMoiActionPerformed(evt);
+            }
+        });
 
         btnNgayBatDau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/iconAnhLich.png"))); // NOI18N
         btnNgayBatDau.addActionListener(new java.awt.event.ActionListener() {
@@ -481,9 +545,20 @@ public void kiemTraDuLieuFloat(JTextField textField){
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang diễn ra", "Sắp diễn ra", "Kết thúc" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang khuyến mãi", "Sắp khuyến mãi", "Đã kết thúc" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         lblSoLuong.setText("Số lượng    :");
+
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -504,7 +579,9 @@ public void kiemTraDuLieuFloat(JTextField textField){
                             .addComponent(lblMaKhuyenMaiKyTu, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtTenKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(382, 382, 382)
+                                .addGap(353, 353, 353)
+                                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(lblSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -560,15 +637,15 @@ public void kiemTraDuLieuFloat(JTextField textField){
                     .addComponent(lblmaKhuyenMai)
                     .addComponent(lblMaKhuyenMaiKyTu, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTenKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTenKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSoLuong)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblTenKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtTenKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                    .addComponent(jCheckBox1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -602,6 +679,17 @@ public void kiemTraDuLieuFloat(JTextField textField){
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void dinhDangSo(String chuoi,JTextField txt){
+                 
+                         
+                String[] mangChuoi = chuoi.split("\\.");
+
+                        // Lấy phần trước và sau dấu chấm
+                String phanTruocDauCham = mangChuoi[0];
+                        DecimalFormat dinhDang = new DecimalFormat("#,###");
+                        String so = dinhDang.format(Integer.parseInt(phanTruocDauCham));
+                        txt.setText(so);
+    }
     private void tblDanhSachKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachKhuyenMaiMouseClicked
         // TODO add your handling code here:
          int row = tblDanhSachKhuyenMai.getSelectedRow();
@@ -613,62 +701,136 @@ public void kiemTraDuLieuFloat(JTextField textField){
                 if(khuyenMaiThanhToan.getMaKhuyenMai().equals(ma)){
                     lblMaKhuyenMaiKyTu.setText(ma);
                     txtTenKhuyenMai.setText(khuyenMaiThanhToan.getTenKhuyenMai());
-                    txtGiaTien1.setText(khuyenMaiThanhToan.getSoTienGiam()+"");
-                    txtGiaTien2.setText(khuyenMaiThanhToan.getGiaTriToiThieuDonHang()+"");
-                    txtGiaTien3.setText(khuyenMaiThanhToan.getSoLuong()+"");
+                        
+                        
+                    dinhDangSo(khuyenMaiThanhToan.getSoTienGiam()+"", txtGiaTien1);
+                    dinhDangSo(khuyenMaiThanhToan.getGiaTriToiThieuDonHang()+"", txtGiaTien2);
+                    dinhDangSo(khuyenMaiThanhToan.getSoLuong()+"", txtGiaTien3);
+
+                    
+                   
                     int namBatDau= Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 2).toString().substring(0,4));
                     int thangBatDau = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 2).toString().substring(5,7));
                     int ngayBatDau = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 2).toString().substring(8,10));
                     dateNgayBatDau.setSelectedDate(new SelectedDate(ngayBatDau,thangBatDau,namBatDau));
-                    
                     int namKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(0,4));
                     int thangKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(5,7));
                     int ngayKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(8,10));
                     dateNgayKetThuc.setSelectedDate(new SelectedDate(ngayKetThuc,thangKetThuc,namKetThuc));
                     tatChiTiet.setText(khuyenMaiThanhToan.getChiTiet());
-                    
+                    System.out.println(khuyenMaiThanhToan);
                 }
             }
         }else if(radTyLe.isSelected()){
-           
-            
             khuyenMaiThanhToan_DAO = new KhuyenMaiThanhToan_DAO();
             ArrayList<KhuyenMaiThanhToan> dsKhuyenMaiThanhToan = khuyenMaiThanhToan_DAO.layDanhSachKhuyenMai_TyLe();
             String ma = tblDanhSachKhuyenMai.getValueAt(row, 0).toString();
             for (KhuyenMaiThanhToan khuyenMaiThanhToan : dsKhuyenMaiThanhToan) {
                  if(khuyenMaiThanhToan.getMaKhuyenMai().equals(ma)){
                      lblMaKhuyenMaiKyTu.setText(ma);
+                     
                      txtTenKhuyenMai.setText(khuyenMaiThanhToan.getTenKhuyenMai());
+                     
                      txtTyLe1.setText(khuyenMaiThanhToan.getPhanTramGiam()+" %");
-                     txtTyLe2.setText(khuyenMaiThanhToan.getGiaTriToiThieuDonHang()+"");
-                     if(khuyenMaiThanhToan.getGiamToiDa() == 0.0){
-                         txtTyLe3.setText("Không giới hạn");
+                     
+                     
+                    dinhDangSo(khuyenMaiThanhToan.getGiaTriToiThieuDonHang()+"", txtTyLe2);
+                     if(khuyenMaiThanhToan.getGiamToiDa() == 0){
+                        txtTyLe3.setText("Không giới hạn");
+                     }else{
+                        dinhDangSo(khuyenMaiThanhToan.getGiamToiDa()+"", txtTyLe3);
                      }
-                     txtTyLe4.setText(khuyenMaiThanhToan.getSoLuong()+"");
+                    dinhDangSo(khuyenMaiThanhToan.getSoLuong()+"", txtTyLe4);
+                    
+                    int namBatDau= Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 2).toString().substring(0,4));
+                    int thangBatDau = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 2).toString().substring(5,7));
+                    int ngayBatDau = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 2).toString().substring(8,10));
+                    dateNgayBatDau.setSelectedDate(new SelectedDate(ngayBatDau,thangBatDau,namBatDau));
+                    int namKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(0,4));
+                    int thangKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(5,7));
+                    int ngayKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(8,10));
+                    dateNgayKetThuc.setSelectedDate(new SelectedDate(ngayKetThuc,thangKetThuc,namKetThuc));
+                    tatChiTiet.setText(khuyenMaiThanhToan.getChiTiet());
                  }
              }
-        }else{
-            giamGiaSanPham_DAO = new GiamGiaSanPham_DAO();
-            ArrayList<GiamGiaSanPham> dsGiamGia = giamGiaSanPham_DAO.layDanhSachGiamGiaSanPham();
-            String ma = tblDanhSachKhuyenMai.getValueAt(row, 0).toString();
-            for (GiamGiaSanPham giamGiaSanPham : dsGiamGia) {
-                lblMaKhuyenMaiKyTu.setText(ma);
-                txtTenKhuyenMai.setText(giamGiaSanPham.getTenGiamGia());
-                txtSanPham1.setText(tblDanhSachKhuyenMai.getValueAt(row, 2)+"");
-                if(giamGiaSanPham.getLoai() == 1){
-                    radGiaTienSanPham.setSelected(true);
-                    txtSanPham3.setText(giamGiaSanPham.getSoTienGiam()+"");
-                     isSelected(txtSanPham3,txtSanPham4);
-                }else{
-                    radTyLeSanPham.setSelected(true);
-                    txtSanPham4.setText(giamGiaSanPham.getTyLeGiam()+"");
-                     isSelected(txtSanPham4,txtSanPham3);
-                }
+        }else if(radSanPham.isSelected()){
+            if(cboSanPham.getSelectedIndex()==0){ 
+                 mouseClick(row, 7, 8);
+                
+            }else if(cboSanPham.getSelectedIndex()==1){
+                    String ma = tblDanhSachKhuyenMai.getValueAt(row, 0).toString();
+                    lblMaKhuyenMaiKyTu.setText(ma);
+                    txtTenKhuyenMai.setText(tblDanhSachKhuyenMai.getValueAt(row, 1).toString());
+                    txtSanPham1.setText(tblDanhSachKhuyenMai.getValueAt(row, 2).toString());
+                    int namBatDau= Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(0,4));
+                    int thangBatDau = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(5,7));
+                    int ngayBatDau = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(8,10));
+                    dateNgayBatDau.setSelectedDate(new SelectedDate(ngayBatDau,thangBatDau,namBatDau));
+                    int namKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 4).toString().substring(0,4));
+                    int thangKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 4).toString().substring(5,7));
+                    int ngayKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 4).toString().substring(8,10));
+                    dateNgayKetThuc.setSelectedDate(new SelectedDate(ngayKetThuc,thangKetThuc,namKetThuc));
+                    if(radGiaTienSanPham.isSelected()){
+                        giamGiaSanPham_DAO = new GiamGiaSanPham_DAO();
+                        ArrayList<GiamGiaSanPham> dsGiamGia = giamGiaSanPham_DAO.layDanhSachGiamGiaSanPham_GiaTien(1);
+                        for (GiamGiaSanPham giamGiaSanPham_GiaTien : dsGiamGia) {
+                            if(ma.equals(giamGiaSanPham_GiaTien.getMaGiamGiaSanPham())){
+                                dinhDangSo(giamGiaSanPham_GiaTien.getSoTienGiam()+"", txtSanPham3);
+                                tatChiTiet.setText(giamGiaSanPham_GiaTien.getChiTiet());
+                            }
+                        }
+                    }else if (radTyLeSanPham.isSelected()){
+                        giamGiaSanPham_DAO = new GiamGiaSanPham_DAO();
+                        ArrayList<GiamGiaSanPham> dsGiamGia = giamGiaSanPham_DAO.layDanhSachGiamGiaSanPham_TyLe(2);
+                        for (GiamGiaSanPham giamGiaSanPham_TyLe : dsGiamGia) {
+                        if(ma.equals(giamGiaSanPham_TyLe.getMaGiamGiaSanPham())){
+                            txtSanPham4.setText(giamGiaSanPham_TyLe.getTyLeGiam()+" %");
+                            tatChiTiet.setText(giamGiaSanPham_TyLe.getChiTiet());
+                        }
+                    }
+                    }
+            }else if(cboSanPham.getSelectedIndex()==2){
+                       mouseClick(row, 3, 4);
+            }else if(cboSanPham.getSelectedIndex()==3){
+                 mouseClick(row, 5, 6);
             }
+            
             
         }
     }//GEN-LAST:event_tblDanhSachKhuyenMaiMouseClicked
-
+    public void mouseClick(int row,int loai, int loai1){
+       String ma = tblDanhSachKhuyenMai.getValueAt(row, 0).toString();
+                        lblMaKhuyenMaiKyTu.setText(ma);
+                        txtTenKhuyenMai.setText( tblDanhSachKhuyenMai.getValueAt(row, 1).toString());
+                        int namBatDau= Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 2).toString().substring(0,4));
+                        int thangBatDau = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 2).toString().substring(5,7));
+                        int ngayBatDau = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 2).toString().substring(8,10));
+                        dateNgayBatDau.setSelectedDate(new SelectedDate(ngayBatDau,thangBatDau,namBatDau));
+                        int namKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(0,4));
+                        int thangKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(5,7));
+                        int ngayKetThuc = Integer.parseInt( tblDanhSachKhuyenMai.getValueAt(row, 3).toString().substring(8,10));
+                        dateNgayKetThuc.setSelectedDate (new SelectedDate(ngayKetThuc,thangKetThuc,namKetThuc));
+                   
+                    if(radGiaTienSanPham.isSelected()){
+                        giamGiaSanPham_DAO = new GiamGiaSanPham_DAO();
+                        ArrayList<GiamGiaSanPham> dsGiamGia = giamGiaSanPham_DAO.layDanhSachGiamGiaSanPham_GiaTien( loai);
+                        for (GiamGiaSanPham giamGiaSanPham_GiaTien : dsGiamGia) {
+                            if(ma.equals(giamGiaSanPham_GiaTien.getMaGiamGiaSanPham())){
+                                dinhDangSo(giamGiaSanPham_GiaTien.getSoTienGiam()+"", txtSanPham3);
+                                tatChiTiet.setText(giamGiaSanPham_GiaTien.getChiTiet());
+                            }
+                        }
+                    }else if (radTyLeSanPham.isSelected()){
+                        giamGiaSanPham_DAO = new GiamGiaSanPham_DAO();
+                        ArrayList<GiamGiaSanPham> dsGiamGia = giamGiaSanPham_DAO.layDanhSachGiamGiaSanPham_TyLe( loai1);
+                        for (GiamGiaSanPham giamGiaSanPham_TyLe : dsGiamGia) {
+                        if(ma.equals(giamGiaSanPham_TyLe.getMaGiamGiaSanPham())){
+                            txtSanPham4.setText(giamGiaSanPham_TyLe.getTyLeGiam()+" %");
+                            tatChiTiet.setText(giamGiaSanPham_TyLe.getChiTiet());
+                        }
+                    }
+         }
+    }
     private void radTyLeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radTyLeActionPerformed
         // TODO add your handling code here:
         lblViTri1.setText("Phần trăm giảm");
@@ -708,7 +870,8 @@ public void kiemTraDuLieuFloat(JTextField textField){
         txtTyLe2.setText("");
         txtTyLe3.setText("");
         txtTyLe4.setText("");
-
+        txtTenKhuyenMai.setText("");
+        tatChiTiet.setText("");
     }
     public void maHoaDon_TyLe(JLabel lbl){
         khuyenMaiThanhToan_DAO = new KhuyenMaiThanhToan_DAO();
@@ -733,6 +896,8 @@ public void kiemTraDuLieuFloat(JTextField textField){
         txtGiaTien1.setText("");
         txtGiaTien2.setText("");                        
         txtGiaTien3.setText("");
+        txtTenKhuyenMai.setText("");
+        tatChiTiet.setText("");
     }
     public void maHoaDon_GiaTri(JLabel lbl){
         khuyenMaiThanhToan_DAO = new KhuyenMaiThanhToan_DAO();
@@ -815,6 +980,19 @@ public void kiemTraDuLieuFloat(JTextField textField){
         txtSanPham1.setText("");
         txtSanPham3.setText("");
         txtSanPham4.setText("");
+        
+        txtTenKhuyenMai.setText("");
+        tatChiTiet.setText("");
+    }
+
+    public void lamMoi(){
+        if(radGiaTien.isSelected()){
+            lamMoiDuLieu_GiaTri();
+        }else if(radTyLe.isSelected()){
+            lamMoiDuLieu_TyLe();
+        }else if(radSanPham.isSelected()){
+             lamMoi_sanPham();
+        }
     }
     public void maHoaDon_SanPham(JLabel lbl){
         giamGiaSanPham_DAO = new GiamGiaSanPham_DAO();
@@ -958,7 +1136,7 @@ public void kiemTraDuLieuFloat(JTextField textField){
 
     private void txtTyLe3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTyLe3FocusLost
         // TODO add your handling code here:
-        if(txtTyLe3.getText().equals("")){
+        if(txtTyLe3.getText().equals("0.0")){
              txtTyLe3.setText("Không giới hạn");
         }
         
@@ -970,6 +1148,32 @@ public void kiemTraDuLieuFloat(JTextField textField){
     LocalDate ngay = parseDate(inputDate);
     return ngay;
     }
+    private String handleDateChange_CapNhatTinhTrang(LocalDate  ngayBatDau ,LocalDate ngayKetThuc) {
+    
+    String tinhTrang ;
+    
+  
+    // Lấy ngày hiện tại
+    LocalDate local = LocalDate.now();
+    if (ngayBatDau != null && ngayKetThuc != null) {
+        if (local.isEqual(ngayBatDau) || (local.isAfter(ngayBatDau) && local.isBefore(ngayKetThuc))) {
+            // Nếu ngày hiện tại nằm trong khoảng từ ngày bắt đầu đến ngày kết thúc
+            tinhTrang = "Đang khuyến mãi";
+        } else if (local.isBefore(ngayBatDau)) {
+            // Ngày nhập vào lớn hơn ngày hiện tại, sự kiện sắp diễn ra
+            tinhTrang = "Sắp khuyến mãi";
+        } else if (local.isAfter(ngayKetThuc)) {
+            // Sự kiện đã kết thúc
+            tinhTrang = "Đã kết thúc";
+        } else {
+            tinhTrang = "Đang khuyến mãi";
+        }
+    } else {
+        tinhTrang = "Ngày không hợp lệ";
+    }
+
+    return tinhTrang;
+}
     private String handleDateChange(ServiceUser.DateChooser dateTextField, ServiceUser.DateChooser dateTextField1) {
     String tinhTrang = "";
     // Chuyển đổi chuỗi thành LocalDate
@@ -980,15 +1184,15 @@ public void kiemTraDuLieuFloat(JTextField textField){
     if (ngayBatDau != null && ngayKetThuc != null) {
         if (local.isEqual(ngayBatDau) || (local.isAfter(ngayBatDau) && local.isBefore(ngayKetThuc))) {
             // Nếu ngày hiện tại nằm trong khoảng từ ngày bắt đầu đến ngày kết thúc
-            tinhTrang = "Đang diễn ra";
+            tinhTrang = "Đang khuyến mãi";
         } else if (local.isBefore(ngayBatDau)) {
             // Ngày nhập vào lớn hơn ngày hiện tại, sự kiện sắp diễn ra
-            tinhTrang = "Sắp diễn ra";
+            tinhTrang = "Sắp khuyến mãi";
         } else if (local.isAfter(ngayKetThuc)) {
             // Sự kiện đã kết thúc
             tinhTrang = "Đã kết thúc";
         } else {
-            tinhTrang = "Đang diễn ra";
+            tinhTrang = "Đang khuyến mãi";
         }
     } else {
         tinhTrang = "Ngày không hợp lệ";
@@ -1019,25 +1223,99 @@ public void kiemTraDuLieuFloat(JTextField textField){
         
         if(radGiaTien.isSelected()){
                 themGiaTienKhuyenMai();
+                lamMoiDuLieu_GiaTri();
         }else if(radTyLe.isSelected()){
             themTyLeKhuyenMai();
+            lamMoiDuLieu_TyLe();
         }else if(radSanPham.isSelected()){
             if(cboSanPham.getSelectedIndex() ==0){
                themToanBoGiamGia(7,8); 
+               lamMoi_sanPham();
             }else if(cboSanPham.getSelectedIndex() ==1){
                themGiamGiaTungSanPham();
+               lamMoi_sanPham();
             }else if(cboSanPham.getSelectedIndex() == 2){
+               
                themToanBoGiamGia(3,4);
-                
+                 lamMoi_sanPham();
             }else if(cboSanPham.getSelectedIndex() ==3){
+               
                 themToanBoGiamGia(5,6);
+                 lamMoi_sanPham();
             }
         }
         
     }//GEN-LAST:event_btnThemActionPerformed
     
     public void themTyLeKhuyenMai(){
-         String maKhuyenMai = lblMaKhuyenMaiKyTu.getText();
+            KhuyenMaiThanhToan khuyenMaiThanhToan_tyLe = khuyenMaiThanhToan_TyLe();
+            khuyenMaiThanhToan_DAO = new KhuyenMaiThanhToan_DAO();
+            
+            ArrayList<KhuyenMaiThanhToan> dsKhuyenMai = khuyenMaiThanhToan_DAO.layDanhSachKhuyenMai_TyLe();
+            int dem = 0;
+            for (KhuyenMaiThanhToan khuyenMaiThanhToan : dsKhuyenMai) {
+                if(khuyenMaiThanhToan_tyLe.getMaKhuyenMai().equals(khuyenMaiThanhToan.getMaKhuyenMai())){
+                    dem++;
+                }
+            }
+            if(dem!=0){
+                 JOptionPane.showMessageDialog(this, "không thể thêm");
+            }else{
+                if( khuyenMaiThanhToan_DAO.themGiamGiaSanPham_TyLe(khuyenMaiThanhToan_tyLe)){
+                maHoaDon_TyLe(lblMaKhuyenMaiKyTu);
+                danhSachKhuyenMai_TyLe();
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                }    
+            }
+            
+           
+            
+    }
+    public KhuyenMaiThanhToan khuyenMaiThanhToan_GiaTien(){
+          String maKhuyenMai = lblMaKhuyenMaiKyTu.getText();
+            String tenKhuyenMai = txtTenKhuyenMai.getText();
+            LocalDate ngayBatDau = ngay(dateNgayBatDau);
+            LocalDate ngayKetThuc = ngay(dateNgayKetThuc);
+            String tinhTrang = handleDateChange(dateNgayBatDau, dateNgayKetThuc);
+            
+            
+            
+            
+            String txtgiaTriToiThieuDonHang = txtGiaTien2.getText().replaceAll("[^\\d.]+", "");
+            double giaTriToiThieuDonHang = Double.parseDouble(txtgiaTriToiThieuDonHang);
+            
+            String txtSoTienGiam = txtGiaTien1.getText().replaceAll("[^\\d.]+", "");
+            double soTienGiam = Double.parseDouble(txtSoTienGiam);
+     
+            
+            String txtSoLuong= txtGiaTien3.getText().replaceAll("[^\\d.]+", "");
+            int soLuong = Integer.parseInt(txtSoLuong);
+            
+            
+            String chiTiet =  tatChiTiet.getText();
+             return new KhuyenMaiThanhToan(maKhuyenMai, tenKhuyenMai, (float) giaTriToiThieuDonHang, (float)soTienGiam, ngayBatDau, ngayKetThuc, tinhTrang, 2, chiTiet, soLuong);
+    }
+    public void themGiaTienKhuyenMai(){
+            KhuyenMaiThanhToan khuyenMaiThanhToan_GiaTien = khuyenMaiThanhToan_GiaTien();
+            khuyenMaiThanhToan_DAO = new KhuyenMaiThanhToan_DAO();
+            ArrayList<KhuyenMaiThanhToan> dsKhuyenMai = khuyenMaiThanhToan_DAO.layDanhSachKhuyenMai_GiaTien();
+            int dem = 0;
+            for (KhuyenMaiThanhToan khuyenMaiThanhToan : dsKhuyenMai) {
+                if(khuyenMaiThanhToan_GiaTien.getMaKhuyenMai().equals(khuyenMaiThanhToan.getMaKhuyenMai())){
+                    dem++;
+                }
+            }
+            if(dem!=0){
+                JOptionPane.showMessageDialog(this, "không thể thêm");
+            }else{
+                khuyenMaiThanhToan_DAO.themGiamGiaSanPham_GiaTien(khuyenMaiThanhToan_GiaTien);
+            maHoaDon_TyLe(lblMaKhuyenMaiKyTu);
+            danhSachKhuyenMai_GiaTien();
+            }
+           
+    }
+    public KhuyenMaiThanhToan khuyenMaiThanhToan_TyLe(){
+            String maKhuyenMai = lblMaKhuyenMaiKyTu.getText();
             String tenKhuyenMai = txtTenKhuyenMai.getText();
             LocalDate ngayBatDau = ngay(dateNgayBatDau);
             LocalDate ngayKetThuc = ngay(dateNgayKetThuc);
@@ -1053,50 +1331,32 @@ public void kiemTraDuLieuFloat(JTextField textField){
             if(!txtTyLe3.getText().equals("Không giới hạn")){
                 String txtGiamToiDa = txtTyLe3.getText().replaceAll("[^\\d.]+", "");
                 giamToiDa = Double.parseDouble(txtGiamToiDa);
+            }else{
+                  giamToiDa = 0.0;  
             }
-            int soLuong = Integer.parseInt(txtTyLe4.getText());
+            String txtSoLuong= txtTyLe4.getText().replaceAll("[^\\d.]+", "");
+            int soLuong = Integer.parseInt(txtSoLuong);
+            
             String chiTiet =  tatChiTiet.getText();
-            KhuyenMaiThanhToan khuyenMaiThanhToan = new KhuyenMaiThanhToan(maKhuyenMai, tenKhuyenMai, (float) phanTramGiam, (float) giaTriToiThieuDonHang,(float) giamToiDa, ngayBatDau, ngayKetThuc, tinhTrang, 1, chiTiet, soLuong);
-            khuyenMaiThanhToan_DAO = new KhuyenMaiThanhToan_DAO();
-            if( khuyenMaiThanhToan_DAO.themGiamGiaSanPham_TyLe(khuyenMaiThanhToan)){
-                maHoaDon_TyLe(lblMaKhuyenMaiKyTu);
-                danhSachKhuyenMai_TyLe();
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
-            }
-           
-            
-    }
-    public void themGiaTienKhuyenMai(){
-            String maKhuyenMai = lblMaKhuyenMaiKyTu.getText();
-            String tenKhuyenMai = txtTenKhuyenMai.getText();
-            LocalDate ngayBatDau = ngay(dateNgayBatDau);
-            LocalDate ngayKetThuc = ngay(dateNgayKetThuc);
-            String tinhTrang = handleDateChange(dateNgayBatDau, dateNgayKetThuc);
-            
-            
-            
-            
-            String txtgiaTriToiThieuDonHang = txtGiaTien2.getText().replaceAll("[^\\d.]+", "");
-            double giaTriToiThieuDonHang = Double.parseDouble(txtgiaTriToiThieuDonHang);
-            
-            String txtSoTienGiam = txtGiaTien1.getText().replaceAll("[^\\d.]+", "");
-            double soTienGiam = Double.parseDouble(txtSoTienGiam);
-     
-            int soLuong = Integer.parseInt(txtGiaTien3.getText());
-            String chiTiet =  tatChiTiet.getText();
-            KhuyenMaiThanhToan khuyenMaiThanhToan = new KhuyenMaiThanhToan(maKhuyenMai, tenKhuyenMai, (float) giaTriToiThieuDonHang, (float)soTienGiam, ngayBatDau, ngayKetThuc, tinhTrang, 2, chiTiet, soLuong);
-            khuyenMaiThanhToan_DAO = new KhuyenMaiThanhToan_DAO();
-            khuyenMaiThanhToan_DAO.themGiamGiaSanPham_GiaTien(khuyenMaiThanhToan);
-            maHoaDon_TyLe(lblMaKhuyenMaiKyTu);
-            danhSachKhuyenMai_GiaTien();
+            return new KhuyenMaiThanhToan(maKhuyenMai, tenKhuyenMai, (float) phanTramGiam, (float) giaTriToiThieuDonHang,(float) giamToiDa, ngayBatDau, ngayKetThuc, tinhTrang, 1, chiTiet, soLuong);
     }
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         // TODO add your handling code here:
         
         if(radGiaTien.isSelected()){
-                
+                  khuyenMaiThanhToan_DAO = new KhuyenMaiThanhToan_DAO();
+                   KhuyenMaiThanhToan khuyenMaiThanhToan_GiaTien = khuyenMaiThanhToan_GiaTien();
+                if(khuyenMaiThanhToan_DAO.capNhatTyLe_KhuyenMai(khuyenMaiThanhToan_GiaTien)){
+                   JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                   danhSachKhuyenMai_GiaTien();
+                }
         }else if(radTyLe.isSelected()){
-            
+            khuyenMaiThanhToan_DAO = new KhuyenMaiThanhToan_DAO();
+             KhuyenMaiThanhToan khuyenMaiThanhToan_tyLe = khuyenMaiThanhToan_TyLe();
+             if(khuyenMaiThanhToan_DAO.capNhatTyLe_KhuyenMai(khuyenMaiThanhToan_tyLe)){
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                danhSachKhuyenMai_TyLe();
+             }
         }else if(radSanPham.isSelected()){
             if(cboSanPham.getSelectedIndex() ==0){
                capNhatToanBoGiaGiam_SanPham(7,8);
@@ -1109,6 +1369,57 @@ public void kiemTraDuLieuFloat(JTextField textField){
             }
         }
     }//GEN-LAST:event_btnCapNhatActionPerformed
+
+    private void txtTyLe4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTyLe4FocusGained
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtTyLe4FocusGained
+
+    private void txtTyLe4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTyLe4FocusLost
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_txtTyLe4FocusLost
+
+    private void txtTyLe1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTyLe1FocusGained
+        // TODO add your handling code here:
+        String priceWithoutCurrency = txtTyLe1.getText().replaceAll("[^\\d.]+", "");
+        double parsedNumber = Double.parseDouble(priceWithoutCurrency);
+        txtTyLe1.setText( parsedNumber+"");
+    }//GEN-LAST:event_txtTyLe1FocusGained
+
+    private void txtTyLe1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTyLe1FocusLost
+        // TODO add your handling code here:
+          txtTyLe1.setText(txtTyLe1.getText()+" %");
+    }//GEN-LAST:event_txtTyLe1FocusLost
+
+    private void txtSanPham4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSanPham4FocusGained
+        // TODO add your handling code here:
+        String priceWithoutCurrency = txtSanPham4.getText().replaceAll("[^\\d.]+", "");
+        double parsedNumber = Double.parseDouble(priceWithoutCurrency);
+        txtSanPham4.setText( parsedNumber+"");
+    }//GEN-LAST:event_txtSanPham4FocusGained
+
+    private void txtSanPham4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSanPham4FocusLost
+        // TODO add your handling code here:
+        txtSanPham4.setText(txtSanPham4.getText()+" %");
+    }//GEN-LAST:event_txtSanPham4FocusLost
+
+    private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
+        // TODO add your handling code here:
+        lamMoi();
+    }//GEN-LAST:event_btnLamMoiActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        if(jCheckBox1.isSelected()){
+             System.out.println("Pannel.pnlKhuyenMai.jComboBox1ActionPerformed()");
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
     public void capNhatGiaTungSanPham(){
         if(radGiaTienSanPham.isSelected()){
                     GiamGiaSanPham giamGiaSanPham = giamGiaSanPham_GiaTien(1);
@@ -1220,6 +1531,7 @@ public void kiemTraDuLieuFloat(JTextField textField){
                            JOptionPane.showMessageDialog(this, "Đã thêm");
                         }
                 }
+        danhSachGiamGia();
     }
     public GiamGiaSanPham giamGiaSanPham_GiaTien(int loai){
             String maKhuyenMai = lblMaKhuyenMaiKyTu.getText();
@@ -1240,7 +1552,12 @@ public void kiemTraDuLieuFloat(JTextField textField){
                      if(tenSanPham.equals(vanPhongPham.getTenSanPham()))
                         maSanPham = vanPhongPham.getMaSanPham();
                 }
-                float soTienGiam = Float.parseFloat(txtSanPham3.getText());
+                
+               
+                
+                String txtsoTienGiam= txtSanPham3.getText().replaceAll("[^\\d.]+", "");
+                float soTienGiam = Float.parseFloat(txtsoTienGiam);
+                
                 LocalDate ngayBatDau = ngay(dateNgayBatDau);
                 LocalDate ngayKetThuc = ngay(dateNgayKetThuc);
                 String chiTiet = tatChiTiet.getText();
@@ -1251,7 +1568,8 @@ public void kiemTraDuLieuFloat(JTextField textField){
     public GiamGiaSanPham giamGiaSanPham_GiaTien_SanPham(int loai){
         String maKhuyenMai = lblMaKhuyenMaiKyTu.getText();
         String tenKhuyenMai = txtTenKhuyenMai.getText();
-        float soTienGiam = Float.parseFloat(txtSanPham3.getText());
+        String txtSoLuong= txtSanPham3.getText().replaceAll("[^\\d.]+", "");
+        float soTienGiam= Float.parseFloat(txtSoLuong);
         LocalDate ngayBatDau = ngay(dateNgayBatDau);
         LocalDate ngayKetThuc = ngay(dateNgayKetThuc);
         String chiTiet = tatChiTiet.getText();
@@ -1282,7 +1600,8 @@ public void kiemTraDuLieuFloat(JTextField textField){
                 
                 LocalDate ngayBatDau = ngay(dateNgayBatDau);
                 LocalDate ngayKetThuc = ngay(dateNgayKetThuc);
-                float tyLe = Float.parseFloat(txtSanPham4.getText());
+                String txtTyLe = txtSanPham4.getText().replaceAll("[^\\d.]+", "");
+                float tyLe = Float.parseFloat(txtTyLe);
                 String chiTiet = tatChiTiet.getText();
                 String tinhTrang = handleDateChange(dateNgayBatDau, dateNgayKetThuc);
                 SanPham sanPham = new SanPham(maSanPham); 
@@ -1292,10 +1611,14 @@ public void kiemTraDuLieuFloat(JTextField textField){
             String maKhuyenMai = lblMaKhuyenMaiKyTu.getText();
             String tenKhuyenMai = txtTenKhuyenMai.getText();
             
-            String maSanPham = "";
+                String maSanPham = "";
                 LocalDate ngayBatDau = ngay(dateNgayBatDau);
                 LocalDate ngayKetThuc = ngay(dateNgayKetThuc);
-                float tyLe = Float.parseFloat(txtSanPham4.getText());
+                
+                String txtSoLuong= txtSanPham4.getText().replaceAll("[^\\d.]+", "");
+                float tyLe = Float.parseFloat(txtSoLuong);
+                
+               
                 String chiTiet = tatChiTiet.getText();
                 String tinhTrang = handleDateChange(dateNgayBatDau, dateNgayKetThuc);
                 SanPham sanPham = new SanPham(maSanPham); 
@@ -1420,7 +1743,7 @@ public void kiemTraDuLieuFloat(JTextField textField){
               model.addRow(row);
               dem++;
         }
-        lblSoLuong.setText(dem+"");
+        lblSoLuong.setText("Số lượng  : "+dem);
         tblDanhSachKhuyenMai.setModel(model);
     }
     public void danhSachKhuyenMai_GiaTien(){
@@ -1431,7 +1754,8 @@ public void kiemTraDuLieuFloat(JTextField textField){
         khuyenMaiThanhToan_DAO = new KhuyenMaiThanhToan_DAO();
         ArrayList<KhuyenMaiThanhToan> dsKhuyenMaiThanhToan = khuyenMaiThanhToan_DAO.layDanhSachKhuyenMai_GiaTien();
         for (KhuyenMaiThanhToan khuyenMaiThanhToan : dsKhuyenMaiThanhToan) {
-              row = new Object[12];
+            
+            row = new Object[12];
               row[0] = khuyenMaiThanhToan.getMaKhuyenMai();
               row[1] = khuyenMaiThanhToan.getTenKhuyenMai();
               row[2] = khuyenMaiThanhToan.getNgayBatDau();
@@ -1441,7 +1765,7 @@ public void kiemTraDuLieuFloat(JTextField textField){
               model.addRow(row);
               dem++;
         }
-        lblSoLuong.setText(dem+"");
+        lblSoLuong.setText("Số lượng  : "+dem);
         tblDanhSachKhuyenMai.setModel(model);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1455,6 +1779,7 @@ public void kiemTraDuLieuFloat(JTextField textField){
     private javax.swing.JComboBox<String> cboSanPham;
     private ServiceUser.DateChooser dateNgayBatDau;
     private ServiceUser.DateChooser dateNgayKetThuc;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;

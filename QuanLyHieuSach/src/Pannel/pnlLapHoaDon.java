@@ -1,16 +1,18 @@
 
 package Pannel;
-
+import DAO.KhuyenMaiThanhToan_DAO;
 import DAO.ChiTietHoaDon_DAO;
 import DAO.HangCho_DAO;
 import DAO.HoaDon_DAO;
 import DAO.KhachHang_DAO;
+import DAO.KhuyenMaiThanhToan_DAO;
 import DAO.Sach_DAO;
 import DAO.VanPhongPham_DAO;
 import Entity.ChiTietHoaDon;
 import Entity.HangCho;
 import Entity.HoaDon;
 import Entity.KhachHang;
+import Entity.KhuyenMaiThanhToan;
 import Entity.NhanVien;
 import Entity.Sach;
 import Entity.SanPham;
@@ -20,6 +22,7 @@ import InHoaDon.FieldHoaDon;
 import InHoaDon.ParameterHoaDon;
 import InHoaDon.XuLyHoaDon;
 import ServiceUser.ScrollBarCustom;
+import ServiceUser.SelectedDate;
 import ServiceUser.TableActionCellEditor;
 import ServiceUser.TableActionCellRender;
 import ServiceUser.TableActionEvent;
@@ -32,16 +35,17 @@ import java.util.logging.Logger;
 import java.time.format.DateTimeFormatter;
 import UI.TrangChu;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-
-import static java.time.temporal.TemporalQueries.localDate;
 import java.util.ArrayList;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -50,6 +54,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LookAndFeel;
+import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -81,6 +86,9 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
     private KhachHang_DAO khachHang_DAO;
     private ChiTietHoaDon_DAO chiTietHoaDon_DAO;
     private HangCho_DAO hangCho_DAO;
+    private KhuyenMaiThanhToan_DAO khuyenMaiThanhToan;
+    private KhuyenMaiThanhToan_DAO khuyenMaiThanhToan_DAO;
+    private Timer timer;
     public pnlLapHoaDon(TaiKhoan tk,NhanVien nv, LookAndFeel originalLookAndFeel) {
         this.nv = nv;
         this.tk = tk;
@@ -140,6 +148,8 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
         kiemTraSoTienTraLai();
         capNhatDanhSach_TheoMa(txtTimKiemMaSanPham);
        // lblTenNhanVien.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+       
+       theoDoiThayDoiTien();
     }
     public void capNhatDanhSach_TheoMa(JTextField txt){
         txt.getDocument().addDocumentListener(new DocumentListener() {
@@ -169,6 +179,24 @@ public class pnlLapHoaDon extends javax.swing.JPanel {
         });
     }
     
+   
+public void theoDoiThayDoiTien(){
+       PropertyChangeListener listener = new PropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent evt) {
+                if ("text".equals(evt.getPropertyName())) {
+                  
+                   
+                            khuyenMaiThanhToan();
+                        
+                   
+                }
+            }
+        };
+        // Lắng nghe sự kiện thay đổi
+        lblTongTien1.addPropertyChangeListener(listener);
+    
+    
+}
 public void inHoaDon() throws JRException {
         XuLyHoaDon.getInstance().compileReport();
         if (tblGioHang.getRowCount() == 0) {
@@ -274,22 +302,35 @@ public void inHoaDon() throws JRException {
                     }else
                         lblTongTien1.setText(formattedTongTien+" VND");
     }
+    
     public void kiemTraSoTienTraLai(){
+       
         DecimalFormat df = new DecimalFormat("#,###");
-        txtTienKhachDua.getDocument().addDocumentListener(new DocumentListener() {
+        if(!txtTienKhachDua.getText().equals("")){
+            txtTienKhachDua.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
             String priceWithCurrency =  lblTongTien1.getText();
 
 	    // Loại bỏ chữ cái không cần thiết từ chuỗi số
+            
 	    String priceWithoutCurrency = priceWithCurrency.replaceAll("[^\\d.]+", "");
 	    double giaBan = Double.parseDouble(priceWithoutCurrency);
-            if(giaBan < Integer.parseInt(txtTienKhachDua.getText())){
-                        txtTienTraLai.setText(  df.format( Double.parseDouble(txtTienKhachDua.getText())- giaBan)+" VND");
+            
+            String txtTienKhachDua = lblTongTien1.getText().replaceAll("[^\\d.]+", "");
+	    double tienKhachDua = Double.parseDouble(txtTienKhachDua);
+            double tien =tienKhachDua - giaBan;
+            if(tien >= 0){
+                        txtTienTraLai.setText(  df.format( tien)+" VND");
                 }else{
                        txtTienTraLai.setText("0.0 VND");
                 }
+            
+            
             }
+           
+            
+            
             @Override
             public void removeUpdate(DocumentEvent e) {
                 String priceWithCurrency =  lblTongTien1.getText();
@@ -321,8 +362,49 @@ public void inHoaDon() throws JRException {
                 }
             
             }
+       
         });
+        }
+        
+       
     }
+     private void khuyenMaiThanhToan(){
+              
+        
+        timer = new Timer(1000, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+           
+            // Tách chuỗi thành hai phần sử dụng dấu chấm làm điểm chia
+            String tongTien = tongTien()+"";
+            String priceWithoutCurrency = tongTien.replaceAll("[^\\d.]+", "");
+            String[] mangChuoi = priceWithoutCurrency.split("\\.");
+            // Lấy phần trước và sau dấu chấm
+            String phanTruocDauCham = mangChuoi[0];
+           
+            int tien = Integer.parseInt(phanTruocDauCham );
+            cboKhuyenMai.removeAllItems();
+            khuyenMaiThanhToan_DAO = new KhuyenMaiThanhToan_DAO();
+            ArrayList<KhuyenMaiThanhToan> dsKhuyenMai_GiaTien = khuyenMaiThanhToan_DAO.layDanhSachKhuyenMai_GiaTien();
+            for (KhuyenMaiThanhToan khuyenMaiThanhToan1 : dsKhuyenMai_GiaTien) {
+                if(tien >= khuyenMaiThanhToan1.getGiaTriToiThieuDonHang() && khuyenMaiThanhToan1.getTinhTrang().equals("Đang khuyến mãi") && khuyenMaiThanhToan1.getSoLuong() > 0){
+                    cboKhuyenMai.addItem(khuyenMaiThanhToan1.getMaKhuyenMai());
+                }
+            }
+            ArrayList<KhuyenMaiThanhToan> dsKhuyenMai_TyLe = khuyenMaiThanhToan_DAO.layDanhSachKhuyenMai_TyLe();
+              for (KhuyenMaiThanhToan khuyenMaiThanhToan1 : dsKhuyenMai_TyLe) {
+                if(tien >= khuyenMaiThanhToan1.getGiaTriToiThieuDonHang() && khuyenMaiThanhToan1.getTinhTrang().equals("Đang khuyến mãi")&& khuyenMaiThanhToan1.getSoLuong() > 0){
+                    cboKhuyenMai.addItem(khuyenMaiThanhToan1.getMaKhuyenMai());
+                }
+            }
+        }
+    });
+   
+        timer.start(); 
+        
+         
+} 
     public int  soLuongToiDaDeThem(String maSanPham){
         int soLuongTon = 0 ;
         ArrayList<Sach> dssach = sach_DAO.layDanhSanPhamSach();
@@ -490,6 +572,7 @@ public void inHoaDon() throws JRException {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtGia = new javax.swing.JTextField();
         pnlHoaDon = new javax.swing.JPanel();
         lblThongTinKhachHang = new javax.swing.JPanel();
         lblMaKhachHang = new javax.swing.JLabel();
@@ -539,8 +622,11 @@ public void inHoaDon() throws JRException {
         lblTienKhachDua1 = new javax.swing.JLabel();
         txtTienTraLai = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboKhuyenMai = new javax.swing.JComboBox<>();
+        btnChiTiet = new javax.swing.JButton();
         lblTieuDeLapHoaDon = new javax.swing.JLabel();
+
+        txtGia.setText("jTextField1");
 
         setPreferredSize(new java.awt.Dimension(1300, 700));
 
@@ -746,7 +832,7 @@ public void inHoaDon() throws JRException {
             pnlDanhSachSanPhamTimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDanhSachSanPhamTimKiemLayout.createSequentialGroup()
                 .addComponent(scrDanhSachSanPhamTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pnlHoaDon.add(pnlDanhSachSanPhamTimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 232, 575, 290));
@@ -820,7 +906,7 @@ public void inHoaDon() throws JRException {
 
         lblTongTien1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lblTongTien1.setText("0.0 VND");
-        pnlHoaDon.add(lblTongTien1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 550, 220, 20));
+        pnlHoaDon.add(lblTongTien1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 550, 220, 20));
 
         btnThanhToan.setText("Thanh toán");
         btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
@@ -850,7 +936,20 @@ public void inHoaDon() throws JRException {
         jLabel1.setText("Khuyến mãi         :");
         pnlHoaDon.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 550, 100, -1));
 
-        pnlHoaDon.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 550, 220, -1));
+        cboKhuyenMai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboKhuyenMaiActionPerformed(evt);
+            }
+        });
+        pnlHoaDon.add(cboKhuyenMai, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 550, 220, -1));
+
+        btnChiTiet.setText("jButton1");
+        btnChiTiet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChiTietActionPerformed(evt);
+            }
+        });
+        pnlHoaDon.add(btnChiTiet, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 550, 20, -1));
 
         lblTieuDeLapHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         lblTieuDeLapHoaDon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -873,7 +972,7 @@ public void inHoaDon() throws JRException {
                 .addComponent(lblTieuDeLapHoaDon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1698,6 +1797,15 @@ xoaSanPham();
         // TODO add your handling code here:
         new frmHangCho().setVisible(true);
     }//GEN-LAST:event_btnDanhSachHangChoActionPerformed
+
+    private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnChiTietActionPerformed
+
+    private void cboKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboKhuyenMaiActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cboKhuyenMaiActionPerformed
     public void kiemTraDuLieuFloat(JTextField textField){
         DecimalFormat df = new DecimalFormat("#,###");
         textField.addKeyListener(new KeyAdapter() {
@@ -1826,13 +1934,14 @@ private void duLieuSDT(){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnChiTiet;
     private javax.swing.JButton btnDanhSachHangCho;
     private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JButton btnThemSanPham;
     private javax.swing.JButton btnThemVaoHangCho;
     private javax.swing.JButton btnXoaSanPham;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cboKhuyenMai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblDiaChi;
     private javax.swing.JLabel lblGiaBan;
@@ -1868,6 +1977,7 @@ private void duLieuSDT(){
     private javax.swing.JTable tblGioHang;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtDiemTichLuy;
+    private javax.swing.JTextField txtGia;
     private javax.swing.JTextField txtGiaBan;
     private javax.swing.JTextField txtMaSanPham;
     private javax.swing.JTextField txtSoDienThoai;

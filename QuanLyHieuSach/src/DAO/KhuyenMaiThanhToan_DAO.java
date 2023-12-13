@@ -173,6 +173,73 @@ public class KhuyenMaiThanhToan_DAO {
 		}
 		return n>0;
     }
+        public boolean capNhatTyLe_KhuyenMai(KhuyenMaiThanhToan khuyenMaiThanhToan){
+        ConnectDB.getInstance();
+	Connection con = ConnectDB.getConnection();
+	PreparedStatement state = null;
+        int n = 0;
+        try {
+             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String sql = "UPDATE [dbo].[KhuyenMaiThanhToan]\n" +
+                        "SET [TenKhuyenMai] = ?,[PhanTramGiam] = ?,[GiaTriToiThieuDonHang] = ?,[GiamToiDa] = ?,[NgayBatDau] = ?,[NgayKetThuc] = ?,[TinhTrang] = ?,[ChiTiet] = ?,[SoLuong] = ?\n" +
+                        "WHERE [MaKhuyenMai] = ?";
+            state = con.prepareStatement(sql);
+            state.setString(1, khuyenMaiThanhToan.getTenKhuyenMai());
+            state.setFloat(2, khuyenMaiThanhToan.getPhanTramGiam());
+            state.setFloat(3, khuyenMaiThanhToan.getGiaTriToiThieuDonHang());
+            state.setFloat(4, khuyenMaiThanhToan.getGiamToiDa());
+            state.setString(5, formatter.format( khuyenMaiThanhToan.getNgayBatDau()));
+            state.setString(6, formatter.format( khuyenMaiThanhToan.getNgayKetThuc()));
+            state.setString(7, khuyenMaiThanhToan.getTinhTrang());
+            state.setString(8, khuyenMaiThanhToan.getChiTiet());
+            state.setInt(9, khuyenMaiThanhToan.getSoLuong());
+            state.setString(10, khuyenMaiThanhToan.getMaKhuyenMai());
+            n = state.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+			try {
+				state.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+                return n > 0;
+    }
+        public boolean capNhatTyLe_GiaTien(KhuyenMaiThanhToan khuyenMaiThanhToan){
+        ConnectDB.getInstance();
+	Connection con = ConnectDB.getConnection();
+	PreparedStatement state = null;
+        int n = 0;
+        try {
+             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String sql = "UPDATE [dbo].[KhuyenMaiThanhToan]\n" +
+                        "SET [TenKhuyenMai] = ?,[GiaTriToiThieuDonHang] = ?,[SoTienGiam] = ?,[NgayBatDau] = ?,[NgayKetThuc] = ?,[TinhTrang] = ?,[ChiTiet] = ?,[SoLuong] = ?\n" +
+                        "WHERE [MaKhuyenMai] = ?";
+            state = con.prepareStatement(sql);
+            state.setString(1, khuyenMaiThanhToan.getTenKhuyenMai());
+            state.setFloat(2, khuyenMaiThanhToan.getGiaTriToiThieuDonHang());
+            state.setFloat(3, khuyenMaiThanhToan.getSoTienGiam());
+            state.setString(4, formatter.format( khuyenMaiThanhToan.getNgayBatDau()));
+            state.setString(5, formatter.format( khuyenMaiThanhToan.getNgayKetThuc()));
+            state.setString(6, khuyenMaiThanhToan.getTinhTrang());
+            state.setString(7, khuyenMaiThanhToan.getChiTiet());
+            state.setInt(8, khuyenMaiThanhToan.getSoLuong());
+            state.setString(9, khuyenMaiThanhToan.getMaKhuyenMai());
+            n = state.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+			try {
+				state.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+                return n > 0;
+    }
         public boolean themGiamGiaSanPham_GiaTien(KhuyenMaiThanhToan khuyenMaiThanhToan){
             ConnectDB.getInstance();
 		Connection con = ConnectDB.getConnection();
@@ -208,5 +275,32 @@ public class KhuyenMaiThanhToan_DAO {
 		}
 		return n>0;
     }
+        public boolean update_tinhTrang(String ma,String tinhTrang){
+            ConnectDB.getInstance();
+            Connection con = ConnectDB.getConnection();
+            PreparedStatement state = null;
+            int n = 0;
+            String sql =  "UPDATE [dbo].[KhuyenMaiThanhToan]\n" +
+                            "SET  [TinhTrang] = ?\n" +
+                            "WHERE [MaKhuyenMai] = ?";
+            try {
+                    state = con.prepareStatement(sql);
+	            state.setString(1,tinhTrang);
+                    state.setString(2, ma);
+                    n = state.executeUpdate();
+		} catch ( SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				state.close();
+			} catch (SQLException e2) {
+                            // TODO: handle exception
+
+			}
+		}
+		return n>0;	
+        }
 }
 
