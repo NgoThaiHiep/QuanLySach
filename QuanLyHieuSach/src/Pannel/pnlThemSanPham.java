@@ -19,7 +19,7 @@ public class pnlThemSanPham extends javax.swing.JPanel {
         this.nv = nv;
         initComponents();
         
-        btnSach.setBackground(Color.red);
+        btnSach.setBackground(Color.white);
         try {
             pnlSouth.add(new Pannel.pnlThemSach());
         } catch (SQLException ex) {
@@ -85,7 +85,7 @@ public class pnlThemSanPham extends javax.swing.JPanel {
     private void btnSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSachActionPerformed
         // TODO add your handling code here:
         pnlSouth.removeAll();
-        btnSach.setBackground(Color.red);
+        btnSach.setBackground(Color.white);
         btnVanPhongPham.setBackground(Color.white);
         try {
             pnlSouth.add(new Pannel.pnlThemSach());
@@ -100,7 +100,7 @@ public class pnlThemSanPham extends javax.swing.JPanel {
     private void btnVanPhongPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVanPhongPhamActionPerformed
         // TODO add your handling code here:
         pnlSouth.removeAll();
-        btnVanPhongPham.setBackground(Color.red);
+        btnVanPhongPham.setBackground(Color.white);
         btnSach.setBackground(Color.white);
 
         try {

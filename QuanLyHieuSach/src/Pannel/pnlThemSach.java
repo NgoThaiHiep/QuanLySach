@@ -34,10 +34,12 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,6 +63,10 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.PlainDocument;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -312,6 +318,7 @@ private static boolean isValidInput(String currentText, String text) {
         btnThemNhaXuatBan1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1130, 787));
 
@@ -564,6 +571,13 @@ private static boolean isValidInput(String currentText, String text) {
             }
         });
 
+        jButton4.setText("Thêm bằng file Excel");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -580,8 +594,10 @@ private static boolean isValidInput(String currentText, String text) {
                         .addGap(448, 448, 448)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(372, Short.MAX_VALUE))
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59)
+                        .addComponent(jButton4)))
+                .addContainerGap(174, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -598,7 +614,10 @@ private static boolean isValidInput(String currentText, String text) {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
-                    .addComponent(jButton3)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton3)
+                        .addComponent(jButton4)))
+                .addGap(345, 345, 345))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -939,6 +958,82 @@ private static boolean isValidInput(String currentText, String text) {
         themNXB.setVisible(true);
         
     }//GEN-LAST:event_btnThemNhaXuatBan1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+       System.out.println("Before opening Excel file");
+
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Choose Excel File");
+    fileChooser.setFileFilter(new FileNameExtensionFilter("Excel Files", "xlsx"));
+
+    int userSelection = fileChooser.showOpenDialog(null);
+
+    if (userSelection == JFileChooser.APPROVE_OPTION) {
+        File selectedFile = fileChooser.getSelectedFile();
+        String excelFilePath = selectedFile.getAbsolutePath();
+
+        try (FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
+             Workbook workbook = new XSSFWorkbook(inputStream)) {
+
+            Sheet sheet = workbook.getSheetAt(0); // Assuming the data is in the first sheet
+
+            Iterator<Row> iterator = sheet.iterator();
+
+            // Skip the header row if present
+            if (iterator.hasNext()) {
+                iterator.next();
+            }
+
+            Sach_DAO sach = new Sach_DAO();
+
+            while (iterator.hasNext()) {
+                Row currentRow = iterator.next();
+
+                try {
+                    String maSach = sach.generateMaSach().toString();
+                    System.out.println(maSach);
+                    String tenSach = currentRow.getCell(0).getStringCellValue();
+                    System.out.println(tenSach);
+                    double donGia = currentRow.getCell(1).getNumericCellValue();
+                    System.out.println(donGia);
+                    String nhaCCS = currentRow.getCell(2).getStringCellValue();
+                    NhaCungCap nhaCC = new NhaCungCap(nhaCCS);
+                    System.out.println(nhaCCS);
+                    String theLoaiS = currentRow.getCell(3).getStringCellValue();
+                    TheLoai theLoai = (theLoaiS != null) ? new TheLoai(theLoaiS) : new TheLoai("DefaultTheLoai");
+                    System.out.println(theLoaiS);
+                    String tacGiaString = currentRow.getCell(4).getStringCellValue();
+                    TacGia tacGia = new TacGia("", tacGiaString);
+                    System.out.println(tacGiaString);
+                    String nhaXBS = currentRow.getCell(5).getStringCellValue();
+                    NhaXuatBan nhaXB = new NhaXuatBan(nhaXBS);
+                    System.out.println(nhaXBS);
+                    int namSX = (int) currentRow.getCell(6).getNumericCellValue();
+                    int soTrang = (int) currentRow.getCell(7).getNumericCellValue();
+                    int soLuongTon = (int) currentRow.getCell(8).getNumericCellValue();
+                    LoaiSanPham lsp = new LoaiSanPham("LSP000001");
+                    Sach s = new Sach(tacGia, namSX, soTrang, theLoai, nhaXB, maSach, tenSach, lsp, nhaCC, soLuongTon, donGia, " ", "Còn hàng", "\\src\\IMG\\khongCoAnh.png", "");
+                    // Now you have the data, you can add it to your system
+                    sach.InsertSach(s);
+                } catch (SQLException ex) {
+                    Logger.getLogger(pnlThemSach.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Error during data insertion: " + ex.getMessage());
+                }
+            }
+
+            System.out.println("Data insertion completed successfully");
+
+            // Trigger UI update if needed
+            System.out.println("UI updated");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    System.out.println("After processing Excel file");
+    }//GEN-LAST:event_jButton4ActionPerformed
     
     private void duLieuTenSach(){
             txtTenSach.addKeyListener(new KeyAdapter() {
@@ -1261,6 +1356,7 @@ private static boolean isValidInput(String currentText, String text) {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblAnhSach;

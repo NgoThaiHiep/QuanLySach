@@ -143,38 +143,23 @@ public class VanPhongPham_DAO {
         PreparedStatement state = null;
         int n = 0;
         try {
-            String sql = "INSERT INTO [dbo].[VanPhongPham]\n" +
-"           ([VanPhongPhamID]\n" +
-"           ,[TenVanPhongPham]\n" +
-"           ,[LoaiSanPham]\n" +
-"           ,[NhaCungCap]\n" +
-"           ,[SoLuongTon]\n" +
-"           ,[DonGia]\n" +
-"           ,[MoTa]\n" +
-"           ,[TinhTrang]\n" +
-"           ,[HinhAnh]\n" +
-"           ,[XuatXu]\n" +
-"           ,[NamSanXuat]\n" +
-"           ,[ChatLieu]\n" +
-"           ,[ThuongHieu]\n" +
-"           ,[LoaiVanPhongPham])\n" +
-"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into VanPhongPham values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
             state = con.prepareStatement(sql);
             state.setString(1, vanPhongPham.getMaSanPham());
             state.setString(2, vanPhongPham.getTenSanPham());
             state.setString(3, vanPhongPham.getLoaiSanPham().getMaLoaiSanPham());
-            state.setString(4,vanPhongPham.getNhaCungCap().getMaNCC());
+            state.setString(4,vanPhongPham.getNhaCungCap().getTenNCC());
             state.setInt(5, vanPhongPham.getSoLuongTon());
             state.setDouble(6, vanPhongPham.getDonGia());
             state.setString(7,vanPhongPham.getMoTa());
             state.setString(8, vanPhongPham.getTinhTrang());
             state.setString(9, vanPhongPham.getHinhAnh());
-            state.setString(10,vanPhongPham.getXuatXu().getMaXuatXu());
+            state.setString(10,vanPhongPham.getXuatXu().getTenQuocGia());
             state.setInt(11, vanPhongPham.getNamSanXuat());
             state.setString(12, vanPhongPham.getChatLieu());
-            state.setString(13, vanPhongPham.getThuongHieu().getMaThuongHieu());
-            state.setString(14, vanPhongPham.getLoaiVanPhongPham().getMaLoaiVanPhongPham());
+            state.setString(13, vanPhongPham.getThuongHieu().getTenThuongHieu());
+            state.setString(14, vanPhongPham.getLoaiVanPhongPham().getTenLoaiVanPhongPham());
             n = state.executeUpdate();
         } catch (Exception e) {
 			// TODO: handle exception

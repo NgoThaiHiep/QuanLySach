@@ -19,6 +19,9 @@ public class pnlTraCuuSanPham extends javax.swing.JPanel {
         this.tk = tk;
         this.nv = nv;
         initComponents();
+
+        btnSach.setBackground(Color.white);
+
         pnlSouth.add(new Pannel.pnlTraCuuSach());
         pnlSouth.repaint();
         pnlSouth.revalidate();
@@ -80,7 +83,7 @@ public class pnlTraCuuSanPham extends javax.swing.JPanel {
     private void btnSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSachActionPerformed
         // TODO add your handling code here:
         pnlSouth.removeAll();
-        btnSach.setBackground(Color.red);
+        btnSach.setBackground(Color.white);
         btnVanPhongPham.setBackground(Color.white);
         try {
             pnlSouth.add(new Pannel.pnlTraCuuSach());
@@ -95,7 +98,7 @@ public class pnlTraCuuSanPham extends javax.swing.JPanel {
     private void btnVanPhongPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVanPhongPhamActionPerformed
         // TODO add your handling code here:
         pnlSouth.removeAll();
-        btnVanPhongPham.setBackground(Color.red);
+        btnVanPhongPham.setBackground(Color.white);
         btnSach.setBackground(Color.white);
 
         try {

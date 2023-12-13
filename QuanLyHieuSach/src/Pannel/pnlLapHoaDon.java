@@ -51,7 +51,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import javax.swing.JComboBox;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -1856,8 +1858,9 @@ xoaSanPham();
 
     private void btnDanhSachHangChoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDanhSachHangChoActionPerformed
         // TODO add your handling code here:
+
         
-        
+
         frmHangCho themHC = new frmHangCho();
 
         // Thiết lập loại đóng cửa sổ

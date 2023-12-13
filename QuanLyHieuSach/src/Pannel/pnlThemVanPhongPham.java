@@ -33,10 +33,12 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -58,6 +60,10 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.PlainDocument;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -262,6 +268,7 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
         btnXuatXu = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 153));
         jPanel1.setEnabled(false);
@@ -491,6 +498,13 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
             }
         });
 
+        jButton4.setText("Thêm bằng file Excel");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -498,22 +512,24 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(471, 471, 471)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(54, 54, 54)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(378, 378, 378)
                                 .addComponent(lblAnhVanPhongPham, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(486, 486, 486)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 321, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(355, 355, 355)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -527,8 +543,9 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton4))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
@@ -817,7 +834,78 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
         jframAnh(true);
         modalDialog.setVisible(true);
     }//GEN-LAST:event_lblAnhVanPhongPhamMouseClicked
-            public void lamMoiDuLieu(){
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Choose Excel File");
+    fileChooser.setFileFilter(new FileNameExtensionFilter("Excel Files", "xlsx"));
+
+    int userSelection = fileChooser.showOpenDialog(null);
+
+    if (userSelection == JFileChooser.APPROVE_OPTION) {
+        File selectedFile = fileChooser.getSelectedFile();
+        String excelFilePath = selectedFile.getAbsolutePath();
+
+        try (FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
+             Workbook workbook = new XSSFWorkbook(inputStream)) {
+
+            Sheet sheet = workbook.getSheetAt(0); // Assuming the data is in the first sheet
+
+            Iterator<Row> iterator = sheet.iterator();
+
+            // Skip the header row if present
+            if (iterator.hasNext()) {
+                iterator.next();
+            }
+
+            VanPhongPham_DAO vpp = new VanPhongPham_DAO();
+
+            while (iterator.hasNext()) {
+                Row currentRow = iterator.next();
+
+                try {
+                    String maVPP = vpp.generateMaVanPhongPham().toString();
+                    System.out.println(maVPP);
+                    String tenVPP = currentRow.getCell(0).getStringCellValue();
+                    System.out.println(tenVPP);
+                    double donGia = currentRow.getCell(1).getNumericCellValue();
+                    System.out.println(donGia);
+                    String nhaCCS = currentRow.getCell(2).getStringCellValue();
+                    NhaCungCap nhaCC = new NhaCungCap(nhaCCS);
+                    System.out.println(nhaCCS);
+                    String xuatXuS = currentRow.getCell(3).getStringCellValue();
+                    
+                    XuatXu xuatXu = (xuatXuS!= null)? new XuatXu(xuatXuS):new XuatXu("Khác");
+                    System.out.println(xuatXuS);
+                    int namSX = (int) currentRow.getCell(4).getNumericCellValue();
+                    String chatLieu = currentRow.getCell(5).getStringCellValue();
+                    String tenLVPPS = currentRow.getCell(6).getStringCellValue();
+                    LoaiVanPhongPham tenLVPP = new LoaiVanPhongPham(tenLVPPS);
+                    String tenTHS = currentRow.getCell(7).getStringCellValue();
+                    ThuongHieu tenTH = new ThuongHieu(tenLVPPS);
+                    int soLuongTon = (int) currentRow.getCell(8).getNumericCellValue();
+                    LoaiSanPham lsp = new LoaiSanPham("LSP000002");
+                    VanPhongPham s = new VanPhongPham(xuatXu, tenTH, tenLVPP, chatLieu, namSX, maVPP, tenVPP, lsp, nhaCC, soLuongTon, donGia," "," ", " ");
+                    // Now you have the data, you can add it to your system
+                    vpp.inserVanPhongPham(s);
+                } catch (SQLException ex) {
+                    Logger.getLogger(pnlThemSach.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Error during data insertion: " + ex.getMessage());
+                }
+            }
+
+            System.out.println("Data insertion completed successfully");
+
+            // Trigger UI update if needed
+            System.out.println("UI updated");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    }//GEN-LAST:event_jButton4ActionPerformed
+        public void lamMoiDuLieu(){
         AbstractDocument document = (AbstractDocument) txtTenSach.getDocument();
 
         DocumentFilter oldFilter;
@@ -976,6 +1064,7 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblAnhVanPhongPham;

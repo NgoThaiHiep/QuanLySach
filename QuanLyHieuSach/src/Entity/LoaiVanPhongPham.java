@@ -14,9 +14,11 @@ public class LoaiVanPhongPham {
     public LoaiVanPhongPham() {
     }
 
-    public LoaiVanPhongPham(String maLoaiVanPhongPham) {
-        this.maLoaiVanPhongPham = maLoaiVanPhongPham;
+    public LoaiVanPhongPham(String tenLoaiVanPhongPham) {
+        this.tenLoaiVanPhongPham = tenLoaiVanPhongPham;
     }
+
+    
 
     public LoaiVanPhongPham(String maLoaiVanPhongPham, String tenLoaiVanPhongPham) {
         this.maLoaiVanPhongPham = maLoaiVanPhongPham;

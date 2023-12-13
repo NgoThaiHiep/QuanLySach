@@ -20,9 +20,11 @@ public class TheLoai {
         this.tenTheLoai = tenTheLoai;
     }
 
-    public TheLoai(String maTheLoai) {
-        this.maTheLoai = maTheLoai;
+    public TheLoai(String tenTheLoai) {
+        this.tenTheLoai = tenTheLoai;
     }
+
+    
 
     public String getMaTheLoai() {
         return maTheLoai;
