@@ -48,6 +48,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import javax.swing.JDialog;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -96,10 +97,75 @@ public class pnlTraCuuNhanVien extends javax.swing.JPanel {
         for (CaLamViec caLam : dsCaLamViec) {
            cboCaLamViec.addItem(caLam.getTenCa());
         }
-        
+         capNhatNhanVienTimKiem();
         
     }
-    
+    public void capNhatNhanVienTimKiem(){
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                nhanVien_DAO = new NhanVien_DAO();
+                chucVu_DAO = new ChucVu_DAO();
+                ArrayList<ChucVu> dsChucVu = chucVu_DAO.layDanhSachChucVu();
+
+                caLam_DAO = new CaLam_DAO();
+                ArrayList<CaLamViec> dsCaLam = caLam_DAO.layDanhSachCaLamViec();
+
+                ArrayList<NhanVien> dsNV = nhanVien_DAO.layDanhSachNhanVien();
+                String colTieuDe1[] = new String[]{"Mã nhân viên", "Tên nhân viên", "CCCD", "Ngày sinh", "Giới tính", "Số điện thoại", "Email", "Địa chỉ", "Trạng thái", "Hình ảnh", "Chức vụ", "Ca làm"};
+
+                DefaultTableModel model = new DefaultTableModel(colTieuDe1,0);
+                   Object[] row;
+                for (NhanVien nhanVien : dsNV) {
+                      row = new Object[12];
+                    // GÁN GIÁ TRỊ
+                    if(txtTimKiem.getText().equals(nhanVien.getMaNV())){
+ 
+                    row[0] = nhanVien.getMaNV();
+                    row[1] = nhanVien.getHoTenNhanVien();
+                    row[2] = nhanVien.getCCCD();
+                    row[3] = nhanVien.getNgaySinh();
+                    row[4] = nhanVien.getGioiTinh() ?   "Nam" :"Nữ";
+                    row[5] = nhanVien.getSoDienThoai();
+                    row[6] =nhanVien.getEmail();
+                    row[7] = nhanVien.getDiaChi();
+                    row[8] = nhanVien.getTrangThai();
+                    row[9] = nhanVien.getHinhAnh();
+
+                    for (ChucVu chucVu : dsChucVu) {
+                       if(nhanVien.getChucVu().getMaChucVu().equals(chucVu.getMaChucVu()))
+
+                        row[10]  = chucVu.getTenChucVu();
+                }
+
+                    for (CaLamViec caLamViec : dsCaLam) {
+                    if(nhanVien.getCaLam().getMaCa().equals( caLamViec.getMaCa())){
+                            row[11] = caLamViec.getTenCa();
+                            break;
+                        }
+                    }
+
+                   model.addRow(row);
+                 }
+                tblDanhSachNhanVien.setModel(model);
+                if (tblDanhSachNhanVien.getRowCount() > 0) {
+                    mouse   (0);
+                }
+                }
+                
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                
+            }
+        });
+    }
     public void init() throws IOException, SQLException{
         try {
             ConnectDB.getInstance().connect();
@@ -146,7 +212,7 @@ public class pnlTraCuuNhanVien extends javax.swing.JPanel {
         date.toDay();
         SelectedDate day = date.getSelectedDate();
         date.setSelectedDate(new SelectedDate(day.getDay(),day.getMonth(),day.getYear() - 18) );
-            capNhatDanhSachNhanVien();            
+                     
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -217,7 +283,8 @@ public class pnlTraCuuNhanVien extends javax.swing.JPanel {
 
         cboTrangThaiTimKiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đang làm", "Tạm nghỉ", "Đã nghỉ" }));
 
-        txtTimKiem.setText("Tìm kiếm theo mã nhân viên, tên nhân viên");
+        txtTimKiem.setText("Tìm kiếm theo mã nhân viên");
+        txtTimKiem.setToolTipText("");
         txtTimKiem.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtTimKiemFocusGained(evt);
@@ -758,7 +825,7 @@ public class pnlTraCuuNhanVien extends javax.swing.JPanel {
         }
         
         
-        String trangThai = "Đang làm";
+        String trangThai = cboTrangThai.getSelectedItem()+"";
         String hinhAnh = selectedFile.getAbsolutePath();
 
         nhanVien_DAO = new NhanVien_DAO();
@@ -860,6 +927,7 @@ public class pnlTraCuuNhanVien extends javax.swing.JPanel {
 
     private void btnLamMoiThongTinNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiThongTinNhanVienActionPerformed
         // TODO add your handling code here:
+       txtTimKiem.setText("");
         txtMaNhanVien.setText("");
         txtCCCD.setText("");
        
@@ -914,7 +982,7 @@ public class pnlTraCuuNhanVien extends javax.swing.JPanel {
 
     private void txtTimKiemFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTimKiemFocusGained
         // TODO add your handling code here:
-        if(txtTimKiem.getText().equals("Tìm kiếm theo mã nhân viên, tên nhân viên")){
+        if(txtTimKiem.getText().equals("Tìm kiếm theo mã nhân viên")){
             txtTimKiem.setText("");
             txtTimKiem.requestFocus();
             removePlaceholderStyle(txtTimKiem);
@@ -925,7 +993,7 @@ public class pnlTraCuuNhanVien extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(txtTimKiem.getText().length()==0){
             addPlaceholderStyle(txtTimKiem);
-            txtTimKiem.setText("Tìm kiếm theo mã nhân viên, tên nhân viên");
+            txtTimKiem.setText("Tìm kiếm theo mã nhân viên");
         }
     }//GEN-LAST:event_txtTimKiemFocusLost
 
@@ -957,6 +1025,11 @@ public class pnlTraCuuNhanVien extends javax.swing.JPanel {
     private void tblDanhSachNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachNhanVienMouseClicked
         // TODO add your handling code here:
         int row = tblDanhSachNhanVien.getSelectedRow();
+        mouse(row);
+                
+    }//GEN-LAST:event_tblDanhSachNhanVienMouseClicked
+    public void mouse( int row ){
+       
         
 		txtMaNhanVien.setText(tblDanhSachNhanVien.getValueAt(row, 0).toString());
 		txtTenNhanVien.setText(tblDanhSachNhanVien.getValueAt(row, 1).toString());
@@ -1044,9 +1117,7 @@ public class pnlTraCuuNhanVien extends javax.swing.JPanel {
                 
                 //txtTienLuong.setText(modelNhanVien.getValueAt(row, 5).toString());
 		//cboPhongBan.setSelectedItem(modelNhanVien.getValueAt(row, 6).toString());
-                
-    }//GEN-LAST:event_tblDanhSachNhanVienMouseClicked
-
+    }
     private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jScrollPane1MouseClicked
@@ -1447,10 +1518,6 @@ public class pnlTraCuuNhanVien extends javax.swing.JPanel {
                     // Đặt màu đỏ đậm cho đường viền
                     LineBorder redLineBorder = new LineBorder(Color.RED, 2);
                          txtCCCD.setBorder(redLineBorder);
-
-
-
-
                 } else {
                  if(!txtCCCD.getText().substring(0, 1).equals("0")){
                          LineBorder redLineBorder = new LineBorder(Color.RED, 2);
@@ -1548,7 +1615,7 @@ public class pnlTraCuuNhanVien extends javax.swing.JPanel {
         ArrayList<CaLamViec> dsCaLam = caLam_DAO.layDanhSachCaLamViec();
         
         ArrayList<NhanVien> dsNV = nhanVien_DAO.layDanhSachNhanVien();
-       String colTieuDe1[] = new String[]{"Mã nhân viên", "Tên nhân viên", "CCCD", "Ngày sinh", "Giới tính", "Số điện thoại", "Email", "Địa chỉ", "Trạng thái", "Hình ảnh", "Chức vụ", "Ca làm"};
+        String colTieuDe1[] = new String[]{"Mã nhân viên", "Tên nhân viên", "CCCD", "Ngày sinh", "Giới tính", "Số điện thoại", "Email", "Địa chỉ", "Trạng thái", "Hình ảnh", "Chức vụ", "Ca làm"};
         
         DefaultTableModel model = new DefaultTableModel(colTieuDe1,0);
            Object[] row;

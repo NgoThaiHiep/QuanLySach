@@ -63,18 +63,9 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         lblTimKiem = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        cboTinhTrang = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        cboSapXepTheo = new javax.swing.JComboBox<>();
-        txtTimKiemTheo = new javax.swing.JComboBox<>();
-        checkboxTheLoai = new javax.swing.JCheckBox();
-        checkboxTacGia = new javax.swing.JCheckBox();
-        checkboxNXB = new javax.swing.JCheckBox();
-        checkboxNamSanXuat = new javax.swing.JCheckBox();
         txtTimKiemTheoMa = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
 
         jLabel5.setText("Tên sách");
 
@@ -165,118 +156,41 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
 
         lblTimKiem.setText("Tìm kiếm");
 
-        jLabel2.setText("Tìm kiếm theo");
-
-        jLabel3.setText("Lọc theo tình trạng");
-
-        cboTinhTrang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
-
-        jLabel4.setText("Sắp xếp theo");
-
-        cboSapXepTheo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboSapXepTheoActionPerformed(evt);
-            }
-        });
-
-        txtTimKiemTheo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTimKiemTheoActionPerformed(evt);
-            }
-        });
-
-        checkboxTheLoai.setText("Thể loại");
-        checkboxTheLoai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkboxTheLoaiActionPerformed(evt);
-            }
-        });
-
-        checkboxTacGia.setText("Tác giả");
-        checkboxTacGia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkboxTacGiaActionPerformed(evt);
-            }
-        });
-
-        checkboxNXB.setText("Nhà xuất bản");
-        checkboxNXB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkboxNXBActionPerformed(evt);
-            }
-        });
-
-        checkboxNamSanXuat.setText("Năm sản xuất");
-        checkboxNamSanXuat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkboxNamSanXuatActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtTimKiemTheoMa)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(checkboxTheLoai)
-                            .addGap(45, 45, 45)
-                            .addComponent(checkboxTacGia)
-                            .addGap(39, 39, 39)
-                            .addComponent(checkboxNXB, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(checkboxNamSanXuat))
-                        .addComponent(txtTimKiemTheo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(65, 65, 65)
-                .addComponent(jLabel4)
-                .addGap(37, 37, 37)
-                .addComponent(cboSapXepTheo, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(572, Short.MAX_VALUE))
+                .addGap(100, 100, 100)
+                .addComponent(txtTimKiemTheoMa, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(310, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(lblTimKiem)
-                    .addGap(540, 540, 540)
-                    .addComponent(jLabel3)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(cboTinhTrang, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(39, Short.MAX_VALUE)))
+                    .addContainerGap(784, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(txtTimKiemTheoMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(cboSapXepTheo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTimKiemTheo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(checkboxTheLoai)
-                    .addComponent(checkboxTacGia)
-                    .addComponent(checkboxNXB)
-                    .addComponent(checkboxNamSanXuat))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblTimKiem)
-                        .addComponent(jLabel3)
-                        .addComponent(cboTinhTrang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(114, Short.MAX_VALUE)))
+                    .addComponent(lblTimKiem)
+                    .addContainerGap(23, Short.MAX_VALUE)))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Kết quả tra cứu"));
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.Y_AXIS));
+
+        jButton3.setText("Toàn bộ sách");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -285,18 +199,26 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1482, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(591, 591, 591)
+                .addComponent(jButton3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(12, 12, 12))
+                .addGap(16, 16, 16)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -309,34 +231,34 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-// private JPanel createPanels() throws IOException {
-//        JPanel containerPanel = new JPanel();
-//        containerPanel.setLayout(new BoxLayout(containerPanel, BoxLayout.Y_AXIS));	
-//        sach_DAO = new Sach_DAO();
-//        nhanVien_DAO = new NhanVien_DAO();
-//        ArrayList<Sach> dssps = sach_DAO.layDanhSanPhamSach();
-//        for (Sach sach : dssps) {
-//        	
-//	          
-//            try {
-//                JPanel newPanel = new CellSach(sach);
-//                newPanel.setPreferredSize(new Dimension(newPanel.getWidth(), PANEL_HEIGHT));
-//                newPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, PANEL_HEIGHT)); // Ensure the panel doesn't expand horizontally
-//                //  newPanel.add(new JLabel("Panel " + (++count)));
-//
-//                containerPanel.add(newPanel);
-//            }
-//            // ArrayList<NhanVien> dsnv=nhanVien_DAO.layDanhSachNhanVien();
-//            catch (SQLException ex) {
-//                Logger.getLogger(pnlTraCuuSach.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//		}
-//        return containerPanel;
-//    }
+ private JPanel createPanels() throws IOException {
+        JPanel containerPanel = new JPanel();
+        containerPanel.setLayout(new BoxLayout(containerPanel, BoxLayout.Y_AXIS));	
+        sach_DAO = new Sach_DAO();
+        nhanVien_DAO = new NhanVien_DAO();
+        ArrayList<Sach> dssps = sach_DAO.layDanhSanPhamSach();
+        for (Sach sach : dssps) {
+        	
+	          
+            try {
+                JPanel newPanel = new CellSach(sach);
+                newPanel.setPreferredSize(new Dimension(newPanel.getWidth(), PANEL_HEIGHT));
+                newPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, PANEL_HEIGHT)); // Ensure the panel doesn't expand horizontally
+                //  newPanel.add(new JLabel("Panel " + (++count)));
+
+                containerPanel.add(newPanel);
+            }
+            // ArrayList<NhanVien> dsnv=nhanVien_DAO.layDanhSachNhanVien();
+            catch (SQLException ex) {
+                Logger.getLogger(pnlTraCuuSach.class.getName()).log(Level.SEVERE, null, ex);
+            }
+		}
+        return containerPanel;
+    }
  private JPanel createPanelsTheoMa(String maSach) throws IOException {
         JPanel containerPanel = new JPanel();
         containerPanel.removeAll();
@@ -418,30 +340,6 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
         panel.setBackground(new Color(60, 60, 60));
         scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, panel);
     }
-    private void cboSapXepTheoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboSapXepTheoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboSapXepTheoActionPerformed
-
-    private void txtTimKiemTheoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemTheoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTimKiemTheoActionPerformed
-
-    private void checkboxTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxTheLoaiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkboxTheLoaiActionPerformed
-
-    private void checkboxTacGiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxTacGiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkboxTacGiaActionPerformed
-
-    private void checkboxNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxNXBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkboxNXBActionPerformed
-
-    private void checkboxNamSanXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkboxNamSanXuatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_checkboxNamSanXuatActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -450,21 +348,42 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+         jPanel3.removeAll();
+        JPanel panel;
+        panel = new JPanel();
+        JPanel newPanel;
+        
+        try {
+            newPanel = createPanels();
+              panel.add(newPanel);
+        } catch (IOException ex) {
+            Logger.getLogger(pnlTraCuuSach.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+        panel.revalidate();
+        panel.repaint();
+        
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        
+
+        JScrollPane scrollPane = new JScrollPane(panel);
+          
+        scrollPane.setVerticalScrollBarPolicy(scrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.getViewport().setPreferredSize(new Dimension(250, 400));
+        addTableStyle(scrollPane);
+          jPanel3.add(scrollPane);
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cboSapXepTheo;
-    private javax.swing.JComboBox<String> cboTinhTrang;
-    private javax.swing.JCheckBox checkboxNXB;
-    private javax.swing.JCheckBox checkboxNamSanXuat;
-    private javax.swing.JCheckBox checkboxTacGia;
-    private javax.swing.JCheckBox checkboxTheLoai;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -476,7 +395,6 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lblAnhSachTimKiem;
     private javax.swing.JLabel lblTimKiem;
-    private javax.swing.JComboBox<String> txtTimKiemTheo;
     private javax.swing.JTextField txtTimKiemTheoMa;
     // End of variables declaration//GEN-END:variables
 }

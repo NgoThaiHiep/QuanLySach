@@ -12,24 +12,68 @@ public class HoaDon {
     private LocalDate ngayLap;
     private NhanVien nhanVien;
     private KhachHang khachHanh;
-    private double TongTien; 
-   
+    
+    private double  soTienKhachDua;
+   private double tongTien; 
+       private double tienBanDau;
+    private double vat;
+    private double tienThua;
 
-    public HoaDon(String maHoaDon, LocalDate ngayLap, NhanVien nhanVien, KhachHang khachHanh, double TongTien) {
+    public HoaDon(String maHoaDon, LocalDate ngayLap, NhanVien nhanVien, KhachHang khachHanh, double soTienKhachDua, double tongTien, double tienBanDau, double vat, double tienThua) {
         this.maHoaDon = maHoaDon;
         this.ngayLap = ngayLap;
         this.nhanVien = nhanVien;
         this.khachHanh = khachHanh;
-        this.TongTien = TongTien;
+        this.soTienKhachDua = soTienKhachDua;
+        this.tongTien = tongTien;
+        this.tienBanDau = tienBanDau;
+        this.vat = vat;
+        this.tienThua = tienThua;
+    }
+
+    public double getSoTienKhachDua() {
+        return soTienKhachDua;
+    }
+
+    public void setSoTienKhachDua(double soTienKhachDua) {
+        this.soTienKhachDua = soTienKhachDua;
     }
 
     public double getTongTien() {
-        return TongTien;
+        return tongTien;
     }
 
-    public void setTongTien(double TongTien) {
-        this.TongTien = TongTien;
+    public void setTongTien(double tongTien) {
+        this.tongTien = tongTien;
     }
+
+    public double getTienBanDau() {
+        return tienBanDau;
+    }
+
+    public void setTienBanDau(double tienBanDau) {
+        this.tienBanDau = tienBanDau;
+    }
+
+    public double getVat() {
+        return vat;
+    }
+
+    public void setVat(double vat) {
+        this.vat = vat;
+    }
+
+    public double getTienThua() {
+        return tienThua;
+    }
+
+    public void setTienThua(double tienThua) {
+        this.tienThua = tienThua;
+    }
+
+
+
+   
     
     public HoaDon(String maHoaDon) {
         this.maHoaDon = maHoaDon;
@@ -94,8 +138,10 @@ public class HoaDon {
 
     @Override
     public String toString() {
-        return "HoaDon{" + "maHoaDon=" + maHoaDon + ", ngayLap=" + ngayLap + ", nhanVien=" + nhanVien + ", khachHanh=" + khachHanh + ", TongTien=" + TongTien + '}';
+        return "HoaDon{" + "maHoaDon=" + maHoaDon + ", ngayLap=" + ngayLap + ", nhanVien=" + nhanVien + ", khachHanh=" + khachHanh + ", soTienKhachDua=" + soTienKhachDua + ", tongTien=" + tongTien + ", tienBanDau=" + tienBanDau + ", vat=" + vat + ", tienThua=" + tienThua + '}';
     }
+
+
 
    
     

@@ -256,14 +256,16 @@ public class Sach_DAO {
     }
     public ArrayList<Sach> layDanhSachTheoMaSach(String maSach){
         ArrayList<Sach> dsSach =  new ArrayList<Sach> ();
-        ConnectDB.getInstance();
-	Connection con = ConnectDB.getConnection();
+       ConnectDB.getInstance();
+		Connection con = ConnectDB.getConnection();
+		PreparedStatement state = null;
 	
          try{
           
-            String sql = "Select * from Sach where SachID LIKE '%"+maSach+"%'";
-            Statement state = con.createStatement();
-            ResultSet rs = state.executeQuery(sql);
+            String sql = "Select * from Sach where SachID =  ?";
+             state = con.prepareStatement(sql);
+             state.setString(1,maSach);
+            ResultSet rs = state.executeQuery();
             while(rs.next()){
                     String maSanPham = rs.getString(1);
                     String tenSanPham = rs.getString(2);

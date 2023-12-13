@@ -130,11 +130,12 @@ public class pnlThemSach extends javax.swing.JPanel {
 //          
 //        }
         // Create a custom DocumentFilter
-        kiemTraSo(txtSoTrang);
-        kiemTraSo(txtSoLuongTon);
-        kiemTraSo(txtNamXuatBan);
+        kiemTraDuLieuFloat(txtSoTrang);
+        kiemTraDuLieuFloat(txtSoLuongTon);
+        
+        
         kiemTraDuLieuFloat(txtDonGia);
-        duLieuTenSach();
+        
         dataTacGia();
         dataTheLoai();
 }
@@ -1035,65 +1036,7 @@ private static boolean isValidInput(String currentText, String text) {
     System.out.println("After processing Excel file");
     }//GEN-LAST:event_jButton4ActionPerformed
     
-    private void duLieuTenSach(){
-            txtTenSach.addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyReleased(KeyEvent e) {
-                    String text = txtTenSach.getText();
-                    String formattedText = vietHoaChuCaiDauTienTrongJtextField(text);
-                    txtTenSach.setText(formattedText);
-                }
-            });
-
-                    // Tạo một DocumentFilter để kiểm tra và lọc ký tự
-            AbstractDocument document = (AbstractDocument) txtTenSach.getDocument();
-            document.setDocumentFilter(new DocumentFilter() {
-                @Override
-                public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-                    // Chỉ cho phép chữ cái, mã UTF-8, và có đúng một dấu cách giữa các từ
-                    if (string == null)
-                        return;
-
-                    String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-                    String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
-                    if (isValidText(newText)) {
-                        super.insertString(fb, offset, string, attr);
-                    }
-                }
-
-                @Override
-                public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-                    // Chỉ cho phép chữ cái, mã UTF-8, và có đúng một dấu cách giữa các từ
-                    if (text == null)
-                        return;
-
-                    String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-                    String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
-                    if (isValidText(newText)) {
-                        super.replace(fb, offset, length, text, attrs);
-                    }
-                }
-
-                private boolean isValidText(String text) {
-                    if (text.isEmpty() || text.startsWith(" ")) {
-                        return false; // Ký tự đầu tiên không được là dấu cách
-                    }
-
-                    String[] words = text.split(" ");
-                    if (words.length < 1) {
-                        return false; // Phải có ít nhất một từ
-                    }
-
-                    for (String word : words) {
-                        if (!Pattern.matches("^[\\p{L} ]*$", word)) {
-                            return false; // Chỉ mã UTF-8 và dấu cách được chấp nhận
-                        }
-                    }
-
-                    return true;
-                }
-            });
-        }
+   
     public void jframThemTheLoai(boolean a){
          JFrame frmTheTheLoai = new JFrame("Large Image");
        
@@ -1193,91 +1136,12 @@ private static boolean isValidInput(String currentText, String text) {
         
         frmTheTheLoai.pack();
         frmTheTheLoai.setLocationRelativeTo(null);
-        duLieuTenTheLoai(txtTenTheLoai);
+       
     }
-    public void duLieuTenTheLoai(JTextField txtTenTheLoai){
-            txtTenTheLoai.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                String text = txtTenTheLoai.getText();
-                String formattedText = vietHoaChuCaiDauTienTrongJtextField(text);
-                txtTenTheLoai.setText(formattedText);
-            }
-        });
-        
-                // Tạo một DocumentFilter để kiểm tra và lọc ký tự
-        AbstractDocument document = (AbstractDocument) txtTenTheLoai.getDocument();
-        document.setDocumentFilter(new DocumentFilter() {
-            @Override
-            public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-                // Chỉ cho phép chữ cái, mã UTF-8, và có đúng một dấu cách giữa các từ
-                if (string == null)
-                    return;
+    
 
-                String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-                String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
-                if (isValidText(newText)) {
-                    super.insertString(fb, offset, string, attr);
-                }
-            }
 
-            @Override
-            public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-                // Chỉ cho phép chữ cái, mã UTF-8, và có đúng một dấu cách giữa các từ
-                if (text == null)
-                    return;
-
-                String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-                String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
-                if (isValidText(newText)) {
-                    super.replace(fb, offset, length, text, attrs);
-                }
-            }
-
-            private boolean isValidText(String text) {
-                if (text.isEmpty() || text.startsWith(" ")) {
-                    return false; // Ký tự đầu tiên không được là dấu cách
-                }
-
-                String[] words = text.split(" ");
-                if (words.length < 1) {
-                    return false; // Phải có ít nhất một từ
-                }
-
-                for (String word : words) {
-                    if (!Pattern.matches("^[\\p{L} ]*$", word)) {
-                        return false; // Chỉ mã UTF-8 và dấu cách được chấp nhận
-                    }
-                }
-
-                return true;
-            }
-        });
-    }
-     private static String vietHoaChuCaiDauTienTrongJtextField(String input) {
-        if (input == null || input.isEmpty()) {
-            return input;
-        }
-
-        StringBuilder formattedText = new StringBuilder();
-        boolean capitalizeNext = true;
-
-        for (char c : input.toCharArray()) {
-            if (Character.isWhitespace(c)) {
-                capitalizeNext = true;
-                formattedText.append(c);
-            } else {
-                if (capitalizeNext) {
-                    formattedText.append(Character.toUpperCase(c));
-                } else {
-                    formattedText.append(Character.toLowerCase(c));
-                }
-                capitalizeNext = false;
-            }
-        }
-
-        return formattedText.toString();
-    }
+    
     public void jframAnh(boolean a){
                     // TODO add your handling code here:
            // Tạo một JFrame mới để hiển thị ảnh phóng to

@@ -1014,7 +1014,7 @@ public void inHoaDon() throws JRException {
                 .addComponent(lblTieuDeLapHoaDon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1681,13 +1681,27 @@ xoaSanPham();
                           //System.out.print("sách " + cellValue + "\t");
                             String priceWithoutCurrency = lblTongTienThanhToanKyTu.getText().replaceAll("[^\\d.]+", "");
                             double giaBan = Double.parseDouble(priceWithoutCurrency);
-                            HoaDon hoaDon = new HoaDon(lblMaHoaDonFont.getText(), localDate, nv, kh,giaBan );
+                            
+                            String txtSoTienKhachDua = txtTienKhachDua.getText().replaceAll("[^\\d.]+", "");
+                            double soTienKhachDua = Double.parseDouble(txtSoTienKhachDua);
+                            
+                            String txtTongTienSanPham = lblTongTien1.getText().replaceAll("[^\\d.]+", "");
+                            double tongTienSanPham = Double.parseDouble(txtTongTienSanPham);
+                            
+                            String txtTienTraLaiKyTu = lblTienTraLaiKyTu.getText().replaceAll("[^\\d.]+", "");
+                            double tienTraLai = Double.parseDouble(txtTienTraLaiKyTu);
+                            
+                            quyDinh_DAO = new QuyDinh_DAO();
+                            QuyDinh quyDinh = quyDinh_DAO.layDuLieuQuyDinh();
+                            
+                            HoaDon hoaDon = new HoaDon(lblMaHoaDonFont.getText(), localDate, nv, kh,soTienKhachDua,giaBan,tongTienSanPham ,quyDinh.getVAT(),tienTraLai);
                            
                             hoaDon_DAO = new HoaDon_DAO();
                             hoaDon_DAO.InsertHoaDon(hoaDon, nv, kh);
                             HangCho hangCho = new HangCho(kh, sanPham, soLuong, localDate);
                             System.out.println(hangCho ); // Xuống dòng sau khi duyệt qua một hàng
                             System.out.println("\n");
+                            
                             hangCho_DAO = new HangCho_DAO();
                             chiTietHoaDon_DAO = new ChiTietHoaDon_DAO();
                             chiTietHoaDon_DAO.InsertCTHoaDon(hoaDon, soLuong, donGia, sanPham);
@@ -1702,6 +1716,7 @@ xoaSanPham();
             String formattedTongTien = decimalFormat.format(tongTien());
             lamMoiDuLieu_KhachHang();
             lamMoiDuLieu_SanPham();
+          
             AbstractDocument document = (AbstractDocument) txtSoDienThoai.getDocument();
              
             DocumentFilter oldFilter;
@@ -1783,14 +1798,25 @@ xoaSanPham();
                 kh.setDiemTL(diemTichLuy);
                 khachHang_DAO.InsertKhachHang(kh);
             }
-            String priceWithoutCurrency = lblTongTienThanhToanKyTu.getText().replaceAll("[^\\d.]+", "");
-            double giaBan = Double.parseDouble(priceWithoutCurrency);
-            HoaDon hoaDon = new HoaDon(lblMaHoaDonFont.getText(), localDate, nv, kh,giaBan);
-            hoaDon_DAO = new HoaDon_DAO();
-            hoaDon_DAO.InsertHoaDon(hoaDon, nv, kh);
-            
-            hangCho_DAO = new HangCho_DAO();
-            hangCho_DAO.DeleteDanhSachHangCho(kh.getMaKhachHang());
+           String priceWithoutCurrency = lblTongTienThanhToanKyTu.getText().replaceAll("[^\\d.]+", "");
+                            double giaBan = Double.parseDouble(priceWithoutCurrency);
+                            
+                            String txtSoTienKhachDua = txtTienKhachDua.getText().replaceAll("[^\\d.]+", "");
+                            double soTienKhachDua = Double.parseDouble(txtSoTienKhachDua);
+                            
+                            String txtTongTienSanPham = lblTongTien1.getText().replaceAll("[^\\d.]+", "");
+                            double tongTienSanPham = Double.parseDouble(txtTongTienSanPham);
+                            
+                            String txtTienTraLaiKyTu = lblTienTraLaiKyTu.getText().replaceAll("[^\\d.]+", "");
+                            double tienTraLai = Double.parseDouble(txtTienTraLaiKyTu);
+                            
+                            quyDinh_DAO = new QuyDinh_DAO();
+                            QuyDinh quyDinh = quyDinh_DAO.layDuLieuQuyDinh();
+                            
+                            HoaDon hoaDon = new HoaDon(lblMaHoaDonFont.getText(), localDate, nv, kh,soTienKhachDua,giaBan,tongTienSanPham ,quyDinh.getVAT(),tienTraLai);
+                    hoaDon_DAO = new HoaDon_DAO();
+                    hoaDon_DAO.InsertHoaDon(hoaDon, nv, kh);
+
             
             for (int row = 0; row < rowCount; row++) {
                 for (int col = 0; col < columnCount; col++) {
@@ -1829,6 +1855,7 @@ xoaSanPham();
                 }
             }
         String formattedDate = null;
+       
         try {
            formattedDate = hoaDon_DAO.generateHoaDon(nv);
         } catch (SQLException ex) {
@@ -1843,6 +1870,10 @@ xoaSanPham();
         }
         try {
             inHoaDon();
+            lamMoiDuLieu_SanPham();
+            lamMoiDuLieu_KhachHang();
+            clearTable(model);
+            tblGioHang.setModel(model);
         } catch (JRException ex) {
             Logger.getLogger(pnlLapHoaDon.class.getName()).log(Level.SEVERE, null, ex);
         }

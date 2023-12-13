@@ -104,12 +104,15 @@ public class VanPhongPham_DAO {
      public ArrayList<VanPhongPham> layDanhSanPhamVanPhongPham_TheoMa(String maVanPhongPham){
         ArrayList<VanPhongPham> dssps = new ArrayList<VanPhongPham>();
 	ConnectDB.getInstance();
-	Connection con = ConnectDB.getConnection();
+		Connection con = ConnectDB.getConnection();
+		PreparedStatement state = null;
         
         try {
-        String sql = "select * from VanPhongPham where VanPhongPhamID LIKE '%"+maVanPhongPham+"%'";
-        Statement state = con.createStatement();
-        ResultSet rs = state.executeQuery(sql);
+        String sql = "select * from VanPhongPham where VanPhongPhamID = ?";
+        
+        state = con.prepareStatement(sql);
+             state.setString(1,maVanPhongPham);
+            ResultSet rs = state.executeQuery();
         while(rs.next()){
         	
                 String maSanPham = rs.getString(1);
