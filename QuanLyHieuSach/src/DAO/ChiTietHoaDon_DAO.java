@@ -2,6 +2,7 @@
 package DAO;
 
 import ConnectDB.ConnectDB;
+import Entity.ChiTietHoaDon;
 import Entity.HoaDon;
 import Entity.KhachHang;
 import Entity.NhanVien;
@@ -11,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -48,6 +50,24 @@ public class ChiTietHoaDon_DAO {
 		}
 		return n>0;
 	}
-    
+    public ArrayList<ChiTietHoaDon> layDanhSachGiamGiaSanPham_GiaTien (String ma){
+        ArrayList<ChiTietHoaDon> dsGiamGiaSanPham = new  ArrayList<ChiTietHoaDon> ();
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement pst = null;
+        try {
+            String sql = "select * from ChiTietHoaDon where  HoaDonID = ?";
+            pst = con.prepareStatement(sql);
+            pst.setString(1,ma);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(new HoaDon(ma),new SanPham(rs.getString("SanPhamID")),rs.getInt("SoLuong"), rs.getFloat("DonGia"));
+                dsGiamGiaSanPham.add(chiTietHoaDon);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dsGiamGiaSanPham;
+    }
     
 }

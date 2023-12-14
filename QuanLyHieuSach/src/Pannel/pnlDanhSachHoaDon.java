@@ -1,20 +1,33 @@
 
 package Pannel;
 
+import DAO.ChiTietHoaDon_DAO;
 import DAO.HoaDon_DAO;
 import DAO.KhachHang_DAO;
 import DAO.NhanVien_DAO;
+import DAO.Sach_DAO;
+import DAO.VanPhongPham_DAO;
+import Entity.ChiTietHoaDon;
 import Entity.HoaDon;
 import Entity.KhachHang;
 import Entity.NhanVien;
+import Entity.Sach;
 import Entity.TaiKhoan;
+import Entity.VanPhongPham;
+import InHoaDon.FieldHoaDon;
+import InHoaDon.ParameterHoaDon;
+import InHoaDon.XuLyHoaDon;
 import ServiceUser.SelectedDate;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -30,6 +43,9 @@ public class pnlDanhSachHoaDon extends javax.swing.JPanel {
     private HoaDon_DAO hoaDon_DAO;
     private KhachHang_DAO khachHang_DAO;
     private NhanVien_DAO nhanVien_DAO;
+    private ChiTietHoaDon_DAO chiTietHoaDon_DAO;
+    private Sach_DAO sach_DAO;
+    private VanPhongPham_DAO vanPhongPham_DAO;
     public pnlDanhSachHoaDon(TaiKhoan tk,NhanVien nv) {
         this.nv = nv;
         this.tk = tk;
@@ -241,6 +257,11 @@ public class pnlDanhSachHoaDon extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        tblDanhSachHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDanhSachHoaDonMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblDanhSachHoaDon);
 
         jButton1.setText("Làm mới");
@@ -251,6 +272,11 @@ public class pnlDanhSachHoaDon extends javax.swing.JPanel {
         });
 
         jButton2.setText("Xuất hóa đơn");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -345,6 +371,125 @@ private LocalDate ngay(ServiceUser.DateChooser dateTextField){
         data.showPopup();
     }//GEN-LAST:event_btnChonNgaySinhActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            // TODO add your handling code here:
+            inHoaDon() ;
+        } catch (JRException ex) {
+            Logger.getLogger(pnlDanhSachHoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tblDanhSachHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDanhSachHoaDonMouseClicked
+        // TODO add your handling code here:
+       
+        
+    }//GEN-LAST:event_tblDanhSachHoaDonMouseClicked
+    public void inHoaDon() throws JRException {
+        int row = tblDanhSachHoaDon.getSelectedRow();
+        XuLyHoaDon.getInstance().compileReport();
+       
+         try {
+                    List<FieldHoaDon> fields = new ArrayList<>();
+                    chiTietHoaDon_DAO = new ChiTietHoaDon_DAO();
+                    ArrayList<ChiTietHoaDon> dsChiTietHoaDon = chiTietHoaDon_DAO.layDanhSachGiamGiaSanPham_GiaTien(txtMaHoaDon.getText());
+                    for (ChiTietHoaDon chiTietHoaDon : dsChiTietHoaDon) {
+                        sach_DAO = new Sach_DAO();
+                        String tenSanPham = "";
+                        ArrayList<Sach> dsSach = sach_DAO.layDanhSachTheoMaSach(chiTietHoaDon.getSanPham().getMaSanPham());
+                        for (Sach sach : dsSach) {
+                            tenSanPham = sach.getTenSanPham();
+                        }
+                        vanPhongPham_DAO = new VanPhongPham_DAO();
+                        
+                        ArrayList<VanPhongPham> dsVanPhongPham = vanPhongPham_DAO.layDanhSanPhamVanPhongPham_TheoMa(chiTietHoaDon.getSanPham().getMaSanPham());
+                        for (VanPhongPham vanPhongPham : dsVanPhongPham) {
+                            tenSanPham = vanPhongPham.getTenSanPham();
+                        }
+                        
+                       
+                        Object soLuongObj = chiTietHoaDon.getSoLuong();
+                      
+                        int soLuong = Integer.parseInt(soLuongObj+"");
+
+                        // Kiểm tra và chuyển đổi kiểu dữ liệu cho giaBan
+                        Object giaBanObj = chiTietHoaDon.getDonGia();
+
+                            System.out.println(giaBanObj+" ");
+                        double giaBan = Double.parseDouble(giaBanObj+"");
+
+                        // Kiểm tra và chuyển đổi kiểu dữ liệu cho soLuong
+
+                        // Kiểm tra và chuyển đổi kiểu dữ liệu cho tongTienSP
+                        
+                        Object tongTienSPObj = soLuong * giaBan;
+                        System.out.println(tongTienSPObj+" ");
+                        double tongTienSP = Double.parseDouble(tongTienSPObj+"");
+
+                         fields.add(new FieldHoaDon(tenSanPham, soLuong, giaBan, tongTienSP));
+                         
+                    }    
+                hoaDon_DAO = new HoaDon_DAO();
+                LocalDate localNgayLapHoaDon = ngay(data);
+                
+                HoaDon hoaDon = hoaDon_DAO.layHoaDon( txtMaHoaDon.getText(), localNgayLapHoaDon+"");
+                
+                nhanVien_DAO = new NhanVien_DAO();
+                TaiKhoan taiKhoan = new TaiKhoan(hoaDon.getNhanVien().getMaNV());
+                NhanVien nhanVien = nhanVien_DAO.layThongTinNhanVien(taiKhoan);
+                
+                String tenNhanVien = nhanVien.getHoTenNhanVien();
+                
+                String maHoaDon = txtMaHoaDon.getText();
+                
+                String tienThanhToan = hoaDon.getTongTien()+"";
+                
+                LocalDate ngay = LocalDate.now();
+                
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                
+                String ngayTao = ngay.format(formatter);
+                
+                khachHang_DAO = new KhachHang_DAO();
+                
+               String stringkh =  hoaDon.getKhachHanh().getMaKhachHang();
+               String inputKh = stringkh.substring(0, 3);
+               String sdt = "Khách hàng lẻ";
+                if(stringkh.equals("KHL")){
+                      sdt = "";  
+                }else{
+                    KhachHang khachHang = khachHang_DAO.layThongTinKhachHang_TheoMa(hoaDon.getKhachHanh().getMaKhachHang());
+                    sdt = khachHang.getSoDienThoai();
+                }
+               
+                
+                String tienBD = hoaDon.getTienBanDau()+"";
+                String khachDua = hoaDon.getSoTienKhachDua()+"";
+                if(khachDua.length()!=0){
+                    khachDua = hoaDon.getSoTienKhachDua() +"VND";
+                }else{
+                    khachDua = tienBD + " VND";
+                }
+                String khuyenMai = "";
+                if (khuyenMai.equals("")){
+                    khuyenMai = "0 VND";
+                }else{
+                    
+                }
+                String traKhach = hoaDon.getTienThua()+" VND";
+                if(khachDua.equals("")){
+                    traKhach = "0 VND";
+                }else{
+                   
+                }
+                   ParameterHoaDon dataprint = new ParameterHoaDon(tenNhanVien, maHoaDon, tienThanhToan, ngayTao, sdt, tienBD, khuyenMai, khachDua, traKhach, fields);
+                XuLyHoaDon.getInstance().printReportPayment(dataprint);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+     
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChonNgaySinh;

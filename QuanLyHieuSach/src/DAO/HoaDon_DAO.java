@@ -117,7 +117,7 @@ public class HoaDon_DAO {
     return n > 0;
 	}
     
-     public HoaDon layHoaDon(String ma,String ngay){
+    public HoaDon layHoaDon(String ma,String ngay){
          HoaDon hoaDon = new HoaDon();
          ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
