@@ -592,13 +592,13 @@ private static boolean isValidInput(String currentText, String text) {
                         .addGap(558, 558, 558)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(448, 448, 448)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(60, 60, 60)
+                        .addGap(437, 437, 437)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59)
+                        .addGap(44, 44, 44)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(86, 86, 86)
                         .addComponent(jButton4)))
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap(173, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -613,11 +613,10 @@ private static boolean isValidInput(String currentText, String text) {
                 .addGap(12, 12, 12)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton3)
-                        .addComponent(jButton4)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4)
+                    .addComponent(jButton2))
                 .addGap(345, 345, 345))
         );
 
@@ -637,7 +636,7 @@ private static boolean isValidInput(String currentText, String text) {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-                JFileChooser fileChooser = new JFileChooser();
+                JFileChooser fileChooser = new JFileChooser(selectedFile);
                 fileChooser.setFileFilter(new FileNameExtensionFilter("Hình ảnh", "jpg", "jpeg", "png", "gif"));
 
                 int returnValue = fileChooser.showOpenDialog(null);
@@ -711,7 +710,11 @@ private static boolean isValidInput(String currentText, String text) {
             else
             	tacGia+=item.toString()+",";
             countCong++;
-        }TacGia tacGias= new TacGia(tacGia);
+        }
+        System.out.println("xx"+ tacGia);
+       
+        TacGia tacGias= new TacGia(tacGia,tacGia);
+         System.out.println("YY" + tacGias);
         String theLoai= "";
         
          List<Object> ItemTheLoai = cboTheLoai.getSelectedItems();
@@ -730,7 +733,11 @@ private static boolean isValidInput(String currentText, String text) {
         }
         
         TheLoai tl = new TheLoai(theLoai);
-        String soTrang = txtSoTrang.getText();
+         String stringSoTrang = txtSoTrang.getText().replaceAll(",", "");
+	     // Chuyển đổi thành số
+	     int soTrang = Integer.parseInt(stringSoTrang);
+             
+   
         String txtGiaBan= txtDonGia.getText();
         
         // Xóa dấu phẩy trong chuỗi
@@ -739,7 +746,7 @@ private static boolean isValidInput(String currentText, String text) {
 	     double giaBan = Double.parseDouble(cleanedInput);
 	    
              
-        String soLuongTon = txtSoLuongTon.getText();
+       
         String nhaXuatBan = cboNhaXuatBan.getSelectedItem()+"";
         
         String nhaXuatBanDuocChon = nhaXuatBan;
@@ -781,15 +788,21 @@ private static boolean isValidInput(String currentText, String text) {
         String hinhAnh = selectedFile.getAbsolutePath();
         String tinhTrang = "";
         
-        if(Integer.parseInt(txtSoLuongTon.getText()) < 10){
+         String stringSoLuongTon= txtSoLuongTon.getText().replaceAll(",", "");
+	     // Chuyển đổi thành số
+	int SoLuongTon = Integer.parseInt(stringSoLuongTon);
+             
+        if(SoLuongTon < 10){
             tinhTrang = "Hết hàng";
         }else{
             tinhTrang = "Còn hàng";
         }
-        Sach sach = new Sach(tacGias,  Integer.parseInt(namXuatBan), Integer.parseInt(soTrang), tl, nxb, maSach, tenSach, loaiSanPham, ncc, Integer.parseInt(soLuongTon),giaBan, tinhTrang, hinhAnh);
+        
+        
+        Sach sach = new Sach(tacGias,  Integer.parseInt(namXuatBan), soTrang, tl, nxb, maSach, tenSach, loaiSanPham, ncc, SoLuongTon,giaBan, tinhTrang, hinhAnh);
         sach_DAO = new Sach_DAO();
         
-        if(sach_DAO.InsertSach(sach)){
+        if(sach_DAO.InsertSach_i(sach)){
             JOptionPane.showMessageDialog(this, "Thêm sách thành công");
             lamMoiDuLieu();
             try {

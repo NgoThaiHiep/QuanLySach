@@ -86,11 +86,11 @@ public class VanPhongPham_DAO {
                 String moTa = rs.getString("MoTa");
                 String tinhTrang = rs.getString("TinhTrang");
                 String hinhAnh = rs.getString("HinhAnh");
-                XuatXu xuatXu = new XuatXu(rs.getString("XuatXu"));
+                XuatXu xuatXu = new XuatXu(rs.getString("XuatXu"), "");
                 int namXuatban = rs.getInt("NamSanXuat");
                 String chatLieu = rs.getString("ChatLieu");
                 ThuongHieu thuongHieu = new ThuongHieu(rs.getString("ThuongHieu"));
-                LoaiVanPhongPham loaiVanPhongPham = new LoaiVanPhongPham(rs.getString("LoaiVanPhongPham"));
+               LoaiVanPhongPham loaiVanPhongPham = new LoaiVanPhongPham(rs.getString("LoaiVanPhongPham"), "");
                  //Sach sach = new Sach();
                 VanPhongPham vanPhongPham = new VanPhongPham(xuatXu, thuongHieu, loaiVanPhongPham, chatLieu, namXuatban, maSanPham, tenSanPham, loaiSanPham, nhaCungCap, soLuongTon , donGia , moTa, tinhTrang, hinhAnh);
                 dssps.add(vanPhongPham);
@@ -124,11 +124,11 @@ public class VanPhongPham_DAO {
                 String moTa = rs.getString("MoTa");
                 String tinhTrang = rs.getString("TinhTrang");
                 String hinhAnh = rs.getString("HinhAnh");
-                XuatXu xuatXu = new XuatXu(rs.getString("XuatXu"));
+                XuatXu xuatXu = new XuatXu(rs.getString("XuatXu"), "");
                 int namXuatban = rs.getInt("NamSanXuat");
                 String chatLieu = rs.getString("ChatLieu");
                 ThuongHieu thuongHieu = new ThuongHieu(rs.getString("ThuongHieu"));
-                LoaiVanPhongPham loaiVanPhongPham = new LoaiVanPhongPham(rs.getString("LoaiVanPhongPham"));
+                LoaiVanPhongPham loaiVanPhongPham = new LoaiVanPhongPham(rs.getString("LoaiVanPhongPham"), "");
                  //Sach sach = new Sach();
                 VanPhongPham vanPhongPham = new VanPhongPham(xuatXu, thuongHieu, loaiVanPhongPham, chatLieu, namXuatban, maSanPham, tenSanPham, loaiSanPham, nhaCungCap, soLuongTon , donGia , moTa, tinhTrang, hinhAnh);
                 dssps.add(vanPhongPham);

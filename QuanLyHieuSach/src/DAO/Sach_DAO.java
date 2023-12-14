@@ -96,6 +96,46 @@ public class Sach_DAO {
         
         return dssps; 
     }
+    public boolean InsertSach_i(Sach sach){
+        ConnectDB.getInstance();
+        Connection con = ConnectDB.getConnection();
+        PreparedStatement state = null;
+        int n = 0;
+        try {
+            String sql = "INSERT INTO Sach (SachID, TenSach, TacGia, NhaXuatBan, NamXuatBan, SoTrang, TheLoai, "
+                    + "LoaiSanPham, NhaCungCap, SoLuongTon, DonGia, MoTa, TinhTrang, HinhAnh,NgonNgu)"
+                    +"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            state = con.prepareStatement(sql);
+            state.setString(1, sach.getMaSanPham());
+            state.setString(2, sach.getTenSanPham());
+            state.setString(3, sach.getTacGia().getMaTacGia());
+            state.setString(4, sach.getNhaXuatBan().getMaNhaXuatBan());
+            state.setInt(5, sach.getNamXuatBan());
+            state.setInt(6, sach.getSoTrang());
+            state.setString(7, sach.getTheLoai().getTenTheLoai());
+            state.setString(8, sach.getLoaiSanPham().getMaLoaiSanPham());
+            state.setString(9, sach.getNhaCungCap().getMaNCC());
+            state.setInt(10, sach.getSoLuongTon());
+            state.setDouble(11, sach.getDonGia());
+            state.setString(12, "");
+            state.setString(13, sach.getTinhTrang());
+            state.setString(14,sach.getHinhAnh());
+            state.setString(15,"");
+            n = state.executeUpdate();
+        } catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				state.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+				e2.printStackTrace();
+			}
+		}
+        return n > 0;
+    }
     public boolean InsertSach(Sach sach){
         ConnectDB.getInstance();
         Connection con = ConnectDB.getConnection();
@@ -134,6 +174,7 @@ public class Sach_DAO {
 		}
         return n > 0;
     }
+    
     public boolean updateTinhTrang(String maSach, String tinhTrang){
        ConnectDB.getInstance();
 		Connection con = ConnectDB.getConnection();
@@ -206,7 +247,7 @@ public class Sach_DAO {
                 state.setString(3, sach.getNhaXuatBan().getMaNhaXuatBan());
                 state.setInt(4, sach.getNamXuatBan());
                 state.setInt(5, sach.getSoTrang());
-                state.setString(6, sach.getTheLoai().getMaTheLoai());
+                state.setString(6, sach.getTheLoai().getTenTheLoai());
                 state.setString(7, sach.getLoaiSanPham().getMaLoaiSanPham());
                 state.setString(8, sach.getNhaCungCap().getMaNCC());
                 state.setInt(9, sach.getSoLuongTon());

@@ -17,7 +17,7 @@ public class LoaiVanPhongPham {
     public LoaiVanPhongPham(String tenLoaiVanPhongPham) {
         this.tenLoaiVanPhongPham = tenLoaiVanPhongPham;
     }
-
+    
     
 
     public LoaiVanPhongPham(String maLoaiVanPhongPham, String tenLoaiVanPhongPham) {

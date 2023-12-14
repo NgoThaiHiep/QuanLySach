@@ -57,7 +57,8 @@ public class pnlTraCuuVanPhongPham extends javax.swing.JPanel {
         vanPhongPham_DAO = new VanPhongPham_DAO();
         nhanVien_DAO = new NhanVien_DAO();
         ArrayList<VanPhongPham> dssps = vanPhongPham_DAO.layDanhSanPhamVanPhongPham_TheoMa(maVanPhongPham);
-        for (VanPhongPham vanPhongPham : dssps) {     
+        for (VanPhongPham vanPhongPham : dssps) {   
+             System.out.println(vanPhongPham);
             JPanel newPanel = new CellVanPhongPham(vanPhongPham); // ArrayList<NhanVien> dsnv=nhanVien_DAO.layDanhSachNhanVien();
             newPanel.setPreferredSize(new Dimension(newPanel.getWidth(), PANEL_HEIGHT));
             newPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, PANEL_HEIGHT)); // Ensure the panel doesn't expand horizontally
@@ -316,6 +317,7 @@ public class pnlTraCuuVanPhongPham extends javax.swing.JPanel {
         //ArrayList<Sach> dssps = sach_DAO.layDanhSanPhamSach();
         ArrayList<VanPhongPham> dsvpp = vanPhongPham_DAO.layDanhSanPhamVanPhongPham();
         for (VanPhongPham vanPhongPham : dsvpp) {
+           
 	       	JPanel newPanel = new CellVanPhongPham(vanPhongPham);
 	           newPanel.setPreferredSize(new Dimension(newPanel.getWidth(), PANEL_HEIGHT));
 	           newPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, PANEL_HEIGHT)); // Ensure the panel doesn't expand horizontally
