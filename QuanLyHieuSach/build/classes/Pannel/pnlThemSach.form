@@ -160,7 +160,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="60" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblNhaXuatBan" min="-2" max="-2" attributes="0"/>
                           <Component id="lblTacGia" min="-2" max="-2" attributes="0"/>
@@ -168,7 +168,7 @@
                           <Component id="lblSoTrang" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblSoLuongTon" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="60" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="txtSoLuongTon" pref="368" max="32767" attributes="0"/>
                           <Component id="txtSoTrang" max="32767" attributes="0"/>
@@ -176,16 +176,17 @@
                           <Component id="cboNhaXuatBan" alignment="1" pref="368" max="32767" attributes="0"/>
                           <Component id="cboTacGia" alignment="1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                      <Component id="btnThemTacGia" min="-2" pref="26" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="1085" max="32767" attributes="0"/>
-                          <Component id="btnThemNhaXuatBan1" min="-2" pref="26" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                              <Component id="btnThemTacGia" min="-2" pref="26" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnThemNhaXuatBan1" min="-2" pref="26" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -205,7 +206,10 @@
                                           <Component id="lblTacGia" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                      <Component id="cboNhaXuatBan" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="cboNhaXuatBan" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnThemNhaXuatBan1" min="-2" pref="22" max="-2" attributes="0"/>
+                                      </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="txtNamXuatBan" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -264,13 +268,6 @@
                           </Group>
                       </Group>
                       <EmptySpace pref="29" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                          <Component id="btnThemNhaXuatBan1" min="-2" pref="22" max="-2" attributes="0"/>
-                          <EmptySpace pref="135" max="32767" attributes="0"/>
-                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
