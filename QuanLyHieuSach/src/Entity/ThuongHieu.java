@@ -12,9 +12,11 @@ public class ThuongHieu {
     private String maThuongHieu;
     private String tenThuongHieu;
 
-    public ThuongHieu(String tenThuongHieu) {
-        this.tenThuongHieu = tenThuongHieu;
+    public ThuongHieu(String maThuongHieu) {
+        this.maThuongHieu = maThuongHieu;
     }
+
+    
 
     
 

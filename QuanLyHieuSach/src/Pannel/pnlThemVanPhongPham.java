@@ -883,7 +883,7 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
                     String tenLVPPS = currentRow.getCell(6).getStringCellValue();
                     LoaiVanPhongPham tenLVPP = new LoaiVanPhongPham(tenLVPPS);
                     String tenTHS = currentRow.getCell(7).getStringCellValue();
-                    ThuongHieu tenTH = new ThuongHieu(tenLVPPS);
+                    ThuongHieu tenTH = new ThuongHieu(tenTHS);
                     int soLuongTon = (int) currentRow.getCell(8).getNumericCellValue();
                     LoaiSanPham lsp = new LoaiSanPham("LSP000002");
                     VanPhongPham s = new VanPhongPham(xuatXu, tenTH, tenLVPP, chatLieu, namSX, maVPP, tenVPP, lsp, nhaCC, soLuongTon, donGia," "," ", " ");
