@@ -241,9 +241,7 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
         sach_DAO = new Sach_DAO();
         nhanVien_DAO = new NhanVien_DAO();
         ArrayList<Sach> dssps = sach_DAO.layDanhSanPhamSach();
-        for (Sach sach : dssps) {
-        	
-	          
+        for (Sach sach : dssps) { 
             try {
                 JPanel newPanel = new CellSach(sach);
                 newPanel.setPreferredSize(new Dimension(newPanel.getWidth(), PANEL_HEIGHT));
@@ -273,6 +271,7 @@ public class pnlTraCuuSach extends javax.swing.JPanel {
                 newPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, PANEL_HEIGHT)); // Ensure the panel doesn't expand horizontally
                 //  newPanel.add(new JLabel("Panel " + (++count)));
                 containerPanel.add(newPanel);
+                System.out.println(sach);
             }
             // ArrayList<NhanVien> dsnv=nhanVien_DAO.layDanhSachNhanVien();
             catch (SQLException ex) {

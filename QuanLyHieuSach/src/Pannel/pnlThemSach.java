@@ -732,6 +732,7 @@ private static boolean isValidInput(String currentText, String text) {
         TheLoai tl = new TheLoai(theLoai);
         String soTrang = txtSoTrang.getText();
         String txtGiaBan= txtDonGia.getText();
+        
         // Xóa dấu phẩy trong chuỗi
 	     String cleanedInput = txtGiaBan.replaceAll(",", "");
 	     // Chuyển đổi thành số

@@ -91,7 +91,7 @@ public class CellSach extends javax.swing.JPanel {
         lblMaSanPham1.setText(sach.getMaSanPham());
         lblTenSach1.setText(sach.getTenSanPham());
         lblTacGia1.setText(sach.getTacGia().getMaTacGia());
-        lblTheLoai1.setText(sach.getTheLoai().getMaTheLoai());
+        lblTheLoai1.setText(sach.getTheLoai().getTenTheLoai());
         lblSoTrang1.setText(sach.getSoTrang()+"");
         lblGiaBan1.setText(sach.getDonGia()+"");
         lblSoLuongTon1.setText(sach.getSoLuongTon()+"");

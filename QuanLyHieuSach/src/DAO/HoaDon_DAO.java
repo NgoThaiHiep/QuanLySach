@@ -4,6 +4,7 @@ package DAO;
 import ConnectDB.ConnectDB;
 import Entity.HangCho;
 import Entity.HoaDon;
+import Entity.HoaDon;
 import Entity.KhachHang;
 import Entity.NhanVien;
 import Entity.SanPham;
@@ -75,19 +76,26 @@ public class HoaDon_DAO {
     try {
        
         // Kiểm tra xem số điện thoại đã tồn tại trong cơ sở dữ liệu hay chưa
+
         String sql = "INSERT INTO [dbo].[HoaDon] (  [HoaDonID],[NgayLapHD],[NhanVienID],[KhachHangID],[SoTienKhachDua] ,[TongTien],[TienBanDau],[VAT],[TienThua])\n" +
 "     VALUES (?,?,?,?,?,?,?,?,?)";
       
+
+     
+        
+
         state = con.prepareStatement(sql);
         state.setString(1,  hd.getMaHoaDon());
         state.setString(2,formattedDate);
         state.setString(3, nv.getMaNV());
+
         state.setString(4,kh.getMaKhachHang());
          state.setDouble(5,hd.getSoTienKhachDua());
         state.setDouble(6,hd.getTongTien());
          state.setDouble(7,hd.getTienBanDau());
           state.setDouble(8,hd.getVat());
            state.setDouble(9,hd.getTienThua());
+
         n = state.executeUpdate();
 
     } catch (Exception e) {
@@ -142,4 +150,72 @@ public class HoaDon_DAO {
         }
         return  hoaDon;
     }
+      public ArrayList<HoaDon> layDanhSachHoaDon(){
+        ArrayList<HoaDon> dshd = new ArrayList<HoaDon>();
+	ConnectDB.getInstance();
+	Connection con = ConnectDB.getConnection();
+        HoaDon hoaDon = new HoaDon();
+        try {
+        String sql = "select * from HoaDon";
+        Statement state = con.createStatement();
+	ResultSet rs = state.executeQuery(sql);
+        while(rs.next()){
+                String ma = rs.getString("HoaDonID");
+                java.sql.Date sqlNgayLapHD = rs.getDate("NgayLapHD");
+                LocalDate ngayLapHD = sqlNgayLapHD.toLocalDate();
+                NhanVien nv = new NhanVien(rs.getString("NhanVienID"));
+                KhachHang kh = new KhachHang(rs.getString("KhachHangID"));
+                
+                double tienKhachDua = rs.getDouble("SoTienKhachDua");
+                double thanhTien = rs.getDouble("TongTien");
+
+                double tienBanDau = rs.getDouble("TienBanDau");
+                double vat = rs.getDouble("VAT");
+                double tienThua= rs.getDouble("TienThua");
+                hoaDon = new HoaDon(ma, ngayLapHD, nv, kh, tienKhachDua, thanhTien, tienBanDau, vat, tienThua);            
+                dshd.add(hoaDon);
+            }    
+        } catch (SQLException e) {
+           e.printStackTrace();
+        }
+        
+        return dshd; 
+    }
+     public ArrayList<HoaDon> layDanhSachHoaDonTheoNgay(LocalDate ngayChon) {
+    ArrayList<HoaDon> dshd = new ArrayList<>();
+    ConnectDB.getInstance();
+    Connection con = ConnectDB.getConnection();
+
+    try {
+        String sql = "select * from HoaDon where NgayLapHD = ?";
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+
+        // Thiết lập giá trị cho tham số trong câu truy vấn
+        preparedStatement.setString(1, ngayChon+"");
+
+        ResultSet rs = preparedStatement.executeQuery();
+
+        while (rs.next()) {
+             String ma = rs.getString("HoaDonID");
+                java.sql.Date sqlNgayLapHD = rs.getDate("NgayLapHD");
+                LocalDate ngayLapHD = sqlNgayLapHD.toLocalDate();
+                NhanVien nv = new NhanVien(rs.getString("NhanVienID"));
+                KhachHang kh = new KhachHang(rs.getString("KhachHangID"));
+                
+                double tienKhachDua = rs.getDouble("SoTienKhachDua");
+                double thanhTien = rs.getDouble("TongTien");
+
+                double tienBanDau = rs.getDouble("TienBanDau");
+                double vat = rs.getDouble("VAT");
+                double tienThua= rs.getDouble("TienThua");
+              HoaDon  hoaDon = new HoaDon(ma, ngayLapHD, nv, kh, tienKhachDua, thanhTien, tienBanDau, vat, tienThua);            
+            dshd.add(hoaDon);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return dshd;
+}
+
 }
