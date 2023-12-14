@@ -152,17 +152,17 @@ public class VanPhongPham_DAO {
             state.setString(1, vanPhongPham.getMaSanPham());
             state.setString(2, vanPhongPham.getTenSanPham());
             state.setString(3, vanPhongPham.getLoaiSanPham().getMaLoaiSanPham());
-            state.setString(4,vanPhongPham.getNhaCungCap().getTenNCC());
+            state.setString(4,vanPhongPham.getNhaCungCap().getMaNCC());
             state.setInt(5, vanPhongPham.getSoLuongTon());
             state.setDouble(6, vanPhongPham.getDonGia());
             state.setString(7,vanPhongPham.getMoTa());
             state.setString(8, vanPhongPham.getTinhTrang());
             state.setString(9, vanPhongPham.getHinhAnh());
-            state.setString(10,vanPhongPham.getXuatXu().getTenQuocGia());
+            state.setString(10,vanPhongPham.getXuatXu().getMaXuatXu());
             state.setInt(11, vanPhongPham.getNamSanXuat());
             state.setString(12, vanPhongPham.getChatLieu());
-            state.setString(13, vanPhongPham.getThuongHieu().getTenThuongHieu());
-            state.setString(14, vanPhongPham.getLoaiVanPhongPham().getTenLoaiVanPhongPham());
+            state.setString(13, vanPhongPham.getThuongHieu().getMaThuongHieu());
+            state.setString(14, vanPhongPham.getLoaiVanPhongPham().getMaLoaiVanPhongPham());
             n = state.executeUpdate();
         } catch (Exception e) {
 			// TODO: handle exception

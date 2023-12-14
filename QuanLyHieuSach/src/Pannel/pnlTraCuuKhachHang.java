@@ -448,14 +448,37 @@ public class pnlTraCuuKhachHang extends javax.swing.JPanel {
         for (KhachHang khachHang : dsKhachHang) {
             // GÁN GIÁ TRỊ
             if (khachHang.getSoDienThoai().equals(txtSoDienThoai.toString())) {
-                dc = khachHang.getDiaChi().split("-");
-                // Lấy giá trị từ mảng row2 đã tách và đặt cho comboboxes
-                String[] diaChiParts = (String[]) dc[3];
-                    cboTinhThanhPho.setSelectedItem(diaChiParts[0].trim());
-                    cboQuanHuyen.setSelectedItem(diaChiParts[1].trim());
-                    cboPhuongXa.setSelectedItem(diaChiParts[2].trim());
+                
     
             }
+              if(jTable1.getValueAt(row, 7).toString().equals("")){
+                    cboTinhThanhPho.setSelectedIndex(0);
+                }else{
+                    	
+		    String part1 = "";
+                    String part2 = "";
+                    String part3 = "";
+                    String input = jTable1.getValueAt(row, 3).toString().toString();
+                    String[] parts = input.split("-");	
+                    for (int i = 0; i < parts.length; i++) {
+	        	 if(i == 0) {
+	        		 part1 = parts[i].toString();
+	        	 }else if(i == 1){
+	        		 part2 = parts[i].toString();
+	        	 }else {
+	        		 part3 =parts[i].toString();
+	        	 }
+			}
+                    cboTinhThanhPho.setSelectedItem(part1);
+                   
+                    if(!part2.equals("")){
+                        cboQuanHuyen.setSelectedItem(part2);
+                         if(!part3.equals("")){
+                            cboPhuongXa.setSelectedItem(part3);
+                        }
+                    }
+                            
+                }
         }
     }//GEN-LAST:event_jTable1MouseClicked
 

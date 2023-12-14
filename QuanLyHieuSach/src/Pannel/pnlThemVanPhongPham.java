@@ -140,10 +140,11 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
             }
         }
         cboNhaCungCap.setSelectedIndex(-1);
-          kiemTraDuLieuFloat(txtDonGia);
-          kiemTraSo(txtSoLuongTon);
-          kiemTraSo(txtNamSanXuat);
-          duLieuTenSach();
+        kiemTraDuLieuFloat(txtDonGia);
+        kiemTraDuLieuFloat(txtSoLuongTon);
+
+          
+         
          
     }
       private void duLieuTenSach(){
@@ -523,11 +524,11 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
                                 .addGap(486, 486, 486)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(355, 355, 355)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
+                                .addGap(335, 335, 335)
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(29, 29, 29)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
                                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -544,8 +545,8 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4))
+                    .addComponent(jButton4)
+                    .addComponent(jButton2))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
@@ -573,7 +574,12 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
         // Chuyển đổi thành số
         double giaBan = Double.parseDouble(cleanedInput);
 
-        String soLuongTon = txtSoLuongTon.getText();
+      
+        
+        String soLuongTon = txtSoLuongTon.getText().replaceAll(",", "");
+        // Chuyển đổi thành số
+     
+        
         String nhaXuatBan = cboThuongHieu.getSelectedItem()+"";
 
         nhaCungCap_DAO = new NhaCungCap_DAO();
@@ -883,7 +889,7 @@ public class pnlThemVanPhongPham extends javax.swing.JPanel {
                     String tenLVPPS = currentRow.getCell(6).getStringCellValue();
                     LoaiVanPhongPham tenLVPP = new LoaiVanPhongPham(tenLVPPS);
                     String tenTHS = currentRow.getCell(7).getStringCellValue();
-                    ThuongHieu tenTH = new ThuongHieu(tenLVPPS);
+                    ThuongHieu tenTH = new ThuongHieu(tenTHS);
                     int soLuongTon = (int) currentRow.getCell(8).getNumericCellValue();
                     LoaiSanPham lsp = new LoaiSanPham("LSP000002");
                     VanPhongPham s = new VanPhongPham(xuatXu, tenTH, tenLVPP, chatLieu, namSX, maVPP, tenVPP, lsp, nhaCC, soLuongTon, donGia," "," ", " ");

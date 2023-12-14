@@ -217,5 +217,78 @@ public class HoaDon_DAO {
 
     return dshd;
 }
+public ArrayList<HoaDon> layDanhSachHoaDonTheoThang(LocalDate ngayChon) {
+    ArrayList<HoaDon> dshd = new ArrayList<>();
+    ConnectDB.getInstance();
+    Connection con = ConnectDB.getConnection();
+
+    try {
+        String sql = "select * from HoaDon where MONTH(NgayLapHD) = ? AND YEAR(NgayLapHD) = ?";
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+
+        // Thiết lập giá trị cho tham số trong câu truy vấn
+        preparedStatement.setInt(1, ngayChon.getMonthValue());
+        preparedStatement.setInt(2, ngayChon.getYear());
+
+        ResultSet rs = preparedStatement.executeQuery();
+
+        while (rs.next()) {
+             String ma = rs.getString("HoaDonID");
+                java.sql.Date sqlNgayLapHD = rs.getDate("NgayLapHD");
+                LocalDate ngayLapHD = sqlNgayLapHD.toLocalDate();
+                NhanVien nv = new NhanVien(rs.getString("NhanVienID"));
+                KhachHang kh = new KhachHang(rs.getString("KhachHangID"));
+                
+                double tienKhachDua = rs.getDouble("SoTienKhachDua");
+                double thanhTien = rs.getDouble("TongTien");
+
+                double tienBanDau = rs.getDouble("TienBanDau");
+                double vat = rs.getDouble("VAT");
+                double tienThua= rs.getDouble("TienThua");
+              HoaDon  hoaDon = new HoaDon(ma, ngayLapHD, nv, kh, tienKhachDua, thanhTien, tienBanDau, vat, tienThua);            
+            dshd.add(hoaDon);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return dshd;
+}
+public ArrayList<HoaDon> layDanhSachHoaDonTheoNam(LocalDate ngayChon) {
+    ArrayList<HoaDon> dshd = new ArrayList<>();
+    ConnectDB.getInstance();
+    Connection con = ConnectDB.getConnection();
+
+    try {
+        String sql = "select * from HoaDon where YEAR(NgayLapHD) = ?";
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+
+        // Thiết lập giá trị cho tham số trong câu truy vấn
+        preparedStatement.setInt(1, ngayChon.getYear());
+
+        ResultSet rs = preparedStatement.executeQuery();
+
+        while (rs.next()) {
+             String ma = rs.getString("HoaDonID");
+                java.sql.Date sqlNgayLapHD = rs.getDate("NgayLapHD");
+                LocalDate ngayLapHD = sqlNgayLapHD.toLocalDate();
+                NhanVien nv = new NhanVien(rs.getString("NhanVienID"));
+                KhachHang kh = new KhachHang(rs.getString("KhachHangID"));
+                
+                double tienKhachDua = rs.getDouble("SoTienKhachDua");
+                double thanhTien = rs.getDouble("TongTien");
+
+                double tienBanDau = rs.getDouble("TienBanDau");
+                double vat = rs.getDouble("VAT");
+                double tienThua= rs.getDouble("TienThua");
+              HoaDon  hoaDon = new HoaDon(ma, ngayLapHD, nv, kh, tienKhachDua, thanhTien, tienBanDau, vat, tienThua);            
+            dshd.add(hoaDon);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return dshd;
+}
 
 }

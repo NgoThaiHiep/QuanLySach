@@ -243,7 +243,7 @@ public void inHoaDon() throws JRException {
                 }
                 String tenNhanVien = lblTenNhanVienFont.getText();
                 String maHoaDon = lblMaHoaDonFont.getText();
-                String tienThanhToan = lblTongTien1.getText();
+                String tienThanhToan = lblTongTienThanhToanKyTu.getText();
                 LocalDate ngay = LocalDate.now();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 String ngayTao = ngay.format(formatter);
@@ -251,9 +251,28 @@ public void inHoaDon() throws JRException {
                 if(sdt.length()!=0){
                     sdt = txtSoDienThoai.getText();
                 }else{
-                    sdt = "Khách vãng lai";
+                    sdt = "Khách Lẻ";
                 }
-                ParameterHoaDon dataprint = new ParameterHoaDon(tenNhanVien, maHoaDon, tienThanhToan, ngayTao, sdt,fields);
+                String tienBD = lblTongTien1.getText();
+                String khachDua = txtTienKhachDua.getText();
+                if(khachDua.length()!=0){
+                    khachDua = txtTienKhachDua.getText() +" "+"VND";
+                }else{
+                    khachDua = tienBD;
+                }
+                String khuyenMai = lblKm.getText();
+                if (khuyenMai.equals("")){
+                    khuyenMai = "0 VND";
+                }else{
+                    khuyenMai = lblKm.getText();
+                }
+                String traKhach = lblTienTraLaiKyTu.getText();
+                if(khachDua.equals("")){
+                    traKhach = "0 VND";
+                }else{
+                    traKhach = lblTienTraLaiKyTu.getText();
+                }
+                ParameterHoaDon dataprint = new ParameterHoaDon(tenNhanVien, maHoaDon, tienThanhToan, ngayTao, sdt, tienBD, khuyenMai, khachDua, traKhach, fields);
                 XuLyHoaDon.getInstance().printReportPayment(dataprint);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -376,7 +395,12 @@ public void inHoaDon() throws JRException {
             @Override
             public void removeUpdate(DocumentEvent e) {
                     
-                   
+                String lenght =txtTienKhachDua.getText(); 
+                if(lenght.length()==0){
+                    lblTienTraLaiKyTu.setText("0.0 VND");
+                }
+                
+            
                     
             }
 
@@ -602,6 +626,7 @@ public void inHoaDon() throws JRException {
     private void initComponents() {
 
         txtGia = new javax.swing.JTextField();
+        lblKm = new javax.swing.JLabel();
         pnlHoaDon = new javax.swing.JPanel();
         lblThongTinKhachHang = new javax.swing.JPanel();
         lblMaKhachHang = new javax.swing.JLabel();
@@ -651,7 +676,6 @@ public void inHoaDon() throws JRException {
         lblTienTraLaiKyTu = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         cboKhuyenMai = new javax.swing.JComboBox<>();
-        btnChiTiet = new javax.swing.JButton();
         lblThueKyTu = new javax.swing.JLabel();
         lblTongTienThanhToan = new javax.swing.JLabel();
         lblTongTienThanhToanKyTu = new javax.swing.JLabel();
@@ -659,6 +683,8 @@ public void inHoaDon() throws JRException {
         lblTieuDeLapHoaDon = new javax.swing.JLabel();
 
         txtGia.setText("jTextField1");
+
+        lblKm.setText("jLabel2");
 
         setPreferredSize(new java.awt.Dimension(1300, 700));
 
@@ -958,7 +984,7 @@ public void inHoaDon() throws JRException {
 
         lblTienKhachDua.setText("Tiền khách đưa   :");
         pnlHoaDon.add(lblTienKhachDua, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 540, 100, 30));
-        pnlHoaDon.add(txtTienKhachDua, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 550, 210, -1));
+        pnlHoaDon.add(txtTienKhachDua, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 540, 210, -1));
 
         lblTienTraLaiKyTu.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lblTienTraLaiKyTu.setText("0.0 VND");
@@ -972,23 +998,15 @@ public void inHoaDon() throws JRException {
                 cboKhuyenMaiActionPerformed(evt);
             }
         });
-        pnlHoaDon.add(cboKhuyenMai, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 562, 220, 20));
-
-        btnChiTiet.setText("jButton1");
-        btnChiTiet.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChiTietActionPerformed(evt);
-            }
-        });
-        pnlHoaDon.add(btnChiTiet, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 560, 20, -1));
+        pnlHoaDon.add(cboKhuyenMai, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 552, 220, 30));
         pnlHoaDon.add(lblThueKyTu, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 500, 60, 20));
 
-        lblTongTienThanhToan.setText("Tổng tiền thanh toán  (đã gồmVAT  )   :");
+        lblTongTienThanhToan.setText("Tổng tiền thanh toán  (đã gồm VAT  )   :");
         pnlHoaDon.add(lblTongTienThanhToan, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 600, 260, 20));
 
         lblTongTienThanhToanKyTu.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lblTongTienThanhToanKyTu.setText("0.0 VND");
-        pnlHoaDon.add(lblTongTienThanhToanKyTu, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 600, 220, 20));
+        pnlHoaDon.add(lblTongTienThanhToanKyTu, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 600, 220, 20));
 
         lblTienTraLai.setText("Tiền trả lại        :");
         pnlHoaDon.add(lblTienTraLai, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 600, 90, 20));
@@ -1014,7 +1032,7 @@ public void inHoaDon() throws JRException {
                 .addComponent(lblTieuDeLapHoaDon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1052,6 +1070,15 @@ public void inHoaDon() throws JRException {
         txtTenSanPham.setText("");
         txtGiaBan.setText("");
         txtSoLuong.setText("");
+    }
+    public void lamMoiDuLieu_ThanhToan(){
+        lblTongTien1.setText("");
+        cboKhuyenMai.setSelectedItem("Không áp mã");
+        lblTongTienThanhToanKyTu.setText("0.0 VND");
+        lblTongTien1.setText("0.0 VND");
+        lblTienTraLaiKyTu.setText("0.0 VND");
+        txtTienKhachDua.setText("");
+        txtTimKiemMaSanPham.setText("");
     }
     private void txtMaSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaSanPhamActionPerformed
         // TODO add your handling code here:
@@ -1682,29 +1709,27 @@ xoaSanPham();
                             String priceWithoutCurrency = lblTongTienThanhToanKyTu.getText().replaceAll("[^\\d.]+", "");
                             double giaBan = Double.parseDouble(priceWithoutCurrency);
                             
-                            String txtSoTienKhachDua = txtTienKhachDua.getText().replaceAll("[^\\d.]+", "");
-                            double soTienKhachDua = Double.parseDouble(txtSoTienKhachDua);
+                         
                             
                             String txtTongTienSanPham = lblTongTien1.getText().replaceAll("[^\\d.]+", "");
                             double tongTienSanPham = Double.parseDouble(txtTongTienSanPham);
                             
-                            String txtTienTraLaiKyTu = lblTienTraLaiKyTu.getText().replaceAll("[^\\d.]+", "");
-                            double tienTraLai = Double.parseDouble(txtTienTraLaiKyTu);
+                           
                             
                             quyDinh_DAO = new QuyDinh_DAO();
                             QuyDinh quyDinh = quyDinh_DAO.layDuLieuQuyDinh();
                             
-                            HoaDon hoaDon = new HoaDon(lblMaHoaDonFont.getText(), localDate, nv, kh,soTienKhachDua,giaBan,tongTienSanPham ,quyDinh.getVAT(),tienTraLai);
+                           // HoaDon hoaDon = new HoaDon(lblMaHoaDonFont.getText(), localDate, nv, kh,soTienKhachDua,giaBan,tongTienSanPham ,quyDinh.getVAT(),tienTraLai);
                            
                             hoaDon_DAO = new HoaDon_DAO();
-                            hoaDon_DAO.InsertHoaDon(hoaDon, nv, kh);
+                           // hoaDon_DAO.InsertHoaDon(hoaDon, nv, kh);
                             HangCho hangCho = new HangCho(kh, sanPham, soLuong, localDate);
                             System.out.println(hangCho ); // Xuống dòng sau khi duyệt qua một hàng
                             System.out.println("\n");
                             
                             hangCho_DAO = new HangCho_DAO();
                             chiTietHoaDon_DAO = new ChiTietHoaDon_DAO();
-                            chiTietHoaDon_DAO.InsertCTHoaDon(hoaDon, soLuong, donGia, sanPham);
+                           // chiTietHoaDon_DAO.InsertCTHoaDon(hoaDon, soLuong, donGia, sanPham);
                             if(hangCho_DAO.InsertHangCho(hangCho)){ 
                             }
                     }
@@ -1716,7 +1741,8 @@ xoaSanPham();
             String formattedTongTien = decimalFormat.format(tongTien());
             lamMoiDuLieu_KhachHang();
             lamMoiDuLieu_SanPham();
-          
+             lamMoiDuLieu_ThanhToan();
+             
             AbstractDocument document = (AbstractDocument) txtSoDienThoai.getDocument();
              
             DocumentFilter oldFilter;
@@ -1872,7 +1898,9 @@ xoaSanPham();
             inHoaDon();
             lamMoiDuLieu_SanPham();
             lamMoiDuLieu_KhachHang();
+            lamMoiDuLieu_ThanhToan();
             clearTable(model);
+            khuyenMaiThanhToan();
             tblGioHang.setModel(model);
         } catch (JRException ex) {
             Logger.getLogger(pnlLapHoaDon.class.getName()).log(Level.SEVERE, null, ex);
@@ -1914,10 +1942,6 @@ xoaSanPham();
         themHC.setVisible(true);
     }//GEN-LAST:event_btnDanhSachHangChoActionPerformed
 
-    private void btnChiTietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnChiTietActionPerformed
-
     private void cboKhuyenMaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboKhuyenMaiActionPerformed
         quyDinh_DAO = new QuyDinh_DAO();
         QuyDinh quyDinh = quyDinh_DAO.layDuLieuQuyDinh();
@@ -1937,11 +1961,17 @@ xoaSanPham();
                     
                     
                     double tongHoaDon = ((giaBan - giaBanKhuyenMai)* quyDinh.getVAT()/100) + (giaBan - giaBanKhuyenMai);
-
                     
-                    String formattedTongTien = decimalFormat.format( tongHoaDon );
+                    if(tongHoaDon <=0){
+                        String formattedTongTien = decimalFormat.format( 0);
                     
                     lblTongTienThanhToanKyTu.setText(formattedTongTien+" VND");
+                    }else{
+                        String formattedTongTien = decimalFormat.format( tongHoaDon );
+                    
+                    lblTongTienThanhToanKyTu.setText(formattedTongTien+" VND");
+                    }
+                    
                    
                 }
             }
@@ -1976,8 +2006,8 @@ xoaSanPham();
                 
             }       
         }else{
-            String priceWithoutCurrency = lblTongTien1.getText().replaceAll("[^\\d.]+", "");
             
+            String priceWithoutCurrency = lblTongTien1.getText().replaceAll("[^\\d.]+", "");
             double giaBan = Double.parseDouble(priceWithoutCurrency);
             
             double tongtien = (giaBan*quyDinh.getVAT()/100) + giaBan ;
@@ -1985,6 +2015,7 @@ xoaSanPham();
             String formattedTongTien = decimalFormat.format( tongtien );
             
             lblTongTienThanhToanKyTu.setText(formattedTongTien+" VND");
+            
         }
              
     }//GEN-LAST:event_cboKhuyenMaiActionPerformed
@@ -2086,7 +2117,6 @@ private void duLieuSDT(){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnChiTiet;
     private javax.swing.JButton btnDanhSachHangCho;
     private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnThanhToan;
@@ -2097,6 +2127,7 @@ private void duLieuSDT(){
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblDiaChi;
     private javax.swing.JLabel lblGiaBan;
+    private javax.swing.JLabel lblKm;
     private javax.swing.JLabel lblMaHoaDon;
     private javax.swing.JLabel lblMaHoaDonFont;
     private javax.swing.JLabel lblMaKhachHang;

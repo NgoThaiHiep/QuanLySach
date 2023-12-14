@@ -94,6 +94,7 @@ public class pnlThongKe extends javax.swing.JPanel {
         pnlSouth.removeAll();
         btnNgay.setBackground(Color.red);
         btnThang.setBackground(Color.white);
+        btnNam.setBackground(Color.white);
         pnlSouth.add(new Pannel.pnlThongKeTheoNgay());
         System.out.println(tk.getTenTK());
         pnlSouth.repaint();
@@ -103,8 +104,9 @@ public class pnlThongKe extends javax.swing.JPanel {
     private void btnThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThangActionPerformed
         // TODO add your handling code here:
         pnlSouth.removeAll();
-        btnNgay.setBackground(Color.red);
-        btnThang.setBackground(Color.white);
+        btnNgay.setBackground(Color.white);
+        btnThang.setBackground(Color.red);
+        btnNam.setBackground(Color.white);
         pnlSouth.add(new Pannel.pnlThongKeTheoThang());
         System.out.println(tk.getTenTK());
         pnlSouth.repaint();
@@ -114,7 +116,8 @@ public class pnlThongKe extends javax.swing.JPanel {
     private void btnNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNamActionPerformed
         // TODO add your handling code here:
         pnlSouth.removeAll();
-        btnNgay.setBackground(Color.red);
+        btnNgay.setBackground(Color.white);
+        btnNam.setBackground(Color.red);
         btnThang.setBackground(Color.white);
         pnlSouth.add(new Pannel.pnlThongKeTheoNam());
         System.out.println(tk.getTenTK());

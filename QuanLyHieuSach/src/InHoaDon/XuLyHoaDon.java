@@ -39,6 +39,10 @@ public class XuLyHoaDon {
         para.put("ngay", data.getNgay());
         para.put("tongTien", data.getTongTien());
         para.put("sdt", data.getSdt());
+        para.put("khuyenMai", data.getKhuyenMai());
+         para.put("tienBD", data.getTienBD());
+          para.put("khachDua", data.getKhachDua());
+           para.put("traKhach", data.getTraKhach());
         DefaultJasperReportsContext.getInstance();
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data.getListFields());
         JasperPrint print = JasperFillManager.fillReport(reportPay, para, dataSource);

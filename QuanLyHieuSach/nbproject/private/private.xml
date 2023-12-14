@@ -6,10 +6,16 @@
             <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Entity/VanPhongPham.java</file>
             <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlThemSach.java</file>
             <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/DAO/VanPhongPham_DAO.java</file>
-            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlTraCuuVanPhongPham.java</file>
-            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlTraCuuSach.java</file>
             <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/ServiceUser/CellSach.java</file>
             <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlDanhSachHoaDon.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlLapHoaDon.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlThemVanPhongPham.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Entity/HoaDon.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlTraCuuKhachHang.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlTraCuuNhanVien.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Entity/LoaiVanPhongPham.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlTraCuuVanPhongPham.java</file>
+            <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlTraCuuSach.java</file>
             <file>file:/D:/MON/PTUD/DoAn1/QuanLySach/QuanLyHieuSach/src/Pannel/pnlThongKeTheoNgay.java</file>
         </group>
     </open-files>

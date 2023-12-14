@@ -8,6 +8,10 @@
 	<parameter name="ngay" class="java.lang.String"/>
 	<parameter name="tongTien" class="java.lang.String"/>
 	<parameter name="sdt" class="java.lang.String"/>
+	<parameter name="tienBD" class="java.lang.String"/>
+	<parameter name="khuyenMai" class="java.lang.String"/>
+	<parameter name="khachDua" class="java.lang.String"/>
+	<parameter name="traKhach" class="java.lang.String"/>
 	<field name="tenSP" class="java.lang.String"/>
 	<field name="soLuong" class="java.lang.Integer"/>
 	<field name="giaBan" class="java.lang.Double"/>
@@ -179,7 +183,7 @@
 		</band>
 	</detail>
 	<summary>
-		<band height="95" splitType="Stretch">
+		<band height="178" splitType="Stretch">
 			<line>
 				<reportElement uuid="30055458-4680-4c96-95fd-b6249dcc1e05" x="0" y="10" width="555" height="1"/>
 				<graphicElement>
@@ -187,32 +191,94 @@
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement uuid="e25c7087-a883-4816-afeb-d937bce04655" x="0" y="26" width="184" height="21"/>
-				<textElement verticalAlignment="Middle">
+				<reportElement uuid="e25c7087-a883-4816-afeb-d937bce04655" x="0" y="11" width="320" height="21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Montserrat Medium" size="12"/>
 				</textElement>
-				<text><![CDATA[Tổng tiền phải thanh toán là:]]></text>
+				<text><![CDATA[Tổng tiền sản phẩm là là:]]></text>
 			</staticText>
-			<textField>
-				<reportElement uuid="b5039fa5-9d40-458e-8b23-c0815fe2635a" x="184" y="26" width="371" height="21"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Montserrat Medium" size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{tongTien}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement uuid="7b611cf5-ff43-4498-a8a1-58eb73cab744" x="0" y="55" width="555" height="20"/>
+				<reportElement uuid="7b611cf5-ff43-4498-a8a1-58eb73cab744" x="0" y="138" width="555" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Montserrat SemiBold" size="14"/>
 				</textElement>
 				<text><![CDATA[Hóa đơn đã bao gồm thuế VAT 8%]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="7b611cf5-ff43-4498-a8a1-58eb73cab744" x="0" y="75" width="555" height="20"/>
+				<reportElement uuid="7b611cf5-ff43-4498-a8a1-58eb73cab744" x="0" y="158" width="555" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Montserrat Light" size="10"/>
 				</textElement>
 				<text><![CDATA[Xin cảm ơn Quý khách/ Thank you !]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="b5039fa5-9d40-458e-8b23-c0815fe2635a" x="320" y="32" width="235" height="21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Montserrat Medium" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{khuyenMai}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e25c7087-a883-4816-afeb-d937bce04655" x="0" y="32" width="320" height="21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Montserrat Medium" size="12"/>
+				</textElement>
+				<text><![CDATA[Tiền đã được giảm:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e25c7087-a883-4816-afeb-d937bce04655" x="0" y="53" width="320" height="21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Montserrat Medium" size="12"/>
+				</textElement>
+				<text><![CDATA[Tổng tiền thanh toán:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="b5039fa5-9d40-458e-8b23-c0815fe2635a" x="320" y="53" width="235" height="21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Montserrat Medium" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tongTien}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b5039fa5-9d40-458e-8b23-c0815fe2635a" x="320" y="11" width="235" height="21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Montserrat Medium" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tienBD}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="2bcd776f-2efe-4769-af39-9adad2b25145" x="0" y="81" width="555" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="e25c7087-a883-4816-afeb-d937bce04655" x="0" y="82" width="320" height="21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Montserrat Medium" size="12"/>
+				</textElement>
+				<text><![CDATA[Tiền khách đưa:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="b5039fa5-9d40-458e-8b23-c0815fe2635a" x="320" y="82" width="235" height="21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Montserrat Medium" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{khachDua}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b5039fa5-9d40-458e-8b23-c0815fe2635a" x="320" y="103" width="235" height="21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Montserrat Medium" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{traKhach}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e25c7087-a883-4816-afeb-d937bce04655" x="0" y="103" width="320" height="21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Montserrat Medium" size="12"/>
+				</textElement>
+				<text><![CDATA[Tiền thối:]]></text>
 			</staticText>
 		</band>
 	</summary>

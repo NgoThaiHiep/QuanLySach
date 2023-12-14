@@ -87,6 +87,7 @@ public class pnlThemSach extends javax.swing.JPanel {
     private List<Object> selectedItemsTheLoai;
     private TheLoai_DAO theLoai_DAO;
     private TacGia_DAO tacGia_DAO;
+    private File selectedFile2;
     
     public pnlThemSach() throws SQLException {
         
@@ -976,9 +977,11 @@ private static boolean isValidInput(String currentText, String text) {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        selectedFile2 = new File("src\\data");
+
        System.out.println("Before opening Excel file");
 
-    JFileChooser fileChooser = new JFileChooser();
+    JFileChooser fileChooser = new JFileChooser(selectedFile2);
     fileChooser.setDialogTitle("Choose Excel File");
     fileChooser.setFileFilter(new FileNameExtensionFilter("Excel Files", "xlsx"));
 
