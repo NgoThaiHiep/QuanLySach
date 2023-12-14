@@ -3,18 +3,100 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Pannel;
+import java.awt.BorderLayout;
+import java.awt.Image;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.text.html.HTMLEditorKit;
+import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.extractor.WordExtractor;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
+import org.apache.poi.xwpf.usermodel.XWPFPicture;
+import org.apache.poi.xwpf.usermodel.XWPFPictureData;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 /**
  *
  * @author FPTSHOP
  */
-public class pnlTroGiup extends javax.swing.JPanel {
-
+public class pnlTroGiup extends JFrame {
+    private JTextPane textPane;
     /**
      * Creates new form pnlTroGiup
      */
-    public pnlTroGiup() {
-        initComponents();
+    public pnlTroGiup() throws IOException {
+        initUI();
+        
+    }
+    private void initUI() {
+        setTitle("Word Viewer");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        textPane = new JTextPane();
+        JScrollPane scrollPane = new JScrollPane(textPane);
+        add(scrollPane, BorderLayout.CENTER);
+
+        loadWordDocument("src/IMG/TroGiup.docx");
+
+        setSize(1920, 1080);
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+
+     private void loadWordDocument(String filePath) {
+        try {
+            FileInputStream fis = new FileInputStream(filePath);
+            XWPFDocument document = new XWPFDocument(fis);
+            StyledDocument styledDocument = textPane.getStyledDocument();
+
+            for (XWPFParagraph paragraph : document.getParagraphs()) {
+                for (XWPFRun run : paragraph.getRuns()) {
+                    String text = run.getText(0);
+                    styledDocument.insertString(styledDocument.getLength(), text, null);
+
+                    // Handle images
+                    for (XWPFPicture picture : run.getEmbeddedPictures()) {
+                        XWPFPictureData pictureData = picture.getPictureData();
+                        byte[] bytes = pictureData.getData();
+
+                        // Insert the image into the textPane
+                        ImageIcon imageIcon = new ImageIcon(bytes);
+                        Image image = imageIcon.getImage();
+                        Image scaledImage = image.getScaledInstance(1920, 1080,  Image.SCALE_DEFAULT);
+                        ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
+
+                        textPane.setCaretPosition(styledDocument.getLength());
+                        textPane.insertIcon(scaledImageIcon);
+                    }
+                }
+
+                // Add a newline after each paragraph
+                styledDocument.insertString(styledDocument.getLength(), "\n", null);
+            }
+
+            fis.close();
+        } catch (IOException | BadLocationException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error loading Word document.");
+        }
     }
 
     /**
@@ -26,28 +108,19 @@ public class pnlTroGiup extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(jLabel1)
-                .addContainerGap(278, Short.MAX_VALUE))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(jLabel1)
-                .addContainerGap(199, Short.MAX_VALUE))
+            .addGap(0, 309, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
