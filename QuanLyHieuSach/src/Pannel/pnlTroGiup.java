@@ -80,7 +80,9 @@ public class pnlTroGiup extends JFrame {
                         // Insert the image into the textPane
                         ImageIcon imageIcon = new ImageIcon(bytes);
                         Image image = imageIcon.getImage();
+
                         Image scaledImage = image.getScaledInstance(1600, 1080,  Image.SCALE_DEFAULT);
+
                         ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
 
                         textPane.setCaretPosition(styledDocument.getLength());
